@@ -35,7 +35,8 @@ class TvDatabaseHelper {
         id INTEGER PRIMARY KEY,
         name TEXT,
         overview TEXT,
-        posterPath TEXT
+        posterPath TEXT,
+        firstAirDate TEXT
       );
     ''');
     await db.execute('''
@@ -85,7 +86,12 @@ class TvDatabaseHelper {
 
   Future<int> insertWatchlist(TvTable tv) async {
     final db = await database;
-    return await db!.insert(_tblWatchlist, tv.toJson());
+    return await db!.insert(_tblWatchlist, {
+      'id': tv.id,
+      'name': tv.name,
+      'overview': tv.overview,
+      'posterPath': tv.posterPath,
+    });
   }
 
   Future<int> removeWatchlist(TvTable tv) async {

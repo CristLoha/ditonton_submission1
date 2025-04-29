@@ -27,7 +27,7 @@ class TvRepositoryImpl implements TvRepository {
       try {
         final result = await remoteDataSource.getOnTheAirTv();
         localDataSource.cacheOnTheAirTv(
-          result.map((tv) => TvTable.fromDTO(tv)).toList(),
+          result.map((tv) => TvTable.fromDT0(tv)).toList(),
         );
         return Right(result.map((model) => model.toEntity()).toList());
       } on ServerException {
@@ -117,6 +117,7 @@ class TvRepositoryImpl implements TvRepository {
     } catch (e) {
       rethrow;
     }
+    
   }
 
   @override

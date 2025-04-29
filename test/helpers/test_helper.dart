@@ -16,6 +16,7 @@ import 'package:ditonton_submission1/domain/usecases/get_movie_detail.dart';
 import 'package:ditonton_submission1/domain/usecases/get_movie_recommendations.dart';
 import 'package:ditonton_submission1/domain/usecases/get_watchlist_movies.dart';
 import 'package:ditonton_submission1/domain/usecases/get_watchlist_status_movie.dart';
+import 'package:ditonton_submission1/domain/usecases/get_watchlist_tv.dart';
 import 'package:ditonton_submission1/domain/usecases/save_watchlist_movie.dart';
 import 'package:ditonton_submission1/domain/usecases/remove_watchlist_movie.dart';
 import 'package:ditonton_submission1/domain/usecases/search_movies.dart';
@@ -83,6 +84,7 @@ final testTvList = [tTv];
     SaveWatchlistMovie,
     RemoveWatchlistMovie,
     GetWatchlistMovies,
+    GetWatchListTv,
     SearchMovies,
     SearchTv,
     GetOnTheAirTv,
@@ -93,7 +95,6 @@ final testTvList = [tTv];
     MovieDatabaseHelper,
     TvDatabaseHelper,
     http.Client,
-   
   ],
   customMocks: [
     MockSpec<MovieRemoteDataSource>(as: #MockMovieRemoteDataSourceImpl),

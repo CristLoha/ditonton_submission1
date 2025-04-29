@@ -431,12 +431,12 @@ void main() {
     });
   });
 
-  group('get watchlist movies', () {
+  group('get watchlist tv', () {
     test('should return list of Movies', () async {
       // arrange
       when(
         mockLocalDataSource.getWatchlistTvs(),
-      ).thenAnswer((_) async => [testTvTable]);
+      ).thenAnswer((_) async => [testWatchlistTvTable]);
       // act
       final result = await repository.getWatchlistTv();
       // assert

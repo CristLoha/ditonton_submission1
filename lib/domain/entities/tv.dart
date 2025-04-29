@@ -33,21 +33,21 @@ class Tv extends Equatable {
     required this.popularity,
   });
 
- const  Tv.watchlist({
+  const Tv.watchlist({
     required this.id,
     required this.overview,
     required this.posterPath,
     required this.name,
-    required this.firstAirDate,
-  }) : voteAverage = 0,
-       voteCount = 0,
-       genreIds = const [],
-       adult = false,
-       backdropPath = '',
-       originCountry = const [],
-       originalLanguage = '',
-       originalName = '',
-       popularity = 0;
+  }) : voteAverage = null,
+       voteCount = null,
+       genreIds = null,
+       adult = null,
+       backdropPath = null,
+       originCountry = null,
+       originalLanguage = null,
+       originalName = null,
+       popularity = null,
+       firstAirDate = null;
 
   @override
   List<Object?> get props => [

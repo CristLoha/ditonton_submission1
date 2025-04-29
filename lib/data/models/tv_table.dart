@@ -1,62 +1,56 @@
+import 'package:ditonton_submission1/data/models/tv_model.dart';
 import 'package:ditonton_submission1/domain/entities/tv.dart';
 import 'package:ditonton_submission1/domain/entities/tv_detail.dart';
-import 'package:ditonton_submission1/data/models/tv_model.dart';
 import 'package:equatable/equatable.dart';
 
 class TvTable extends Equatable {
   final int id;
-  final String? name;
-  final String? posterPath;
-  final String? overview;
-  final DateTime? firstAirDate;
+  final String name;
+  final String overview;
+  final String posterPath;
+
   const TvTable({
     required this.id,
     required this.name,
+    required this.overview,
     required this.posterPath,
-      required this.overview,
-      required this.firstAirDate,
-    });
+  });
 
   factory TvTable.fromEntity(TvDetail tv) => TvTable(
     id: tv.id,
     name: tv.name,
-    posterPath: tv.posterPath,
     overview: tv.overview,
-    firstAirDate: tv.firstAirDate,
+    posterPath: tv.posterPath,
   );
 
   factory TvTable.fromMap(Map<String, dynamic> map) => TvTable(
     id: map['id'],
-    name: map['name'],
-    posterPath: map['posterPath'],
-    overview: map['overview'],
-    firstAirDate: map['firstAirDate'],
+    name: map['name'] ?? '',
+    overview: map['overview'] ?? '',
+    posterPath: map['posterPath'] ?? '',
   );
 
-  factory TvTable.fromDTO(TvModel tv) => TvTable(
+  factory TvTable.fromDT0(TvModel tv) => TvTable(
     id: tv.id,
     name: tv.name,
-    posterPath: tv.posterPath,
+    posterPath: tv.posterPath ?? '',
     overview: tv.overview,
-    firstAirDate: tv.firstAirDate,
   );
 
   Map<String, dynamic> toJson() => {
     'id': id,
     'name': name,
-    'posterPath': posterPath,
     'overview': overview,
+    'posterPath': posterPath,
   };
 
   Tv toEntity() => Tv.watchlist(
     id: id,
-    overview: overview ?? '',
-    posterPath: posterPath ?? '',
-    name: name ?? '',
-    firstAirDate: firstAirDate ?? DateTime.now(),
-
+    overview: overview,
+    posterPath: posterPath,
+    name: name,
   );
 
   @override
-  List<Object?> get props => [id, name, posterPath, overview];
+  List<Object?> get props => [id, name, overview, posterPath];
 }

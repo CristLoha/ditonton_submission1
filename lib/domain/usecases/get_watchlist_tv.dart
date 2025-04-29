@@ -3,12 +3,12 @@ import 'package:ditonton_submission1/core/error/failure.dart';
 import 'package:ditonton_submission1/domain/entities/tv.dart';
 import 'package:ditonton_submission1/domain/repositories/tv_repository.dart';
 
-class GetWatchlistTv {
-  final TvRepository repository;
+class GetWatchListTv {
+  final TvRepository _repository;
 
-  GetWatchlistTv(this.repository);
+  GetWatchListTv(this._repository);
 
   Future<Either<Failure, List<Tv>>> execute() {
-    return repository.getWatchlistTv();
+    return _repository.getWatchlistTv();
   }
 }

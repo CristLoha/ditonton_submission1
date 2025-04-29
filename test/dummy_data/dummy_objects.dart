@@ -75,7 +75,6 @@ final testTvFromCache = Tv.watchlist(
   overview:
       'Twenty years after modern civilization has been destroyed, Joel, a hardened survivor, is hired to smuggle Ellie, a 14-year-old girl, out of an oppressive quarantine zone. What starts as a small job soon becomes a brutal, heartbreaking journey, as they both must traverse the United States and depend on each other for survival.',
   posterPath: '/dmo6TYuuJgaYinXBPjrgG9mB5od.jpg',
-  firstAirDate: DateTime.parse('2023-01-15'),
 );
 
 final testWatchlistMovie = Movie.watchlist(
@@ -90,7 +89,13 @@ final testWatchlistTv = Tv.watchlist(
   name: 'name',
   posterPath: 'posterPath',
   overview: 'overview',
-  firstAirDate: DateTime.parse('2023-01-15'),
+);
+
+final testWatchlistTvTable = TvTable(
+  id: 1,
+  name: 'name',
+  posterPath: 'posterPath',
+  overview: 'overview',
 );
 
 final testMovieTable = MovieTable(
@@ -101,11 +106,11 @@ final testMovieTable = MovieTable(
 );
 
 final testTvTable = TvTable(
-  id: 1,
-  name: 'name',
-  posterPath: 'posterPath',
-  overview: 'overview',
-  firstAirDate: DateTime.parse('2023-01-15'),
+  id: 45789,
+  name: 'Sturm der Liebe',
+  posterPath: '/jfFNydakwvbeACEwSd2Gh8UWtba.jpg',
+  overview:
+      'These are the stories of relationships taking place in the fictional five-star hotel Fürstenhof, located in Feldkirchen-Westerham near Rosenheim with the plot revolving around members of the family room area, the hotel owners, and employees.',
 );
 
 final testMovieMap = {
@@ -256,7 +261,6 @@ final testTvCache = TvTable(
   overview:
       'Twenty years after modern civilization has been destroyed, Joel, a hardened survivor, is hired to smuggle Ellie, a 14-year-old girl, out of an oppressive quarantine zone. What starts as a small job soon becomes a brutal, heartbreaking journey, as they both must traverse the United States and depend on each other for survival.',
   posterPath: '/dmo6TYuuJgaYinXBPjrgG9mB5od.jpg',
-  firstAirDate: DateTime.parse('2023-01-15'),
 );
 
 final testTvCacheMap = {
