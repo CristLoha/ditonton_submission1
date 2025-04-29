@@ -1,0 +1,28 @@
+{
+    "page": 1,
+    "results": [
+        {
+            "adult": false,
+            "backdrop_path": "/h0y3OzHzG4yNvn8u3Za6ByH8lrQ.jpg",
+            "genre_ids": [
+                18,
+                10766
+            ],
+            "id": 45789,
+            "origin_country": [
+                "DE"
+            ],
+            "original_language": "de",
+            "original_name": "Sturm der Liebe",
+            "overview": "These are the stories of relationships taking place in the fictional five-star hotel Fürstenhof, located in Feldkirchen-Westerham near Rosenheim with the plot revolving around members of the family room area, the hotel owners, and employees.",
+            "popularity": 572.0316,
+            "poster_path": "/jfFNydakwvbeACEwSd2Gh8UWtba.jpg",
+            "first_air_date": "2005-09-26",
+            "name": "Sturm der Liebe",
+            "vote_average": 6.014,
+            "vote_count": 36
+        }
+    ],
+    "total_pages": 65,
+    "total_results": 1289
+}

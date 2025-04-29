@@ -1,0 +1,97 @@
+{
+    "adult": false,
+    "backdrop_path": "/h0y3OzHzG4yNvn8u3Za6ByH8lrQ.jpg",
+    "created_by": [
+        {
+            "id": 1,
+            "credit_id": "credit1",
+            "name": "Creator Name",
+            "gender": 1,
+            "profile_path": "/path.jpg"
+        }
+    ],
+    "episode_run_time": [
+        45
+    ],
+    "first_air_date": "2005-09-26",
+    "genres": [
+        {
+            "id": 18,
+            "name": "Drama"
+        },
+        {
+            "id": 10766,
+            "name": "Soap Opera"
+        }
+    ],
+    "homepage": "https://google.com",
+    "id": 45789,
+    "in_production": true,
+    "languages": [
+        "de"
+    ],
+    "last_air_date": "2024-03-19",
+    "name": "Sturm der Liebe",
+    "next_episode_to_air": {
+        "id": 1,
+        "name": "Next Episode",
+        "overview": "Overview",
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "air_date": "2024-03-20",
+        "episode_number": 1,
+        "production_code": "",
+        "runtime": 45,
+        "season_number": 1,
+        "show_id": 45789,
+        "still_path": "/path.jpg"
+    },
+    "networks": [],
+    "number_of_episodes": 1000,
+    "number_of_seasons": 20,
+    "origin_country": [
+        "DE"
+    ],
+    "original_language": "de",
+    "original_name": "Sturm der Liebe",
+    "overview": "These are the stories of relationships taking place in the fictional five-star hotel Fürstenhof, located in Feldkirchen-Westerham near Rosenheim with the plot revolving around members of the family room area, the hotel owners, and employees.",
+    "popularity": 572.0316,
+    "poster_path": "/jfFNydakwvbeACEwSd2Gh8UWtba.jpg",
+    "production_companies": [
+        {
+            "id": 1,
+            "logo_path": null,
+            "name": "Company",
+            "origin_country": "DE"
+        }
+    ],
+    "production_countries": [
+        {
+            "iso_3166_1": "DE",
+            "name": "Germany"
+        }
+    ],
+    "seasons": [
+        {
+            "air_date": "2005-09-26",
+            "episode_count": 50,
+            "id": 1,
+            "name": "Season 1",
+            "overview": "Overview",
+            "poster_path": "/path.jpg",
+            "season_number": 1
+        }
+    ],
+    "spoken_languages": [
+        {
+            "english_name": "German",
+            "iso_639_1": "de",
+            "name": "Deutsch"
+        }
+    ],
+    "status": "Returning Series",
+    "tagline": "Tagline",
+    "type": "Scripted",
+    "vote_average": 6.014,
+    "vote_count": 36
+}
