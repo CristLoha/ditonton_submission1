@@ -1,52 +1,53 @@
-import 'package:ditonton_submission1/core/constants/text_styles.dart';
 import 'package:ditonton_submission1/core/enums/state_enum.dart';
-import 'package:ditonton_submission1/presentation/provider/movie_search_notifier.dart';
-import 'package:ditonton_submission1/presentation/widgets/movie_card_list.dart';
+import 'package:ditonton_submission1/presentation/provider/tv_search_notifier.dart';
+import 'package:ditonton_submission1/presentation/pages/tv_detail_page.dart';
+import 'package:ditonton_submission1/presentation/widgets/media_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SearchPage extends StatelessWidget {
-  static const routeName = '/search';
+class TvSearchPage extends StatelessWidget {
+  static const routeName = '/tv-search';
 
-  const SearchPage({super.key});
+  const TvSearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Search')),
+      appBar: AppBar(title: const Text('Search TV Shows')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
-              onSubmitted: (query) {
-                Provider.of<MovieSearchNotifier>(
-                  context,
-                  listen: false,
-                ).fetchMovieSearch(query);
+              onChanged: (query) {
+                if (query.isNotEmpty) {
+                  Provider.of<TvSearchNotifier>(
+                    context,
+                    listen: false,
+                  ).fetchTvSearch(query);
+                }
               },
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Search title',
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(),
               ),
               textInputAction: TextInputAction.search,
             ),
-            SizedBox(height: 16),
-            Text('Search Result', style: kHeading6),
-            Consumer<MovieSearchNotifier>(
+            const SizedBox(height: 16),
+            Consumer<TvSearchNotifier>(
               builder: (context, data, child) {
                 if (data.state == RequestState.loading) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else if (data.state == RequestState.loaded) {
                   final result = data.searchResult;
                   return Expanded(
                     child: ListView.builder(
                       padding: const EdgeInsets.all(8),
                       itemBuilder: (context, index) {
-                        final movie = data.searchResult[index];
-                        return MovieCard(movie);
+                        final tv = result[index];
+                        return MediaCardList(media: tv, isMovie: false);
                       },
                       itemCount: result.length,
                     ),

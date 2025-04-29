@@ -74,13 +74,15 @@ void main() {
   });
 
   group('Get Movie Detail By Id', () {
-    final tId = 1;
+    final tId = 45789;
 
     test('should return Movie Detail Table when data is found', () async {
       // arrange
-      when(
+          when(
         mockDatabaseHelper.getTvById(tId),
       ).thenAnswer((_) async => testTvMap);
+    
+
       // act
       final result = await dataSource.getTvById(tId);
       // assert
@@ -137,18 +139,19 @@ void main() {
         expect(result, [testTvCache]);
       });
 
-      test('should throw CacheException when cache data is not exist', () async {
-        // arrange
-        when(
-          mockDatabaseHelper.getCacheTvs('on the air'),
-        ).thenAnswer((_) async => []);
-        // act
-        final call = dataSource.getCachedOnTheAirTv();
-        // assert
-        expect(() => call, throwsA(isA<CacheException>()));
-      });
-
-      
+      test(
+        'should throw CacheException when cache data is not exist',
+        () async {
+          // arrange
+          when(
+            mockDatabaseHelper.getCacheTvs('on the air'),
+          ).thenAnswer((_) async => []);
+          // act
+          final call = dataSource.getCachedOnTheAirTv();
+          // assert
+          expect(() => call, throwsA(isA<CacheException>()));
+        },
+      );
     });
   });
 }

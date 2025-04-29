@@ -1,80 +1,80 @@
-import 'package:ditonton_submission1/core/enums/state_enum.dart';
-import 'package:ditonton_submission1/core/utils/utils.dart';
-import 'package:ditonton_submission1/presentation/provider/watchlist_movie_notifier.dart';
-import 'package:ditonton_submission1/presentation/widgets/movie_card_list.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+// import 'package:ditonton_submission1/core/enums/state_enum.dart';
+// import 'package:ditonton_submission1/core/utils/utils.dart';
+// import 'package:ditonton_submission1/presentation/provider/watchlist_movie_notifier.dart';
+// import 'package:ditonton_submission1/presentation/widgets/movie_card_list.dart';
+// import 'package:flutter/material.dart';
+// import 'package:provider/provider.dart';
 
-class WatchlistMoviesPage extends StatefulWidget {
-  static const routeName = '/watchlist-movie';
+// class WatchlistMoviesPage extends StatefulWidget {
+//   static const routeName = '/watchlist-movie';
 
-  const WatchlistMoviesPage({super.key});
+//   const WatchlistMoviesPage({super.key});
 
-  @override
-  WatchlistMoviesPageState createState() => WatchlistMoviesPageState();
-}
+//   @override
+//   WatchlistMoviesPageState createState() => WatchlistMoviesPageState();
+// }
 
-class WatchlistMoviesPageState extends State<WatchlistMoviesPage>
-    with RouteAware {
-  @override
-  void initState() {
-    super.initState();
-    Future.microtask(() {
-      if (!mounted) return;
-      Provider.of<WatchlistMovieNotifier>(
-        context,
-        listen: false,
-      ).fetchWatchlistMovies();
-    });
-  }
+// class WatchlistMoviesPageState extends State<WatchlistMoviesPage>
+//     with RouteAware {
+//   @override
+//   void initState() {
+//     super.initState();
+//     Future.microtask(() {
+//       if (!mounted) return;
+//       Provider.of<WatchlistMovieNotifier>(
+//         context,
+//         listen: false,
+//       ).fetchWatchlistMovies();
+//     });
+//   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    routeObserver.subscribe(this, ModalRoute.of(context)!);
-  }
+//   @override
+//   void didChangeDependencies() {
+//     super.didChangeDependencies();
+//     routeObserver.subscribe(this, ModalRoute.of(context)!);
+//   }
 
-  @override
-  void didPopNext() {
-    Provider.of<WatchlistMovieNotifier>(
-      context,
-      listen: false,
-    ).fetchWatchlistMovies();
-  }
+//   @override
+//   void didPopNext() {
+//     Provider.of<WatchlistMovieNotifier>(
+//       context,
+//       listen: false,
+//     ).fetchWatchlistMovies();
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Watchlist')),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Consumer<WatchlistMovieNotifier>(
-          builder: (context, data, child) {
-            if (data.watchlistState == RequestState.loading) {
-              return Center(child: CircularProgressIndicator());
-            } else if (data.watchlistState == RequestState.loaded) {
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  final movie = data.watchlistMovies[index];
-                  return MovieCard(movie);
-                },
-                itemCount: data.watchlistMovies.length,
-              );
-            } else {
-              return Center(
-                key: Key('error_message'),
-                child: Text(data.message),
-              );
-            }
-          },
-        ),
-      ),
-    );
-  }
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: Text('Watchlist')),
+//       body: Padding(
+//         padding: const EdgeInsets.all(8.0),
+//         child: Consumer<WatchlistMovieNotifier>(
+//           builder: (context, data, child) {
+//             if (data.watchlistState == RequestState.loading) {
+//               return Center(child: CircularProgressIndicator());
+//             } else if (data.watchlistState == RequestState.loaded) {
+//               return ListView.builder(
+//                 itemBuilder: (context, index) {
+//                   final movie = data.watchlistMovies[index];
+//                   return MediaCardList(media: movie, isMovie: true);
+//                 },
+//                 itemCount: data.watchlistMovies.length,
+//               );
+//             } else {
+//               return Center(
+//                 key: Key('error_message'),
+//                 child: Text(data.message),
+//               );
+//             }
+//           },
+//         ),
+//       ),
+//     );
+//   }
 
-  @override
-  void dispose() {
-    routeObserver.unsubscribe(this);
-    super.dispose();
-  }
-}
+//   @override
+//   void dispose() {
+//     routeObserver.unsubscribe(this);
+//     super.dispose();
+//   }
+// }

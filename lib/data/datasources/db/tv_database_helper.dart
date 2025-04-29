@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:ditonton_submission1/data/models/tv_table.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
+import 'dart:io';
 
 class TvDatabaseHelper {
   static TvDatabaseHelper? _databaseHelper;
@@ -23,24 +25,29 @@ class TvDatabaseHelper {
 
   Future<Database> _initDb() async {
     final path = await getDatabasesPath();
-    final databasePath = '$path/ditonton.db';
+    final databasePath = join(path, 'ditonton.db');
 
-    var db = await openDatabase(databasePath, version: 1, onCreate: _onCreate);
+    var db = await openDatabase(
+      databasePath,
+      version: 1,
+      onCreate: _onCreate,
+      onUpgrade: _onUpgrade,
+    );
     return db;
   }
 
   void _onCreate(Database db, int version) async {
+    print('Creating TV database tables...');
     await db.execute('''
-      CREATE TABLE  $_tblWatchlist (
+      CREATE TABLE IF NOT EXISTS $_tblWatchlist (
         id INTEGER PRIMARY KEY,
         name TEXT,
         overview TEXT,
-        posterPath TEXT,
-        firstAirDate TEXT
+        posterPath TEXT
       );
     ''');
     await db.execute('''
-      CREATE TABLE $_tblCache (
+      CREATE TABLE IF NOT EXISTS $_tblCache (
         id INTEGER PRIMARY KEY,
         name TEXT,
         overview TEXT,
@@ -48,6 +55,14 @@ class TvDatabaseHelper {
         category TEXT
       );
     ''');
+    print('TV database tables created successfully');
+  }
+
+  void _onUpgrade(Database db, int oldVersion, int newVersion) async {
+    print('Upgrading TV database from version $oldVersion to $newVersion');
+    if (oldVersion < 2) {
+      // Add any new tables or columns here
+    }
   }
 
   Future<void> insertCacheTransaction(

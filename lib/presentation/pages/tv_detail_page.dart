@@ -1,37 +1,37 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton_submission1/core/constants/colors.dart';
 import 'package:ditonton_submission1/core/constants/text_styles.dart';
-import 'package:ditonton_submission1/domain/entities/genre.dart';
-import 'package:ditonton_submission1/domain/entities/movie.dart';
-import 'package:ditonton_submission1/domain/entities/movie_detail.dart';
-import 'package:ditonton_submission1/presentation/provider/movie_detail_notifier.dart';
-import 'package:ditonton_submission1/presentation/widgets/custom_snackbar.dart';
 import 'package:ditonton_submission1/core/enums/state_enum.dart';
+import 'package:ditonton_submission1/domain/entities/genre.dart';
+import 'package:ditonton_submission1/domain/entities/tv.dart';
+import 'package:ditonton_submission1/domain/entities/tv_detail.dart';
+import 'package:ditonton_submission1/presentation/provider/tv_detail_notifier.dart';
+import 'package:ditonton_submission1/presentation/widgets/custom_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 
-class MovieDetailPage extends StatefulWidget {
-  static const routeName = '/movie-detail';
+class TvDetailPage extends StatefulWidget {
+  static const routeName = '/tv-detail';
 
   final int id;
-  const MovieDetailPage({super.key, required this.id});
+  const TvDetailPage({super.key, required this.id});
 
   @override
-  MovieDetailPageState createState() => MovieDetailPageState();
+  TvDetailPageState createState() => TvDetailPageState();
 }
 
-class MovieDetailPageState extends State<MovieDetailPage> {
+class TvDetailPageState extends State<TvDetailPage> {
   @override
   void initState() {
     super.initState();
     Future.microtask(() {
       if (mounted) {
-        Provider.of<MovieDetailNotifier>(
+        Provider.of<TvDetailNotifier>(
           context,
           listen: false,
-        ).fetchMovieDetail(widget.id);
-        Provider.of<MovieDetailNotifier>(
+        ).fetchTvDetail(widget.id);
+        Provider.of<TvDetailNotifier>(
           context,
           listen: false,
         ).loadWatchlistStatus(widget.id);
@@ -40,45 +40,34 @@ class MovieDetailPageState extends State<MovieDetailPage> {
   }
 
   Future<void> _onWatchlistButtonPressed(
-    MovieDetail movie,
+    TvDetail tv,
     bool isAddedWatchlist,
-    MovieDetailNotifier provider,
+    TvDetailNotifier provider,
   ) async {
     if (isAddedWatchlist) {
-      await provider.removeFromWatchlist(movie);
+      await provider.removeFromWatchlist(tv);
     } else {
-      await provider.addWatchlist(movie);
+      await provider.addWatchlist(tv);
     }
     if (!mounted) return;
-
-    if (provider.watchlistMessage == 'Added to Watchlist' ||
-        provider.watchlistMessage == 'Removed from Watchlist') {
-      CustomSnackbar.show(context, provider.watchlistMessage);
-    } else {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(content: Text(provider.watchlistMessage));
-        },
-      );
-    }
+    CustomSnackbar.show(context, provider.watchlistMessage);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<MovieDetailNotifier>(
+      body: Consumer<TvDetailNotifier>(
         builder: (context, provider, child) {
-          if (provider.movieState == RequestState.loading) {
+          if (provider.state == RequestState.loading) {
             return Center(child: CircularProgressIndicator());
-          } else if (provider.movieState == RequestState.loaded) {
-            final movie = provider.movie;
+          } else if (provider.state == RequestState.loaded) {
+            final tv = provider.tv;
             return DetailContent(
-              movie,
-              provider.movieRecommendations,
+              tv!,
+              provider.tvRecommendations,
               provider.isAddedToWatchlist,
-              onWatchlistButtonPressed: (movie, isAddedWatchlist) {
-                _onWatchlistButtonPressed(movie, isAddedWatchlist, provider);
+              onWatchlistButtonPressed: (tv, isAddedWatchlist) {
+                _onWatchlistButtonPressed(tv, isAddedWatchlist, provider);
               },
             );
           } else {
@@ -91,13 +80,13 @@ class MovieDetailPageState extends State<MovieDetailPage> {
 }
 
 class DetailContent extends StatelessWidget {
-  final MovieDetail movie;
-  final List<Movie> recommendations;
+  final TvDetail tv;
+  final List<Tv> recommendations;
   final bool isAddedWatchlist;
-  final Function(MovieDetail, bool) onWatchlistButtonPressed;
+  final Function(TvDetail, bool) onWatchlistButtonPressed;
 
   const DetailContent(
-    this.movie,
+    this.tv,
     this.recommendations,
     this.isAddedWatchlist, {
     required this.onWatchlistButtonPressed,
@@ -110,7 +99,7 @@ class DetailContent extends StatelessWidget {
     return Stack(
       children: [
         CachedNetworkImage(
-          imageUrl: 'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+          imageUrl: 'https://image.tmdb.org/t/p/w500${tv.posterPath}',
           width: screenWidth,
           placeholder:
               (context, url) => Center(child: CircularProgressIndicator()),
@@ -135,11 +124,11 @@ class DetailContent extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(movie.title, style: kHeading5),
+                            Text(tv.name, style: kHeading5),
                             FilledButton(
                               onPressed:
                                   () => onWatchlistButtonPressed(
-                                    movie,
+                                    tv,
                                     isAddedWatchlist,
                                   ),
                               child: Row(
@@ -152,12 +141,16 @@ class DetailContent extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            Text(_showGenres(movie.genres)),
-                            Text(_showDuration(movie.runtime)),
+                            Text(
+                              '${tv.numberOfSeasons} Seasons • ${tv.numberOfEpisodes} Episodes',
+                            ),
+                            Text(
+                              'First Aired: ${tv.firstAirDate.day}/${tv.firstAirDate.month}/${tv.firstAirDate.year}',
+                            ),
                             Row(
                               children: [
                                 RatingBarIndicator(
-                                  rating: movie.voteAverage / 2,
+                                  rating: tv.voteAverage / 2,
                                   itemCount: 5,
                                   itemBuilder:
                                       (context, index) => Icon(
@@ -166,15 +159,15 @@ class DetailContent extends StatelessWidget {
                                       ),
                                   itemSize: 24,
                                 ),
-                                Text('${movie.voteAverage}'),
+                                Text('${tv.voteAverage}'),
                               ],
                             ),
                             SizedBox(height: 16),
                             Text('Overview', style: kHeading6),
-                            Text(movie.overview),
+                            Text(tv.overview),
                             SizedBox(height: 16),
                             Text('Recommendations', style: kHeading6),
-                            Consumer<MovieDetailNotifier>(
+                            Consumer<TvDetailNotifier>(
                               builder: (context, data, child) {
                                 if (data.recommendationState ==
                                     RequestState.loading) {
@@ -188,15 +181,15 @@ class DetailContent extends StatelessWidget {
                                     child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
                                       itemBuilder: (context, index) {
-                                        final movie = recommendations[index];
+                                        final tv = recommendations[index];
                                         return Padding(
                                           padding: const EdgeInsets.all(4.0),
                                           child: InkWell(
                                             onTap: () {
                                               Navigator.pushReplacementNamed(
                                                 context,
-                                                MovieDetailPage.routeName,
-                                                arguments: movie.id,
+                                                TvDetailPage.routeName,
+                                                arguments: tv.id,
                                               );
                                             },
                                             child: ClipRRect(
@@ -205,7 +198,7 @@ class DetailContent extends StatelessWidget {
                                               ),
                                               child: CachedNetworkImage(
                                                 imageUrl:
-                                                    'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                                                    'https://image.tmdb.org/t/p/w500${tv.posterPath}',
                                                 placeholder:
                                                     (context, url) => Center(
                                                       child:
@@ -272,11 +265,9 @@ class DetailContent extends StatelessWidget {
     for (var genre in genres) {
       result += '${genre.name}, ';
     }
-
     if (result.isEmpty) {
       return result;
     }
-
     return result.substring(0, result.length - 2);
   }
 

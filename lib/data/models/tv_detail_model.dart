@@ -147,6 +147,7 @@ class TvDetailResponse extends Equatable {
       adult: adult,
       backdropPath: backdropPath ?? '',
       id: id,
+      genres: genres.map((genre) => genre.toEntity()).toList(),
       name: name,
       overview: overview,
       posterPath: posterPath ?? '',
@@ -158,6 +159,8 @@ class TvDetailResponse extends Equatable {
       originCountry: originCountry,
       originalLanguage: originalLanguage,
       popularity: popularity,
+      numberOfSeasons: numberOfSeasons,
+      numberOfEpisodes: numberOfEpisodes,
     );
   }
 

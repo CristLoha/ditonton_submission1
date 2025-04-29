@@ -1,25 +1,26 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton_submission1/core/constants/text_styles.dart';
 import 'package:ditonton_submission1/core/constants/values.dart';
-import 'package:ditonton_submission1/domain/entities/movie.dart';
 import 'package:ditonton_submission1/presentation/pages/movie_detail_page.dart';
+import 'package:ditonton_submission1/presentation/pages/tv_detail_page.dart';
 import 'package:flutter/material.dart';
 
-class MovieCard extends StatelessWidget {
-  final Movie movie;
+class MediaCardList extends StatelessWidget {
+  final dynamic media;
+  final bool isMovie;
 
-  const MovieCard(this.movie, {super.key});
+  const MediaCardList({required this.media, required this.isMovie, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.all(8),
       child: InkWell(
         onTap: () {
           Navigator.pushNamed(
             context,
-            MovieDetailPage.routeName,
-            arguments: movie.id,
+            isMovie ? MovieDetailPage.routeName : TvDetailPage.routeName,
+            arguments: isMovie ? media.id : media.id,
           );
         },
         child: Stack(
@@ -36,14 +37,14 @@ class MovieCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      movie.title ?? '-',
+                      isMovie ? media.title ?? '-' : media.name ?? '-',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: kHeading6,
                     ),
                     SizedBox(height: 16),
                     Text(
-                      movie.overview ?? '-',
+                      media.overview ?? '-',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -56,7 +57,10 @@ class MovieCard extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(8)),
                 child: CachedNetworkImage(
-                  imageUrl: '$baseImageUrl${movie.posterPath}',
+                  imageUrl:
+                      media.posterPath != null && media.posterPath.isNotEmpty
+                          ? '$baseImageUrl${media.posterPath}'
+                          : 'https://via.placeholder.com/500x750?text=No+Image',
                   width: 80,
                   placeholder:
                       (context, url) =>

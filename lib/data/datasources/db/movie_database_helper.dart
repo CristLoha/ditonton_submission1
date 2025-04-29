@@ -9,7 +9,8 @@ class MovieDatabaseHelper {
     _databaseHelper = this;
   }
 
-  factory MovieDatabaseHelper() => _databaseHelper ?? MovieDatabaseHelper._instance();
+  factory MovieDatabaseHelper() =>
+      _databaseHelper ?? MovieDatabaseHelper._instance();
 
   static Database? _database;
 
@@ -22,7 +23,7 @@ class MovieDatabaseHelper {
   static const String _tblCache = 'cache';
   Future<Database> _initDb() async {
     final path = await getDatabasesPath();
-    final databasePath = '$path/ditonton.db';
+    final databasePath = '$path/ditonton1.db';
 
     var db = await openDatabase(databasePath, version: 1, onCreate: _onCreate);
     return db;
@@ -50,7 +51,7 @@ class MovieDatabaseHelper {
 
   Future<void> insertCacheTransaction(
     List<MovieTable> movies,
-    
+
     String category,
   ) async {
     final db = await database;
@@ -115,7 +116,6 @@ class MovieDatabaseHelper {
   Future<List<Map<String, dynamic>>> getWatchlistMovies() async {
     final db = await database;
     final List<Map<String, dynamic>> results = await db!.query(_tblWatchlist);
-
     return results;
   }
 }

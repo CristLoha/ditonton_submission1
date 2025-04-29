@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ditonton_submission1/core/enums/state_enum.dart';
 import 'package:ditonton_submission1/domain/entities/tv.dart';
-import 'package:ditonton_submission1/presentation/provider/tv_detail_notifer.dart';
+import 'package:ditonton_submission1/presentation/provider/tv_detail_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ditonton_submission1/core/error/failure.dart';
@@ -13,6 +13,9 @@ void main() {
   late TvDetailNotifier provider;
   late MockGetTvDetail mockGetTvDetail;
   late MockGetTvRecommendations mockGetTvRecommendations;
+  late MockGetWatchListStatusTv mockGetWatchListStatus;
+  late MockSaveWatchlistTv mockSaveWatchlist;
+  late MockRemoveWatchlistTv mockRemoveWatchlist;
   late int listenerCallCount;
   final tId = 1;
   final testTv = <Tv>[tTv];
@@ -30,9 +33,15 @@ void main() {
     listenerCallCount = 0;
     mockGetTvDetail = MockGetTvDetail();
     mockGetTvRecommendations = MockGetTvRecommendations();
+    mockGetWatchListStatus = MockGetWatchListStatusTv();
+    mockSaveWatchlist = MockSaveWatchlistTv();
+    mockRemoveWatchlist = MockRemoveWatchlistTv();
     provider = TvDetailNotifier(
       getTvDetail: mockGetTvDetail,
       getTvRecommendations: mockGetTvRecommendations,
+      getWatchListStatus: mockGetWatchListStatus,
+      saveWatchlist: mockSaveWatchlist,
+      removeWatchlist: mockRemoveWatchlist,
     )..addListener(() {
       listenerCallCount += 1;
     });
@@ -66,8 +75,8 @@ void main() {
       await provider.fetchTvDetail(tId);
       // assert
       expect(provider.state, RequestState.loaded);
-      expect(provider.tvDetail, testTvDetail);
-      expect(listenerCallCount, 2);
+      expect(provider.tv, testTvDetail);
+      expect(listenerCallCount, 3);
     });
 
     test(

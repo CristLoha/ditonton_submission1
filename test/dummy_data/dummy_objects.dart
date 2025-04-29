@@ -121,13 +121,16 @@ final testMovieMap = {
 };
 
 final testTvMap = {
-  'id': 1,
-  'name': 'name',
-  'posterPath': 'posterPath',
-  'overview': 'overview',
+  'id': 45789,
+  'name': 'Sturm der Liebe',
+  'posterPath': '/jfFNydakwvbeACEwSd2Gh8UWtba.jpg',
+  'overview': 'These are the stories of relationships taking place in the fictional five-star hotel Fürstenhof, located in Feldkirchen-Westerham near Rosenheim with the plot revolving around members of the family room area, the hotel owners, and employees.',
 };
 
 final testTvDetail = TvDetail(
+  genres: [Genre(id: 18, name: 'Drama')],
+  numberOfSeasons: 1,
+  numberOfEpisodes: 50,
   adult: false,
   backdropPath: '/h0y3OzHzG4yNvn8u3Za6ByH8lrQ.jpg',
   id: 45789,

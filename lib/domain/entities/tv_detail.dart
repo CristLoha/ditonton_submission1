@@ -1,3 +1,4 @@
+import 'package:ditonton_submission1/domain/entities/genre.dart';
 import 'package:equatable/equatable.dart';
 
 class TvDetail extends Equatable {
@@ -9,12 +10,15 @@ class TvDetail extends Equatable {
   final int voteCount;
   final DateTime firstAirDate;
   final List<int> genreIds;
+  final List<Genre> genres;
   final String originalName;
   final List<String> originCountry;
   final String originalLanguage;
   final double popularity;
   final String backdropPath;
   final bool adult;
+  final int numberOfSeasons;
+  final int numberOfEpisodes;
 
   const TvDetail({
     required this.id,
@@ -25,12 +29,15 @@ class TvDetail extends Equatable {
     required this.voteCount,
     required this.firstAirDate,
     required this.genreIds,
+    required this.genres,
     required this.originalName,
     required this.originCountry,
     required this.originalLanguage,
     required this.popularity,
     required this.backdropPath,
     required this.adult,
+    required this.numberOfSeasons,
+    required this.numberOfEpisodes,
   });
 
   @override
@@ -43,11 +50,14 @@ class TvDetail extends Equatable {
     voteCount,
     firstAirDate,
     genreIds,
+    genres,
     originalName,
     originCountry,
     originalLanguage,
     popularity,
     backdropPath,
     adult,
+    numberOfSeasons,
+    numberOfEpisodes,
   ];
 }

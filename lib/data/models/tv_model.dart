@@ -2,36 +2,36 @@ import 'package:equatable/equatable.dart';
 import 'package:ditonton_submission1/domain/entities/tv.dart';
 
 class TvModel extends Equatable {
-  final bool? adult;
-  final String? backdropPath;
-  final List<int>? genreIds;
   final int id;
-  final List<String>? originCountry;
-  final String? originalLanguage;
-  final String? originalName;
-  final String overview;
-  final double? popularity;
-  final String? posterPath;
-  final DateTime? firstAirDate;
   final String name;
-  final double? voteAverage;
-  final int? voteCount;
+  final String overview;
+  final String? posterPath;
+  final double voteAverage;
+  final int voteCount;
+  final DateTime? firstAirDate;
+  final List<int> genreIds;
+  final String originalName;
+  final List<String> originCountry;
+  final String originalLanguage;
+  final double popularity;
+  final String? backdropPath;
+  final bool adult;
 
   const TvModel({
-    required this.adult,
-    required this.backdropPath,
-    required this.genreIds,
     required this.id,
-    required this.originCountry,
-    required this.originalLanguage,
-    required this.originalName,
-    required this.overview,
-    required this.popularity,
-    required this.posterPath,
-    required this.firstAirDate,
     required this.name,
+    required this.overview,
+    this.posterPath,
     required this.voteAverage,
     required this.voteCount,
+    this.firstAirDate,
+    required this.genreIds,
+    required this.originalName,
+    required this.originCountry,
+    required this.originalLanguage,
+    required this.popularity,
+    this.backdropPath,
+    required this.adult,
   });
 
   const TvModel.watchlist({
@@ -41,99 +41,96 @@ class TvModel extends Equatable {
     required this.name,
   }) : adult = false,
        backdropPath = null,
-       genreIds = null,
-       originCountry = null,
-       originalLanguage = null,
-       originalName = null,
-       voteAverage = null,
-       voteCount = null,
+       genreIds = const [],
+       originCountry = const [],
+       originalLanguage = '',
+       originalName = '',
+       voteAverage = 0.0,
+       voteCount = 0,
        firstAirDate = null,
-       popularity = null;
+       popularity = 0.0;
 
   factory TvModel.fromJson(Map<String, dynamic> json) => TvModel(
-    adult: json["adult"],
-    backdropPath: json["backdrop_path"],
-    genreIds:
-        json["genre_ids"] != null
-            ? List<int>.from(json["genre_ids"].map((x) => x))
-            : null,
     id: json["id"],
-    originCountry:
-        json["origin_country"] != null
-            ? List<String>.from(json["origin_country"].map((x) => x))
-            : null,
-    originalLanguage: json["original_language"],
-    originalName: json["original_name"],
+    name: json["name"] ?? '',
     overview: json["overview"] ?? '',
-    popularity: json["popularity"]?.toDouble(),
-    posterPath: json["poster_path"],
+    posterPath:
+        json["poster_path"] != null && json["poster_path"].toString().isNotEmpty
+            ? json["poster_path"]
+            : null,
+    voteAverage: (json["vote_average"] ?? 0.0).toDouble(),
+    voteCount: json["vote_count"] ?? 0,
     firstAirDate:
-        json["first_air_date"] != null
+        json["first_air_date"] != null &&
+                json["first_air_date"].toString().isNotEmpty
             ? DateTime.parse(json["first_air_date"])
             : null,
-    name: json["name"] ?? '',
-    voteAverage: json["vote_average"]?.toDouble(),
-    voteCount: json["vote_count"],
+    genreIds: List<int>.from(json["genre_ids"]?.map((x) => x) ?? []),
+    originalName: json["original_name"] ?? '',
+    originCountry: List<String>.from(
+      json["origin_country"]?.map((x) => x) ?? [],
+    ),
+    originalLanguage: json["original_language"] ?? '',
+    popularity: (json["popularity"] ?? 0.0).toDouble(),
+    backdropPath:
+        json["backdrop_path"] != null &&
+                json["backdrop_path"].toString().isNotEmpty
+            ? json["backdrop_path"]
+            : null,
+    adult: json["adult"] ?? false,
   );
 
   Map<String, dynamic> toJson() => {
-    "adult": adult,
-    "backdrop_path": backdropPath,
-    "genre_ids":
-        genreIds != null ? List<dynamic>.from(genreIds!.map((x) => x)) : null,
     "id": id,
-    "origin_country":
-        originCountry != null
-            ? List<dynamic>.from(originCountry!.map((x) => x))
-            : null,
-    "original_language": originalLanguage,
-    "original_name": originalName,
-    "overview": overview,
-    "popularity": popularity,
-    "poster_path": posterPath,
-    "first_air_date":
-        firstAirDate != null
-            ? "${firstAirDate!.year.toString().padLeft(4, '0')}-${firstAirDate!.month.toString().padLeft(2, '0')}-${firstAirDate!.day.toString().padLeft(2, '0')}"
-            : null,
     "name": name,
+    "overview": overview,
+    "poster_path": posterPath,
     "vote_average": voteAverage,
     "vote_count": voteCount,
+    "first_air_date": firstAirDate?.toIso8601String(),
+    "genre_ids": List<dynamic>.from(genreIds.map((x) => x)),
+    "original_name": originalName,
+    "origin_country": List<dynamic>.from(originCountry.map((x) => x)),
+    "original_language": originalLanguage,
+    "popularity": popularity,
+    "backdrop_path": backdropPath,
+    "adult": adult,
   };
-
-  @override
-  List<Object?> get props => [
-    adult,
-    backdropPath,
-    genreIds,
-    id,
-    originCountry,
-    originalLanguage,
-    originalName,
-    overview,
-    popularity,
-    posterPath,
-    firstAirDate,
-    name,
-    voteAverage,
-    voteCount,
-  ];
 
   Tv toEntity() {
     return Tv(
-      adult: adult,
-      backdropPath: backdropPath,
-      genreIds: genreIds,
       id: id,
-      originCountry: originCountry,
-      originalLanguage: originalLanguage,
-      originalName: originalName,
-      popularity: popularity,
-      posterPath: posterPath,
-      firstAirDate: firstAirDate,
       name: name,
+      overview: overview,
+      posterPath: posterPath ?? '',
       voteAverage: voteAverage,
       voteCount: voteCount,
-      overview: overview,
+      firstAirDate: firstAirDate ?? DateTime.now(),
+      genreIds: genreIds,
+      originalName: originalName,
+      originCountry: originCountry,
+      originalLanguage: originalLanguage,
+      popularity: popularity,
+      backdropPath: backdropPath ?? '',
+      adult: adult,
     );
   }
+
+  @override
+  List<Object?> get props => [
+    id,
+    name,
+    overview,
+    posterPath,
+    voteAverage,
+    voteCount,
+    firstAirDate,
+    genreIds,
+    originalName,
+    originCountry,
+    originalLanguage,
+    popularity,
+    backdropPath,
+    adult,
+  ];
 }

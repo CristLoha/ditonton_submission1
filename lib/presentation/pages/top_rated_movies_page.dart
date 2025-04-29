@@ -1,6 +1,6 @@
 import 'package:ditonton_submission1/core/enums/state_enum.dart';
 import 'package:ditonton_submission1/presentation/provider/top_rated_movies_notifier.dart';
-import 'package:ditonton_submission1/presentation/widgets/movie_card_list.dart';
+import 'package:ditonton_submission1/presentation/widgets/media_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -40,7 +40,7 @@ class TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final movie = data.movies[index];
-                  return MovieCard(movie);
+                  return MediaCardList(media: movie, isMovie: true);
                 },
                 itemCount: data.movies.length,
               );

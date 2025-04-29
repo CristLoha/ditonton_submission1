@@ -117,7 +117,6 @@ class TvRepositoryImpl implements TvRepository {
     } catch (e) {
       rethrow;
     }
-    
   }
 
   @override

@@ -26,6 +26,9 @@ import 'package:ditonton_submission1/domain/usecases/get_top_rated_tv.dart';
 import 'package:ditonton_submission1/domain/usecases/get_tv_detail.dart';
 import 'package:ditonton_submission1/domain/usecases/get_tv_recommendations.dart';
 import 'package:ditonton_submission1/domain/usecases/search_tv.dart';
+import 'package:ditonton_submission1/domain/usecases/get_watchlist_status_tv.dart';
+import 'package:ditonton_submission1/domain/usecases/save_watchlist_tv.dart';
+import 'package:ditonton_submission1/domain/usecases/remove_watchlist_tv.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
 
@@ -92,6 +95,9 @@ final testTvList = [tTv];
     GetTopRatedTv,
     GetTvDetail,
     GetTvRecommendations,
+    GetWatchListStatusTv,
+    SaveWatchlistTv,
+    RemoveWatchlistTv,
     MovieDatabaseHelper,
     TvDatabaseHelper,
     http.Client,
