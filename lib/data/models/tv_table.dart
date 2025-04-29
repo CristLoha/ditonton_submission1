@@ -8,19 +8,21 @@ class TvTable extends Equatable {
   final String? name;
   final String? posterPath;
   final String? overview;
-
+  final DateTime? firstAirDate;
   const TvTable({
     required this.id,
     required this.name,
     required this.posterPath,
-    required this.overview,
-  });
+      required this.overview,
+      required this.firstAirDate,
+    });
 
   factory TvTable.fromEntity(TvDetail tv) => TvTable(
     id: tv.id,
     name: tv.name,
     posterPath: tv.posterPath,
     overview: tv.overview,
+    firstAirDate: tv.firstAirDate,
   );
 
   factory TvTable.fromMap(Map<String, dynamic> map) => TvTable(
@@ -28,6 +30,7 @@ class TvTable extends Equatable {
     name: map['name'],
     posterPath: map['posterPath'],
     overview: map['overview'],
+    firstAirDate: map['firstAirDate'],
   );
 
   factory TvTable.fromDTO(TvModel tv) => TvTable(
@@ -35,6 +38,7 @@ class TvTable extends Equatable {
     name: tv.name,
     posterPath: tv.posterPath,
     overview: tv.overview,
+    firstAirDate: tv.firstAirDate,
   );
 
   Map<String, dynamic> toJson() => {
@@ -49,6 +53,8 @@ class TvTable extends Equatable {
     overview: overview ?? '',
     posterPath: posterPath ?? '',
     name: name ?? '',
+    firstAirDate: firstAirDate ?? DateTime.now(),
+
   );
 
   @override

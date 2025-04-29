@@ -33,14 +33,14 @@ class Tv extends Equatable {
     required this.popularity,
   });
 
-  Tv.watchlist({
+ const  Tv.watchlist({
     required this.id,
     required this.overview,
     required this.posterPath,
     required this.name,
+    required this.firstAirDate,
   }) : voteAverage = 0,
        voteCount = 0,
-       firstAirDate = DateTime.now(),
        genreIds = const [],
        adult = false,
        backdropPath = '',

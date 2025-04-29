@@ -69,11 +69,28 @@ final testMovieFromCache = Movie.watchlist(
   title: 'Spider-Man',
 );
 
+final testTvFromCache = Tv.watchlist(
+  id: 100088,
+  name: 'The Last of Us',
+  overview:
+      'Twenty years after modern civilization has been destroyed, Joel, a hardened survivor, is hired to smuggle Ellie, a 14-year-old girl, out of an oppressive quarantine zone. What starts as a small job soon becomes a brutal, heartbreaking journey, as they both must traverse the United States and depend on each other for survival.',
+  posterPath: '/dmo6TYuuJgaYinXBPjrgG9mB5od.jpg',
+  firstAirDate: DateTime.parse('2023-01-15'),
+);
+
 final testWatchlistMovie = Movie.watchlist(
   id: 1,
   title: 'title',
   posterPath: 'posterPath',
   overview: 'overview',
+);
+
+final testWatchlistTv = Tv.watchlist(
+  id: 1,
+  name: 'name',
+  posterPath: 'posterPath',
+  overview: 'overview',
+  firstAirDate: DateTime.parse('2023-01-15'),
 );
 
 final testMovieTable = MovieTable(
@@ -83,11 +100,26 @@ final testMovieTable = MovieTable(
   overview: 'overview',
 );
 
+final testTvTable = TvTable(
+  id: 1,
+  name: 'name',
+  posterPath: 'posterPath',
+  overview: 'overview',
+  firstAirDate: DateTime.parse('2023-01-15'),
+);
+
 final testMovieMap = {
   'id': 1,
   'overview': 'overview',
   'posterPath': 'posterPath',
   'title': 'title',
+};
+
+final testTvMap = {
+  'id': 1,
+  'name': 'name',
+  'posterPath': 'posterPath',
+  'overview': 'overview',
 };
 
 final testTvDetail = TvDetail(
@@ -224,4 +256,13 @@ final testTvCache = TvTable(
   overview:
       'Twenty years after modern civilization has been destroyed, Joel, a hardened survivor, is hired to smuggle Ellie, a 14-year-old girl, out of an oppressive quarantine zone. What starts as a small job soon becomes a brutal, heartbreaking journey, as they both must traverse the United States and depend on each other for survival.',
   posterPath: '/dmo6TYuuJgaYinXBPjrgG9mB5od.jpg',
+  firstAirDate: DateTime.parse('2023-01-15'),
 );
+
+final testTvCacheMap = {
+  'id': 100088,
+  'name': 'The Last of Us',
+  'posterPath': '/dmo6TYuuJgaYinXBPjrgG9mB5od.jpg',
+  'overview':
+      'Twenty years after modern civilization has been destroyed, Joel, a hardened survivor, is hired to smuggle Ellie, a 14-year-old girl, out of an oppressive quarantine zone. What starts as a small job soon becomes a brutal, heartbreaking journey, as they both must traverse the United States and depend on each other for survival.',
+};
