@@ -106,7 +106,6 @@ class TvDetailResponse extends Equatable {
         voteCount: json["vote_count"] ?? 0,
       );
 
-
   TvDetail toEntity() {
     return TvDetail(
       adult: adult,

@@ -27,5 +27,4 @@ void main() {
     verify(mockTvRepository.getWatchlistTv());
     expect(result, Right(tTvList));
   });
-
 }

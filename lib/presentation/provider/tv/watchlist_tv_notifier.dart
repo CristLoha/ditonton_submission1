@@ -3,7 +3,6 @@ import 'package:ditonton_submission1/domain/entities/tv.dart';
 import 'package:ditonton_submission1/domain/usecases/tv/get_watchlist_tv.dart';
 import 'package:flutter/foundation.dart';
 
-
 class WatchlistTvNotifier extends ChangeNotifier {
   final GetWatchListTv getWatchlistTv;
 

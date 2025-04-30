@@ -77,10 +77,9 @@ void main() {
 
     test('should return Movie Detail Table when data is found', () async {
       // arrange
-          when(
+      when(
         mockDatabaseHelper.getTvById(tId),
       ).thenAnswer((_) async => testTvMap);
-    
 
       // act
       final result = await dataSource.getTvById(tId);

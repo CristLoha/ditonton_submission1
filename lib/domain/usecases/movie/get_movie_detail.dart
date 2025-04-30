@@ -3,7 +3,6 @@ import 'package:ditonton_submission1/core/error/failure.dart';
 import 'package:ditonton_submission1/domain/entities/movie_detail.dart';
 import 'package:ditonton_submission1/domain/repositories/movie_repository.dart';
 
-
 class GetMovieDetail {
   final MovieRepository repository;
 

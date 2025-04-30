@@ -16,8 +16,6 @@ abstract class MovieRemoteDataSource {
 }
 
 class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
-
-
   final http.Client client;
 
   MovieRemoteDataSourceImpl({required this.client});
@@ -37,7 +35,9 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
 
   @override
   Future<MovieDetailResponse> getMovieDetail(int id) async {
-    final response = await client.get(Uri.parse('${Api.baseUrl}/movie/$id?${Api.apiKey}'));
+    final response = await client.get(
+      Uri.parse('${Api.baseUrl}/movie/$id?${Api.apiKey}'),
+    );
 
     if (response.statusCode == 200) {
       return MovieDetailResponse.fromJson(json.decode(response.body));

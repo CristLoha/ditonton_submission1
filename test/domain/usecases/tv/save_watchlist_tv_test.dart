@@ -26,5 +26,4 @@ void main() {
     verify(mockTvRepository.saveWatchlist(testTvDetail));
     expect(result, Right('Added to Watchlist'));
   });
-  
 }

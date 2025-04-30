@@ -8,7 +8,6 @@ import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 import '../../../helpers/test_helper.mocks.dart';
 
-
 void main() {
   late MockTopRatedMoviesNotifier mockNotifier;
 

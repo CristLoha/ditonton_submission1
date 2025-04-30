@@ -19,18 +19,19 @@ void main() {
   group('GetPopularTv Tests', () {
     group('execute', () {
       test(
-          'should get list of popular tv from repository when execute function is called',
-          () async {
-            // arrange
-            when(
-      mockTvRepository.getPopularTv(),
-    ).thenAnswer((_) async => Right(tTvList));
-    // act
-        final result = await usecase.execute();
-        // assert
-        verify(mockTvRepository.getPopularTv());
-        expect(result, Right(tTvList));
-      });
+        'should get list of popular tv from repository when execute function is called',
+        () async {
+          // arrange
+          when(
+            mockTvRepository.getPopularTv(),
+          ).thenAnswer((_) async => Right(tTvList));
+          // act
+          final result = await usecase.execute();
+          // assert
+          verify(mockTvRepository.getPopularTv());
+          expect(result, Right(tTvList));
+        },
+      );
     });
   });
 }

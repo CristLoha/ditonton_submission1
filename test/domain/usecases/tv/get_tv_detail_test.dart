@@ -28,4 +28,3 @@ void main() {
     expect(result, Right(testTvDetail));
   });
 }
-

@@ -2,7 +2,6 @@ import 'package:ditonton_submission1/core/constants/colors.dart';
 import 'package:ditonton_submission1/core/constants/text_styles.dart';
 import 'package:flutter/material.dart';
 
-
 final kTextTheme = TextTheme(
   headlineMedium: kHeading5,
   headlineSmall: kHeading6,
@@ -10,9 +9,7 @@ final kTextTheme = TextTheme(
   bodyMedium: kBodyText,
 );
 
-final kDrawerTheme = DrawerThemeData(
-  backgroundColor: Colors.grey.shade700,
-);
+final kDrawerTheme = DrawerThemeData(backgroundColor: Colors.grey.shade700);
 
 const kColorScheme = ColorScheme(
   primary: kMikadoYellow,

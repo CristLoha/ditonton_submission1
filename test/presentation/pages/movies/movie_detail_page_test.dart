@@ -105,9 +105,9 @@ void main() {
       expect(find.text('Failed'), findsOneWidget);
     },
   );
-testWidgets(
-  'Should show recommendation movies when available',
-  (WidgetTester tester) async {
+  testWidgets('Should show recommendation movies when available', (
+    WidgetTester tester,
+  ) async {
     when(mockNotifier.movieState).thenReturn(RequestState.loaded);
     when(mockNotifier.movie).thenReturn(testMovieDetail);
     when(mockNotifier.recommendationState).thenReturn(RequestState.loaded);
@@ -116,19 +116,21 @@ testWidgets(
 
     await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
 
-    await tester.drag(find.byType(SingleChildScrollView).first, const Offset(0, -300));
+    await tester.drag(
+      find.byType(SingleChildScrollView).first,
+      const Offset(0, -300),
+    );
     await tester.pump();
 
     final recommendationText = find.text('Recommendations');
     expect(recommendationText, findsOneWidget);
 
     expect(find.byType(CachedNetworkImage), findsWidgets);
-  },
-);
+  });
 
-testWidgets(
-  'Should show loading indicator when recommendation is loading',
-  (WidgetTester tester) async {
+  testWidgets('Should show loading indicator when recommendation is loading', (
+    WidgetTester tester,
+  ) async {
     when(mockNotifier.movieState).thenReturn(RequestState.loaded);
     when(mockNotifier.movie).thenReturn(testMovieDetail);
     when(mockNotifier.recommendationState).thenReturn(RequestState.loading);
@@ -138,14 +140,11 @@ testWidgets(
     await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
 
     expect(find.byType(CircularProgressIndicator), findsWidgets);
-  },
-);
+  });
 
-
-
-testWidgets(
-  'Should show empty container on unknown recommendation state',
-  (WidgetTester tester) async {
+  testWidgets('Should show empty container on unknown recommendation state', (
+    WidgetTester tester,
+  ) async {
     when(mockNotifier.movieState).thenReturn(RequestState.loaded);
     when(mockNotifier.movie).thenReturn(testMovieDetail);
     when(mockNotifier.recommendationState).thenReturn(RequestState.empty);
@@ -156,8 +155,5 @@ testWidgets(
 
     // Container default tidak mudah ditemukan, tapi bisa dicek keberadaan parent
     expect(find.byType(Container), findsWidgets);
-  },
-);
-
-
+  });
 }

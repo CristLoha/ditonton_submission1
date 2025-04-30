@@ -124,7 +124,8 @@ final testTvMap = {
   'id': 45789,
   'name': 'Sturm der Liebe',
   'posterPath': '/jfFNydakwvbeACEwSd2Gh8UWtba.jpg',
-  'overview': 'These are the stories of relationships taking place in the fictional five-star hotel Fürstenhof, located in Feldkirchen-Westerham near Rosenheim with the plot revolving around members of the family room area, the hotel owners, and employees.',
+  'overview':
+      'These are the stories of relationships taking place in the fictional five-star hotel Fürstenhof, located in Feldkirchen-Westerham near Rosenheim with the plot revolving around members of the family room area, the hotel owners, and employees.',
 };
 
 final testTvDetail = TvDetail(

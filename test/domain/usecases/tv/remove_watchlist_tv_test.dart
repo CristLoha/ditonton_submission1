@@ -26,5 +26,4 @@ void main() {
     verify(mockTvRepository.removeWatchlist(testTvDetail));
     expect(result, Right('Removed from watchlist'));
   });
-
 }

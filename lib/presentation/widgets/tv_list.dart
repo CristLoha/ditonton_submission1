@@ -4,7 +4,6 @@ import 'package:ditonton_submission1/domain/entities/tv.dart';
 import 'package:ditonton_submission1/presentation/pages/tv/tv_detail_page.dart';
 import 'package:flutter/material.dart';
 
-
 class TvList extends StatelessWidget {
   final List<Tv> tvShows;
 

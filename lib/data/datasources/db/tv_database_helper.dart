@@ -48,7 +48,6 @@ class TvDatabaseHelper {
         category TEXT
       );
     ''');
- 
   }
 
   static void setDatabaseForTesting(Database? database) {

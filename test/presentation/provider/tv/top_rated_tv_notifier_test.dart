@@ -34,12 +34,12 @@ void main() {
     });
 
     test('should change tv data when data is gotten successfully', () async {
-       // arrange
-        when(
-          mockGetTopRatedTv.execute(),
-        ).thenAnswer((_) async => Right(testTvList));
-        // act
-        await provider.fetchTopRatedTv();
+      // arrange
+      when(
+        mockGetTopRatedTv.execute(),
+      ).thenAnswer((_) async => Right(testTvList));
+      // act
+      await provider.fetchTopRatedTv();
       // assert
       expect(provider.state, RequestState.loaded);
       expect(provider.tv, testTvList);
@@ -48,7 +48,9 @@ void main() {
 
     test('should return error when data is unsuccessful', () async {
       // arrange
-      when(mockGetTopRatedTv.execute()).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+      when(
+        mockGetTopRatedTv.execute(),
+      ).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       // act
       await provider.fetchTopRatedTv();
       // assert

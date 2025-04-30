@@ -171,7 +171,7 @@ void main() {
         verify(mockRemoveWatchlist.execute(testTvDetail));
       });
 
-         test(
+      test(
         'should update watchlist status when add watchlist success',
         () async {
           // arrange
@@ -209,7 +209,7 @@ void main() {
         },
       );
     });
-     group('Error Handling', () {
+    group('Error Handling', () {
       test('should return error when data is unsuccessful', () async {
         // arrange
         when(
