@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'package:ditonton_submission1/data/models/movie_table.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:flutter/foundation.dart';
 
 class MovieDatabaseHelper {
   static MovieDatabaseHelper? _databaseHelper;
+  static Database? _database;
 
   MovieDatabaseHelper._instance() {
     _databaseHelper = this;
@@ -12,7 +14,11 @@ class MovieDatabaseHelper {
   factory MovieDatabaseHelper() =>
       _databaseHelper ?? MovieDatabaseHelper._instance();
 
-  static Database? _database;
+  // For testing purposes
+  @visibleForTesting
+  static void setDatabaseForTesting(Database? database) {
+    _database = database;
+  }
 
   Future<Database?> get database async {
     _database ??= await _initDb();
@@ -21,6 +27,7 @@ class MovieDatabaseHelper {
 
   static const String _tblWatchlist = 'watchlist';
   static const String _tblCache = 'cache';
+
   Future<Database> _initDb() async {
     final path = await getDatabasesPath();
     final databasePath = '$path/ditonton1.db';

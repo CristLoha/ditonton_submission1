@@ -1,4 +1,4 @@
-import 'package:ditonton_submission1/presentation/provider/tv_search_notifier.dart';
+import 'package:ditonton_submission1/presentation/provider/tv/tv_search_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:dartz/dartz.dart';

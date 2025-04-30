@@ -1,6 +1,6 @@
 import 'package:ditonton_submission1/core/error/failure.dart';
+import 'package:ditonton_submission1/presentation/provider/tv/popular_tv_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ditonton_submission1/presentation/provider/popular_tv_notifer.dart';
 import 'package:mockito/mockito.dart';
 import 'package:dartz/dartz.dart';
 import '../../../helpers/test_helper.dart';

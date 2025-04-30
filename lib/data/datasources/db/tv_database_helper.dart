@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:ditonton_submission1/data/models/tv_table.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import 'dart:io';
 
 class TvDatabaseHelper {
   static TvDatabaseHelper? _databaseHelper;
@@ -63,6 +62,10 @@ class TvDatabaseHelper {
     if (oldVersion < 2) {
       // Add any new tables or columns here
     }
+  }
+
+  static void setDatabaseForTesting(Database? database) {
+    _database = database;
   }
 
   Future<void> insertCacheTransaction(

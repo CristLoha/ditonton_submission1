@@ -4,17 +4,17 @@ import 'package:ditonton_submission1/core/constants/values.dart';
 import 'package:ditonton_submission1/domain/entities/movie.dart';
 import 'package:ditonton_submission1/domain/entities/tv.dart';
 import 'package:ditonton_submission1/presentation/pages/about_page.dart';
-import 'package:ditonton_submission1/presentation/pages/movie_detail_page.dart';
-import 'package:ditonton_submission1/presentation/pages/movie_search_page.dart';
-import 'package:ditonton_submission1/presentation/pages/popular_movies_page.dart';
-import 'package:ditonton_submission1/presentation/pages/top_rated_movies_page.dart';
-import 'package:ditonton_submission1/presentation/pages/tv_detail_page.dart';
-import 'package:ditonton_submission1/presentation/pages/popular_tv_page.dart';
-import 'package:ditonton_submission1/presentation/pages/top_rated_tv_page.dart';
-import 'package:ditonton_submission1/presentation/pages/tv_search_page.dart';
+import 'package:ditonton_submission1/presentation/pages/movies/movie_detail_page.dart';
+import 'package:ditonton_submission1/presentation/pages/movies/movie_search_page.dart';
+import 'package:ditonton_submission1/presentation/pages/movies/popular_movies_page.dart';
+import 'package:ditonton_submission1/presentation/pages/movies/top_rated_movies_page.dart';
+import 'package:ditonton_submission1/presentation/pages/tv/tv_detail_page.dart';
+import 'package:ditonton_submission1/presentation/pages/tv/popular_tv_page.dart';
+import 'package:ditonton_submission1/presentation/pages/tv/top_rated_tv_page.dart';
+import 'package:ditonton_submission1/presentation/pages/tv/tv_search_page.dart';
 import 'package:ditonton_submission1/presentation/pages/watchlist_page.dart';
-import 'package:ditonton_submission1/presentation/provider/movie_list_notifier.dart';
-import 'package:ditonton_submission1/presentation/provider/tv_list_notifier.dart';
+import 'package:ditonton_submission1/presentation/provider/movies/movie_list_notifier.dart';
+import 'package:ditonton_submission1/presentation/provider/tv/tv_list_notifier.dart';
 import 'package:ditonton_submission1/core/enums/state_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -74,6 +74,7 @@ class HomePageState extends State<HomePage> {
             ListTile(
               leading: Icon(Icons.tv),
               title: Text('TV Shows'),
+              key: Key('tv_shows_button'),
               selected: !_showMovies,
               onTap: () {
                 setState(() {

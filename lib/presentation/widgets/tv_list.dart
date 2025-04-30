@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton_submission1/core/constants/values.dart';
 import 'package:ditonton_submission1/domain/entities/tv.dart';
-import 'package:ditonton_submission1/presentation/pages/tv_detail_page.dart';
+import 'package:ditonton_submission1/presentation/pages/tv/tv_detail_page.dart';
 import 'package:flutter/material.dart';
 
 

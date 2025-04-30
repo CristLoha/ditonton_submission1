@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:ditonton_submission1/presentation/provider/tv_list_notifier.dart';
+import 'package:ditonton_submission1/presentation/provider/tv/tv_list_notifier.dart';
 import 'package:ditonton_submission1/domain/entities/tv.dart';
 import 'package:ditonton_submission1/core/error/failure.dart';
 import 'package:ditonton_submission1/core/enums/state_enum.dart';

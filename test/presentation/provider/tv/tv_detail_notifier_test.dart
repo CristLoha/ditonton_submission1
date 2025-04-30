@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ditonton_submission1/core/enums/state_enum.dart';
 import 'package:ditonton_submission1/domain/entities/tv.dart';
-import 'package:ditonton_submission1/presentation/provider/tv_detail_notifier.dart';
+import 'package:ditonton_submission1/presentation/provider/tv/tv_detail_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ditonton_submission1/core/error/failure.dart';
