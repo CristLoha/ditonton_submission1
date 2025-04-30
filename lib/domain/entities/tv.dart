@@ -66,26 +66,4 @@ class Tv extends Equatable {
     voteAverage,
     voteCount,
   ];
-
-  factory Tv.fromJson(Map<String, dynamic> json) => Tv(
-    adult: json["adult"] ?? false,
-    backdropPath: json["backdrop_path"] ?? '',
-    genreIds: List<int>.from(json["genre_ids"]?.map((x) => x) ?? []),
-    id: json["id"],
-    originCountry: List<String>.from(
-      json["origin_country"]?.map((x) => x) ?? [],
-    ),
-    originalLanguage: json["original_language"] ?? '',
-    originalName: json["original_name"] ?? '',
-    overview: json["overview"] ?? '',
-    popularity: (json["popularity"] ?? 0.0).toDouble(),
-    posterPath: json["poster_path"] ?? '',
-    firstAirDate:
-        json["first_air_date"] != null
-            ? DateTime.parse(json["first_air_date"])
-            : null,
-    name: json["name"] ?? '',
-    voteAverage: (json["vote_average"] ?? 0.0).toDouble(),
-    voteCount: json["vote_count"] ?? 0,
-  );
 }

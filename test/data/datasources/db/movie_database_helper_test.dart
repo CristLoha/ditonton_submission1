@@ -54,6 +54,15 @@ void main() {
   });
 
   group('MovieDatabaseHelper', () {
+    test('should be a singleton', () {
+      // arrange
+      final instance1 = MovieDatabaseHelper();
+      final instance2 = MovieDatabaseHelper();
+
+      // assert
+      expect(instance1, instance2);
+    });
+
     group('insertWatchlist', () {
       test('should insert movie to watchlist table', () async {
         // arrange
@@ -76,6 +85,20 @@ void main() {
         expect(movies.first['overview'], movie.overview);
         expect(movies.first['posterPath'], movie.posterPath);
       });
+
+      test('should throw error when inserting duplicate movie', () async {
+        // arrange
+        final movie = MovieTable(
+          id: 1,
+          title: 'test',
+          overview: 'test',
+          posterPath: 'test',
+        );
+        await databaseHelper.insertWatchlist(movie);
+
+        // act & assert
+        expect(() => databaseHelper.insertWatchlist(movie), throwsException);
+      });
     });
 
     group('removeWatchlist', () {
@@ -96,6 +119,22 @@ void main() {
         expect(result, 1);
         final movies = await database.query('watchlist');
         expect(movies, isEmpty);
+      });
+
+      test('should return 0 when removing non-existent movie', () async {
+        // arrange
+        final movie = MovieTable(
+          id: 1,
+          title: 'test',
+          overview: 'test',
+          posterPath: 'test',
+        );
+
+        // act
+        final result = await databaseHelper.removeWatchlist(movie);
+
+        // assert
+        expect(result, 0);
       });
     });
 
@@ -153,6 +192,14 @@ void main() {
         expect(result.first['overview'], movie.overview);
         expect(result.first['posterPath'], movie.posterPath);
       });
+
+      test('should return empty list when watchlist is empty', () async {
+        // act
+        final result = await databaseHelper.getWatchlistMovies();
+
+        // assert
+        expect(result, isEmpty);
+      });
     });
 
     group('cache operations', () {
@@ -199,6 +246,49 @@ void main() {
         expect(result, 1);
         final cachedMovies = await database.query('cache');
         expect(cachedMovies, isEmpty);
+      });
+
+      test('should handle multiple movies in cache transaction', () async {
+        // arrange
+        final movies = [
+          MovieTable(
+            id: 1,
+            title: 'test1',
+            overview: 'test1',
+            posterPath: 'test1',
+          ),
+          MovieTable(
+            id: 2,
+            title: 'test2',
+            overview: 'test2',
+            posterPath: 'test2',
+          ),
+        ];
+
+        // act
+        await databaseHelper.insertCacheTransaction(movies, 'now playing');
+        final result = await databaseHelper.getCacheMovies('now playing');
+
+        // assert
+        expect(result.length, 2);
+        expect(result[0]['id'], movies[0].id);
+        expect(result[1]['id'], movies[1].id);
+      });
+
+      test('should return empty list for non-existent category', () async {
+        // act
+        final result = await databaseHelper.getCacheMovies('non-existent');
+
+        // assert
+        expect(result, isEmpty);
+      });
+
+      test('should return 0 when clearing non-existent category', () async {
+        // act
+        final result = await databaseHelper.clearCache('non-existent');
+
+        // assert
+        expect(result, 0);
       });
     });
   });

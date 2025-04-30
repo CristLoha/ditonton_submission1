@@ -26,17 +26,11 @@ class TvDatabaseHelper {
     final path = await getDatabasesPath();
     final databasePath = join(path, 'ditonton.db');
 
-    var db = await openDatabase(
-      databasePath,
-      version: 1,
-      onCreate: _onCreate,
-      onUpgrade: _onUpgrade,
-    );
+    var db = await openDatabase(databasePath, version: 1, onCreate: _onCreate);
     return db;
   }
 
   void _onCreate(Database db, int version) async {
-    print('Creating TV database tables...');
     await db.execute('''
       CREATE TABLE IF NOT EXISTS $_tblWatchlist (
         id INTEGER PRIMARY KEY,
@@ -54,14 +48,7 @@ class TvDatabaseHelper {
         category TEXT
       );
     ''');
-    print('TV database tables created successfully');
-  }
-
-  void _onUpgrade(Database db, int oldVersion, int newVersion) async {
-    print('Upgrading TV database from version $oldVersion to $newVersion');
-    if (oldVersion < 2) {
-      // Add any new tables or columns here
-    }
+ 
   }
 
   static void setDatabaseForTesting(Database? database) {
