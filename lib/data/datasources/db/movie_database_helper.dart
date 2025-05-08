@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:ditonton_submission1/data/models/movie_table.dart';
+import 'package:home/data/models/movie_table.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter/foundation.dart';
 

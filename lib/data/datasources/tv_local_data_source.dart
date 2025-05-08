@@ -1,6 +1,6 @@
-import 'package:ditonton_submission1/core/error/exception.dart';
+import 'package:core/core.dart';
 import 'package:ditonton_submission1/data/datasources/db/tv_database_helper.dart';
-import 'package:ditonton_submission1/data/models/tv_table.dart';
+import 'package:home/data/models/tv_table.dart';
 
 abstract class TvLocalDataSource {
   Future<void> cacheOnTheAirTv(List<TvTable> tvs);

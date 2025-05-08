@@ -1,0 +1,20 @@
+export 'domain/usecases/get_now_playing_movies.dart';
+export 'domain/usecases/get_popular_movies.dart';
+export 'domain/usecases/get_popular_tv.dart';
+export 'domain/usecases/get_on_the_air_tv.dart';
+export 'presentation/provider/movie_list_notifier.dart';
+export 'presentation/provider/tv_list_notifier.dart';
+export 'presentation/pages/home.dart';
+export 'domain/repository/movie_repository.dart';
+export 'domain/repository/tv_repository.dart';
+export 'domain/entities/movie.dart';
+export 'domain/entities/tv.dart';
+export 'domain/entities/movie_detail.dart';
+export 'domain/entities/tv_detail.dart';
+export 'data/models/tv_table.dart';
+export 'data/models/tv_model.dart';
+export 'domain/usecases/get_top_rated_movies.dart';
+export 'domain/usecases/get_top_rated_tv.dart';
+export 'data/models/movie_table.dart';
+export 'data/models/movie_model.dart';
+

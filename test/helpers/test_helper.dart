@@ -1,18 +1,13 @@
+import 'package:core/core.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
-import 'package:ditonton_submission1/core/error/network_info.dart';
 import 'package:ditonton_submission1/data/datasources/db/movie_database_helper.dart';
 import 'package:ditonton_submission1/data/datasources/db/tv_database_helper.dart';
 import 'package:ditonton_submission1/data/datasources/movie_local_data_source.dart';
 import 'package:ditonton_submission1/data/datasources/movie_remote_data_source.dart';
 import 'package:ditonton_submission1/data/datasources/tv_local_data_source.dart';
 import 'package:ditonton_submission1/data/datasources/tv_remote_data_source.dart';
-import 'package:ditonton_submission1/domain/entities/movie.dart';
-import 'package:ditonton_submission1/domain/entities/tv.dart';
-import 'package:ditonton_submission1/domain/repositories/movie_repository.dart';
-import 'package:ditonton_submission1/domain/repositories/tv_repository.dart';
-import 'package:ditonton_submission1/domain/usecases/movie/get_now_playing_movies.dart';
-import 'package:ditonton_submission1/domain/usecases/movie/get_popular_movies.dart';
-import 'package:ditonton_submission1/domain/usecases/movie/get_top_rated_movies.dart';
+import 'package:ditonton_submission1/presentation/provider/movies/top_rated_movies_notifier.dart';
+import 'package:ditonton_submission1/presentation/provider/tv/popular_tv_notifier.dart';
 import 'package:ditonton_submission1/domain/usecases/movie/get_movie_detail.dart';
 import 'package:ditonton_submission1/domain/usecases/movie/get_movie_recommendations.dart';
 import 'package:ditonton_submission1/domain/usecases/movie/get_watchlist_movies.dart';
@@ -21,9 +16,6 @@ import 'package:ditonton_submission1/domain/usecases/tv/get_watchlist_tv.dart';
 import 'package:ditonton_submission1/domain/usecases/movie/save_watchlist_movie.dart';
 import 'package:ditonton_submission1/domain/usecases/movie/remove_watchlist_movie.dart';
 import 'package:ditonton_submission1/domain/usecases/movie/search_movies.dart';
-import 'package:ditonton_submission1/domain/usecases/tv/get_on_the_air_tv.dart';
-import 'package:ditonton_submission1/domain/usecases/tv/get_popular_tv.dart';
-import 'package:ditonton_submission1/domain/usecases/tv/get_top_rated_tv.dart';
 import 'package:ditonton_submission1/domain/usecases/tv/get_tv_detail.dart';
 import 'package:ditonton_submission1/domain/usecases/tv/get_tv_recommendations.dart';
 import 'package:ditonton_submission1/domain/usecases/tv/search_tv.dart';
@@ -31,14 +23,11 @@ import 'package:ditonton_submission1/domain/usecases/tv/get_watchlist_status_tv.
 import 'package:ditonton_submission1/domain/usecases/tv/save_watchlist_tv.dart';
 import 'package:ditonton_submission1/domain/usecases/tv/remove_watchlist_tv.dart';
 import 'package:ditonton_submission1/presentation/provider/movies/movie_detail_notifier.dart';
-import 'package:ditonton_submission1/presentation/provider/movies/movie_list_notifier.dart';
 import 'package:ditonton_submission1/presentation/provider/movies/movie_search_notifier.dart';
-import 'package:ditonton_submission1/presentation/provider/movies/popular_movies_notifier.dart';
-import 'package:ditonton_submission1/presentation/provider/movies/top_rated_movies_notifier.dart';
-import 'package:ditonton_submission1/presentation/provider/tv/popular_tv_notifier.dart';
 import 'package:ditonton_submission1/presentation/provider/tv/top_rated_tv_notifier.dart';
+import 'package:home/home.dart';
+import 'package:home/presentation/provider/popular_movies_notifier.dart';
 import 'package:ditonton_submission1/presentation/provider/tv/tv_detail_notifier.dart';
-import 'package:ditonton_submission1/presentation/provider/tv/tv_list_notifier.dart';
 import 'package:ditonton_submission1/presentation/provider/tv/tv_search_notifier.dart';
 import 'package:ditonton_submission1/presentation/provider/movies/watchlist_movie_notifier.dart';
 import 'package:ditonton_submission1/presentation/provider/tv/watchlist_tv_notifier.dart';
@@ -86,14 +75,14 @@ final testTvList = [tTv];
 // Mock classes
 @GenerateMocks(
   [
+    TopRatedMoviesNotifier,
+    GetTopRatedMovies,
+    GetTopRatedTv,
     MovieRepository,
     TvRepository,
     MovieRemoteDataSource,
     TvRemoteDataSource,
     NetworkInfo,
-    GetNowPlayingMovies,
-    GetPopularMovies,
-    GetTopRatedMovies,
     GetMovieDetail,
     GetMovieRecommendations,
     GetWatchListStatusMovie,
@@ -103,9 +92,6 @@ final testTvList = [tTv];
     GetWatchListTv,
     SearchMovies,
     SearchTv,
-    GetOnTheAirTv,
-    GetPopularTv,
-    GetTopRatedTv,
     GetTvDetail,
     GetTvRecommendations,
     GetWatchListStatusTv,
@@ -113,14 +99,12 @@ final testTvList = [tTv];
     RemoveWatchlistTv,
     MovieDatabaseHelper,
     TvDatabaseHelper,
-    MovieListNotifier,
-    PopularTvNotifier,
     TopRatedTvNotifier,
-    TvListNotifier,
     TvDetailNotifier,
     PopularMoviesNotifier,
-    TopRatedMoviesNotifier,
     MovieDetailNotifier,
+    PopularTvNotifier,
+    GetPopularTv,
     TvSearchNotifier,
     MovieSearchNotifier,
     WatchlistMovieNotifier,

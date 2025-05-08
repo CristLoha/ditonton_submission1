@@ -1,8 +1,7 @@
 import 'dart:convert';
-import 'package:ditonton_submission1/core/constants/api.dart';
-import 'package:ditonton_submission1/core/error/exception.dart';
+import 'package:core/core.dart';
 import 'package:ditonton_submission1/data/models/tv_detail_model.dart';
-import 'package:ditonton_submission1/data/models/tv_model.dart';
+import 'package:home/data/models/tv_model.dart';
 import 'package:ditonton_submission1/data/models/tv_response.dart';
 import 'package:http/http.dart' as http;
 

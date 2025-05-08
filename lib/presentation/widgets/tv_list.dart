@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ditonton_submission1/core/constants/values.dart';
-import 'package:ditonton_submission1/domain/entities/tv.dart';
-import 'package:ditonton_submission1/presentation/pages/tv/tv_detail_page.dart';
+import 'package:core/core.dart';
+import 'package:home/domain/entities/tv.dart';
 import 'package:flutter/material.dart';
 
 class TvList extends StatelessWidget {
@@ -23,7 +22,7 @@ class TvList extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(
                   context,
-                  TvDetailPage.routeName,
+                  tvDetailRoute,
                   arguments: tv.id,
                 );
               },
@@ -48,10 +47,7 @@ class TvList extends StatelessWidget {
                         gradient: LinearGradient(
                           begin: Alignment.bottomCenter,
                           end: Alignment.topCenter,
-                          colors: [
-                            Colors.black.withOpacity(0.8),
-                            Colors.transparent,
-                          ],
+                          colors: [Colors.black, Colors.transparent],
                         ),
                       ),
                       padding: const EdgeInsets.all(8),

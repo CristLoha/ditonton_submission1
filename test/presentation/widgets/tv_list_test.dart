@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ditonton_submission1/domain/entities/tv.dart';
+import 'package:home/domain/entities/tv.dart';
 import 'package:ditonton_submission1/presentation/widgets/tv_list.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 

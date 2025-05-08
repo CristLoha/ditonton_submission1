@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ditonton_submission1/core/constants/text_styles.dart';
-import 'package:ditonton_submission1/core/constants/values.dart';
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
 class MediaCard extends StatelessWidget {

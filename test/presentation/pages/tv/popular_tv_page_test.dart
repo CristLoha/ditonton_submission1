@@ -1,10 +1,10 @@
+import 'package:core/core.dart';
 import 'package:ditonton_submission1/presentation/provider/tv/popular_tv_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:home/home.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
-import 'package:ditonton_submission1/core/enums/state_enum.dart';
-import 'package:ditonton_submission1/domain/entities/tv.dart';
 import 'package:ditonton_submission1/presentation/pages/tv/popular_tv_page.dart';
 import 'package:ditonton_submission1/presentation/widgets/media_card_list.dart';
 import 'package:ditonton_submission1/presentation/provider/tv/tv_detail_notifier.dart';

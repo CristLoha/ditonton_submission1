@@ -1,5 +1,5 @@
 import 'package:ditonton_submission1/data/datasources/db/tv_database_helper.dart';
-import 'package:ditonton_submission1/data/models/tv_table.dart';
+import 'package:home/data/models/tv_table.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 

@@ -1,14 +1,12 @@
 import 'dart:io';
+import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ditonton_submission1/core/error/exception.dart';
-import 'package:ditonton_submission1/core/error/failure.dart';
-import 'package:ditonton_submission1/core/error/network_info.dart';
 import 'package:ditonton_submission1/data/datasources/tv_remote_data_source.dart';
 import 'package:ditonton_submission1/data/datasources/tv_local_data_source.dart';
-import 'package:ditonton_submission1/data/models/tv_table.dart';
-import 'package:ditonton_submission1/domain/entities/tv.dart';
-import 'package:ditonton_submission1/domain/entities/tv_detail.dart';
-import 'package:ditonton_submission1/domain/repositories/tv_repository.dart';
+import 'package:home/data/models/tv_table.dart';
+import 'package:home/domain/entities/tv.dart';
+import 'package:home/domain/entities/tv_detail.dart';
+import 'package:home/domain/repository/tv_repository.dart';
 
 class TvRepositoryImpl implements TvRepository {
   final TvRemoteDataSource remoteDataSource;

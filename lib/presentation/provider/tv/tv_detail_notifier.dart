@@ -1,6 +1,5 @@
-import 'package:ditonton_submission1/core/enums/state_enum.dart';
-import 'package:ditonton_submission1/domain/entities/tv.dart';
-import 'package:ditonton_submission1/domain/entities/tv_detail.dart';
+import 'package:core/core.dart';
+import 'package:home/home.dart';
 import 'package:ditonton_submission1/domain/usecases/tv/get_tv_detail.dart';
 import 'package:ditonton_submission1/domain/usecases/tv/get_tv_recommendations.dart';
 import 'package:ditonton_submission1/domain/usecases/tv/get_watchlist_status_tv.dart';

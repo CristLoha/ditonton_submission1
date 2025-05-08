@@ -1,6 +1,6 @@
-import 'package:ditonton_submission1/core/error/exception.dart';
+import 'package:core/core.dart';
 import 'package:ditonton_submission1/data/datasources/db/movie_database_helper.dart';
-import 'package:ditonton_submission1/data/models/movie_table.dart';
+import 'package:home/data/models/movie_table.dart';
 
 abstract class MovieLocalDataSource {
   Future<void> cacheNowPlayingMovies(List<MovieTable> movies);

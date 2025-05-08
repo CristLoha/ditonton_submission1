@@ -1,13 +1,10 @@
-import 'package:ditonton_submission1/core/enums/state_enum.dart';
+import 'package:core/core.dart';
 import 'package:ditonton_submission1/presentation/provider/tv/tv_search_notifier.dart';
-import 'package:ditonton_submission1/presentation/pages/tv/tv_detail_page.dart';
 import 'package:ditonton_submission1/presentation/widgets/media_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TvSearchPage extends StatelessWidget {
-  static const routeName = '/tv-search';
-
   const TvSearchPage({super.key});
 
   @override

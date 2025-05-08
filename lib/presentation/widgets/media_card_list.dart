@@ -1,8 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ditonton_submission1/core/constants/text_styles.dart';
-import 'package:ditonton_submission1/core/constants/values.dart';
-import 'package:ditonton_submission1/presentation/pages/movies/movie_detail_page.dart';
-import 'package:ditonton_submission1/presentation/pages/tv/tv_detail_page.dart';
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
 class MediaCardList extends StatelessWidget {
@@ -19,7 +16,7 @@ class MediaCardList extends StatelessWidget {
         onTap: () {
           Navigator.pushNamed(
             context,
-            isMovie ? MovieDetailPage.routeName : TvDetailPage.routeName,
+            isMovie ? movieDetailRoute : tvDetailRoute,
             arguments: isMovie ? media.id : media.id,
           );
         },

@@ -1,10 +1,9 @@
 import 'dart:io';
+import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ditonton_submission1/data/models/tv_model.dart';
+import 'package:home/data/models/tv_model.dart';
 import 'package:ditonton_submission1/data/repositories/tv_repository_impl.dart';
-import 'package:ditonton_submission1/core/error/exception.dart';
-import 'package:ditonton_submission1/core/error/failure.dart';
-import 'package:ditonton_submission1/domain/entities/tv.dart';
+import 'package:home/domain/entities/tv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import '../../dummy_data/dummy_objects.dart';

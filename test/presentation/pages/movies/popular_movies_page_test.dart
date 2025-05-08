@@ -1,7 +1,7 @@
-import 'package:ditonton_submission1/core/enums/state_enum.dart';
-import 'package:ditonton_submission1/domain/entities/movie.dart';
+import 'package:core/core.dart';
+import 'package:home/domain/entities/movie.dart';
 import 'package:ditonton_submission1/presentation/pages/movies/popular_movies_page.dart';
-import 'package:ditonton_submission1/presentation/provider/movies/popular_movies_notifier.dart';
+import 'package:home/presentation/provider/popular_movies_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';

@@ -1,5 +1,4 @@
-import 'dart:convert';
-import 'package:ditonton_submission1/data/models/tv_model.dart';
+import 'package:home/data/models/tv_model.dart';
 import 'package:equatable/equatable.dart';
 
 class TvResponse extends Equatable {

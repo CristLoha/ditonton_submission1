@@ -1,13 +1,12 @@
-import 'package:ditonton_submission1/domain/entities/movie.dart';
-import 'package:ditonton_submission1/domain/entities/movie_detail.dart';
+import 'package:core/core.dart';
 import 'package:ditonton_submission1/domain/usecases/movie/get_movie_detail.dart';
 import 'package:ditonton_submission1/domain/usecases/movie/get_movie_recommendations.dart';
-import 'package:ditonton_submission1/core/enums/state_enum.dart';
 import 'package:ditonton_submission1/domain/usecases/movie/get_watchlist_status_movie.dart';
 import 'package:ditonton_submission1/domain/usecases/movie/remove_watchlist_movie.dart';
 import 'package:ditonton_submission1/domain/usecases/movie/save_watchlist_movie.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:home/home.dart';
 
 class MovieDetailNotifier extends ChangeNotifier {
   static const watchlistAddSuccessMessage = 'Added to Watchlist';

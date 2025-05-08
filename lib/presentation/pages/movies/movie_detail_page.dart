@@ -1,18 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ditonton_submission1/core/constants/colors.dart';
-import 'package:ditonton_submission1/core/constants/text_styles.dart';
-import 'package:ditonton_submission1/domain/entities/genre.dart';
-import 'package:ditonton_submission1/domain/entities/movie.dart';
-import 'package:ditonton_submission1/domain/entities/movie_detail.dart';
+import 'package:core/core.dart';
+import 'package:home/domain/entities/genre.dart';
+import 'package:home/domain/entities/movie.dart';
+import 'package:home/domain/entities/movie_detail.dart';
 import 'package:ditonton_submission1/presentation/provider/movies/movie_detail_notifier.dart';
 import 'package:ditonton_submission1/presentation/widgets/custom_snackbar.dart';
-import 'package:ditonton_submission1/core/enums/state_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 
 class MovieDetailPage extends StatefulWidget {
-  static const routeName = '/movie-detail';
 
   final int id;
   const MovieDetailPage({super.key, required this.id});
@@ -195,7 +192,7 @@ class DetailContent extends StatelessWidget {
                                             onTap: () {
                                               Navigator.pushReplacementNamed(
                                                 context,
-                                                MovieDetailPage.routeName,
+                                                movieDetailRoute,
                                                 arguments: movie.id,
                                               );
                                             },

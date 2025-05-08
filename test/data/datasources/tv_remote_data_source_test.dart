@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:ditonton_submission1/core/error/exception.dart';
+import 'package:core/core.dart';
 import 'package:ditonton_submission1/data/datasources/tv_remote_data_source.dart';
 import 'package:ditonton_submission1/data/models/tv_detail_model.dart';
 import 'package:ditonton_submission1/data/models/tv_response.dart';

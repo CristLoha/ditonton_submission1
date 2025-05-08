@@ -1,15 +1,12 @@
 import 'dart:io';
-
 import 'package:dartz/dartz.dart';
-import 'package:ditonton_submission1/core/error/exception.dart';
-import 'package:ditonton_submission1/core/error/failure.dart';
-import 'package:ditonton_submission1/core/error/network_info.dart';
+import 'package:core/core.dart';
 import 'package:ditonton_submission1/data/datasources/movie_local_data_source.dart';
 import 'package:ditonton_submission1/data/datasources/movie_remote_data_source.dart';
-import 'package:ditonton_submission1/data/models/movie_table.dart';
-import 'package:ditonton_submission1/domain/entities/movie.dart';
-import 'package:ditonton_submission1/domain/entities/movie_detail.dart';
-import 'package:ditonton_submission1/domain/repositories/movie_repository.dart';
+import 'package:home/data/models/movie_table.dart';
+import 'package:home/domain/entities/movie.dart';
+import 'package:home/domain/entities/movie_detail.dart';
+import 'package:home/domain/repository/movie_repository.dart';
 
 class MovieRepositoryImpl implements MovieRepository {
   final MovieRemoteDataSource remoteDataSource;

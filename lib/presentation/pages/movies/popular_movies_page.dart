@@ -1,11 +1,10 @@
-import 'package:ditonton_submission1/core/enums/state_enum.dart';
-import 'package:ditonton_submission1/presentation/provider/movies/popular_movies_notifier.dart';
+import 'package:core/core.dart';
+import 'package:home/presentation/provider/popular_movies_notifier.dart';
 import 'package:ditonton_submission1/presentation/widgets/media_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PopularMoviesPage extends StatefulWidget {
-  static const routeName = '/popular-movie';
 
   const PopularMoviesPage({super.key});
 

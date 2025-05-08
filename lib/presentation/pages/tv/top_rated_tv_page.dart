@@ -1,12 +1,11 @@
-import 'package:ditonton_submission1/core/enums/state_enum.dart';
+import 'package:core/core.dart';
 import 'package:ditonton_submission1/presentation/provider/tv/top_rated_tv_notifier.dart';
+
 import 'package:ditonton_submission1/presentation/widgets/media_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'tv_detail_page.dart';
 
 class TopRatedTvPage extends StatefulWidget {
-  static const routeName = '/top-rated-tv';
 
   const TopRatedTvPage({super.key});
 
@@ -62,7 +61,7 @@ class _TopRatedTvPageState extends State<TopRatedTvPage> {
                     onTap: () {
                       Navigator.of(
                         context,
-                      ).pushNamed(TvDetailPage.routeName, arguments: tv.id);
+                      ).pushNamed(tvDetailRoute, arguments: tv.id);
                     },
                     child: MediaCardList(media: tv, isMovie: false),
                   );

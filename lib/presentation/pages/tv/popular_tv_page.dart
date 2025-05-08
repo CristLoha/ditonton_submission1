@@ -1,13 +1,10 @@
-import 'package:ditonton_submission1/core/enums/state_enum.dart';
+import 'package:core/core.dart';
 import 'package:ditonton_submission1/presentation/provider/tv/popular_tv_notifier.dart';
-import 'package:ditonton_submission1/presentation/pages/tv/tv_detail_page.dart';
 import 'package:ditonton_submission1/presentation/widgets/media_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PopularTvPage extends StatefulWidget {
-  static const routeName = '/popular-tv';
-
   const PopularTvPage({super.key});
 
   @override
@@ -59,7 +56,7 @@ class _PopularTvPageState extends State<PopularTvPage> {
                     onTap: () {
                       Navigator.of(
                         context,
-                      ).pushNamed(TvDetailPage.routeName, arguments: tv.id);
+                      ).pushNamed(tvDetailRoute, arguments: tv.id);
                     },
                     child: MediaCardList(media: tv, isMovie: false),
                   );

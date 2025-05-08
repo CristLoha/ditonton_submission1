@@ -1,15 +1,10 @@
 import 'package:ditonton_submission1/data/models/movie_detail_model.dart';
-import 'package:ditonton_submission1/data/models/movie_table.dart';
+import 'package:home/data/models/movie_table.dart';
 import 'package:ditonton_submission1/data/models/tv_detail_model.dart';
-import 'package:ditonton_submission1/domain/entities/genre.dart';
-import 'package:ditonton_submission1/domain/entities/movie.dart';
-import 'package:ditonton_submission1/domain/entities/movie_detail.dart';
-import 'package:ditonton_submission1/domain/entities/tv_detail.dart';
-import 'package:ditonton_submission1/domain/entities/tv.dart';
-import 'package:ditonton_submission1/data/models/tv_model.dart';
-import 'package:ditonton_submission1/data/models/movie_model.dart';
+import 'package:home/data/models/movie_model.dart';
 import 'package:ditonton_submission1/data/models/genre_model.dart';
-import 'package:ditonton_submission1/data/models/tv_table.dart';
+import 'package:home/domain/entities/genre.dart';
+import 'package:home/home.dart';
 
 final testMovie = Movie(
   adult: false,

@@ -1,9 +1,8 @@
+import 'package:core/core.dart';
 import 'package:ditonton_submission1/presentation/provider/tv/tv_search_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ditonton_submission1/core/error/failure.dart';
-import 'package:ditonton_submission1/core/enums/state_enum.dart';
 import '../../../helpers/test_helper.dart';
 import '../../../helpers/test_helper.mocks.dart';
 

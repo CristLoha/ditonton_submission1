@@ -1,5 +1,4 @@
-import 'package:ditonton_submission1/core/enums/state_enum.dart';
-import 'package:ditonton_submission1/domain/entities/tv.dart';
+import 'package:core/core.dart';
 import 'package:ditonton_submission1/presentation/pages/tv/tv_detail_page.dart';
 import 'package:ditonton_submission1/presentation/provider/tv/tv_detail_notifier.dart';
 import 'package:flutter/material.dart';
