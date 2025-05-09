@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
-import 'package:ditonton_submission1/presentation/provider/tv/top_rated_tv_notifier.dart';
+import 'package:ditonton_submission1/features/tv/presentation/provider/tv/top_rated_tv_notifier.dart';
 import 'package:home/domain/entities/tv.dart';
-import 'package:ditonton_submission1/presentation/pages/tv/top_rated_tv_page.dart';
+import 'package:ditonton_submission1/features/tv/presentation/pages/tv/top_rated_tv_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';

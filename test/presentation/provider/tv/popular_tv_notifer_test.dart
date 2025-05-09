@@ -1,6 +1,6 @@
 import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ditonton_submission1/presentation/provider/tv/popular_tv_notifier.dart';
+import 'package:ditonton_submission1/features/tv/presentation/provider/tv/popular_tv_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import '../../../helpers/test_helper.dart';

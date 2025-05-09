@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:home/domain/entities/tv.dart';
-import 'package:ditonton_submission1/presentation/provider/tv/tv_detail_notifier.dart';
+import 'package:ditonton_submission1/features/tv/presentation/provider/tv/tv_detail_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import '../../../dummy_data/dummy_objects.dart';

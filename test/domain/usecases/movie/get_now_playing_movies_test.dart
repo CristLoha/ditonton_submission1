@@ -3,8 +3,8 @@ import 'package:home/domain/entities/movie.dart';
 import 'package:home/domain/usecases/get_now_playing_movies.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-
 import '../../../helpers/test_helper.mocks.dart';
+
 
 void main() {
   late GetNowPlayingMovies usecase;

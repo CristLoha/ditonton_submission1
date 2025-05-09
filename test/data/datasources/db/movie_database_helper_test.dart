@@ -1,4 +1,4 @@
-import 'package:ditonton_submission1/data/datasources/db/movie_database_helper.dart';
+import 'package:ditonton_submission1/features/movies/data/datasources/db/movie_database_helper.dart';
 import 'package:home/data/models/movie_table.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';

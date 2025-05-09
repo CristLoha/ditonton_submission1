@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:home/data/models/tv_model.dart';
-import 'package:ditonton_submission1/data/models/tv_response.dart';
+import 'package:ditonton_submission1/features/tv/data/models/tv_response.dart';
 import 'package:flutter_test/flutter_test.dart';
 import '../../json_reader.dart';
 

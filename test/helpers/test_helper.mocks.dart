@@ -3,81 +3,83 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i25;
-import 'dart:convert' as _i41;
-import 'dart:typed_data' as _i42;
-import 'dart:ui' as _i26;
+import 'dart:async' as _i18;
+import 'dart:convert' as _i45;
+import 'dart:typed_data' as _i46;
+import 'dart:ui' as _i39;
 
-import 'package:core/core.dart' as _i23;
+import 'package:core/core.dart' as _i19;
 import 'package:dartz/dartz.dart' as _i3;
-import 'package:data_connection_checker/data_connection_checker.dart' as _i20;
-import 'package:ditonton_submission1/data/datasources/db/movie_database_helper.dart'
-    as _i29;
-import 'package:ditonton_submission1/data/datasources/db/tv_database_helper.dart'
-    as _i31;
-import 'package:ditonton_submission1/data/datasources/movie_local_data_source.dart'
-    as _i43;
-import 'package:ditonton_submission1/data/datasources/movie_remote_data_source.dart'
-    as _i27;
-import 'package:ditonton_submission1/data/datasources/tv_local_data_source.dart'
-    as _i44;
-import 'package:ditonton_submission1/data/datasources/tv_remote_data_source.dart'
-    as _i28;
-import 'package:ditonton_submission1/data/models/movie_detail_model.dart'
-    as _i4;
-import 'package:ditonton_submission1/data/models/tv_detail_model.dart' as _i5;
-import 'package:ditonton_submission1/domain/usecases/movie/get_movie_detail.dart'
-    as _i11;
-import 'package:ditonton_submission1/domain/usecases/movie/get_movie_recommendations.dart'
-    as _i12;
-import 'package:ditonton_submission1/domain/usecases/movie/get_watchlist_movies.dart'
-    as _i18;
-import 'package:ditonton_submission1/domain/usecases/movie/get_watchlist_status_movie.dart'
-    as _i13;
-import 'package:ditonton_submission1/domain/usecases/movie/remove_watchlist_movie.dart'
-    as _i15;
-import 'package:ditonton_submission1/domain/usecases/movie/save_watchlist_movie.dart'
-    as _i14;
-import 'package:ditonton_submission1/domain/usecases/movie/search_movies.dart'
-    as _i17;
-import 'package:ditonton_submission1/domain/usecases/tv/get_tv_detail.dart'
-    as _i6;
-import 'package:ditonton_submission1/domain/usecases/tv/get_tv_recommendations.dart'
-    as _i7;
-import 'package:ditonton_submission1/domain/usecases/tv/get_watchlist_status_tv.dart'
-    as _i8;
-import 'package:ditonton_submission1/domain/usecases/tv/get_watchlist_tv.dart'
-    as _i19;
-import 'package:ditonton_submission1/domain/usecases/tv/remove_watchlist_tv.dart'
-    as _i10;
-import 'package:ditonton_submission1/domain/usecases/tv/save_watchlist_tv.dart'
-    as _i9;
-import 'package:ditonton_submission1/domain/usecases/tv/search_tv.dart' as _i16;
-import 'package:ditonton_submission1/presentation/provider/movies/movie_detail_notifier.dart'
-    as _i35;
-import 'package:ditonton_submission1/presentation/provider/movies/movie_search_notifier.dart'
-    as _i38;
-import 'package:ditonton_submission1/presentation/provider/movies/top_rated_movies_notifier.dart'
-    as _i22;
-import 'package:ditonton_submission1/presentation/provider/movies/watchlist_movie_notifier.dart'
-    as _i39;
-import 'package:ditonton_submission1/presentation/provider/tv/popular_tv_notifier.dart'
-    as _i36;
-import 'package:ditonton_submission1/presentation/provider/tv/top_rated_tv_notifier.dart'
-    as _i32;
-import 'package:ditonton_submission1/presentation/provider/tv/tv_detail_notifier.dart'
-    as _i33;
-import 'package:ditonton_submission1/presentation/provider/tv/tv_search_notifier.dart'
-    as _i37;
-import 'package:ditonton_submission1/presentation/provider/tv/watchlist_tv_notifier.dart'
-    as _i40;
-import 'package:home/home.dart' as _i2;
-import 'package:home/presentation/provider/popular_movies_notifier.dart'
+import 'package:data_connection_checker/data_connection_checker.dart' as _i16;
+import 'package:ditonton_submission1/features/movies/data/datasources/db/movie_database_helper.dart'
     as _i34;
-import 'package:http/http.dart' as _i21;
+import 'package:ditonton_submission1/features/movies/data/datasources/movie_local_data_source.dart'
+    as _i47;
+import 'package:ditonton_submission1/features/movies/data/datasources/movie_remote_data_source.dart'
+    as _i24;
+import 'package:ditonton_submission1/features/movies/data/models/movie_detail_model.dart'
+    as _i5;
+import 'package:ditonton_submission1/features/movies/domain/usecases/get_movie_detail.dart'
+    as _i28;
+import 'package:ditonton_submission1/features/movies/domain/usecases/get_movie_recommendations.dart'
+    as _i29;
+import 'package:ditonton_submission1/features/movies/domain/usecases/get_watchlist_movies.dart'
+    as _i14;
+import 'package:ditonton_submission1/features/movies/domain/usecases/get_watchlist_status_movie.dart'
+    as _i30;
+import 'package:ditonton_submission1/features/movies/domain/usecases/remove_watchlist_movie.dart'
+    as _i32;
+import 'package:ditonton_submission1/features/movies/domain/usecases/save_watchlist_movie.dart'
+    as _i31;
+import 'package:ditonton_submission1/features/movies/domain/usecases/search_movies.dart'
+    as _i33;
+import 'package:ditonton_submission1/features/movies/presentation/provider/movies/watchlist_movie_notifier.dart'
+    as _i43;
+import 'package:ditonton_submission1/features/tv/data/datasources/db/tv_database_helper.dart'
+    as _i36;
+import 'package:ditonton_submission1/features/tv/data/datasources/tv_local_data_source.dart'
+    as _i48;
+import 'package:ditonton_submission1/features/tv/data/datasources/tv_remote_data_source.dart'
+    as _i26;
+import 'package:ditonton_submission1/features/tv/data/models/tv_detail_model.dart'
+    as _i6;
+import 'package:ditonton_submission1/features/tv/domain/usecases/tv/get_tv_detail.dart'
+    as _i8;
+import 'package:ditonton_submission1/features/tv/domain/usecases/tv/get_tv_recommendations.dart'
+    as _i9;
+import 'package:ditonton_submission1/features/tv/domain/usecases/tv/get_watchlist_status_tv.dart'
+    as _i10;
+import 'package:ditonton_submission1/features/tv/domain/usecases/tv/get_watchlist_tv.dart'
+    as _i15;
+import 'package:ditonton_submission1/features/tv/domain/usecases/tv/remove_watchlist_tv.dart'
+    as _i12;
+import 'package:ditonton_submission1/features/tv/domain/usecases/tv/save_watchlist_tv.dart'
+    as _i11;
+import 'package:ditonton_submission1/features/tv/domain/usecases/tv/search_tv.dart'
+    as _i13;
+import 'package:ditonton_submission1/features/tv/presentation/provider/tv/popular_tv_notifier.dart'
+    as _i41;
+import 'package:ditonton_submission1/features/tv/presentation/provider/tv/top_rated_tv_notifier.dart'
+    as _i37;
+import 'package:ditonton_submission1/features/tv/presentation/provider/tv/tv_detail_notifier.dart'
+    as _i40;
+import 'package:ditonton_submission1/features/tv/presentation/provider/tv/tv_search_notifier.dart'
+    as _i42;
+import 'package:ditonton_submission1/features/tv/presentation/provider/tv/watchlist_tv_notifier.dart'
+    as _i44;
+import 'package:home/data/models/movie_model.dart' as _i25;
+import 'package:home/data/models/tv_model.dart' as _i27;
+import 'package:home/domain/entities/movie.dart' as _i20;
+import 'package:home/domain/entities/movie_detail.dart' as _i22;
+import 'package:home/domain/entities/tv.dart' as _i21;
+import 'package:home/domain/entities/tv_detail.dart' as _i23;
+import 'package:home/domain/repository/movie_repository.dart' as _i2;
+import 'package:home/domain/repository/tv_repository.dart' as _i4;
+import 'package:home/home.dart' as _i7;
+import 'package:http/http.dart' as _i17;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i24;
-import 'package:sqflite/sqflite.dart' as _i30;
+import 'package:mockito/src/dummies.dart' as _i38;
+import 'package:sqflite/sqflite.dart' as _i35;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -93,254 +95,116 @@ import 'package:sqflite/sqflite.dart' as _i30;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeGetTopRatedMovies_0 extends _i1.SmartFake
-    implements _i2.GetTopRatedMovies {
-  _FakeGetTopRatedMovies_0(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeMovieRepository_1 extends _i1.SmartFake
+class _FakeMovieRepository_0 extends _i1.SmartFake
     implements _i2.MovieRepository {
-  _FakeMovieRepository_1(Object parent, Invocation parentInvocation)
+  _FakeMovieRepository_0(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeEither_2<L, R> extends _i1.SmartFake implements _i3.Either<L, R> {
-  _FakeEither_2(Object parent, Invocation parentInvocation)
+class _FakeEither_1<L, R> extends _i1.SmartFake implements _i3.Either<L, R> {
+  _FakeEither_1(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeTvRepository_3 extends _i1.SmartFake implements _i2.TvRepository {
-  _FakeTvRepository_3(Object parent, Invocation parentInvocation)
+class _FakeTvRepository_2 extends _i1.SmartFake implements _i4.TvRepository {
+  _FakeTvRepository_2(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeMovieDetailResponse_4 extends _i1.SmartFake
-    implements _i4.MovieDetailResponse {
-  _FakeMovieDetailResponse_4(Object parent, Invocation parentInvocation)
+class _FakeMovieDetailResponse_3 extends _i1.SmartFake
+    implements _i5.MovieDetailResponse {
+  _FakeMovieDetailResponse_3(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeTvDetailResponse_5 extends _i1.SmartFake
-    implements _i5.TvDetailResponse {
-  _FakeTvDetailResponse_5(Object parent, Invocation parentInvocation)
+class _FakeTvDetailResponse_4 extends _i1.SmartFake
+    implements _i6.TvDetailResponse {
+  _FakeTvDetailResponse_4(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeGetTopRatedTv_6 extends _i1.SmartFake implements _i2.GetTopRatedTv {
-  _FakeGetTopRatedTv_6(Object parent, Invocation parentInvocation)
+class _FakeGetTopRatedTv_5 extends _i1.SmartFake implements _i7.GetTopRatedTv {
+  _FakeGetTopRatedTv_5(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeGetTvDetail_7 extends _i1.SmartFake implements _i6.GetTvDetail {
-  _FakeGetTvDetail_7(Object parent, Invocation parentInvocation)
+class _FakeGetTvDetail_6 extends _i1.SmartFake implements _i8.GetTvDetail {
+  _FakeGetTvDetail_6(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeGetTvRecommendations_8 extends _i1.SmartFake
-    implements _i7.GetTvRecommendations {
-  _FakeGetTvRecommendations_8(Object parent, Invocation parentInvocation)
+class _FakeGetTvRecommendations_7 extends _i1.SmartFake
+    implements _i9.GetTvRecommendations {
+  _FakeGetTvRecommendations_7(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeGetWatchListStatusTv_9 extends _i1.SmartFake
-    implements _i8.GetWatchListStatusTv {
-  _FakeGetWatchListStatusTv_9(Object parent, Invocation parentInvocation)
+class _FakeGetWatchListStatusTv_8 extends _i1.SmartFake
+    implements _i10.GetWatchListStatusTv {
+  _FakeGetWatchListStatusTv_8(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeSaveWatchlistTv_10 extends _i1.SmartFake
-    implements _i9.SaveWatchlistTv {
-  _FakeSaveWatchlistTv_10(Object parent, Invocation parentInvocation)
+class _FakeSaveWatchlistTv_9 extends _i1.SmartFake
+    implements _i11.SaveWatchlistTv {
+  _FakeSaveWatchlistTv_9(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeRemoveWatchlistTv_11 extends _i1.SmartFake
-    implements _i10.RemoveWatchlistTv {
-  _FakeRemoveWatchlistTv_11(Object parent, Invocation parentInvocation)
+class _FakeRemoveWatchlistTv_10 extends _i1.SmartFake
+    implements _i12.RemoveWatchlistTv {
+  _FakeRemoveWatchlistTv_10(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeGetPopularMovies_12 extends _i1.SmartFake
-    implements _i2.GetPopularMovies {
-  _FakeGetPopularMovies_12(Object parent, Invocation parentInvocation)
+class _FakeGetPopularTv_11 extends _i1.SmartFake implements _i7.GetPopularTv {
+  _FakeGetPopularTv_11(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeGetMovieDetail_13 extends _i1.SmartFake
-    implements _i11.GetMovieDetail {
-  _FakeGetMovieDetail_13(Object parent, Invocation parentInvocation)
+class _FakeSearchTv_12 extends _i1.SmartFake implements _i13.SearchTv {
+  _FakeSearchTv_12(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeGetMovieRecommendations_14 extends _i1.SmartFake
-    implements _i12.GetMovieRecommendations {
-  _FakeGetMovieRecommendations_14(Object parent, Invocation parentInvocation)
+class _FakeGetWatchlistMovies_13 extends _i1.SmartFake
+    implements _i14.GetWatchlistMovies {
+  _FakeGetWatchlistMovies_13(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeGetWatchListStatusMovie_15 extends _i1.SmartFake
-    implements _i13.GetWatchListStatusMovie {
-  _FakeGetWatchListStatusMovie_15(Object parent, Invocation parentInvocation)
+class _FakeGetWatchListTv_14 extends _i1.SmartFake
+    implements _i15.GetWatchListTv {
+  _FakeGetWatchListTv_14(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeSaveWatchlistMovie_16 extends _i1.SmartFake
-    implements _i14.SaveWatchlistMovie {
-  _FakeSaveWatchlistMovie_16(Object parent, Invocation parentInvocation)
+class _FakeDuration_15 extends _i1.SmartFake implements Duration {
+  _FakeDuration_15(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeRemoveWatchlistMovie_17 extends _i1.SmartFake
-    implements _i15.RemoveWatchlistMovie {
-  _FakeRemoveWatchlistMovie_17(Object parent, Invocation parentInvocation)
+class _FakeAddressCheckResult_16 extends _i1.SmartFake
+    implements _i16.AddressCheckResult {
+  _FakeAddressCheckResult_16(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeMovieDetail_18 extends _i1.SmartFake implements _i2.MovieDetail {
-  _FakeMovieDetail_18(Object parent, Invocation parentInvocation)
+class _FakeResponse_17 extends _i1.SmartFake implements _i17.Response {
+  _FakeResponse_17(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeGetPopularTv_19 extends _i1.SmartFake implements _i2.GetPopularTv {
-  _FakeGetPopularTv_19(Object parent, Invocation parentInvocation)
+class _FakeStreamedResponse_18 extends _i1.SmartFake
+    implements _i17.StreamedResponse {
+  _FakeStreamedResponse_18(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
-}
-
-class _FakeSearchTv_20 extends _i1.SmartFake implements _i16.SearchTv {
-  _FakeSearchTv_20(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeSearchMovies_21 extends _i1.SmartFake implements _i17.SearchMovies {
-  _FakeSearchMovies_21(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeGetWatchlistMovies_22 extends _i1.SmartFake
-    implements _i18.GetWatchlistMovies {
-  _FakeGetWatchlistMovies_22(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeGetWatchListTv_23 extends _i1.SmartFake
-    implements _i19.GetWatchListTv {
-  _FakeGetWatchListTv_23(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeDuration_24 extends _i1.SmartFake implements Duration {
-  _FakeDuration_24(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeAddressCheckResult_25 extends _i1.SmartFake
-    implements _i20.AddressCheckResult {
-  _FakeAddressCheckResult_25(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeResponse_26 extends _i1.SmartFake implements _i21.Response {
-  _FakeResponse_26(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeStreamedResponse_27 extends _i1.SmartFake
-    implements _i21.StreamedResponse {
-  _FakeStreamedResponse_27(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-/// A class which mocks [TopRatedMoviesNotifier].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockTopRatedMoviesNotifier extends _i1.Mock
-    implements _i22.TopRatedMoviesNotifier {
-  MockTopRatedMoviesNotifier() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i2.GetTopRatedMovies get getTopRatedMovies =>
-      (super.noSuchMethod(
-            Invocation.getter(#getTopRatedMovies),
-            returnValue: _FakeGetTopRatedMovies_0(
-              this,
-              Invocation.getter(#getTopRatedMovies),
-            ),
-          )
-          as _i2.GetTopRatedMovies);
-
-  @override
-  _i23.RequestState get state =>
-      (super.noSuchMethod(
-            Invocation.getter(#state),
-            returnValue: _i23.RequestState.empty,
-          )
-          as _i23.RequestState);
-
-  @override
-  List<_i2.Movie> get movies =>
-      (super.noSuchMethod(
-            Invocation.getter(#movies),
-            returnValue: <_i2.Movie>[],
-          )
-          as List<_i2.Movie>);
-
-  @override
-  String get message =>
-      (super.noSuchMethod(
-            Invocation.getter(#message),
-            returnValue: _i24.dummyValue<String>(
-              this,
-              Invocation.getter(#message),
-            ),
-          )
-          as String);
-
-  @override
-  bool get hasListeners =>
-      (super.noSuchMethod(Invocation.getter(#hasListeners), returnValue: false)
-          as bool);
-
-  @override
-  _i25.Future<void> fetchTopRatedMovies() =>
-      (super.noSuchMethod(
-            Invocation.method(#fetchTopRatedMovies, []),
-            returnValue: _i25.Future<void>.value(),
-            returnValueForMissingStub: _i25.Future<void>.value(),
-          )
-          as _i25.Future<void>);
-
-  @override
-  void addListener(_i26.VoidCallback? listener) => super.noSuchMethod(
-    Invocation.method(#addListener, [listener]),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  void removeListener(_i26.VoidCallback? listener) => super.noSuchMethod(
-    Invocation.method(#removeListener, [listener]),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  void dispose() => super.noSuchMethod(
-    Invocation.method(#dispose, []),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  void notifyListeners() => super.noSuchMethod(
-    Invocation.method(#notifyListeners, []),
-    returnValueForMissingStub: null,
-  );
 }
 
 /// A class which mocks [GetTopRatedMovies].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetTopRatedMovies extends _i1.Mock implements _i2.GetTopRatedMovies {
+class MockGetTopRatedMovies extends _i1.Mock implements _i7.GetTopRatedMovies {
   MockGetTopRatedMovies() {
     _i1.throwOnMissingStub(this);
   }
@@ -349,7 +213,7 @@ class MockGetTopRatedMovies extends _i1.Mock implements _i2.GetTopRatedMovies {
   _i2.MovieRepository get repository =>
       (super.noSuchMethod(
             Invocation.getter(#repository),
-            returnValue: _FakeMovieRepository_1(
+            returnValue: _FakeMovieRepository_0(
               this,
               Invocation.getter(#repository),
             ),
@@ -357,52 +221,52 @@ class MockGetTopRatedMovies extends _i1.Mock implements _i2.GetTopRatedMovies {
           as _i2.MovieRepository);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>> execute() =>
+  _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>> execute() =>
       (super.noSuchMethod(
             Invocation.method(#execute, []),
             returnValue:
-                _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>>.value(
-                  _FakeEither_2<_i23.Failure, List<_i2.Movie>>(
+                _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>>.value(
+                  _FakeEither_1<_i19.Failure, List<_i20.Movie>>(
                     this,
                     Invocation.method(#execute, []),
                   ),
                 ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>>);
+          as _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>>);
 }
 
 /// A class which mocks [GetTopRatedTv].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetTopRatedTv extends _i1.Mock implements _i2.GetTopRatedTv {
+class MockGetTopRatedTv extends _i1.Mock implements _i7.GetTopRatedTv {
   MockGetTopRatedTv() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.TvRepository get repository =>
+  _i4.TvRepository get repository =>
       (super.noSuchMethod(
             Invocation.getter(#repository),
-            returnValue: _FakeTvRepository_3(
+            returnValue: _FakeTvRepository_2(
               this,
               Invocation.getter(#repository),
             ),
           )
-          as _i2.TvRepository);
+          as _i4.TvRepository);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>> execute() =>
+  _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>> execute() =>
       (super.noSuchMethod(
             Invocation.method(#execute, []),
             returnValue:
-                _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>>.value(
-                  _FakeEither_2<_i23.Failure, List<_i2.Tv>>(
+                _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>>.value(
+                  _FakeEither_1<_i19.Failure, List<_i21.Tv>>(
                     this,
                     Invocation.method(#execute, []),
                   ),
                 ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>>);
+          as _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>>);
 }
 
 /// A class which mocks [MovieRepository].
@@ -414,452 +278,465 @@ class MockMovieRepository extends _i1.Mock implements _i2.MovieRepository {
   }
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>>
+  _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>>
   getNowPlayingMovies() =>
       (super.noSuchMethod(
             Invocation.method(#getNowPlayingMovies, []),
             returnValue:
-                _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>>.value(
-                  _FakeEither_2<_i23.Failure, List<_i2.Movie>>(
+                _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>>.value(
+                  _FakeEither_1<_i19.Failure, List<_i20.Movie>>(
                     this,
                     Invocation.method(#getNowPlayingMovies, []),
                   ),
                 ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>>);
+          as _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>>);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>> getPopularMovies() =>
+  _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>> getPopularMovies() =>
       (super.noSuchMethod(
             Invocation.method(#getPopularMovies, []),
             returnValue:
-                _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>>.value(
-                  _FakeEither_2<_i23.Failure, List<_i2.Movie>>(
+                _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>>.value(
+                  _FakeEither_1<_i19.Failure, List<_i20.Movie>>(
                     this,
                     Invocation.method(#getPopularMovies, []),
                   ),
                 ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>>);
+          as _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>>);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>> getTopRatedMovies() =>
+  _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>> getTopRatedMovies() =>
       (super.noSuchMethod(
             Invocation.method(#getTopRatedMovies, []),
             returnValue:
-                _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>>.value(
-                  _FakeEither_2<_i23.Failure, List<_i2.Movie>>(
+                _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>>.value(
+                  _FakeEither_1<_i19.Failure, List<_i20.Movie>>(
                     this,
                     Invocation.method(#getTopRatedMovies, []),
                   ),
                 ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>>);
+          as _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>>);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, _i2.MovieDetail>> getMovieDetail(
+  _i18.Future<_i3.Either<_i19.Failure, _i22.MovieDetail>> getMovieDetail(
     int? id,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#getMovieDetail, [id]),
             returnValue:
-                _i25.Future<_i3.Either<_i23.Failure, _i2.MovieDetail>>.value(
-                  _FakeEither_2<_i23.Failure, _i2.MovieDetail>(
+                _i18.Future<_i3.Either<_i19.Failure, _i22.MovieDetail>>.value(
+                  _FakeEither_1<_i19.Failure, _i22.MovieDetail>(
                     this,
                     Invocation.method(#getMovieDetail, [id]),
                   ),
                 ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, _i2.MovieDetail>>);
+          as _i18.Future<_i3.Either<_i19.Failure, _i22.MovieDetail>>);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>>
+  _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>>
   getMovieRecommendations(int? id) =>
       (super.noSuchMethod(
             Invocation.method(#getMovieRecommendations, [id]),
             returnValue:
-                _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>>.value(
-                  _FakeEither_2<_i23.Failure, List<_i2.Movie>>(
+                _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>>.value(
+                  _FakeEither_1<_i19.Failure, List<_i20.Movie>>(
                     this,
                     Invocation.method(#getMovieRecommendations, [id]),
                   ),
                 ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>>);
+          as _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>>);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>> searchMovies(
+  _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>> searchMovies(
     String? query,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#searchMovies, [query]),
             returnValue:
-                _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>>.value(
-                  _FakeEither_2<_i23.Failure, List<_i2.Movie>>(
+                _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>>.value(
+                  _FakeEither_1<_i19.Failure, List<_i20.Movie>>(
                     this,
                     Invocation.method(#searchMovies, [query]),
                   ),
                 ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>>);
+          as _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>>);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, String>> saveWatchlist(
-    _i2.MovieDetail? movie,
+  _i18.Future<_i3.Either<_i19.Failure, String>> saveWatchlist(
+    _i22.MovieDetail? movie,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#saveWatchlist, [movie]),
-            returnValue: _i25.Future<_i3.Either<_i23.Failure, String>>.value(
-              _FakeEither_2<_i23.Failure, String>(
+            returnValue: _i18.Future<_i3.Either<_i19.Failure, String>>.value(
+              _FakeEither_1<_i19.Failure, String>(
                 this,
                 Invocation.method(#saveWatchlist, [movie]),
               ),
             ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, String>>);
+          as _i18.Future<_i3.Either<_i19.Failure, String>>);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, String>> removeWatchlist(
-    _i2.MovieDetail? movie,
+  _i18.Future<_i3.Either<_i19.Failure, String>> removeWatchlist(
+    _i22.MovieDetail? movie,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#removeWatchlist, [movie]),
-            returnValue: _i25.Future<_i3.Either<_i23.Failure, String>>.value(
-              _FakeEither_2<_i23.Failure, String>(
+            returnValue: _i18.Future<_i3.Either<_i19.Failure, String>>.value(
+              _FakeEither_1<_i19.Failure, String>(
                 this,
                 Invocation.method(#removeWatchlist, [movie]),
               ),
             ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, String>>);
+          as _i18.Future<_i3.Either<_i19.Failure, String>>);
 
   @override
-  _i25.Future<bool> isAddedToWatchlist(int? id) =>
+  _i18.Future<bool> isAddedToWatchlist(int? id) =>
       (super.noSuchMethod(
             Invocation.method(#isAddedToWatchlist, [id]),
-            returnValue: _i25.Future<bool>.value(false),
+            returnValue: _i18.Future<bool>.value(false),
           )
-          as _i25.Future<bool>);
+          as _i18.Future<bool>);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>> getWatchlistMovies() =>
+  _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>>
+  getWatchlistMovies() =>
       (super.noSuchMethod(
             Invocation.method(#getWatchlistMovies, []),
             returnValue:
-                _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>>.value(
-                  _FakeEither_2<_i23.Failure, List<_i2.Movie>>(
+                _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>>.value(
+                  _FakeEither_1<_i19.Failure, List<_i20.Movie>>(
                     this,
                     Invocation.method(#getWatchlistMovies, []),
                   ),
                 ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>>);
+          as _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>>);
 }
 
 /// A class which mocks [TvRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTvRepository extends _i1.Mock implements _i2.TvRepository {
+class MockTvRepository extends _i1.Mock implements _i4.TvRepository {
   MockTvRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>> getOnTheAirTv() =>
+  _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>> getOnTheAirTv() =>
       (super.noSuchMethod(
             Invocation.method(#getOnTheAirTv, []),
             returnValue:
-                _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>>.value(
-                  _FakeEither_2<_i23.Failure, List<_i2.Tv>>(
+                _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>>.value(
+                  _FakeEither_1<_i19.Failure, List<_i21.Tv>>(
                     this,
                     Invocation.method(#getOnTheAirTv, []),
                   ),
                 ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>>);
+          as _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>>);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>> getPopularTv() =>
+  _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>> getPopularTv() =>
       (super.noSuchMethod(
             Invocation.method(#getPopularTv, []),
             returnValue:
-                _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>>.value(
-                  _FakeEither_2<_i23.Failure, List<_i2.Tv>>(
+                _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>>.value(
+                  _FakeEither_1<_i19.Failure, List<_i21.Tv>>(
                     this,
                     Invocation.method(#getPopularTv, []),
                   ),
                 ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>>);
+          as _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>>);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>> getTopRatedTv() =>
+  _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>> getTopRatedTv() =>
       (super.noSuchMethod(
             Invocation.method(#getTopRatedTv, []),
             returnValue:
-                _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>>.value(
-                  _FakeEither_2<_i23.Failure, List<_i2.Tv>>(
+                _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>>.value(
+                  _FakeEither_1<_i19.Failure, List<_i21.Tv>>(
                     this,
                     Invocation.method(#getTopRatedTv, []),
                   ),
                 ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>>);
+          as _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>>);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, _i2.TvDetail>> getTvDetail(int? id) =>
+  _i18.Future<_i3.Either<_i19.Failure, _i23.TvDetail>> getTvDetail(int? id) =>
       (super.noSuchMethod(
             Invocation.method(#getTvDetail, [id]),
             returnValue:
-                _i25.Future<_i3.Either<_i23.Failure, _i2.TvDetail>>.value(
-                  _FakeEither_2<_i23.Failure, _i2.TvDetail>(
+                _i18.Future<_i3.Either<_i19.Failure, _i23.TvDetail>>.value(
+                  _FakeEither_1<_i19.Failure, _i23.TvDetail>(
                     this,
                     Invocation.method(#getTvDetail, [id]),
                   ),
                 ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, _i2.TvDetail>>);
+          as _i18.Future<_i3.Either<_i19.Failure, _i23.TvDetail>>);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>> getTvRecommendations(
+  _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>> getTvRecommendations(
     int? id,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#getTvRecommendations, [id]),
             returnValue:
-                _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>>.value(
-                  _FakeEither_2<_i23.Failure, List<_i2.Tv>>(
+                _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>>.value(
+                  _FakeEither_1<_i19.Failure, List<_i21.Tv>>(
                     this,
                     Invocation.method(#getTvRecommendations, [id]),
                   ),
                 ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>>);
+          as _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>>);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>> searchTv(String? query) =>
+  _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>> searchTv(
+    String? query,
+  ) =>
       (super.noSuchMethod(
             Invocation.method(#searchTv, [query]),
             returnValue:
-                _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>>.value(
-                  _FakeEither_2<_i23.Failure, List<_i2.Tv>>(
+                _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>>.value(
+                  _FakeEither_1<_i19.Failure, List<_i21.Tv>>(
                     this,
                     Invocation.method(#searchTv, [query]),
                   ),
                 ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>>);
+          as _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>>);
 
   @override
-  _i25.Future<bool> isAddedToWatchlist(int? id) =>
+  _i18.Future<bool> isAddedToWatchlist(int? id) =>
       (super.noSuchMethod(
             Invocation.method(#isAddedToWatchlist, [id]),
-            returnValue: _i25.Future<bool>.value(false),
+            returnValue: _i18.Future<bool>.value(false),
           )
-          as _i25.Future<bool>);
+          as _i18.Future<bool>);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>> getWatchlistTv() =>
+  _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>> getWatchlistTv() =>
       (super.noSuchMethod(
             Invocation.method(#getWatchlistTv, []),
             returnValue:
-                _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>>.value(
-                  _FakeEither_2<_i23.Failure, List<_i2.Tv>>(
+                _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>>.value(
+                  _FakeEither_1<_i19.Failure, List<_i21.Tv>>(
                     this,
                     Invocation.method(#getWatchlistTv, []),
                   ),
                 ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>>);
+          as _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>>);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, String>> saveWatchlist(
-    _i2.TvDetail? tv,
+  _i18.Future<_i3.Either<_i19.Failure, String>> saveWatchlist(
+    _i23.TvDetail? tv,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#saveWatchlist, [tv]),
-            returnValue: _i25.Future<_i3.Either<_i23.Failure, String>>.value(
-              _FakeEither_2<_i23.Failure, String>(
+            returnValue: _i18.Future<_i3.Either<_i19.Failure, String>>.value(
+              _FakeEither_1<_i19.Failure, String>(
                 this,
                 Invocation.method(#saveWatchlist, [tv]),
               ),
             ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, String>>);
+          as _i18.Future<_i3.Either<_i19.Failure, String>>);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, String>> removeWatchlist(
-    _i2.TvDetail? tv,
+  _i18.Future<_i3.Either<_i19.Failure, String>> removeWatchlist(
+    _i23.TvDetail? tv,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#removeWatchlist, [tv]),
-            returnValue: _i25.Future<_i3.Either<_i23.Failure, String>>.value(
-              _FakeEither_2<_i23.Failure, String>(
+            returnValue: _i18.Future<_i3.Either<_i19.Failure, String>>.value(
+              _FakeEither_1<_i19.Failure, String>(
                 this,
                 Invocation.method(#removeWatchlist, [tv]),
               ),
             ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, String>>);
+          as _i18.Future<_i3.Either<_i19.Failure, String>>);
 }
 
 /// A class which mocks [MovieRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockMovieRemoteDataSource extends _i1.Mock
-    implements _i27.MovieRemoteDataSource {
+    implements _i24.MovieRemoteDataSource {
   MockMovieRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i25.Future<List<_i2.MovieModel>> getNowPlayingMovies() =>
+  _i18.Future<List<_i25.MovieModel>> getNowPlayingMovies() =>
       (super.noSuchMethod(
             Invocation.method(#getNowPlayingMovies, []),
-            returnValue: _i25.Future<List<_i2.MovieModel>>.value(
-              <_i2.MovieModel>[],
+            returnValue: _i18.Future<List<_i25.MovieModel>>.value(
+              <_i25.MovieModel>[],
             ),
           )
-          as _i25.Future<List<_i2.MovieModel>>);
+          as _i18.Future<List<_i25.MovieModel>>);
 
   @override
-  _i25.Future<List<_i2.MovieModel>> getPopularMovies() =>
+  _i18.Future<List<_i25.MovieModel>> getPopularMovies() =>
       (super.noSuchMethod(
             Invocation.method(#getPopularMovies, []),
-            returnValue: _i25.Future<List<_i2.MovieModel>>.value(
-              <_i2.MovieModel>[],
+            returnValue: _i18.Future<List<_i25.MovieModel>>.value(
+              <_i25.MovieModel>[],
             ),
           )
-          as _i25.Future<List<_i2.MovieModel>>);
+          as _i18.Future<List<_i25.MovieModel>>);
 
   @override
-  _i25.Future<List<_i2.MovieModel>> getTopRatedMovies() =>
+  _i18.Future<List<_i25.MovieModel>> getTopRatedMovies() =>
       (super.noSuchMethod(
             Invocation.method(#getTopRatedMovies, []),
-            returnValue: _i25.Future<List<_i2.MovieModel>>.value(
-              <_i2.MovieModel>[],
+            returnValue: _i18.Future<List<_i25.MovieModel>>.value(
+              <_i25.MovieModel>[],
             ),
           )
-          as _i25.Future<List<_i2.MovieModel>>);
+          as _i18.Future<List<_i25.MovieModel>>);
 
   @override
-  _i25.Future<_i4.MovieDetailResponse> getMovieDetail(int? id) =>
+  _i18.Future<_i5.MovieDetailResponse> getMovieDetail(int? id) =>
       (super.noSuchMethod(
             Invocation.method(#getMovieDetail, [id]),
-            returnValue: _i25.Future<_i4.MovieDetailResponse>.value(
-              _FakeMovieDetailResponse_4(
+            returnValue: _i18.Future<_i5.MovieDetailResponse>.value(
+              _FakeMovieDetailResponse_3(
                 this,
                 Invocation.method(#getMovieDetail, [id]),
               ),
             ),
           )
-          as _i25.Future<_i4.MovieDetailResponse>);
+          as _i18.Future<_i5.MovieDetailResponse>);
 
   @override
-  _i25.Future<List<_i2.MovieModel>> getMovieRecommendations(int? id) =>
+  _i18.Future<List<_i25.MovieModel>> getMovieRecommendations(int? id) =>
       (super.noSuchMethod(
             Invocation.method(#getMovieRecommendations, [id]),
-            returnValue: _i25.Future<List<_i2.MovieModel>>.value(
-              <_i2.MovieModel>[],
+            returnValue: _i18.Future<List<_i25.MovieModel>>.value(
+              <_i25.MovieModel>[],
             ),
           )
-          as _i25.Future<List<_i2.MovieModel>>);
+          as _i18.Future<List<_i25.MovieModel>>);
 
   @override
-  _i25.Future<List<_i2.MovieModel>> searchMovies(String? query) =>
+  _i18.Future<List<_i25.MovieModel>> searchMovies(String? query) =>
       (super.noSuchMethod(
             Invocation.method(#searchMovies, [query]),
-            returnValue: _i25.Future<List<_i2.MovieModel>>.value(
-              <_i2.MovieModel>[],
+            returnValue: _i18.Future<List<_i25.MovieModel>>.value(
+              <_i25.MovieModel>[],
             ),
           )
-          as _i25.Future<List<_i2.MovieModel>>);
+          as _i18.Future<List<_i25.MovieModel>>);
 }
 
 /// A class which mocks [TvRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTvRemoteDataSource extends _i1.Mock
-    implements _i28.TvRemoteDataSource {
+    implements _i26.TvRemoteDataSource {
   MockTvRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i25.Future<List<_i2.TvModel>> getOnTheAirTv() =>
+  _i18.Future<List<_i27.TvModel>> getOnTheAirTv() =>
       (super.noSuchMethod(
             Invocation.method(#getOnTheAirTv, []),
-            returnValue: _i25.Future<List<_i2.TvModel>>.value(<_i2.TvModel>[]),
+            returnValue: _i18.Future<List<_i27.TvModel>>.value(
+              <_i27.TvModel>[],
+            ),
           )
-          as _i25.Future<List<_i2.TvModel>>);
+          as _i18.Future<List<_i27.TvModel>>);
 
   @override
-  _i25.Future<List<_i2.TvModel>> getPopularTv() =>
+  _i18.Future<List<_i27.TvModel>> getPopularTv() =>
       (super.noSuchMethod(
             Invocation.method(#getPopularTv, []),
-            returnValue: _i25.Future<List<_i2.TvModel>>.value(<_i2.TvModel>[]),
+            returnValue: _i18.Future<List<_i27.TvModel>>.value(
+              <_i27.TvModel>[],
+            ),
           )
-          as _i25.Future<List<_i2.TvModel>>);
+          as _i18.Future<List<_i27.TvModel>>);
 
   @override
-  _i25.Future<List<_i2.TvModel>> getTopRatedTv() =>
+  _i18.Future<List<_i27.TvModel>> getTopRatedTv() =>
       (super.noSuchMethod(
             Invocation.method(#getTopRatedTv, []),
-            returnValue: _i25.Future<List<_i2.TvModel>>.value(<_i2.TvModel>[]),
+            returnValue: _i18.Future<List<_i27.TvModel>>.value(
+              <_i27.TvModel>[],
+            ),
           )
-          as _i25.Future<List<_i2.TvModel>>);
+          as _i18.Future<List<_i27.TvModel>>);
 
   @override
-  _i25.Future<_i5.TvDetailResponse> getTvDetail(int? id) =>
+  _i18.Future<_i6.TvDetailResponse> getTvDetail(int? id) =>
       (super.noSuchMethod(
             Invocation.method(#getTvDetail, [id]),
-            returnValue: _i25.Future<_i5.TvDetailResponse>.value(
-              _FakeTvDetailResponse_5(
+            returnValue: _i18.Future<_i6.TvDetailResponse>.value(
+              _FakeTvDetailResponse_4(
                 this,
                 Invocation.method(#getTvDetail, [id]),
               ),
             ),
           )
-          as _i25.Future<_i5.TvDetailResponse>);
+          as _i18.Future<_i6.TvDetailResponse>);
 
   @override
-  _i25.Future<List<_i2.TvModel>> searchTv(String? query) =>
+  _i18.Future<List<_i27.TvModel>> searchTv(String? query) =>
       (super.noSuchMethod(
             Invocation.method(#searchTv, [query]),
-            returnValue: _i25.Future<List<_i2.TvModel>>.value(<_i2.TvModel>[]),
+            returnValue: _i18.Future<List<_i27.TvModel>>.value(
+              <_i27.TvModel>[],
+            ),
           )
-          as _i25.Future<List<_i2.TvModel>>);
+          as _i18.Future<List<_i27.TvModel>>);
 
   @override
-  _i25.Future<List<_i2.TvModel>> getTvRecommendations(int? id) =>
+  _i18.Future<List<_i27.TvModel>> getTvRecommendations(int? id) =>
       (super.noSuchMethod(
             Invocation.method(#getTvRecommendations, [id]),
-            returnValue: _i25.Future<List<_i2.TvModel>>.value(<_i2.TvModel>[]),
+            returnValue: _i18.Future<List<_i27.TvModel>>.value(
+              <_i27.TvModel>[],
+            ),
           )
-          as _i25.Future<List<_i2.TvModel>>);
+          as _i18.Future<List<_i27.TvModel>>);
 }
 
 /// A class which mocks [NetworkInfo].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNetworkInfo extends _i1.Mock implements _i23.NetworkInfo {
+class MockNetworkInfo extends _i1.Mock implements _i19.NetworkInfo {
   MockNetworkInfo() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i25.Future<bool> get isConnected =>
+  _i18.Future<bool> get isConnected =>
       (super.noSuchMethod(
             Invocation.getter(#isConnected),
-            returnValue: _i25.Future<bool>.value(false),
+            returnValue: _i18.Future<bool>.value(false),
           )
-          as _i25.Future<bool>);
+          as _i18.Future<bool>);
 }
 
 /// A class which mocks [GetMovieDetail].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetMovieDetail extends _i1.Mock implements _i11.GetMovieDetail {
+class MockGetMovieDetail extends _i1.Mock implements _i28.GetMovieDetail {
   MockGetMovieDetail() {
     _i1.throwOnMissingStub(this);
   }
@@ -868,7 +745,7 @@ class MockGetMovieDetail extends _i1.Mock implements _i11.GetMovieDetail {
   _i2.MovieRepository get repository =>
       (super.noSuchMethod(
             Invocation.getter(#repository),
-            returnValue: _FakeMovieRepository_1(
+            returnValue: _FakeMovieRepository_0(
               this,
               Invocation.getter(#repository),
             ),
@@ -876,25 +753,25 @@ class MockGetMovieDetail extends _i1.Mock implements _i11.GetMovieDetail {
           as _i2.MovieRepository);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, _i2.MovieDetail>> execute(int? id) =>
+  _i18.Future<_i3.Either<_i19.Failure, _i22.MovieDetail>> execute(int? id) =>
       (super.noSuchMethod(
             Invocation.method(#execute, [id]),
             returnValue:
-                _i25.Future<_i3.Either<_i23.Failure, _i2.MovieDetail>>.value(
-                  _FakeEither_2<_i23.Failure, _i2.MovieDetail>(
+                _i18.Future<_i3.Either<_i19.Failure, _i22.MovieDetail>>.value(
+                  _FakeEither_1<_i19.Failure, _i22.MovieDetail>(
                     this,
                     Invocation.method(#execute, [id]),
                   ),
                 ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, _i2.MovieDetail>>);
+          as _i18.Future<_i3.Either<_i19.Failure, _i22.MovieDetail>>);
 }
 
 /// A class which mocks [GetMovieRecommendations].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetMovieRecommendations extends _i1.Mock
-    implements _i12.GetMovieRecommendations {
+    implements _i29.GetMovieRecommendations {
   MockGetMovieRecommendations() {
     _i1.throwOnMissingStub(this);
   }
@@ -903,7 +780,7 @@ class MockGetMovieRecommendations extends _i1.Mock
   _i2.MovieRepository get repository =>
       (super.noSuchMethod(
             Invocation.getter(#repository),
-            returnValue: _FakeMovieRepository_1(
+            returnValue: _FakeMovieRepository_0(
               this,
               Invocation.getter(#repository),
             ),
@@ -911,25 +788,25 @@ class MockGetMovieRecommendations extends _i1.Mock
           as _i2.MovieRepository);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>> execute(dynamic id) =>
+  _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>> execute(dynamic id) =>
       (super.noSuchMethod(
             Invocation.method(#execute, [id]),
             returnValue:
-                _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>>.value(
-                  _FakeEither_2<_i23.Failure, List<_i2.Movie>>(
+                _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>>.value(
+                  _FakeEither_1<_i19.Failure, List<_i20.Movie>>(
                     this,
                     Invocation.method(#execute, [id]),
                   ),
                 ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>>);
+          as _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>>);
 }
 
 /// A class which mocks [GetWatchListStatusMovie].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetWatchListStatusMovie extends _i1.Mock
-    implements _i13.GetWatchListStatusMovie {
+    implements _i30.GetWatchListStatusMovie {
   MockGetWatchListStatusMovie() {
     _i1.throwOnMissingStub(this);
   }
@@ -938,7 +815,7 @@ class MockGetWatchListStatusMovie extends _i1.Mock
   _i2.MovieRepository get repository =>
       (super.noSuchMethod(
             Invocation.getter(#repository),
-            returnValue: _FakeMovieRepository_1(
+            returnValue: _FakeMovieRepository_0(
               this,
               Invocation.getter(#repository),
             ),
@@ -946,19 +823,19 @@ class MockGetWatchListStatusMovie extends _i1.Mock
           as _i2.MovieRepository);
 
   @override
-  _i25.Future<bool> execute(int? id) =>
+  _i18.Future<bool> execute(int? id) =>
       (super.noSuchMethod(
             Invocation.method(#execute, [id]),
-            returnValue: _i25.Future<bool>.value(false),
+            returnValue: _i18.Future<bool>.value(false),
           )
-          as _i25.Future<bool>);
+          as _i18.Future<bool>);
 }
 
 /// A class which mocks [SaveWatchlistMovie].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockSaveWatchlistMovie extends _i1.Mock
-    implements _i14.SaveWatchlistMovie {
+    implements _i31.SaveWatchlistMovie {
   MockSaveWatchlistMovie() {
     _i1.throwOnMissingStub(this);
   }
@@ -967,7 +844,7 @@ class MockSaveWatchlistMovie extends _i1.Mock
   _i2.MovieRepository get repository =>
       (super.noSuchMethod(
             Invocation.getter(#repository),
-            returnValue: _FakeMovieRepository_1(
+            returnValue: _FakeMovieRepository_0(
               this,
               Invocation.getter(#repository),
             ),
@@ -975,26 +852,26 @@ class MockSaveWatchlistMovie extends _i1.Mock
           as _i2.MovieRepository);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, String>> execute(
-    _i2.MovieDetail? movie,
+  _i18.Future<_i3.Either<_i19.Failure, String>> execute(
+    _i22.MovieDetail? movie,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#execute, [movie]),
-            returnValue: _i25.Future<_i3.Either<_i23.Failure, String>>.value(
-              _FakeEither_2<_i23.Failure, String>(
+            returnValue: _i18.Future<_i3.Either<_i19.Failure, String>>.value(
+              _FakeEither_1<_i19.Failure, String>(
                 this,
                 Invocation.method(#execute, [movie]),
               ),
             ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, String>>);
+          as _i18.Future<_i3.Either<_i19.Failure, String>>);
 }
 
 /// A class which mocks [RemoveWatchlistMovie].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockRemoveWatchlistMovie extends _i1.Mock
-    implements _i15.RemoveWatchlistMovie {
+    implements _i32.RemoveWatchlistMovie {
   MockRemoveWatchlistMovie() {
     _i1.throwOnMissingStub(this);
   }
@@ -1003,7 +880,7 @@ class MockRemoveWatchlistMovie extends _i1.Mock
   _i2.MovieRepository get repository =>
       (super.noSuchMethod(
             Invocation.getter(#repository),
-            returnValue: _FakeMovieRepository_1(
+            returnValue: _FakeMovieRepository_0(
               this,
               Invocation.getter(#repository),
             ),
@@ -1011,72 +888,72 @@ class MockRemoveWatchlistMovie extends _i1.Mock
           as _i2.MovieRepository);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, String>> execute(
-    _i2.MovieDetail? movie,
+  _i18.Future<_i3.Either<_i19.Failure, String>> execute(
+    _i22.MovieDetail? movie,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#execute, [movie]),
-            returnValue: _i25.Future<_i3.Either<_i23.Failure, String>>.value(
-              _FakeEither_2<_i23.Failure, String>(
+            returnValue: _i18.Future<_i3.Either<_i19.Failure, String>>.value(
+              _FakeEither_1<_i19.Failure, String>(
                 this,
                 Invocation.method(#execute, [movie]),
               ),
             ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, String>>);
+          as _i18.Future<_i3.Either<_i19.Failure, String>>);
 }
 
 /// A class which mocks [GetWatchlistMovies].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetWatchlistMovies extends _i1.Mock
-    implements _i18.GetWatchlistMovies {
+    implements _i14.GetWatchlistMovies {
   MockGetWatchlistMovies() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>> execute() =>
+  _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>> execute() =>
       (super.noSuchMethod(
             Invocation.method(#execute, []),
             returnValue:
-                _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>>.value(
-                  _FakeEither_2<_i23.Failure, List<_i2.Movie>>(
+                _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>>.value(
+                  _FakeEither_1<_i19.Failure, List<_i20.Movie>>(
                     this,
                     Invocation.method(#execute, []),
                   ),
                 ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>>);
+          as _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>>);
 }
 
 /// A class which mocks [GetWatchListTv].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetWatchListTv extends _i1.Mock implements _i19.GetWatchListTv {
+class MockGetWatchListTv extends _i1.Mock implements _i15.GetWatchListTv {
   MockGetWatchListTv() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>> execute() =>
+  _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>> execute() =>
       (super.noSuchMethod(
             Invocation.method(#execute, []),
             returnValue:
-                _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>>.value(
-                  _FakeEither_2<_i23.Failure, List<_i2.Tv>>(
+                _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>>.value(
+                  _FakeEither_1<_i19.Failure, List<_i21.Tv>>(
                     this,
                     Invocation.method(#execute, []),
                   ),
                 ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>>);
+          as _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>>);
 }
 
 /// A class which mocks [SearchMovies].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSearchMovies extends _i1.Mock implements _i17.SearchMovies {
+class MockSearchMovies extends _i1.Mock implements _i33.SearchMovies {
   MockSearchMovies() {
     _i1.throwOnMissingStub(this);
   }
@@ -1085,7 +962,7 @@ class MockSearchMovies extends _i1.Mock implements _i17.SearchMovies {
   _i2.MovieRepository get repository =>
       (super.noSuchMethod(
             Invocation.getter(#repository),
-            returnValue: _FakeMovieRepository_1(
+            returnValue: _FakeMovieRepository_0(
               this,
               Invocation.getter(#repository),
             ),
@@ -1093,421 +970,421 @@ class MockSearchMovies extends _i1.Mock implements _i17.SearchMovies {
           as _i2.MovieRepository);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>> execute(
+  _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>> execute(
     String? query,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#execute, [query]),
             returnValue:
-                _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>>.value(
-                  _FakeEither_2<_i23.Failure, List<_i2.Movie>>(
+                _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>>.value(
+                  _FakeEither_1<_i19.Failure, List<_i20.Movie>>(
                     this,
                     Invocation.method(#execute, [query]),
                   ),
                 ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, List<_i2.Movie>>>);
+          as _i18.Future<_i3.Either<_i19.Failure, List<_i20.Movie>>>);
 }
 
 /// A class which mocks [SearchTv].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSearchTv extends _i1.Mock implements _i16.SearchTv {
+class MockSearchTv extends _i1.Mock implements _i13.SearchTv {
   MockSearchTv() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.TvRepository get repository =>
+  _i4.TvRepository get repository =>
       (super.noSuchMethod(
             Invocation.getter(#repository),
-            returnValue: _FakeTvRepository_3(
+            returnValue: _FakeTvRepository_2(
               this,
               Invocation.getter(#repository),
             ),
           )
-          as _i2.TvRepository);
+          as _i4.TvRepository);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>> execute(String? query) =>
+  _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>> execute(String? query) =>
       (super.noSuchMethod(
             Invocation.method(#execute, [query]),
             returnValue:
-                _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>>.value(
-                  _FakeEither_2<_i23.Failure, List<_i2.Tv>>(
+                _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>>.value(
+                  _FakeEither_1<_i19.Failure, List<_i21.Tv>>(
                     this,
                     Invocation.method(#execute, [query]),
                   ),
                 ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>>);
+          as _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>>);
 }
 
 /// A class which mocks [GetTvDetail].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetTvDetail extends _i1.Mock implements _i6.GetTvDetail {
+class MockGetTvDetail extends _i1.Mock implements _i8.GetTvDetail {
   MockGetTvDetail() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.TvRepository get repository =>
+  _i4.TvRepository get repository =>
       (super.noSuchMethod(
             Invocation.getter(#repository),
-            returnValue: _FakeTvRepository_3(
+            returnValue: _FakeTvRepository_2(
               this,
               Invocation.getter(#repository),
             ),
           )
-          as _i2.TvRepository);
+          as _i4.TvRepository);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, _i2.TvDetail>> execute(int? id) =>
+  _i18.Future<_i3.Either<_i19.Failure, _i23.TvDetail>> execute(int? id) =>
       (super.noSuchMethod(
             Invocation.method(#execute, [id]),
             returnValue:
-                _i25.Future<_i3.Either<_i23.Failure, _i2.TvDetail>>.value(
-                  _FakeEither_2<_i23.Failure, _i2.TvDetail>(
+                _i18.Future<_i3.Either<_i19.Failure, _i23.TvDetail>>.value(
+                  _FakeEither_1<_i19.Failure, _i23.TvDetail>(
                     this,
                     Invocation.method(#execute, [id]),
                   ),
                 ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, _i2.TvDetail>>);
+          as _i18.Future<_i3.Either<_i19.Failure, _i23.TvDetail>>);
 }
 
 /// A class which mocks [GetTvRecommendations].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetTvRecommendations extends _i1.Mock
-    implements _i7.GetTvRecommendations {
+    implements _i9.GetTvRecommendations {
   MockGetTvRecommendations() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.TvRepository get repository =>
+  _i4.TvRepository get repository =>
       (super.noSuchMethod(
             Invocation.getter(#repository),
-            returnValue: _FakeTvRepository_3(
+            returnValue: _FakeTvRepository_2(
               this,
               Invocation.getter(#repository),
             ),
           )
-          as _i2.TvRepository);
+          as _i4.TvRepository);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>> execute(dynamic id) =>
+  _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>> execute(dynamic id) =>
       (super.noSuchMethod(
             Invocation.method(#execute, [id]),
             returnValue:
-                _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>>.value(
-                  _FakeEither_2<_i23.Failure, List<_i2.Tv>>(
+                _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>>.value(
+                  _FakeEither_1<_i19.Failure, List<_i21.Tv>>(
                     this,
                     Invocation.method(#execute, [id]),
                   ),
                 ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>>);
+          as _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>>);
 }
 
 /// A class which mocks [GetWatchListStatusTv].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetWatchListStatusTv extends _i1.Mock
-    implements _i8.GetWatchListStatusTv {
+    implements _i10.GetWatchListStatusTv {
   MockGetWatchListStatusTv() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.TvRepository get repository =>
+  _i4.TvRepository get repository =>
       (super.noSuchMethod(
             Invocation.getter(#repository),
-            returnValue: _FakeTvRepository_3(
+            returnValue: _FakeTvRepository_2(
               this,
               Invocation.getter(#repository),
             ),
           )
-          as _i2.TvRepository);
+          as _i4.TvRepository);
 
   @override
-  _i25.Future<bool> execute(int? id) =>
+  _i18.Future<bool> execute(int? id) =>
       (super.noSuchMethod(
             Invocation.method(#execute, [id]),
-            returnValue: _i25.Future<bool>.value(false),
+            returnValue: _i18.Future<bool>.value(false),
           )
-          as _i25.Future<bool>);
+          as _i18.Future<bool>);
 }
 
 /// A class which mocks [SaveWatchlistTv].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSaveWatchlistTv extends _i1.Mock implements _i9.SaveWatchlistTv {
+class MockSaveWatchlistTv extends _i1.Mock implements _i11.SaveWatchlistTv {
   MockSaveWatchlistTv() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.TvRepository get repository =>
+  _i4.TvRepository get repository =>
       (super.noSuchMethod(
             Invocation.getter(#repository),
-            returnValue: _FakeTvRepository_3(
+            returnValue: _FakeTvRepository_2(
               this,
               Invocation.getter(#repository),
             ),
           )
-          as _i2.TvRepository);
+          as _i4.TvRepository);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, String>> execute(_i2.TvDetail? tv) =>
+  _i18.Future<_i3.Either<_i19.Failure, String>> execute(_i23.TvDetail? tv) =>
       (super.noSuchMethod(
             Invocation.method(#execute, [tv]),
-            returnValue: _i25.Future<_i3.Either<_i23.Failure, String>>.value(
-              _FakeEither_2<_i23.Failure, String>(
+            returnValue: _i18.Future<_i3.Either<_i19.Failure, String>>.value(
+              _FakeEither_1<_i19.Failure, String>(
                 this,
                 Invocation.method(#execute, [tv]),
               ),
             ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, String>>);
+          as _i18.Future<_i3.Either<_i19.Failure, String>>);
 }
 
 /// A class which mocks [RemoveWatchlistTv].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRemoveWatchlistTv extends _i1.Mock implements _i10.RemoveWatchlistTv {
+class MockRemoveWatchlistTv extends _i1.Mock implements _i12.RemoveWatchlistTv {
   MockRemoveWatchlistTv() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.TvRepository get repository =>
+  _i4.TvRepository get repository =>
       (super.noSuchMethod(
             Invocation.getter(#repository),
-            returnValue: _FakeTvRepository_3(
+            returnValue: _FakeTvRepository_2(
               this,
               Invocation.getter(#repository),
             ),
           )
-          as _i2.TvRepository);
+          as _i4.TvRepository);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, String>> execute(_i2.TvDetail? tv) =>
+  _i18.Future<_i3.Either<_i19.Failure, String>> execute(_i23.TvDetail? tv) =>
       (super.noSuchMethod(
             Invocation.method(#execute, [tv]),
-            returnValue: _i25.Future<_i3.Either<_i23.Failure, String>>.value(
-              _FakeEither_2<_i23.Failure, String>(
+            returnValue: _i18.Future<_i3.Either<_i19.Failure, String>>.value(
+              _FakeEither_1<_i19.Failure, String>(
                 this,
                 Invocation.method(#execute, [tv]),
               ),
             ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, String>>);
+          as _i18.Future<_i3.Either<_i19.Failure, String>>);
 }
 
 /// A class which mocks [MovieDatabaseHelper].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockMovieDatabaseHelper extends _i1.Mock
-    implements _i29.MovieDatabaseHelper {
+    implements _i34.MovieDatabaseHelper {
   MockMovieDatabaseHelper() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i25.Future<_i30.Database?> get database =>
+  _i18.Future<_i35.Database?> get database =>
       (super.noSuchMethod(
             Invocation.getter(#database),
-            returnValue: _i25.Future<_i30.Database?>.value(),
+            returnValue: _i18.Future<_i35.Database?>.value(),
           )
-          as _i25.Future<_i30.Database?>);
+          as _i18.Future<_i35.Database?>);
 
   @override
-  _i25.Future<void> insertCacheTransaction(
-    List<_i2.MovieTable>? movies,
+  _i18.Future<void> insertCacheTransaction(
+    List<_i7.MovieTable>? movies,
     String? category,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#insertCacheTransaction, [movies, category]),
-            returnValue: _i25.Future<void>.value(),
-            returnValueForMissingStub: _i25.Future<void>.value(),
+            returnValue: _i18.Future<void>.value(),
+            returnValueForMissingStub: _i18.Future<void>.value(),
           )
-          as _i25.Future<void>);
+          as _i18.Future<void>);
 
   @override
-  _i25.Future<List<Map<String, dynamic>>> getCacheMovies(String? category) =>
+  _i18.Future<List<Map<String, dynamic>>> getCacheMovies(String? category) =>
       (super.noSuchMethod(
             Invocation.method(#getCacheMovies, [category]),
-            returnValue: _i25.Future<List<Map<String, dynamic>>>.value(
+            returnValue: _i18.Future<List<Map<String, dynamic>>>.value(
               <Map<String, dynamic>>[],
             ),
           )
-          as _i25.Future<List<Map<String, dynamic>>>);
+          as _i18.Future<List<Map<String, dynamic>>>);
 
   @override
-  _i25.Future<int> clearCache(String? category) =>
+  _i18.Future<int> clearCache(String? category) =>
       (super.noSuchMethod(
             Invocation.method(#clearCache, [category]),
-            returnValue: _i25.Future<int>.value(0),
+            returnValue: _i18.Future<int>.value(0),
           )
-          as _i25.Future<int>);
+          as _i18.Future<int>);
 
   @override
-  _i25.Future<int> insertWatchlist(_i2.MovieTable? movie) =>
+  _i18.Future<int> insertWatchlist(_i7.MovieTable? movie) =>
       (super.noSuchMethod(
             Invocation.method(#insertWatchlist, [movie]),
-            returnValue: _i25.Future<int>.value(0),
+            returnValue: _i18.Future<int>.value(0),
           )
-          as _i25.Future<int>);
+          as _i18.Future<int>);
 
   @override
-  _i25.Future<int> removeWatchlist(_i2.MovieTable? movie) =>
+  _i18.Future<int> removeWatchlist(_i7.MovieTable? movie) =>
       (super.noSuchMethod(
             Invocation.method(#removeWatchlist, [movie]),
-            returnValue: _i25.Future<int>.value(0),
+            returnValue: _i18.Future<int>.value(0),
           )
-          as _i25.Future<int>);
+          as _i18.Future<int>);
 
   @override
-  _i25.Future<Map<String, dynamic>?> getMovieById(int? id) =>
+  _i18.Future<Map<String, dynamic>?> getMovieById(int? id) =>
       (super.noSuchMethod(
             Invocation.method(#getMovieById, [id]),
-            returnValue: _i25.Future<Map<String, dynamic>?>.value(),
+            returnValue: _i18.Future<Map<String, dynamic>?>.value(),
           )
-          as _i25.Future<Map<String, dynamic>?>);
+          as _i18.Future<Map<String, dynamic>?>);
 
   @override
-  _i25.Future<List<Map<String, dynamic>>> getWatchlistMovies() =>
+  _i18.Future<List<Map<String, dynamic>>> getWatchlistMovies() =>
       (super.noSuchMethod(
             Invocation.method(#getWatchlistMovies, []),
-            returnValue: _i25.Future<List<Map<String, dynamic>>>.value(
+            returnValue: _i18.Future<List<Map<String, dynamic>>>.value(
               <Map<String, dynamic>>[],
             ),
           )
-          as _i25.Future<List<Map<String, dynamic>>>);
+          as _i18.Future<List<Map<String, dynamic>>>);
 }
 
 /// A class which mocks [TvDatabaseHelper].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTvDatabaseHelper extends _i1.Mock implements _i31.TvDatabaseHelper {
+class MockTvDatabaseHelper extends _i1.Mock implements _i36.TvDatabaseHelper {
   MockTvDatabaseHelper() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i25.Future<_i30.Database?> get database =>
+  _i18.Future<_i35.Database?> get database =>
       (super.noSuchMethod(
             Invocation.getter(#database),
-            returnValue: _i25.Future<_i30.Database?>.value(),
+            returnValue: _i18.Future<_i35.Database?>.value(),
           )
-          as _i25.Future<_i30.Database?>);
+          as _i18.Future<_i35.Database?>);
 
   @override
-  _i25.Future<void> insertCacheTransaction(
-    List<_i2.TvTable>? tvs,
+  _i18.Future<void> insertCacheTransaction(
+    List<_i7.TvTable>? tvs,
     String? category,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#insertCacheTransaction, [tvs, category]),
-            returnValue: _i25.Future<void>.value(),
-            returnValueForMissingStub: _i25.Future<void>.value(),
+            returnValue: _i18.Future<void>.value(),
+            returnValueForMissingStub: _i18.Future<void>.value(),
           )
-          as _i25.Future<void>);
+          as _i18.Future<void>);
 
   @override
-  _i25.Future<List<Map<String, dynamic>>> getCacheTvs(String? category) =>
+  _i18.Future<List<Map<String, dynamic>>> getCacheTvs(String? category) =>
       (super.noSuchMethod(
             Invocation.method(#getCacheTvs, [category]),
-            returnValue: _i25.Future<List<Map<String, dynamic>>>.value(
+            returnValue: _i18.Future<List<Map<String, dynamic>>>.value(
               <Map<String, dynamic>>[],
             ),
           )
-          as _i25.Future<List<Map<String, dynamic>>>);
+          as _i18.Future<List<Map<String, dynamic>>>);
 
   @override
-  _i25.Future<int> clearCache(String? category) =>
+  _i18.Future<int> clearCache(String? category) =>
       (super.noSuchMethod(
             Invocation.method(#clearCache, [category]),
-            returnValue: _i25.Future<int>.value(0),
+            returnValue: _i18.Future<int>.value(0),
           )
-          as _i25.Future<int>);
+          as _i18.Future<int>);
 
   @override
-  _i25.Future<int> insertWatchlist(_i2.TvTable? tv) =>
+  _i18.Future<int> insertWatchlist(_i7.TvTable? tv) =>
       (super.noSuchMethod(
             Invocation.method(#insertWatchlist, [tv]),
-            returnValue: _i25.Future<int>.value(0),
+            returnValue: _i18.Future<int>.value(0),
           )
-          as _i25.Future<int>);
+          as _i18.Future<int>);
 
   @override
-  _i25.Future<int> removeWatchlist(_i2.TvTable? tv) =>
+  _i18.Future<int> removeWatchlist(_i7.TvTable? tv) =>
       (super.noSuchMethod(
             Invocation.method(#removeWatchlist, [tv]),
-            returnValue: _i25.Future<int>.value(0),
+            returnValue: _i18.Future<int>.value(0),
           )
-          as _i25.Future<int>);
+          as _i18.Future<int>);
 
   @override
-  _i25.Future<Map<String, dynamic>?> getTvById(int? id) =>
+  _i18.Future<Map<String, dynamic>?> getTvById(int? id) =>
       (super.noSuchMethod(
             Invocation.method(#getTvById, [id]),
-            returnValue: _i25.Future<Map<String, dynamic>?>.value(),
+            returnValue: _i18.Future<Map<String, dynamic>?>.value(),
           )
-          as _i25.Future<Map<String, dynamic>?>);
+          as _i18.Future<Map<String, dynamic>?>);
 
   @override
-  _i25.Future<List<Map<String, dynamic>>> getWatchlistTvs() =>
+  _i18.Future<List<Map<String, dynamic>>> getWatchlistTvs() =>
       (super.noSuchMethod(
             Invocation.method(#getWatchlistTvs, []),
-            returnValue: _i25.Future<List<Map<String, dynamic>>>.value(
+            returnValue: _i18.Future<List<Map<String, dynamic>>>.value(
               <Map<String, dynamic>>[],
             ),
           )
-          as _i25.Future<List<Map<String, dynamic>>>);
+          as _i18.Future<List<Map<String, dynamic>>>);
 }
 
 /// A class which mocks [TopRatedTvNotifier].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTopRatedTvNotifier extends _i1.Mock
-    implements _i32.TopRatedTvNotifier {
+    implements _i37.TopRatedTvNotifier {
   MockTopRatedTvNotifier() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.GetTopRatedTv get getTopRatedTv =>
+  _i7.GetTopRatedTv get getTopRatedTv =>
       (super.noSuchMethod(
             Invocation.getter(#getTopRatedTv),
-            returnValue: _FakeGetTopRatedTv_6(
+            returnValue: _FakeGetTopRatedTv_5(
               this,
               Invocation.getter(#getTopRatedTv),
             ),
           )
-          as _i2.GetTopRatedTv);
+          as _i7.GetTopRatedTv);
 
   @override
-  _i23.RequestState get state =>
+  _i19.RequestState get state =>
       (super.noSuchMethod(
             Invocation.getter(#state),
-            returnValue: _i23.RequestState.empty,
+            returnValue: _i19.RequestState.empty,
           )
-          as _i23.RequestState);
+          as _i19.RequestState);
 
   @override
-  List<_i2.Tv> get tv =>
-      (super.noSuchMethod(Invocation.getter(#tv), returnValue: <_i2.Tv>[])
-          as List<_i2.Tv>);
+  List<_i21.Tv> get tv =>
+      (super.noSuchMethod(Invocation.getter(#tv), returnValue: <_i21.Tv>[])
+          as List<_i21.Tv>);
 
   @override
   String get message =>
       (super.noSuchMethod(
             Invocation.getter(#message),
-            returnValue: _i24.dummyValue<String>(
+            returnValue: _i38.dummyValue<String>(
               this,
               Invocation.getter(#message),
             ),
@@ -1520,22 +1397,22 @@ class MockTopRatedTvNotifier extends _i1.Mock
           as bool);
 
   @override
-  _i25.Future<void> fetchTopRatedTv() =>
+  _i18.Future<void> fetchTopRatedTv() =>
       (super.noSuchMethod(
             Invocation.method(#fetchTopRatedTv, []),
-            returnValue: _i25.Future<void>.value(),
-            returnValueForMissingStub: _i25.Future<void>.value(),
+            returnValue: _i18.Future<void>.value(),
+            returnValueForMissingStub: _i18.Future<void>.value(),
           )
-          as _i25.Future<void>);
+          as _i18.Future<void>);
 
   @override
-  void addListener(_i26.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i39.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#addListener, [listener]),
     returnValueForMissingStub: null,
   );
 
   @override
-  void removeListener(_i26.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i39.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#removeListener, [listener]),
     returnValueForMissingStub: null,
   );
@@ -1556,95 +1433,95 @@ class MockTopRatedTvNotifier extends _i1.Mock
 /// A class which mocks [TvDetailNotifier].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTvDetailNotifier extends _i1.Mock implements _i33.TvDetailNotifier {
+class MockTvDetailNotifier extends _i1.Mock implements _i40.TvDetailNotifier {
   MockTvDetailNotifier() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.GetTvDetail get getTvDetail =>
+  _i8.GetTvDetail get getTvDetail =>
       (super.noSuchMethod(
             Invocation.getter(#getTvDetail),
-            returnValue: _FakeGetTvDetail_7(
+            returnValue: _FakeGetTvDetail_6(
               this,
               Invocation.getter(#getTvDetail),
             ),
           )
-          as _i6.GetTvDetail);
+          as _i8.GetTvDetail);
 
   @override
-  _i7.GetTvRecommendations get getTvRecommendations =>
+  _i9.GetTvRecommendations get getTvRecommendations =>
       (super.noSuchMethod(
             Invocation.getter(#getTvRecommendations),
-            returnValue: _FakeGetTvRecommendations_8(
+            returnValue: _FakeGetTvRecommendations_7(
               this,
               Invocation.getter(#getTvRecommendations),
             ),
           )
-          as _i7.GetTvRecommendations);
+          as _i9.GetTvRecommendations);
 
   @override
-  _i8.GetWatchListStatusTv get getWatchListStatus =>
+  _i10.GetWatchListStatusTv get getWatchListStatus =>
       (super.noSuchMethod(
             Invocation.getter(#getWatchListStatus),
-            returnValue: _FakeGetWatchListStatusTv_9(
+            returnValue: _FakeGetWatchListStatusTv_8(
               this,
               Invocation.getter(#getWatchListStatus),
             ),
           )
-          as _i8.GetWatchListStatusTv);
+          as _i10.GetWatchListStatusTv);
 
   @override
-  _i9.SaveWatchlistTv get saveWatchlist =>
+  _i11.SaveWatchlistTv get saveWatchlist =>
       (super.noSuchMethod(
             Invocation.getter(#saveWatchlist),
-            returnValue: _FakeSaveWatchlistTv_10(
+            returnValue: _FakeSaveWatchlistTv_9(
               this,
               Invocation.getter(#saveWatchlist),
             ),
           )
-          as _i9.SaveWatchlistTv);
+          as _i11.SaveWatchlistTv);
 
   @override
-  _i10.RemoveWatchlistTv get removeWatchlist =>
+  _i12.RemoveWatchlistTv get removeWatchlist =>
       (super.noSuchMethod(
             Invocation.getter(#removeWatchlist),
-            returnValue: _FakeRemoveWatchlistTv_11(
+            returnValue: _FakeRemoveWatchlistTv_10(
               this,
               Invocation.getter(#removeWatchlist),
             ),
           )
-          as _i10.RemoveWatchlistTv);
+          as _i12.RemoveWatchlistTv);
 
   @override
-  _i23.RequestState get state =>
+  _i19.RequestState get state =>
       (super.noSuchMethod(
             Invocation.getter(#state),
-            returnValue: _i23.RequestState.empty,
+            returnValue: _i19.RequestState.empty,
           )
-          as _i23.RequestState);
+          as _i19.RequestState);
 
   @override
-  _i23.RequestState get recommendationState =>
+  _i19.RequestState get recommendationState =>
       (super.noSuchMethod(
             Invocation.getter(#recommendationState),
-            returnValue: _i23.RequestState.empty,
+            returnValue: _i19.RequestState.empty,
           )
-          as _i23.RequestState);
+          as _i19.RequestState);
 
   @override
-  List<_i2.Tv> get tvRecommendations =>
+  List<_i21.Tv> get tvRecommendations =>
       (super.noSuchMethod(
             Invocation.getter(#tvRecommendations),
-            returnValue: <_i2.Tv>[],
+            returnValue: <_i21.Tv>[],
           )
-          as List<_i2.Tv>);
+          as List<_i21.Tv>);
 
   @override
   String get message =>
       (super.noSuchMethod(
             Invocation.getter(#message),
-            returnValue: _i24.dummyValue<String>(
+            returnValue: _i38.dummyValue<String>(
               this,
               Invocation.getter(#message),
             ),
@@ -1663,7 +1540,7 @@ class MockTvDetailNotifier extends _i1.Mock implements _i33.TvDetailNotifier {
   String get watchlistMessage =>
       (super.noSuchMethod(
             Invocation.getter(#watchlistMessage),
-            returnValue: _i24.dummyValue<String>(
+            returnValue: _i38.dummyValue<String>(
               this,
               Invocation.getter(#watchlistMessage),
             ),
@@ -1676,327 +1553,49 @@ class MockTvDetailNotifier extends _i1.Mock implements _i33.TvDetailNotifier {
           as bool);
 
   @override
-  _i25.Future<void> fetchTvDetail(int? id) =>
+  _i18.Future<void> fetchTvDetail(int? id) =>
       (super.noSuchMethod(
             Invocation.method(#fetchTvDetail, [id]),
-            returnValue: _i25.Future<void>.value(),
-            returnValueForMissingStub: _i25.Future<void>.value(),
+            returnValue: _i18.Future<void>.value(),
+            returnValueForMissingStub: _i18.Future<void>.value(),
           )
-          as _i25.Future<void>);
+          as _i18.Future<void>);
 
   @override
-  _i25.Future<void> loadWatchlistStatus(int? id) =>
+  _i18.Future<void> loadWatchlistStatus(int? id) =>
       (super.noSuchMethod(
             Invocation.method(#loadWatchlistStatus, [id]),
-            returnValue: _i25.Future<void>.value(),
-            returnValueForMissingStub: _i25.Future<void>.value(),
+            returnValue: _i18.Future<void>.value(),
+            returnValueForMissingStub: _i18.Future<void>.value(),
           )
-          as _i25.Future<void>);
+          as _i18.Future<void>);
 
   @override
-  _i25.Future<void> addWatchlist(_i2.TvDetail? tv) =>
+  _i18.Future<void> addWatchlist(_i23.TvDetail? tv) =>
       (super.noSuchMethod(
             Invocation.method(#addWatchlist, [tv]),
-            returnValue: _i25.Future<void>.value(),
-            returnValueForMissingStub: _i25.Future<void>.value(),
+            returnValue: _i18.Future<void>.value(),
+            returnValueForMissingStub: _i18.Future<void>.value(),
           )
-          as _i25.Future<void>);
+          as _i18.Future<void>);
 
   @override
-  _i25.Future<void> removeFromWatchlist(_i2.TvDetail? tv) =>
+  _i18.Future<void> removeFromWatchlist(_i23.TvDetail? tv) =>
       (super.noSuchMethod(
             Invocation.method(#removeFromWatchlist, [tv]),
-            returnValue: _i25.Future<void>.value(),
-            returnValueForMissingStub: _i25.Future<void>.value(),
+            returnValue: _i18.Future<void>.value(),
+            returnValueForMissingStub: _i18.Future<void>.value(),
           )
-          as _i25.Future<void>);
+          as _i18.Future<void>);
 
   @override
-  void addListener(_i26.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i39.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#addListener, [listener]),
     returnValueForMissingStub: null,
   );
 
   @override
-  void removeListener(_i26.VoidCallback? listener) => super.noSuchMethod(
-    Invocation.method(#removeListener, [listener]),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  void dispose() => super.noSuchMethod(
-    Invocation.method(#dispose, []),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  void notifyListeners() => super.noSuchMethod(
-    Invocation.method(#notifyListeners, []),
-    returnValueForMissingStub: null,
-  );
-}
-
-/// A class which mocks [PopularMoviesNotifier].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockPopularMoviesNotifier extends _i1.Mock
-    implements _i34.PopularMoviesNotifier {
-  MockPopularMoviesNotifier() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i2.GetPopularMovies get getPopularMovies =>
-      (super.noSuchMethod(
-            Invocation.getter(#getPopularMovies),
-            returnValue: _FakeGetPopularMovies_12(
-              this,
-              Invocation.getter(#getPopularMovies),
-            ),
-          )
-          as _i2.GetPopularMovies);
-
-  @override
-  _i23.RequestState get state =>
-      (super.noSuchMethod(
-            Invocation.getter(#state),
-            returnValue: _i23.RequestState.empty,
-          )
-          as _i23.RequestState);
-
-  @override
-  List<_i2.Movie> get movies =>
-      (super.noSuchMethod(
-            Invocation.getter(#movies),
-            returnValue: <_i2.Movie>[],
-          )
-          as List<_i2.Movie>);
-
-  @override
-  String get message =>
-      (super.noSuchMethod(
-            Invocation.getter(#message),
-            returnValue: _i24.dummyValue<String>(
-              this,
-              Invocation.getter(#message),
-            ),
-          )
-          as String);
-
-  @override
-  bool get hasListeners =>
-      (super.noSuchMethod(Invocation.getter(#hasListeners), returnValue: false)
-          as bool);
-
-  @override
-  _i25.Future<void> fetchPopularMovies() =>
-      (super.noSuchMethod(
-            Invocation.method(#fetchPopularMovies, []),
-            returnValue: _i25.Future<void>.value(),
-            returnValueForMissingStub: _i25.Future<void>.value(),
-          )
-          as _i25.Future<void>);
-
-  @override
-  void addListener(_i26.VoidCallback? listener) => super.noSuchMethod(
-    Invocation.method(#addListener, [listener]),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  void removeListener(_i26.VoidCallback? listener) => super.noSuchMethod(
-    Invocation.method(#removeListener, [listener]),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  void dispose() => super.noSuchMethod(
-    Invocation.method(#dispose, []),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  void notifyListeners() => super.noSuchMethod(
-    Invocation.method(#notifyListeners, []),
-    returnValueForMissingStub: null,
-  );
-}
-
-/// A class which mocks [MovieDetailNotifier].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockMovieDetailNotifier extends _i1.Mock
-    implements _i35.MovieDetailNotifier {
-  MockMovieDetailNotifier() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i11.GetMovieDetail get getMovieDetail =>
-      (super.noSuchMethod(
-            Invocation.getter(#getMovieDetail),
-            returnValue: _FakeGetMovieDetail_13(
-              this,
-              Invocation.getter(#getMovieDetail),
-            ),
-          )
-          as _i11.GetMovieDetail);
-
-  @override
-  _i12.GetMovieRecommendations get getMovieRecommendations =>
-      (super.noSuchMethod(
-            Invocation.getter(#getMovieRecommendations),
-            returnValue: _FakeGetMovieRecommendations_14(
-              this,
-              Invocation.getter(#getMovieRecommendations),
-            ),
-          )
-          as _i12.GetMovieRecommendations);
-
-  @override
-  _i13.GetWatchListStatusMovie get getWatchListStatus =>
-      (super.noSuchMethod(
-            Invocation.getter(#getWatchListStatus),
-            returnValue: _FakeGetWatchListStatusMovie_15(
-              this,
-              Invocation.getter(#getWatchListStatus),
-            ),
-          )
-          as _i13.GetWatchListStatusMovie);
-
-  @override
-  _i14.SaveWatchlistMovie get saveWatchlist =>
-      (super.noSuchMethod(
-            Invocation.getter(#saveWatchlist),
-            returnValue: _FakeSaveWatchlistMovie_16(
-              this,
-              Invocation.getter(#saveWatchlist),
-            ),
-          )
-          as _i14.SaveWatchlistMovie);
-
-  @override
-  _i15.RemoveWatchlistMovie get removeWatchlist =>
-      (super.noSuchMethod(
-            Invocation.getter(#removeWatchlist),
-            returnValue: _FakeRemoveWatchlistMovie_17(
-              this,
-              Invocation.getter(#removeWatchlist),
-            ),
-          )
-          as _i15.RemoveWatchlistMovie);
-
-  @override
-  _i2.MovieDetail get movie =>
-      (super.noSuchMethod(
-            Invocation.getter(#movie),
-            returnValue: _FakeMovieDetail_18(this, Invocation.getter(#movie)),
-          )
-          as _i2.MovieDetail);
-
-  @override
-  _i23.RequestState get movieState =>
-      (super.noSuchMethod(
-            Invocation.getter(#movieState),
-            returnValue: _i23.RequestState.empty,
-          )
-          as _i23.RequestState);
-
-  @override
-  List<_i2.Movie> get movieRecommendations =>
-      (super.noSuchMethod(
-            Invocation.getter(#movieRecommendations),
-            returnValue: <_i2.Movie>[],
-          )
-          as List<_i2.Movie>);
-
-  @override
-  _i23.RequestState get recommendationState =>
-      (super.noSuchMethod(
-            Invocation.getter(#recommendationState),
-            returnValue: _i23.RequestState.empty,
-          )
-          as _i23.RequestState);
-
-  @override
-  String get message =>
-      (super.noSuchMethod(
-            Invocation.getter(#message),
-            returnValue: _i24.dummyValue<String>(
-              this,
-              Invocation.getter(#message),
-            ),
-          )
-          as String);
-
-  @override
-  bool get isAddedToWatchlist =>
-      (super.noSuchMethod(
-            Invocation.getter(#isAddedToWatchlist),
-            returnValue: false,
-          )
-          as bool);
-
-  @override
-  String get watchlistMessage =>
-      (super.noSuchMethod(
-            Invocation.getter(#watchlistMessage),
-            returnValue: _i24.dummyValue<String>(
-              this,
-              Invocation.getter(#watchlistMessage),
-            ),
-          )
-          as String);
-
-  @override
-  bool get hasListeners =>
-      (super.noSuchMethod(Invocation.getter(#hasListeners), returnValue: false)
-          as bool);
-
-  @override
-  _i25.Future<void> fetchMovieDetail(int? id) =>
-      (super.noSuchMethod(
-            Invocation.method(#fetchMovieDetail, [id]),
-            returnValue: _i25.Future<void>.value(),
-            returnValueForMissingStub: _i25.Future<void>.value(),
-          )
-          as _i25.Future<void>);
-
-  @override
-  _i25.Future<void> addWatchlist(_i2.MovieDetail? movie) =>
-      (super.noSuchMethod(
-            Invocation.method(#addWatchlist, [movie]),
-            returnValue: _i25.Future<void>.value(),
-            returnValueForMissingStub: _i25.Future<void>.value(),
-          )
-          as _i25.Future<void>);
-
-  @override
-  _i25.Future<void> removeFromWatchlist(_i2.MovieDetail? movie) =>
-      (super.noSuchMethod(
-            Invocation.method(#removeFromWatchlist, [movie]),
-            returnValue: _i25.Future<void>.value(),
-            returnValueForMissingStub: _i25.Future<void>.value(),
-          )
-          as _i25.Future<void>);
-
-  @override
-  _i25.Future<void> loadWatchlistStatus(int? id) =>
-      (super.noSuchMethod(
-            Invocation.method(#loadWatchlistStatus, [id]),
-            returnValue: _i25.Future<void>.value(),
-            returnValueForMissingStub: _i25.Future<void>.value(),
-          )
-          as _i25.Future<void>);
-
-  @override
-  void addListener(_i26.VoidCallback? listener) => super.noSuchMethod(
-    Invocation.method(#addListener, [listener]),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  void removeListener(_i26.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i39.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#removeListener, [listener]),
     returnValueForMissingStub: null,
   );
@@ -2017,40 +1616,40 @@ class MockMovieDetailNotifier extends _i1.Mock
 /// A class which mocks [PopularTvNotifier].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockPopularTvNotifier extends _i1.Mock implements _i36.PopularTvNotifier {
+class MockPopularTvNotifier extends _i1.Mock implements _i41.PopularTvNotifier {
   MockPopularTvNotifier() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.GetPopularTv get getPopularTv =>
+  _i7.GetPopularTv get getPopularTv =>
       (super.noSuchMethod(
             Invocation.getter(#getPopularTv),
-            returnValue: _FakeGetPopularTv_19(
+            returnValue: _FakeGetPopularTv_11(
               this,
               Invocation.getter(#getPopularTv),
             ),
           )
-          as _i2.GetPopularTv);
+          as _i7.GetPopularTv);
 
   @override
-  _i23.RequestState get state =>
+  _i19.RequestState get state =>
       (super.noSuchMethod(
             Invocation.getter(#state),
-            returnValue: _i23.RequestState.empty,
+            returnValue: _i19.RequestState.empty,
           )
-          as _i23.RequestState);
+          as _i19.RequestState);
 
   @override
-  List<_i2.Tv> get tv =>
-      (super.noSuchMethod(Invocation.getter(#tv), returnValue: <_i2.Tv>[])
-          as List<_i2.Tv>);
+  List<_i21.Tv> get tv =>
+      (super.noSuchMethod(Invocation.getter(#tv), returnValue: <_i21.Tv>[])
+          as List<_i21.Tv>);
 
   @override
   String get message =>
       (super.noSuchMethod(
             Invocation.getter(#message),
-            returnValue: _i24.dummyValue<String>(
+            returnValue: _i38.dummyValue<String>(
               this,
               Invocation.getter(#message),
             ),
@@ -2063,22 +1662,22 @@ class MockPopularTvNotifier extends _i1.Mock implements _i36.PopularTvNotifier {
           as bool);
 
   @override
-  _i25.Future<void> fetchPopularTv() =>
+  _i18.Future<void> fetchPopularTv() =>
       (super.noSuchMethod(
             Invocation.method(#fetchPopularTv, []),
-            returnValue: _i25.Future<void>.value(),
-            returnValueForMissingStub: _i25.Future<void>.value(),
+            returnValue: _i18.Future<void>.value(),
+            returnValueForMissingStub: _i18.Future<void>.value(),
           )
-          as _i25.Future<void>);
+          as _i18.Future<void>);
 
   @override
-  void addListener(_i26.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i39.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#addListener, [listener]),
     returnValueForMissingStub: null,
   );
 
   @override
-  void removeListener(_i26.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i39.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#removeListener, [listener]),
     returnValueForMissingStub: null,
   );
@@ -2099,74 +1698,74 @@ class MockPopularTvNotifier extends _i1.Mock implements _i36.PopularTvNotifier {
 /// A class which mocks [GetPopularTv].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetPopularTv extends _i1.Mock implements _i2.GetPopularTv {
+class MockGetPopularTv extends _i1.Mock implements _i7.GetPopularTv {
   MockGetPopularTv() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.TvRepository get repository =>
+  _i4.TvRepository get repository =>
       (super.noSuchMethod(
             Invocation.getter(#repository),
-            returnValue: _FakeTvRepository_3(
+            returnValue: _FakeTvRepository_2(
               this,
               Invocation.getter(#repository),
             ),
           )
-          as _i2.TvRepository);
+          as _i4.TvRepository);
 
   @override
-  _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>> execute() =>
+  _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>> execute() =>
       (super.noSuchMethod(
             Invocation.method(#execute, []),
             returnValue:
-                _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>>.value(
-                  _FakeEither_2<_i23.Failure, List<_i2.Tv>>(
+                _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>>.value(
+                  _FakeEither_1<_i19.Failure, List<_i21.Tv>>(
                     this,
                     Invocation.method(#execute, []),
                   ),
                 ),
           )
-          as _i25.Future<_i3.Either<_i23.Failure, List<_i2.Tv>>>);
+          as _i18.Future<_i3.Either<_i19.Failure, List<_i21.Tv>>>);
 }
 
 /// A class which mocks [TvSearchNotifier].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTvSearchNotifier extends _i1.Mock implements _i37.TvSearchNotifier {
+class MockTvSearchNotifier extends _i1.Mock implements _i42.TvSearchNotifier {
   MockTvSearchNotifier() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i16.SearchTv get searchTv =>
+  _i13.SearchTv get searchTv =>
       (super.noSuchMethod(
             Invocation.getter(#searchTv),
-            returnValue: _FakeSearchTv_20(this, Invocation.getter(#searchTv)),
+            returnValue: _FakeSearchTv_12(this, Invocation.getter(#searchTv)),
           )
-          as _i16.SearchTv);
+          as _i13.SearchTv);
 
   @override
-  _i23.RequestState get state =>
+  _i19.RequestState get state =>
       (super.noSuchMethod(
             Invocation.getter(#state),
-            returnValue: _i23.RequestState.empty,
+            returnValue: _i19.RequestState.empty,
           )
-          as _i23.RequestState);
+          as _i19.RequestState);
 
   @override
-  List<_i2.Tv> get searchResult =>
+  List<_i21.Tv> get searchResult =>
       (super.noSuchMethod(
             Invocation.getter(#searchResult),
-            returnValue: <_i2.Tv>[],
+            returnValue: <_i21.Tv>[],
           )
-          as List<_i2.Tv>);
+          as List<_i21.Tv>);
 
   @override
   String get message =>
       (super.noSuchMethod(
             Invocation.getter(#message),
-            returnValue: _i24.dummyValue<String>(
+            returnValue: _i38.dummyValue<String>(
               this,
               Invocation.getter(#message),
             ),
@@ -2179,108 +1778,22 @@ class MockTvSearchNotifier extends _i1.Mock implements _i37.TvSearchNotifier {
           as bool);
 
   @override
-  _i25.Future<void> fetchTvSearch(String? query) =>
+  _i18.Future<void> fetchTvSearch(String? query) =>
       (super.noSuchMethod(
             Invocation.method(#fetchTvSearch, [query]),
-            returnValue: _i25.Future<void>.value(),
-            returnValueForMissingStub: _i25.Future<void>.value(),
+            returnValue: _i18.Future<void>.value(),
+            returnValueForMissingStub: _i18.Future<void>.value(),
           )
-          as _i25.Future<void>);
+          as _i18.Future<void>);
 
   @override
-  void addListener(_i26.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i39.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#addListener, [listener]),
     returnValueForMissingStub: null,
   );
 
   @override
-  void removeListener(_i26.VoidCallback? listener) => super.noSuchMethod(
-    Invocation.method(#removeListener, [listener]),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  void dispose() => super.noSuchMethod(
-    Invocation.method(#dispose, []),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  void notifyListeners() => super.noSuchMethod(
-    Invocation.method(#notifyListeners, []),
-    returnValueForMissingStub: null,
-  );
-}
-
-/// A class which mocks [MovieSearchNotifier].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockMovieSearchNotifier extends _i1.Mock
-    implements _i38.MovieSearchNotifier {
-  MockMovieSearchNotifier() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i17.SearchMovies get searchMovies =>
-      (super.noSuchMethod(
-            Invocation.getter(#searchMovies),
-            returnValue: _FakeSearchMovies_21(
-              this,
-              Invocation.getter(#searchMovies),
-            ),
-          )
-          as _i17.SearchMovies);
-
-  @override
-  _i23.RequestState get state =>
-      (super.noSuchMethod(
-            Invocation.getter(#state),
-            returnValue: _i23.RequestState.empty,
-          )
-          as _i23.RequestState);
-
-  @override
-  List<_i2.Movie> get searchResult =>
-      (super.noSuchMethod(
-            Invocation.getter(#searchResult),
-            returnValue: <_i2.Movie>[],
-          )
-          as List<_i2.Movie>);
-
-  @override
-  String get message =>
-      (super.noSuchMethod(
-            Invocation.getter(#message),
-            returnValue: _i24.dummyValue<String>(
-              this,
-              Invocation.getter(#message),
-            ),
-          )
-          as String);
-
-  @override
-  bool get hasListeners =>
-      (super.noSuchMethod(Invocation.getter(#hasListeners), returnValue: false)
-          as bool);
-
-  @override
-  _i25.Future<void> fetchMovieSearch(String? query) =>
-      (super.noSuchMethod(
-            Invocation.method(#fetchMovieSearch, [query]),
-            returnValue: _i25.Future<void>.value(),
-            returnValueForMissingStub: _i25.Future<void>.value(),
-          )
-          as _i25.Future<void>);
-
-  @override
-  void addListener(_i26.VoidCallback? listener) => super.noSuchMethod(
-    Invocation.method(#addListener, [listener]),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  void removeListener(_i26.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i39.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#removeListener, [listener]),
     returnValueForMissingStub: null,
   );
@@ -2302,43 +1815,43 @@ class MockMovieSearchNotifier extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockWatchlistMovieNotifier extends _i1.Mock
-    implements _i39.WatchlistMovieNotifier {
+    implements _i43.WatchlistMovieNotifier {
   MockWatchlistMovieNotifier() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i18.GetWatchlistMovies get getWatchlistMovies =>
+  _i14.GetWatchlistMovies get getWatchlistMovies =>
       (super.noSuchMethod(
             Invocation.getter(#getWatchlistMovies),
-            returnValue: _FakeGetWatchlistMovies_22(
+            returnValue: _FakeGetWatchlistMovies_13(
               this,
               Invocation.getter(#getWatchlistMovies),
             ),
           )
-          as _i18.GetWatchlistMovies);
+          as _i14.GetWatchlistMovies);
 
   @override
-  List<_i2.Movie> get watchlistMovies =>
+  List<_i20.Movie> get watchlistMovies =>
       (super.noSuchMethod(
             Invocation.getter(#watchlistMovies),
-            returnValue: <_i2.Movie>[],
+            returnValue: <_i20.Movie>[],
           )
-          as List<_i2.Movie>);
+          as List<_i20.Movie>);
 
   @override
-  _i23.RequestState get watchlistState =>
+  _i19.RequestState get watchlistState =>
       (super.noSuchMethod(
             Invocation.getter(#watchlistState),
-            returnValue: _i23.RequestState.empty,
+            returnValue: _i19.RequestState.empty,
           )
-          as _i23.RequestState);
+          as _i19.RequestState);
 
   @override
   String get message =>
       (super.noSuchMethod(
             Invocation.getter(#message),
-            returnValue: _i24.dummyValue<String>(
+            returnValue: _i38.dummyValue<String>(
               this,
               Invocation.getter(#message),
             ),
@@ -2351,22 +1864,22 @@ class MockWatchlistMovieNotifier extends _i1.Mock
           as bool);
 
   @override
-  _i25.Future<void> fetchWatchlistMovies() =>
+  _i18.Future<void> fetchWatchlistMovies() =>
       (super.noSuchMethod(
             Invocation.method(#fetchWatchlistMovies, []),
-            returnValue: _i25.Future<void>.value(),
-            returnValueForMissingStub: _i25.Future<void>.value(),
+            returnValue: _i18.Future<void>.value(),
+            returnValueForMissingStub: _i18.Future<void>.value(),
           )
-          as _i25.Future<void>);
+          as _i18.Future<void>);
 
   @override
-  void addListener(_i26.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i39.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#addListener, [listener]),
     returnValueForMissingStub: null,
   );
 
   @override
-  void removeListener(_i26.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i39.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#removeListener, [listener]),
     returnValueForMissingStub: null,
   );
@@ -2388,43 +1901,43 @@ class MockWatchlistMovieNotifier extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockWatchlistTvNotifier extends _i1.Mock
-    implements _i40.WatchlistTvNotifier {
+    implements _i44.WatchlistTvNotifier {
   MockWatchlistTvNotifier() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i19.GetWatchListTv get getWatchlistTv =>
+  _i15.GetWatchListTv get getWatchlistTv =>
       (super.noSuchMethod(
             Invocation.getter(#getWatchlistTv),
-            returnValue: _FakeGetWatchListTv_23(
+            returnValue: _FakeGetWatchListTv_14(
               this,
               Invocation.getter(#getWatchlistTv),
             ),
           )
-          as _i19.GetWatchListTv);
+          as _i15.GetWatchListTv);
 
   @override
-  List<_i2.Tv> get watchlistTv =>
+  List<_i21.Tv> get watchlistTv =>
       (super.noSuchMethod(
             Invocation.getter(#watchlistTv),
-            returnValue: <_i2.Tv>[],
+            returnValue: <_i21.Tv>[],
           )
-          as List<_i2.Tv>);
+          as List<_i21.Tv>);
 
   @override
-  _i23.RequestState get watchlistState =>
+  _i19.RequestState get watchlistState =>
       (super.noSuchMethod(
             Invocation.getter(#watchlistState),
-            returnValue: _i23.RequestState.empty,
+            returnValue: _i19.RequestState.empty,
           )
-          as _i23.RequestState);
+          as _i19.RequestState);
 
   @override
   String get message =>
       (super.noSuchMethod(
             Invocation.getter(#message),
-            returnValue: _i24.dummyValue<String>(
+            returnValue: _i38.dummyValue<String>(
               this,
               Invocation.getter(#message),
             ),
@@ -2437,22 +1950,22 @@ class MockWatchlistTvNotifier extends _i1.Mock
           as bool);
 
   @override
-  _i25.Future<void> fetchWatchlistTv() =>
+  _i18.Future<void> fetchWatchlistTv() =>
       (super.noSuchMethod(
             Invocation.method(#fetchWatchlistTv, []),
-            returnValue: _i25.Future<void>.value(),
-            returnValueForMissingStub: _i25.Future<void>.value(),
+            returnValue: _i18.Future<void>.value(),
+            returnValueForMissingStub: _i18.Future<void>.value(),
           )
-          as _i25.Future<void>);
+          as _i18.Future<void>);
 
   @override
-  void addListener(_i26.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i39.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#addListener, [listener]),
     returnValueForMissingStub: null,
   );
 
   @override
-  void removeListener(_i26.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i39.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#removeListener, [listener]),
     returnValueForMissingStub: null,
   );
@@ -2474,24 +1987,24 @@ class MockWatchlistTvNotifier extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockDataConnectionChecker extends _i1.Mock
-    implements _i20.DataConnectionChecker {
+    implements _i16.DataConnectionChecker {
   MockDataConnectionChecker() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  List<_i20.AddressCheckOptions> get addresses =>
+  List<_i16.AddressCheckOptions> get addresses =>
       (super.noSuchMethod(
             Invocation.getter(#addresses),
-            returnValue: <_i20.AddressCheckOptions>[],
+            returnValue: <_i16.AddressCheckOptions>[],
           )
-          as List<_i20.AddressCheckOptions>);
+          as List<_i16.AddressCheckOptions>);
 
   @override
   Duration get checkInterval =>
       (super.noSuchMethod(
             Invocation.getter(#checkInterval),
-            returnValue: _FakeDuration_24(
+            returnValue: _FakeDuration_15(
               this,
               Invocation.getter(#checkInterval),
             ),
@@ -2499,38 +2012,38 @@ class MockDataConnectionChecker extends _i1.Mock
           as Duration);
 
   @override
-  List<_i20.AddressCheckResult> get lastTryResults =>
+  List<_i16.AddressCheckResult> get lastTryResults =>
       (super.noSuchMethod(
             Invocation.getter(#lastTryResults),
-            returnValue: <_i20.AddressCheckResult>[],
+            returnValue: <_i16.AddressCheckResult>[],
           )
-          as List<_i20.AddressCheckResult>);
+          as List<_i16.AddressCheckResult>);
 
   @override
-  _i25.Future<bool> get hasConnection =>
+  _i18.Future<bool> get hasConnection =>
       (super.noSuchMethod(
             Invocation.getter(#hasConnection),
-            returnValue: _i25.Future<bool>.value(false),
+            returnValue: _i18.Future<bool>.value(false),
           )
-          as _i25.Future<bool>);
+          as _i18.Future<bool>);
 
   @override
-  _i25.Future<_i20.DataConnectionStatus> get connectionStatus =>
+  _i18.Future<_i16.DataConnectionStatus> get connectionStatus =>
       (super.noSuchMethod(
             Invocation.getter(#connectionStatus),
-            returnValue: _i25.Future<_i20.DataConnectionStatus>.value(
-              _i20.DataConnectionStatus.disconnected,
+            returnValue: _i18.Future<_i16.DataConnectionStatus>.value(
+              _i16.DataConnectionStatus.disconnected,
             ),
           )
-          as _i25.Future<_i20.DataConnectionStatus>);
+          as _i18.Future<_i16.DataConnectionStatus>);
 
   @override
-  _i25.Stream<_i20.DataConnectionStatus> get onStatusChange =>
+  _i18.Stream<_i16.DataConnectionStatus> get onStatusChange =>
       (super.noSuchMethod(
             Invocation.getter(#onStatusChange),
-            returnValue: _i25.Stream<_i20.DataConnectionStatus>.empty(),
+            returnValue: _i18.Stream<_i16.DataConnectionStatus>.empty(),
           )
-          as _i25.Stream<_i20.DataConnectionStatus>);
+          as _i18.Stream<_i16.DataConnectionStatus>);
 
   @override
   bool get hasListeners =>
@@ -2546,7 +2059,7 @@ class MockDataConnectionChecker extends _i1.Mock
           as bool);
 
   @override
-  set addresses(List<_i20.AddressCheckOptions>? _addresses) =>
+  set addresses(List<_i16.AddressCheckOptions>? _addresses) =>
       super.noSuchMethod(
         Invocation.setter(#addresses, _addresses),
         returnValueForMissingStub: null,
@@ -2559,61 +2072,61 @@ class MockDataConnectionChecker extends _i1.Mock
   );
 
   @override
-  _i25.Future<_i20.AddressCheckResult> isHostReachable(
-    _i20.AddressCheckOptions? options,
+  _i18.Future<_i16.AddressCheckResult> isHostReachable(
+    _i16.AddressCheckOptions? options,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#isHostReachable, [options]),
-            returnValue: _i25.Future<_i20.AddressCheckResult>.value(
-              _FakeAddressCheckResult_25(
+            returnValue: _i18.Future<_i16.AddressCheckResult>.value(
+              _FakeAddressCheckResult_16(
                 this,
                 Invocation.method(#isHostReachable, [options]),
               ),
             ),
           )
-          as _i25.Future<_i20.AddressCheckResult>);
+          as _i18.Future<_i16.AddressCheckResult>);
 }
 
 /// A class which mocks [Client].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockClient extends _i1.Mock implements _i21.Client {
+class MockClient extends _i1.Mock implements _i17.Client {
   MockClient() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i25.Future<_i21.Response> head(Uri? url, {Map<String, String>? headers}) =>
+  _i18.Future<_i17.Response> head(Uri? url, {Map<String, String>? headers}) =>
       (super.noSuchMethod(
             Invocation.method(#head, [url], {#headers: headers}),
-            returnValue: _i25.Future<_i21.Response>.value(
-              _FakeResponse_26(
+            returnValue: _i18.Future<_i17.Response>.value(
+              _FakeResponse_17(
                 this,
                 Invocation.method(#head, [url], {#headers: headers}),
               ),
             ),
           )
-          as _i25.Future<_i21.Response>);
+          as _i18.Future<_i17.Response>);
 
   @override
-  _i25.Future<_i21.Response> get(Uri? url, {Map<String, String>? headers}) =>
+  _i18.Future<_i17.Response> get(Uri? url, {Map<String, String>? headers}) =>
       (super.noSuchMethod(
             Invocation.method(#get, [url], {#headers: headers}),
-            returnValue: _i25.Future<_i21.Response>.value(
-              _FakeResponse_26(
+            returnValue: _i18.Future<_i17.Response>.value(
+              _FakeResponse_17(
                 this,
                 Invocation.method(#get, [url], {#headers: headers}),
               ),
             ),
           )
-          as _i25.Future<_i21.Response>);
+          as _i18.Future<_i17.Response>);
 
   @override
-  _i25.Future<_i21.Response> post(
+  _i18.Future<_i17.Response> post(
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i41.Encoding? encoding,
+    _i45.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
             Invocation.method(
@@ -2621,8 +2134,8 @@ class MockClient extends _i1.Mock implements _i21.Client {
               [url],
               {#headers: headers, #body: body, #encoding: encoding},
             ),
-            returnValue: _i25.Future<_i21.Response>.value(
-              _FakeResponse_26(
+            returnValue: _i18.Future<_i17.Response>.value(
+              _FakeResponse_17(
                 this,
                 Invocation.method(
                   #post,
@@ -2632,14 +2145,14 @@ class MockClient extends _i1.Mock implements _i21.Client {
               ),
             ),
           )
-          as _i25.Future<_i21.Response>);
+          as _i18.Future<_i17.Response>);
 
   @override
-  _i25.Future<_i21.Response> put(
+  _i18.Future<_i17.Response> put(
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i41.Encoding? encoding,
+    _i45.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
             Invocation.method(
@@ -2647,8 +2160,8 @@ class MockClient extends _i1.Mock implements _i21.Client {
               [url],
               {#headers: headers, #body: body, #encoding: encoding},
             ),
-            returnValue: _i25.Future<_i21.Response>.value(
-              _FakeResponse_26(
+            returnValue: _i18.Future<_i17.Response>.value(
+              _FakeResponse_17(
                 this,
                 Invocation.method(
                   #put,
@@ -2658,14 +2171,14 @@ class MockClient extends _i1.Mock implements _i21.Client {
               ),
             ),
           )
-          as _i25.Future<_i21.Response>);
+          as _i18.Future<_i17.Response>);
 
   @override
-  _i25.Future<_i21.Response> patch(
+  _i18.Future<_i17.Response> patch(
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i41.Encoding? encoding,
+    _i45.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
             Invocation.method(
@@ -2673,8 +2186,8 @@ class MockClient extends _i1.Mock implements _i21.Client {
               [url],
               {#headers: headers, #body: body, #encoding: encoding},
             ),
-            returnValue: _i25.Future<_i21.Response>.value(
-              _FakeResponse_26(
+            returnValue: _i18.Future<_i17.Response>.value(
+              _FakeResponse_17(
                 this,
                 Invocation.method(
                   #patch,
@@ -2684,14 +2197,14 @@ class MockClient extends _i1.Mock implements _i21.Client {
               ),
             ),
           )
-          as _i25.Future<_i21.Response>);
+          as _i18.Future<_i17.Response>);
 
   @override
-  _i25.Future<_i21.Response> delete(
+  _i18.Future<_i17.Response> delete(
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i41.Encoding? encoding,
+    _i45.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
             Invocation.method(
@@ -2699,8 +2212,8 @@ class MockClient extends _i1.Mock implements _i21.Client {
               [url],
               {#headers: headers, #body: body, #encoding: encoding},
             ),
-            returnValue: _i25.Future<_i21.Response>.value(
-              _FakeResponse_26(
+            returnValue: _i18.Future<_i17.Response>.value(
+              _FakeResponse_17(
                 this,
                 Invocation.method(
                   #delete,
@@ -2710,44 +2223,44 @@ class MockClient extends _i1.Mock implements _i21.Client {
               ),
             ),
           )
-          as _i25.Future<_i21.Response>);
+          as _i18.Future<_i17.Response>);
 
   @override
-  _i25.Future<String> read(Uri? url, {Map<String, String>? headers}) =>
+  _i18.Future<String> read(Uri? url, {Map<String, String>? headers}) =>
       (super.noSuchMethod(
             Invocation.method(#read, [url], {#headers: headers}),
-            returnValue: _i25.Future<String>.value(
-              _i24.dummyValue<String>(
+            returnValue: _i18.Future<String>.value(
+              _i38.dummyValue<String>(
                 this,
                 Invocation.method(#read, [url], {#headers: headers}),
               ),
             ),
           )
-          as _i25.Future<String>);
+          as _i18.Future<String>);
 
   @override
-  _i25.Future<_i42.Uint8List> readBytes(
+  _i18.Future<_i46.Uint8List> readBytes(
     Uri? url, {
     Map<String, String>? headers,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#readBytes, [url], {#headers: headers}),
-            returnValue: _i25.Future<_i42.Uint8List>.value(_i42.Uint8List(0)),
+            returnValue: _i18.Future<_i46.Uint8List>.value(_i46.Uint8List(0)),
           )
-          as _i25.Future<_i42.Uint8List>);
+          as _i18.Future<_i46.Uint8List>);
 
   @override
-  _i25.Future<_i21.StreamedResponse> send(_i21.BaseRequest? request) =>
+  _i18.Future<_i17.StreamedResponse> send(_i17.BaseRequest? request) =>
       (super.noSuchMethod(
             Invocation.method(#send, [request]),
-            returnValue: _i25.Future<_i21.StreamedResponse>.value(
-              _FakeStreamedResponse_27(
+            returnValue: _i18.Future<_i17.StreamedResponse>.value(
+              _FakeStreamedResponse_18(
                 this,
                 Invocation.method(#send, [request]),
               ),
             ),
           )
-          as _i25.Future<_i21.StreamedResponse>);
+          as _i18.Future<_i17.StreamedResponse>);
 
   @override
   void close() => super.noSuchMethod(
@@ -2760,275 +2273,285 @@ class MockClient extends _i1.Mock implements _i21.Client {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockMovieRemoteDataSourceImpl extends _i1.Mock
-    implements _i27.MovieRemoteDataSource {
+    implements _i24.MovieRemoteDataSource {
   MockMovieRemoteDataSourceImpl() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i25.Future<List<_i2.MovieModel>> getNowPlayingMovies() =>
+  _i18.Future<List<_i25.MovieModel>> getNowPlayingMovies() =>
       (super.noSuchMethod(
             Invocation.method(#getNowPlayingMovies, []),
-            returnValue: _i25.Future<List<_i2.MovieModel>>.value(
-              <_i2.MovieModel>[],
+            returnValue: _i18.Future<List<_i25.MovieModel>>.value(
+              <_i25.MovieModel>[],
             ),
           )
-          as _i25.Future<List<_i2.MovieModel>>);
+          as _i18.Future<List<_i25.MovieModel>>);
 
   @override
-  _i25.Future<List<_i2.MovieModel>> getPopularMovies() =>
+  _i18.Future<List<_i25.MovieModel>> getPopularMovies() =>
       (super.noSuchMethod(
             Invocation.method(#getPopularMovies, []),
-            returnValue: _i25.Future<List<_i2.MovieModel>>.value(
-              <_i2.MovieModel>[],
+            returnValue: _i18.Future<List<_i25.MovieModel>>.value(
+              <_i25.MovieModel>[],
             ),
           )
-          as _i25.Future<List<_i2.MovieModel>>);
+          as _i18.Future<List<_i25.MovieModel>>);
 
   @override
-  _i25.Future<List<_i2.MovieModel>> getTopRatedMovies() =>
+  _i18.Future<List<_i25.MovieModel>> getTopRatedMovies() =>
       (super.noSuchMethod(
             Invocation.method(#getTopRatedMovies, []),
-            returnValue: _i25.Future<List<_i2.MovieModel>>.value(
-              <_i2.MovieModel>[],
+            returnValue: _i18.Future<List<_i25.MovieModel>>.value(
+              <_i25.MovieModel>[],
             ),
           )
-          as _i25.Future<List<_i2.MovieModel>>);
+          as _i18.Future<List<_i25.MovieModel>>);
 
   @override
-  _i25.Future<_i4.MovieDetailResponse> getMovieDetail(int? id) =>
+  _i18.Future<_i5.MovieDetailResponse> getMovieDetail(int? id) =>
       (super.noSuchMethod(
             Invocation.method(#getMovieDetail, [id]),
-            returnValue: _i25.Future<_i4.MovieDetailResponse>.value(
-              _FakeMovieDetailResponse_4(
+            returnValue: _i18.Future<_i5.MovieDetailResponse>.value(
+              _FakeMovieDetailResponse_3(
                 this,
                 Invocation.method(#getMovieDetail, [id]),
               ),
             ),
           )
-          as _i25.Future<_i4.MovieDetailResponse>);
+          as _i18.Future<_i5.MovieDetailResponse>);
 
   @override
-  _i25.Future<List<_i2.MovieModel>> getMovieRecommendations(int? id) =>
+  _i18.Future<List<_i25.MovieModel>> getMovieRecommendations(int? id) =>
       (super.noSuchMethod(
             Invocation.method(#getMovieRecommendations, [id]),
-            returnValue: _i25.Future<List<_i2.MovieModel>>.value(
-              <_i2.MovieModel>[],
+            returnValue: _i18.Future<List<_i25.MovieModel>>.value(
+              <_i25.MovieModel>[],
             ),
           )
-          as _i25.Future<List<_i2.MovieModel>>);
+          as _i18.Future<List<_i25.MovieModel>>);
 
   @override
-  _i25.Future<List<_i2.MovieModel>> searchMovies(String? query) =>
+  _i18.Future<List<_i25.MovieModel>> searchMovies(String? query) =>
       (super.noSuchMethod(
             Invocation.method(#searchMovies, [query]),
-            returnValue: _i25.Future<List<_i2.MovieModel>>.value(
-              <_i2.MovieModel>[],
+            returnValue: _i18.Future<List<_i25.MovieModel>>.value(
+              <_i25.MovieModel>[],
             ),
           )
-          as _i25.Future<List<_i2.MovieModel>>);
+          as _i18.Future<List<_i25.MovieModel>>);
 }
 
 /// A class which mocks [TvRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTvRemoteDataSourceImpl extends _i1.Mock
-    implements _i28.TvRemoteDataSource {
+    implements _i26.TvRemoteDataSource {
   MockTvRemoteDataSourceImpl() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i25.Future<List<_i2.TvModel>> getOnTheAirTv() =>
+  _i18.Future<List<_i27.TvModel>> getOnTheAirTv() =>
       (super.noSuchMethod(
             Invocation.method(#getOnTheAirTv, []),
-            returnValue: _i25.Future<List<_i2.TvModel>>.value(<_i2.TvModel>[]),
+            returnValue: _i18.Future<List<_i27.TvModel>>.value(
+              <_i27.TvModel>[],
+            ),
           )
-          as _i25.Future<List<_i2.TvModel>>);
+          as _i18.Future<List<_i27.TvModel>>);
 
   @override
-  _i25.Future<List<_i2.TvModel>> getPopularTv() =>
+  _i18.Future<List<_i27.TvModel>> getPopularTv() =>
       (super.noSuchMethod(
             Invocation.method(#getPopularTv, []),
-            returnValue: _i25.Future<List<_i2.TvModel>>.value(<_i2.TvModel>[]),
+            returnValue: _i18.Future<List<_i27.TvModel>>.value(
+              <_i27.TvModel>[],
+            ),
           )
-          as _i25.Future<List<_i2.TvModel>>);
+          as _i18.Future<List<_i27.TvModel>>);
 
   @override
-  _i25.Future<List<_i2.TvModel>> getTopRatedTv() =>
+  _i18.Future<List<_i27.TvModel>> getTopRatedTv() =>
       (super.noSuchMethod(
             Invocation.method(#getTopRatedTv, []),
-            returnValue: _i25.Future<List<_i2.TvModel>>.value(<_i2.TvModel>[]),
+            returnValue: _i18.Future<List<_i27.TvModel>>.value(
+              <_i27.TvModel>[],
+            ),
           )
-          as _i25.Future<List<_i2.TvModel>>);
+          as _i18.Future<List<_i27.TvModel>>);
 
   @override
-  _i25.Future<_i5.TvDetailResponse> getTvDetail(int? id) =>
+  _i18.Future<_i6.TvDetailResponse> getTvDetail(int? id) =>
       (super.noSuchMethod(
             Invocation.method(#getTvDetail, [id]),
-            returnValue: _i25.Future<_i5.TvDetailResponse>.value(
-              _FakeTvDetailResponse_5(
+            returnValue: _i18.Future<_i6.TvDetailResponse>.value(
+              _FakeTvDetailResponse_4(
                 this,
                 Invocation.method(#getTvDetail, [id]),
               ),
             ),
           )
-          as _i25.Future<_i5.TvDetailResponse>);
+          as _i18.Future<_i6.TvDetailResponse>);
 
   @override
-  _i25.Future<List<_i2.TvModel>> searchTv(String? query) =>
+  _i18.Future<List<_i27.TvModel>> searchTv(String? query) =>
       (super.noSuchMethod(
             Invocation.method(#searchTv, [query]),
-            returnValue: _i25.Future<List<_i2.TvModel>>.value(<_i2.TvModel>[]),
+            returnValue: _i18.Future<List<_i27.TvModel>>.value(
+              <_i27.TvModel>[],
+            ),
           )
-          as _i25.Future<List<_i2.TvModel>>);
+          as _i18.Future<List<_i27.TvModel>>);
 
   @override
-  _i25.Future<List<_i2.TvModel>> getTvRecommendations(int? id) =>
+  _i18.Future<List<_i27.TvModel>> getTvRecommendations(int? id) =>
       (super.noSuchMethod(
             Invocation.method(#getTvRecommendations, [id]),
-            returnValue: _i25.Future<List<_i2.TvModel>>.value(<_i2.TvModel>[]),
+            returnValue: _i18.Future<List<_i27.TvModel>>.value(
+              <_i27.TvModel>[],
+            ),
           )
-          as _i25.Future<List<_i2.TvModel>>);
+          as _i18.Future<List<_i27.TvModel>>);
 }
 
 /// A class which mocks [MovieLocalDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockMovieLocalDataSource extends _i1.Mock
-    implements _i43.MovieLocalDataSource {
+    implements _i47.MovieLocalDataSource {
   MockMovieLocalDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i25.Future<void> cacheNowPlayingMovies(List<_i2.MovieTable>? movies) =>
+  _i18.Future<void> cacheNowPlayingMovies(List<_i7.MovieTable>? movies) =>
       (super.noSuchMethod(
             Invocation.method(#cacheNowPlayingMovies, [movies]),
-            returnValue: _i25.Future<void>.value(),
-            returnValueForMissingStub: _i25.Future<void>.value(),
+            returnValue: _i18.Future<void>.value(),
+            returnValueForMissingStub: _i18.Future<void>.value(),
           )
-          as _i25.Future<void>);
+          as _i18.Future<void>);
 
   @override
-  _i25.Future<List<_i2.MovieTable>> getCachedNowPlayingMovies() =>
+  _i18.Future<List<_i7.MovieTable>> getCachedNowPlayingMovies() =>
       (super.noSuchMethod(
             Invocation.method(#getCachedNowPlayingMovies, []),
-            returnValue: _i25.Future<List<_i2.MovieTable>>.value(
-              <_i2.MovieTable>[],
+            returnValue: _i18.Future<List<_i7.MovieTable>>.value(
+              <_i7.MovieTable>[],
             ),
           )
-          as _i25.Future<List<_i2.MovieTable>>);
+          as _i18.Future<List<_i7.MovieTable>>);
 
   @override
-  _i25.Future<String> insertWatchlist(_i2.MovieTable? movie) =>
+  _i18.Future<String> insertWatchlist(_i7.MovieTable? movie) =>
       (super.noSuchMethod(
             Invocation.method(#insertWatchlist, [movie]),
-            returnValue: _i25.Future<String>.value(
-              _i24.dummyValue<String>(
+            returnValue: _i18.Future<String>.value(
+              _i38.dummyValue<String>(
                 this,
                 Invocation.method(#insertWatchlist, [movie]),
               ),
             ),
           )
-          as _i25.Future<String>);
+          as _i18.Future<String>);
 
   @override
-  _i25.Future<String> removeWatchlist(_i2.MovieTable? movie) =>
+  _i18.Future<String> removeWatchlist(_i7.MovieTable? movie) =>
       (super.noSuchMethod(
             Invocation.method(#removeWatchlist, [movie]),
-            returnValue: _i25.Future<String>.value(
-              _i24.dummyValue<String>(
+            returnValue: _i18.Future<String>.value(
+              _i38.dummyValue<String>(
                 this,
                 Invocation.method(#removeWatchlist, [movie]),
               ),
             ),
           )
-          as _i25.Future<String>);
+          as _i18.Future<String>);
 
   @override
-  _i25.Future<_i2.MovieTable?> getMovieById(int? id) =>
+  _i18.Future<_i7.MovieTable?> getMovieById(int? id) =>
       (super.noSuchMethod(
             Invocation.method(#getMovieById, [id]),
-            returnValue: _i25.Future<_i2.MovieTable?>.value(),
+            returnValue: _i18.Future<_i7.MovieTable?>.value(),
           )
-          as _i25.Future<_i2.MovieTable?>);
+          as _i18.Future<_i7.MovieTable?>);
 
   @override
-  _i25.Future<List<_i2.MovieTable>> getWatchlistMovies() =>
+  _i18.Future<List<_i7.MovieTable>> getWatchlistMovies() =>
       (super.noSuchMethod(
             Invocation.method(#getWatchlistMovies, []),
-            returnValue: _i25.Future<List<_i2.MovieTable>>.value(
-              <_i2.MovieTable>[],
+            returnValue: _i18.Future<List<_i7.MovieTable>>.value(
+              <_i7.MovieTable>[],
             ),
           )
-          as _i25.Future<List<_i2.MovieTable>>);
+          as _i18.Future<List<_i7.MovieTable>>);
 }
 
 /// A class which mocks [TvLocalDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTvLocalDataSource extends _i1.Mock implements _i44.TvLocalDataSource {
+class MockTvLocalDataSource extends _i1.Mock implements _i48.TvLocalDataSource {
   MockTvLocalDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i25.Future<void> cacheOnTheAirTv(List<_i2.TvTable>? tvs) =>
+  _i18.Future<void> cacheOnTheAirTv(List<_i7.TvTable>? tvs) =>
       (super.noSuchMethod(
             Invocation.method(#cacheOnTheAirTv, [tvs]),
-            returnValue: _i25.Future<void>.value(),
-            returnValueForMissingStub: _i25.Future<void>.value(),
+            returnValue: _i18.Future<void>.value(),
+            returnValueForMissingStub: _i18.Future<void>.value(),
           )
-          as _i25.Future<void>);
+          as _i18.Future<void>);
 
   @override
-  _i25.Future<List<_i2.TvTable>> getCachedOnTheAirTv() =>
+  _i18.Future<List<_i7.TvTable>> getCachedOnTheAirTv() =>
       (super.noSuchMethod(
             Invocation.method(#getCachedOnTheAirTv, []),
-            returnValue: _i25.Future<List<_i2.TvTable>>.value(<_i2.TvTable>[]),
+            returnValue: _i18.Future<List<_i7.TvTable>>.value(<_i7.TvTable>[]),
           )
-          as _i25.Future<List<_i2.TvTable>>);
+          as _i18.Future<List<_i7.TvTable>>);
 
   @override
-  _i25.Future<String> insertWatchlist(_i2.TvTable? tv) =>
+  _i18.Future<String> insertWatchlist(_i7.TvTable? tv) =>
       (super.noSuchMethod(
             Invocation.method(#insertWatchlist, [tv]),
-            returnValue: _i25.Future<String>.value(
-              _i24.dummyValue<String>(
+            returnValue: _i18.Future<String>.value(
+              _i38.dummyValue<String>(
                 this,
                 Invocation.method(#insertWatchlist, [tv]),
               ),
             ),
           )
-          as _i25.Future<String>);
+          as _i18.Future<String>);
 
   @override
-  _i25.Future<String> removeWatchlist(_i2.TvTable? tv) =>
+  _i18.Future<String> removeWatchlist(_i7.TvTable? tv) =>
       (super.noSuchMethod(
             Invocation.method(#removeWatchlist, [tv]),
-            returnValue: _i25.Future<String>.value(
-              _i24.dummyValue<String>(
+            returnValue: _i18.Future<String>.value(
+              _i38.dummyValue<String>(
                 this,
                 Invocation.method(#removeWatchlist, [tv]),
               ),
             ),
           )
-          as _i25.Future<String>);
+          as _i18.Future<String>);
 
   @override
-  _i25.Future<_i2.TvTable?> getTvById(int? id) =>
+  _i18.Future<_i7.TvTable?> getTvById(int? id) =>
       (super.noSuchMethod(
             Invocation.method(#getTvById, [id]),
-            returnValue: _i25.Future<_i2.TvTable?>.value(),
+            returnValue: _i18.Future<_i7.TvTable?>.value(),
           )
-          as _i25.Future<_i2.TvTable?>);
+          as _i18.Future<_i7.TvTable?>);
 
   @override
-  _i25.Future<List<_i2.TvTable>> getWatchlistTvs() =>
+  _i18.Future<List<_i7.TvTable>> getWatchlistTvs() =>
       (super.noSuchMethod(
             Invocation.method(#getWatchlistTvs, []),
-            returnValue: _i25.Future<List<_i2.TvTable>>.value(<_i2.TvTable>[]),
+            returnValue: _i18.Future<List<_i7.TvTable>>.value(<_i7.TvTable>[]),
           )
-          as _i25.Future<List<_i2.TvTable>>);
+          as _i18.Future<List<_i7.TvTable>>);
 }

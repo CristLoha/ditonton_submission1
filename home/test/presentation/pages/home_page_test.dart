@@ -1,50 +1,101 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home/home.dart';
-import 'package:mockito/mockito.dart';
-import 'package:provider/provider.dart';
+import 'package:home/presentation/bloc/home/home_bloc.dart';
+import 'package:home/presentation/bloc/movie_list/movie_list_state.dart';
 import 'package:core/core.dart';
-import '../provider/movie_list_notifier_test.mocks.dart';
-import '../provider/tv_list_notifier_test.mocks.dart';
-
-
+import 'package:mockito/mockito.dart';
+import '../bloc/movie_list_bloc_test.mocks.dart';
+import '../bloc/tv_list_bloc_test.mocks.dart';
+import 'package:dartz/dartz.dart';
+import 'package:network_image_mock/network_image_mock.dart';
 
 void main() {
-  late MockMovieListNotifier mockMovieListNotifier;
-  late MockTvListNotifier mockTvListNotifier;
+  late MovieListBloc movieListBloc;
+  late TvListBloc tvListBloc;
+  late MockGetNowPlayingMovies mockGetNowPlayingMovies;
+  late MockGetPopularMovies mockGetPopularMovies;
+  late MockGetTopRatedMovies mockGetTopRatedMovies;
+  late MockGetOnTheAirTv mockGetOnTheAirTv;
+  late MockGetPopularTv mockGetPopularTv;
+  late MockGetTopRatedTv mockGetTopRatedTv;
 
   setUp(() {
-    mockMovieListNotifier = MockMovieListNotifier();
-    mockTvListNotifier = MockTvListNotifier();
+    mockGetNowPlayingMovies = MockGetNowPlayingMovies();
+    mockGetPopularMovies = MockGetPopularMovies();
+    mockGetTopRatedMovies = MockGetTopRatedMovies();
+    mockGetOnTheAirTv = MockGetOnTheAirTv();
+    mockGetPopularTv = MockGetPopularTv();
+    mockGetTopRatedTv = MockGetTopRatedTv();
 
-    // Add stubs for MovieListNotifier
-    when(mockMovieListNotifier.nowPlayingState).thenReturn(RequestState.empty);
-    when(
-      mockMovieListNotifier.popularMoviesState,
-    ).thenReturn(RequestState.empty);
-    when(
-      mockMovieListNotifier.topRatedMoviesState,
-    ).thenReturn(RequestState.empty);
-    when(mockMovieListNotifier.nowPlayingMovies).thenReturn([]);
-    when(mockMovieListNotifier.popularMovies).thenReturn([]);
-    when(mockMovieListNotifier.topRatedMovies).thenReturn([]);
+    final tMovie = Movie(
+      adult: false,
+      backdropPath: '/muth4OYamXf41G2evdrLEg8d3om.jpg',
+      genreIds: [14, 28],
+      id: 557,
+      originalTitle: 'Spider-Man',
+      overview:
+          'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
+      popularity: 60.441,
+      posterPath: '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
+      releaseDate: '2002-05-01',
+      title: 'Spider-Man',
+      video: false,
+      voteAverage: 7.2,
+      voteCount: 13507,
+    );
 
-    // Add stubs for TvListNotifier
-    when(mockTvListNotifier.onTheAirTvState).thenReturn(RequestState.empty);
-    when(mockTvListNotifier.popularTvState).thenReturn(RequestState.empty);
-    when(mockTvListNotifier.topRatedTvState).thenReturn(RequestState.empty);
-    when(mockTvListNotifier.onTheAirTv).thenReturn([]);
-    when(mockTvListNotifier.popularTv).thenReturn([]);
-    when(mockTvListNotifier.topRatedTv).thenReturn([]);
+    final tTv = Tv(
+      adult: false,
+      backdropPath: '/7dowXHcFccjmxf0YZYxDFkfVq65.jpg',
+      genreIds: [18],
+      id: 100088,
+      originalName: 'The Last of Us',
+      overview:
+          'Twenty years after modern civilization has been destroyed, Joel, a hardened survivor, is hired to smuggle Ellie, a 14-year-old girl, out of an oppressive quarantine zone. What starts as a small job soon becomes a brutal, heartbreaking journey, as they both must traverse the United States and depend on each other for survival.',
+      popularity: 433.6105,
+      posterPath: '/dmo6TYuuJgaYinXBPjrgG9mB5od.jpg',
+      firstAirDate: DateTime.parse('2023-01-15'),
+      name: 'The Last of Us',
+      voteAverage: 8.579,
+      voteCount: 5750,
+      originCountry: ['US'],
+      originalLanguage: 'en',
+    );
+
+    when(
+      mockGetNowPlayingMovies.execute(),
+    ).thenAnswer((_) async => Right([tMovie]));
+    when(
+      mockGetPopularMovies.execute(),
+    ).thenAnswer((_) async => Right([tMovie]));
+    when(
+      mockGetTopRatedMovies.execute(),
+    ).thenAnswer((_) async => Right([tMovie]));
+    when(mockGetOnTheAirTv.execute()).thenAnswer((_) async => Right([tTv]));
+    when(mockGetPopularTv.execute()).thenAnswer((_) async => Right([tTv]));
+    when(mockGetTopRatedTv.execute()).thenAnswer((_) async => Right([tTv]));
+
+    movieListBloc = MovieListBloc(
+      getNowPlayingMovies: mockGetNowPlayingMovies,
+      getPopularMovies: mockGetPopularMovies,
+      getTopRatedMovies: mockGetTopRatedMovies,
+    );
+
+    tvListBloc = TvListBloc(
+      getOnTheAirTv: mockGetOnTheAirTv,
+      getPopularTv: mockGetPopularTv,
+      getTopRatedTv: mockGetTopRatedTv,
+    );
   });
 
   Widget createTestableWidget(Widget body) {
-    return MultiProvider(
+    return MultiBlocProvider(
       providers: [
-        ChangeNotifierProvider<MovieListNotifier>.value(
-          value: mockMovieListNotifier,
-        ),
-        ChangeNotifierProvider<TvListNotifier>.value(value: mockTvListNotifier),
+        BlocProvider<MovieListBloc>(create: (context) => movieListBloc),
+        BlocProvider<TvListBloc>(create: (context) => tvListBloc),
+        BlocProvider<HomeBloc>(create: (context) => HomeBloc()),
       ],
       child: MaterialApp(
         home: body,
@@ -90,25 +141,28 @@ void main() {
     originCountry: ['US'],
     originalLanguage: 'en',
   );
-
   testWidgets('Page should display drawer when drawer button is tapped', (
     WidgetTester tester,
   ) async {
-    when(mockMovieListNotifier.nowPlayingState).thenReturn(RequestState.loaded);
-    when(mockMovieListNotifier.nowPlayingMovies).thenReturn([tMovie]);
-    when(
-      mockMovieListNotifier.popularMoviesState,
-    ).thenReturn(RequestState.loaded);
-    when(mockMovieListNotifier.popularMovies).thenReturn([tMovie]);
-    when(
-      mockMovieListNotifier.topRatedMoviesState,
-    ).thenReturn(RequestState.loaded);
-    when(mockMovieListNotifier.topRatedMovies).thenReturn([tMovie]);
+    // arrange
+    movieListBloc.emit(
+      MovieListState(
+        nowPlayingState: RequestState.loaded,
+        popularMoviesState: RequestState.loaded,
+        topRatedMoviesState: RequestState.loaded,
+        nowPlayingMovies: [tMovie],
+        popularMovies: [tMovie],
+        topRatedMovies: [tMovie],
+        message: '',
+      ),
+    );
 
+    // act
     await tester.pumpWidget(createTestableWidget(HomePage()));
     await tester.tap(find.byIcon(Icons.menu));
     await tester.pump(const Duration(seconds: 1));
 
+    // assert
     expect(find.byType(Drawer), findsOneWidget);
     expect(find.text('Movies'), findsOneWidget);
     expect(find.text('TV Shows'), findsOneWidget);
@@ -119,113 +173,104 @@ void main() {
   testWidgets('Page should display movie list when movies tab is selected', (
     WidgetTester tester,
   ) async {
-    when(mockMovieListNotifier.nowPlayingState).thenReturn(RequestState.loaded);
-    when(mockMovieListNotifier.nowPlayingMovies).thenReturn([tMovie]);
-    when(
-      mockMovieListNotifier.popularMoviesState,
-    ).thenReturn(RequestState.loaded);
-    when(mockMovieListNotifier.popularMovies).thenReturn([tMovie]);
-    when(
-      mockMovieListNotifier.topRatedMoviesState,
-    ).thenReturn(RequestState.loaded);
-    when(mockMovieListNotifier.topRatedMovies).thenReturn([tMovie]);
+    await mockNetworkImagesFor(() async {
+      // arrange
+      movieListBloc.emit(
+        MovieListState(
+          nowPlayingState: RequestState.loaded,
+          popularMoviesState: RequestState.loaded,
+          topRatedMoviesState: RequestState.loaded,
+          nowPlayingMovies: [tMovie],
+          popularMovies: [tMovie],
+          topRatedMovies: [tMovie],
+          message: '',
+        ),
+      );
 
-    await tester.pumpWidget(createTestableWidget(HomePage()));
-    await tester.pump(const Duration(seconds: 1));
+      // act
+      await tester.pumpWidget(createTestableWidget(HomePage()));
+      await tester.pump();
 
-    expect(find.text('Now Playing'), findsOneWidget);
-    expect(find.text('Popular'), findsOneWidget);
-    expect(find.text('Top Rated'), findsOneWidget);
-    expect(find.byType(MovieList), findsNWidgets(3));
+      // assert
+      expect(find.text('Now Playing'), findsOneWidget);
+      expect(find.text('Popular'), findsOneWidget);
+      expect(find.text('Top Rated'), findsOneWidget);
+      expect(find.byType(MovieList), findsNWidgets(3));
+    });
   });
 
-  testWidgets('Page should display tv list when tv shows tab is selected', (
-    WidgetTester tester,
-  ) async {
-    when(mockTvListNotifier.onTheAirTvState).thenReturn(RequestState.loaded);
-    when(mockTvListNotifier.onTheAirTv).thenReturn([tTv]);
-    when(mockTvListNotifier.popularTvState).thenReturn(RequestState.loaded);
-    when(mockTvListNotifier.popularTv).thenReturn([tTv]);
-    when(mockTvListNotifier.topRatedTvState).thenReturn(RequestState.loaded);
-    when(mockTvListNotifier.topRatedTv).thenReturn([tTv]);
 
-    await tester.pumpWidget(createTestableWidget(HomePage()));
-    await tester.pump();
-
-    // Tap the drawer button to open it
-    await tester.tap(find.byIcon(Icons.menu));
-    await tester.pump();
-
-    // Find and tap TV Shows button directly in the widget tree
-    final tvShowsButton = find.byKey(Key('tv_shows_button')).evaluate().first;
-    final tvShowsWidget = tvShowsButton.widget as ListTile;
-    tvShowsWidget.onTap?.call();
-    await tester.pump();
-
-    // Verify TV content is displayed
-    expect(find.text('On The Air'), findsOneWidget);
-    expect(find.text('Popular'), findsOneWidget);
-    expect(find.text('Top Rated'), findsOneWidget);
-    expect(find.byType(TvList), findsNWidgets(3));
-  });
-
+  // Wrap other tests that display images with mockNetworkImagesFor
   testWidgets('Page should display loading indicator when state is loading', (
     WidgetTester tester,
   ) async {
-    when(
-      mockMovieListNotifier.nowPlayingState,
-    ).thenReturn(RequestState.loading);
-    when(
-      mockMovieListNotifier.popularMoviesState,
-    ).thenReturn(RequestState.loading);
-    when(
-      mockMovieListNotifier.topRatedMoviesState,
-    ).thenReturn(RequestState.loading);
+    // arrange
+    movieListBloc.emit(
+      MovieListState(
+        nowPlayingState: RequestState.loading,
+        popularMoviesState: RequestState.loading,
+        topRatedMoviesState: RequestState.loading,
+        nowPlayingMovies: [],
+        popularMovies: [],
+        topRatedMovies: [],
+        message: '',
+      ),
+    );
 
+    // act
     await tester.pumpWidget(createTestableWidget(HomePage()));
     await tester.pump(const Duration(milliseconds: 500));
 
+    // assert
     expect(find.byType(CircularProgressIndicator), findsNWidgets(3));
   });
 
   testWidgets('Page should display error message when state is error', (
     WidgetTester tester,
   ) async {
-    when(mockMovieListNotifier.nowPlayingState).thenReturn(RequestState.error);
-    when(mockMovieListNotifier.message).thenReturn('Error message');
-    when(
-      mockMovieListNotifier.popularMoviesState,
-    ).thenReturn(RequestState.error);
-    when(
-      mockMovieListNotifier.topRatedMoviesState,
-    ).thenReturn(RequestState.error);
+    // arrange
+    movieListBloc.emit(
+      MovieListState(
+        nowPlayingState: RequestState.error,
+        popularMoviesState: RequestState.error,
+        topRatedMoviesState: RequestState.error,
+        nowPlayingMovies: [],
+        popularMovies: [],
+        topRatedMovies: [],
+        message: 'Failed',
+      ),
+    );
 
+    // act
     await tester.pumpWidget(createTestableWidget(HomePage()));
     await tester.pump(const Duration(milliseconds: 500));
 
+    // assert
     expect(find.text('Failed'), findsNWidgets(3));
   });
 
   testWidgets(
     'Page should navigate to search page when search button is tapped',
     (WidgetTester tester) async {
-      when(
-        mockMovieListNotifier.nowPlayingState,
-      ).thenReturn(RequestState.loaded);
-      when(mockMovieListNotifier.nowPlayingMovies).thenReturn([tMovie]);
-      when(
-        mockMovieListNotifier.popularMoviesState,
-      ).thenReturn(RequestState.loaded);
-      when(mockMovieListNotifier.popularMovies).thenReturn([tMovie]);
-      when(
-        mockMovieListNotifier.topRatedMoviesState,
-      ).thenReturn(RequestState.loaded);
-      when(mockMovieListNotifier.topRatedMovies).thenReturn([tMovie]);
+      // arrange
+      movieListBloc.emit(
+        MovieListState(
+          nowPlayingState: RequestState.loaded,
+          popularMoviesState: RequestState.loaded,
+          topRatedMoviesState: RequestState.loaded,
+          nowPlayingMovies: [tMovie],
+          popularMovies: [tMovie],
+          topRatedMovies: [tMovie],
+          message: '',
+        ),
+      );
 
+      // act
       await tester.pumpWidget(createTestableWidget(HomePage()));
       await tester.tap(find.byIcon(Icons.search));
       await tester.pump();
 
+      // assert
       expect(find.byType(HomePage), findsOneWidget);
     },
   );

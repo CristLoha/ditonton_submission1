@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:ditonton_submission1/presentation/provider/movies/watchlist_movie_notifier.dart';
+import 'package:ditonton_submission1/features/movies/presentation/provider/movies/watchlist_movie_notifier.dart';
 import 'package:core/core.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';

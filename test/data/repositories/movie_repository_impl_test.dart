@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:home/data/models/movie_model.dart';
-import 'package:ditonton_submission1/data/repositories/movie_repository_impl.dart';
+import 'package:ditonton_submission1/features/movies/data/repositories/movie_repository_impl.dart';
 import 'package:home/domain/entities/movie.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';

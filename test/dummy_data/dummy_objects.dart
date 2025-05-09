@@ -1,9 +1,6 @@
-import 'package:ditonton_submission1/data/models/movie_detail_model.dart';
-import 'package:home/data/models/movie_table.dart';
-import 'package:ditonton_submission1/data/models/tv_detail_model.dart';
-import 'package:home/data/models/movie_model.dart';
-import 'package:ditonton_submission1/data/models/genre_model.dart';
-import 'package:home/domain/entities/genre.dart';
+import 'package:ditonton_submission1/features/movies/data/models/movie_detail_model.dart';
+import 'package:ditonton_submission1/features/tv/data/models/tv_detail_model.dart';
+import 'package:ditonton_submission1/features/tv/data/models/genre_model.dart';
 import 'package:home/home.dart';
 
 final testMovie = Movie(
