@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:core/core.dart';
 import '../bloc/top_rated/top_rated_movies_bloc.dart';
 import '../widgets/movie_card.dart';
 
@@ -30,18 +29,21 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<TopRatedMoviesBloc, TopRatedMoviesState>(
           builder: (context, state) {
-            if (state.state == RequestState.loading) {
+            if (state is TopRatedMoviesLoading) {
               return const Center(child: CircularProgressIndicator());
-            } else if (state.state == RequestState.loaded) {
+            } else if (state is TopRatedMoviesHasData) {
+              final result = state.result;
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final movie = state.movies[index];
+                  final movie = result[index];
                   return MovieCard(movie);
                 },
-                itemCount: state.movies.length,
+                itemCount: result.length,
               );
-            } else if (state.state == RequestState.error) {
-              return Center(child: Text(state.message));
+            } else if (state is TopRatedMoviesError) {
+              return Center(
+                child: Text(key: Key('error_message'), state.message),
+              );
             } else {
               return const Center(child: Text('No Data'));
             }

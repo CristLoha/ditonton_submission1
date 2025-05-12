@@ -53,9 +53,7 @@ void init() {
     () => TopRatedMoviesBloc(getTopRatedMovies: locator()),
   );
   locator.registerFactory(() => PopularMoviesBloc(getPopularMovies: locator()));
-  locator.registerFactory(
-    () => WatchlistMovieBloc(getWatchlistMovies: locator()),
-  );
+  locator.registerFactory(() => WatchlistMovieBloc(locator()));
 
   // bloc movie
   locator.registerFactory(

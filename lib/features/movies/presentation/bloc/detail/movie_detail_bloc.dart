@@ -113,7 +113,7 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
 
       final isAdded = await getWatchListStatus.execute(state.movie!.id);
 
-      // Penting: Pastikan handler belum selesai
+
       if (emit.isDone) return;
 
       emit(

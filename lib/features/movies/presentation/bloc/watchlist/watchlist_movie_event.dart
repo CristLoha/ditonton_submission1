@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-abstract class WatchlistMovieEvent extends Equatable {
+sealed class WatchlistMovieEvent extends Equatable {
   const WatchlistMovieEvent();
 
   @override

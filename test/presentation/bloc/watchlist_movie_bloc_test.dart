@@ -15,9 +15,7 @@ void main() {
 
   setUp(() {
     mockGetWatchlistMovies = MockGetWatchlistMovies();
-    watchlistMovieBloc = WatchlistMovieBloc(
-      getWatchlistMovies: mockGetWatchlistMovies,
-    );
+    watchlistMovieBloc = WatchlistMovieBloc(mockGetWatchlistMovies);
   });
 
   final tMovie = Movie(

@@ -1,28 +1,23 @@
 part of 'top_rated_movies_bloc.dart';
 
+
 class TopRatedMoviesState extends Equatable {
-  final RequestState state;
-  final List<Movie> movies;
-  final String message;
-
-  const TopRatedMoviesState({
-    this.state = RequestState.empty,
-    this.movies = const [],
-    this.message = '',
-  });
-
-  TopRatedMoviesState copyWith({
-    RequestState? state,
-    List<Movie>? movies,
-    String? message,
-  }) {
-    return TopRatedMoviesState(
-      state: state ?? this.state,
-      movies: movies ?? this.movies,
-      message: message ?? this.message,
-    );
-  }
+  const TopRatedMoviesState();
 
   @override
-  List<Object> get props => [state, movies, message];
+  List<Object> get props => [];
 }
+class TopRatedMoviesLoading extends TopRatedMoviesState {}
+class TopRatedMoviesError extends TopRatedMoviesState {
+  final String message;
+  const TopRatedMoviesError(this.message);
+  @override
+  List<Object> get props => [message];
+}
+class TopRatedMoviesHasData extends TopRatedMoviesState {
+  final List<Movie> result;
+  const TopRatedMoviesHasData(this.result);
+  @override
+  List<Object> get props => [result];
+}
+
