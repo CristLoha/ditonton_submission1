@@ -28,7 +28,6 @@ import 'package:ditonton_submission1/features/movies/presentation/bloc/detail/mo
 import 'package:ditonton_submission1/features/tv/presentation/bloc/search/search_tv_bloc.dart';
 import 'package:home/home.dart';
 import 'package:ditonton_submission1/features/tv/presentation/provider/tv/tv_detail_notifier.dart';
-import 'package:ditonton_submission1/features/movies/presentation/provider/movies/watchlist_movie_notifier.dart';
 import 'package:ditonton_submission1/features/tv/presentation/provider/tv/watchlist_tv_notifier.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
@@ -88,9 +87,7 @@ void init() {
   locator.registerFactory(() => SearchTvBloc(locator()));
   locator.registerFactory(() => PopularTvNotifier(locator()));
   locator.registerFactory(() => TopRatedTvNotifier(getTopRatedTv: locator()));
-  locator.registerFactory(
-    () => WatchlistMovieNotifier(getWatchlistMovies: locator()),
-  );
+
   locator.registerFactory(() => WatchlistTvNotifier(getWatchlistTv: locator()));
 
   // use case movie

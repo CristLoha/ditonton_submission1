@@ -25,7 +25,6 @@ import 'package:ditonton_submission1/features/tv/presentation/provider/tv/top_ra
 import 'package:home/home.dart';
 import 'package:ditonton_submission1/features/tv/presentation/provider/tv/tv_detail_notifier.dart';
 import 'package:ditonton_submission1/features/tv/presentation/provider/tv/tv_search_notifier.dart';
-import 'package:ditonton_submission1/features/movies/presentation/provider/movies/watchlist_movie_notifier.dart';
 import 'package:ditonton_submission1/features/tv/presentation/provider/tv/watchlist_tv_notifier.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
@@ -115,7 +114,6 @@ final testTvList = [tTv];
     PopularTvNotifier,
     GetPopularTv,
     TvSearchNotifier,
-    WatchlistMovieNotifier,
     WatchlistTvNotifier,
     DataConnectionChecker,
     http.Client,

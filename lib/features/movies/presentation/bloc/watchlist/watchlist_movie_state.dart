@@ -1,36 +1,27 @@
-import 'package:core/utils/state_enum.dart';
 import 'package:equatable/equatable.dart';
-import 'package:home/domain/entities/movie.dart';
+import 'package:home/home.dart';
 
 class WatchlistMovieState extends Equatable {
-  final List<Movie> watchlistMovies;
-  final RequestState watchlistState;
-  final String message;
-
-  const WatchlistMovieState({
-    required this.watchlistMovies,
-    required this.watchlistState,
-    required this.message,
-  });
-
-  WatchlistMovieState copyWith({
-    List<Movie>? watchlistMovies,
-    RequestState? watchlistState,
-    String? message,
-  }) {
-    return WatchlistMovieState(
-      watchlistMovies: watchlistMovies ?? this.watchlistMovies,
-      watchlistState: watchlistState ?? this.watchlistState,
-      message: message ?? this.message,
-    );
-  }
-
-  factory WatchlistMovieState.initial() => const WatchlistMovieState(
-        watchlistMovies: [],
-        watchlistState: RequestState.empty,
-        message: '',
-      );
+  const WatchlistMovieState();
 
   @override
-  List<Object> get props => [watchlistMovies, watchlistState, message];
+  List<Object> get props => [];
+}
+
+class WatchlistMovieEmpty extends WatchlistMovieState {}
+
+class WatchlistMovieLoading extends WatchlistMovieState {}
+
+class WatchlistMovieError extends WatchlistMovieState {
+  final String message;
+  const WatchlistMovieError(this.message);
+  @override
+  List<Object> get props => [message];
+}
+
+class WatchlistMovieHasData extends WatchlistMovieState {
+  final List<Movie> result;
+  const WatchlistMovieHasData(this.result);
+  @override
+  List<Object> get props => [result];
 }

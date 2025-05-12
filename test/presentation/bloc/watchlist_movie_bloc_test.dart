@@ -9,7 +9,6 @@ import 'package:home/home.dart';
 import 'package:mockito/mockito.dart';
 import '../../helpers/test_helper.mocks.dart';
 
-
 void main() {
   late WatchlistMovieBloc watchlistMovieBloc;
   late MockGetWatchlistMovies mockGetWatchlistMovies;
@@ -40,27 +39,21 @@ void main() {
   final tMovieList = <Movie>[tMovie];
 
   test('initial state should be empty', () {
-    expect(watchlistMovieBloc.state, WatchlistMovieState.initial());
+    expect(watchlistMovieBloc.state, WatchlistMovieEmpty());
   });
 
   group('Get Watchlist Movies', () {
     blocTest<WatchlistMovieBloc, WatchlistMovieState>(
       'Should emit [Loading, Loaded] when data is gotten successfully',
       build: () {
-        when(mockGetWatchlistMovies.execute())
-            .thenAnswer((_) async => Right(tMovieList));
+        when(
+          mockGetWatchlistMovies.execute(),
+        ).thenAnswer((_) async => Right(tMovieList));
         return watchlistMovieBloc;
       },
-      act: (bloc) => bloc.add(FetchWatchlistMovies()),
-      expect: () => [
-        WatchlistMovieState.initial().copyWith(
-          watchlistState: RequestState.loading,
-        ),
-        WatchlistMovieState.initial().copyWith(
-          watchlistState: RequestState.loaded,
-          watchlistMovies: tMovieList,
-        ),
-      ],
+      act: (bloc) => bloc.add(FetchWatchlistMoviesEvent()),
+      expect:
+          () => [WatchlistMovieLoading(), WatchlistMovieHasData(tMovieList)],
       verify: (bloc) {
         verify(mockGetWatchlistMovies.execute());
       },
@@ -69,20 +62,17 @@ void main() {
     blocTest<WatchlistMovieBloc, WatchlistMovieState>(
       'Should emit [Loading, Error] when get data is unsuccessful',
       build: () {
-        when(mockGetWatchlistMovies.execute())
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+        when(
+          mockGetWatchlistMovies.execute(),
+        ).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
         return watchlistMovieBloc;
       },
-      act: (bloc) => bloc.add(FetchWatchlistMovies()),
-      expect: () => [
-        WatchlistMovieState.initial().copyWith(
-          watchlistState: RequestState.loading,
-        ),
-        WatchlistMovieState.initial().copyWith(
-          watchlistState: RequestState.error,
-          message: 'Server Failure',
-        ),
-      ],
+      act: (bloc) => bloc.add(FetchWatchlistMoviesEvent()),
+      expect:
+          () => [
+            WatchlistMovieLoading(),
+            WatchlistMovieError('Server Failure'),
+          ],
       verify: (bloc) {
         verify(mockGetWatchlistMovies.execute());
       },
