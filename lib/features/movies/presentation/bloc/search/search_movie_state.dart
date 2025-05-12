@@ -7,12 +7,12 @@ sealed class SearchMovieState extends Equatable {
   List<Object> get props => [];
 }
 
-class SearchEmpty extends SearchMovieState {}
-class SearchLoading extends SearchMovieState {}
-class SearchError extends SearchMovieState {
+class SearchMovieEmpty extends SearchMovieState {}
+class SearchMovieLoading extends SearchMovieState {}
+class SearchMovieError extends SearchMovieState {
   final String message;
 
-  const SearchError(this.message);
+  const SearchMovieError(this.message);
 
   @override
   List<Object> get props => [message];

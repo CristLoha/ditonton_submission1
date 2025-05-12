@@ -29,7 +29,7 @@ class MovieSearchPage extends StatelessWidget {
             const SizedBox(height: 16),
             BlocBuilder<SearchMovieBloc, SearchMovieState>(
               builder: (context, state) {
-                if (state is SearchLoading) {
+                if (state is SearchMovieLoading) {
                   return const Center(child: CircularProgressIndicator());
                 } else if (state is SearchHasData) {
                   final result = state.result;
@@ -44,7 +44,7 @@ class MovieSearchPage extends StatelessWidget {
                       itemCount: result.length,
                     ),
                   );
-                } else if (state is SearchError) {
+                } else if (state is SearchMovieError) {
                   return Expanded(
                     child: Center(
                       child: Column(

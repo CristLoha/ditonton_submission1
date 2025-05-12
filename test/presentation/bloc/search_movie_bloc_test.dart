@@ -36,7 +36,7 @@ void main() {
   final tQuery = 'spiderman';
 
   test('initial state should be empty', () {
-    expect(searchBloc.state, SearchEmpty());
+    expect(searchBloc.state, SearchMovieEmpty());
   });
 
   group('SearchMovieBloc', () {
@@ -50,7 +50,7 @@ void main() {
       },
       act: (bloc) => bloc.add(OnQueryChanged(tQuery)),
       wait: const Duration(milliseconds: 500),
-      expect: () => [SearchLoading(), SearchHasData(testMovieList)],
+      expect: () => [SearchMovieLoading(), SearchHasData(testMovieList)],
       verify: (bloc) {
         verify(mockSearchMovies.execute(tQuery));
       },

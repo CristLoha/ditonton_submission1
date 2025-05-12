@@ -41,7 +41,7 @@ void main() {
 
   testWidgets('Page should display center progress bar when loading',
       (WidgetTester tester) async {
-    searchBloc.emit(SearchLoading());
+    searchBloc.emit(SearchMovieLoading());
 
     await tester.pumpWidget(makeTestableWidget(MovieSearchPage()));
     await tester.enterText(find.byType(TextField), 'Spider-Man');
@@ -64,7 +64,7 @@ void main() {
 
   testWidgets('Page should display text with message when Error',
       (WidgetTester tester) async {
-    searchBloc.emit(SearchError('Error message'));
+    searchBloc.emit(SearchMovieError('Error message'));
 
     await tester.pumpWidget(makeTestableWidget(MovieSearchPage()));
     await tester.enterText(find.byType(TextField), 'Spider-Man');
@@ -76,7 +76,7 @@ void main() {
 
   testWidgets('Page should display empty container when search is empty',
       (WidgetTester tester) async {
-    searchBloc.emit(SearchEmpty());
+    searchBloc.emit(SearchMovieEmpty());
 
     await tester.pumpWidget(makeTestableWidget(MovieSearchPage()));
     await tester.enterText(find.byType(TextField), '');

@@ -1,8 +1,7 @@
-import 'package:core/core.dart';
-import 'package:ditonton_submission1/features/tv/presentation/provider/tv/tv_search_notifier.dart';
+import 'package:ditonton_submission1/features/tv/presentation/bloc/search/search_tv_bloc.dart';
 import 'package:ditonton_submission1/features/tv/presentation/widgets/media_card_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TvSearchPage extends StatelessWidget {
   const TvSearchPage({super.key});
@@ -19,10 +18,7 @@ class TvSearchPage extends StatelessWidget {
             TextField(
               onChanged: (query) {
                 if (query.isNotEmpty) {
-                  Provider.of<TvSearchNotifier>(
-                    context,
-                    listen: false,
-                  ).fetchTvSearch(query);
+                  context.read<SearchTvBloc>().add(OnQueryChanged(query));
                 }
               },
               decoration: const InputDecoration(
@@ -33,12 +29,12 @@ class TvSearchPage extends StatelessWidget {
               textInputAction: TextInputAction.search,
             ),
             const SizedBox(height: 16),
-            Consumer<TvSearchNotifier>(
-              builder: (context, data, child) {
-                if (data.state == RequestState.loading) {
+            BlocBuilder<SearchTvBloc, SearchTvState>(
+              builder: (context, state) {
+                if (state is SearchTvLoading) {
                   return const Center(child: CircularProgressIndicator());
-                } else if (data.state == RequestState.loaded) {
-                  final result = data.searchResult;
+                } else if (state is SearchTvHasData) {
+                  final result = state.result;
                   return Expanded(
                     child: ListView.builder(
                       padding: const EdgeInsets.all(8),
@@ -49,20 +45,19 @@ class TvSearchPage extends StatelessWidget {
                       itemCount: result.length,
                     ),
                   );
-                } else if (data.state == RequestState.error) {
+                } else if (state is SearchTvError) {
                   return Expanded(
                     child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(data.message, key: const Key('error_message')),
+                          Text(state.message, key: const Key('error_message')),
                           const SizedBox(height: 8),
                           ElevatedButton(
                             onPressed: () {
-                              Provider.of<TvSearchNotifier>(
-                                context,
-                                listen: false,
-                              ).fetchTvSearch('');
+                              context.read<SearchTvBloc>().add(
+                                OnQueryChanged(''),
+                              );
                             },
                             child: const Text('Try Again'),
                           ),
