@@ -4,7 +4,6 @@ import 'package:ditonton_submission1/features/movies/presentation/bloc/popular_m
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home/home.dart';
-import 'package:home/presentation/bloc/movie_list/movie_list_event.dart';
 
 class PopularMoviesPage extends StatefulWidget {
   const PopularMoviesPage({super.key});
@@ -19,7 +18,7 @@ class PopularMoviesPageState extends State<PopularMoviesPage> {
     super.initState();
     Future.microtask(() {
       if (!mounted) return;
-      context.read<MovieListBloc>().add(FetchMovieListPopularMovies());
+      context.read<PopularMoviesBloc>().add(FetchPopularMoviesData());
     });
   }
 
@@ -35,7 +34,6 @@ class PopularMoviesPageState extends State<PopularMoviesPage> {
               return const Center(child: CircularProgressIndicator());
             } else if (state is PopularMoviesHasData) {
               final result = state.result;
-
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final movie = result[index];

@@ -12,7 +12,6 @@ class TopRatedMoviesBloc
     : super(const TopRatedMoviesState()) {
     on<FetchTopRatedMovies>((event, emit) async {
       emit(TopRatedMoviesLoading());
-
       final result = await getTopRatedMovies.execute();
       result.fold(
         (failure) => emit(TopRatedMoviesError(failure.message)),
