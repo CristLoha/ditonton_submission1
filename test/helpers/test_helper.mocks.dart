@@ -227,6 +227,40 @@ class MockGetTopRatedMovies extends _i1.Mock implements _i7.GetTopRatedMovies {
           as _i17.Future<_i3.Either<_i18.Failure, List<_i19.Movie>>>);
 }
 
+/// A class which mocks [GetPopularMovies].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetPopularMovies extends _i1.Mock implements _i7.GetPopularMovies {
+  MockGetPopularMovies() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.MovieRepository get repository =>
+      (super.noSuchMethod(
+            Invocation.getter(#repository),
+            returnValue: _FakeMovieRepository_0(
+              this,
+              Invocation.getter(#repository),
+            ),
+          )
+          as _i2.MovieRepository);
+
+  @override
+  _i17.Future<_i3.Either<_i18.Failure, List<_i19.Movie>>> execute() =>
+      (super.noSuchMethod(
+            Invocation.method(#execute, []),
+            returnValue:
+                _i17.Future<_i3.Either<_i18.Failure, List<_i19.Movie>>>.value(
+                  _FakeEither_1<_i18.Failure, List<_i19.Movie>>(
+                    this,
+                    Invocation.method(#execute, []),
+                  ),
+                ),
+          )
+          as _i17.Future<_i3.Either<_i18.Failure, List<_i19.Movie>>>);
+}
+
 /// A class which mocks [GetTopRatedTv].
 ///
 /// See the documentation for Mockito's code generation for more information.

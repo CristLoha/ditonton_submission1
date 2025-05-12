@@ -87,6 +87,7 @@ final testTvList = [tTv];
 @GenerateMocks(
   [
     GetTopRatedMovies,
+    GetPopularMovies,
     GetTopRatedTv,
     MovieRepository,
     TvRepository,

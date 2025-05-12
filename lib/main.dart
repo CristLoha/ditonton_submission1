@@ -24,6 +24,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:home/presentation/bloc/home/home_bloc.dart';
 import 'package:provider/provider.dart';
+import 'features/movies/presentation/bloc/popular_movies/popular_movies_bloc.dart';
 import 'features/tv/presentation/provider/tv/popular_tv_notifier.dart';
 import 'features/tv/presentation/provider/tv/top_rated_tv_notifier.dart';
 

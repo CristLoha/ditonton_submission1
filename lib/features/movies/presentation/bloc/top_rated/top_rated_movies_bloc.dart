@@ -8,7 +8,7 @@ class TopRatedMoviesBloc
     extends Bloc<TopRatedMoviesEvent, TopRatedMoviesState> {
   final GetTopRatedMovies getTopRatedMovies;
 
-  TopRatedMoviesBloc({required this.getTopRatedMovies})
+  TopRatedMoviesBloc(this.getTopRatedMovies)
     : super(const TopRatedMoviesState()) {
     on<FetchTopRatedMovies>((event, emit) async {
       emit(TopRatedMoviesLoading());

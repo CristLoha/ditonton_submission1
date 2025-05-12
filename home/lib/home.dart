@@ -3,7 +3,6 @@ export 'domain/usecases/get_popular_movies.dart';
 export 'domain/usecases/get_popular_tv.dart';
 export 'domain/usecases/get_on_the_air_tv.dart';
 export 'presentation/bloc/movie_list/movie_list_bloc.dart';
-export 'presentation/bloc/popular_movies/popular_movies_bloc.dart';
 export 'presentation/bloc/tv_list/tv_list_bloc.dart';
 export 'presentation/pages/home_page.dart';
 export 'domain/repository/movie_repository.dart';

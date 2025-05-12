@@ -3,8 +3,6 @@ import 'package:core/core.dart';
 import 'package:home/domain/usecases/get_now_playing_movies.dart';
 import 'package:home/domain/usecases/get_popular_movies.dart';
 import 'package:home/domain/usecases/get_top_rated_movies.dart';
-// Remove this import as it's causing the conflict
-// import 'package:home/presentation/bloc/popular_movies/popular_movies_bloc.dart';
 import 'movie_list_event.dart';
 import 'movie_list_state.dart';
 

@@ -16,9 +16,7 @@ void main() {
 
   setUp(() {
     mockGetTopRatedMovies = MockGetTopRatedMovies();
-    topRatedMoviesBloc = TopRatedMoviesBloc(
-      getTopRatedMovies: mockGetTopRatedMovies,
-    );
+    topRatedMoviesBloc = TopRatedMoviesBloc(mockGetTopRatedMovies);
   });
 
   Widget createTestableWidget(Widget body) {
@@ -79,14 +77,29 @@ void main() {
     WidgetTester tester,
   ) async {
     topRatedMoviesBloc.emit(TopRatedMoviesError('Error message'));
-    when(mockGetTopRatedMovies.execute()).thenAnswer(
-      (_) async => Left(ServerFailure('Error message')),
-    );
+    when(
+      mockGetTopRatedMovies.execute(),
+    ).thenAnswer((_) async => Left(ServerFailure('Error message')));
 
     final textFinder = find.byKey(Key('error_message'));
 
     await tester.pumpWidget(createTestableWidget(TopRatedMoviesPage()));
 
     expect(textFinder, findsOneWidget);
+  });
+
+  testWidgets('Page should display text no data', (WidgetTester tester) async {
+    topRatedMoviesBloc.emit(TopRatedMoviesState());
+    when(mockGetTopRatedMovies.execute()).thenAnswer((_) async => Right([]));
+
+    await tester.pumpWidget(createTestableWidget(TopRatedMoviesPage()));
+    final textFinder = find.byKey(Key('no_data_message'));
+    final centerFinder = find.byType(Center);
+
+    await tester.pump();
+
+    expect(centerFinder, findsOneWidget);
+    expect(textFinder, findsOneWidget);
+    expect(find.text('No Data'), findsOneWidget);
   });
 }

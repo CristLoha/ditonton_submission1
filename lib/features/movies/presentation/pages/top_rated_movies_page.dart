@@ -45,7 +45,9 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
                 child: Text(key: Key('error_message'), state.message),
               );
             } else {
-              return const Center(child: Text('No Data'));
+              return const Center(
+                child: Text(key: Key('no_data_message'), 'No Data'),
+              );
             }
           },
         ),

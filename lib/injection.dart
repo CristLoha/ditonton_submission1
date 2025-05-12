@@ -31,6 +31,7 @@ import 'package:ditonton_submission1/features/tv/presentation/provider/tv/tv_det
 import 'package:ditonton_submission1/features/tv/presentation/provider/tv/watchlist_tv_notifier.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
+import 'features/movies/presentation/bloc/popular_movies/popular_movies_bloc.dart';
 import 'features/tv/presentation/provider/tv/popular_tv_notifier.dart';
 import 'features/tv/presentation/provider/tv/top_rated_tv_notifier.dart';
 import 'package:ditonton_submission1/features/movies/presentation/bloc/top_rated/top_rated_movies_bloc.dart';
@@ -49,10 +50,8 @@ void init() {
       getMovieRecommendations: locator(),
     ),
   );
-  locator.registerFactory(
-    () => TopRatedMoviesBloc(getTopRatedMovies: locator()),
-  );
-  locator.registerFactory(() => PopularMoviesBloc(getPopularMovies: locator()));
+  locator.registerFactory(() => TopRatedMoviesBloc(locator()));
+  locator.registerFactory(() => PopularMoviesBloc(locator()));
   locator.registerFactory(() => WatchlistMovieBloc(locator()));
 
   // bloc movie

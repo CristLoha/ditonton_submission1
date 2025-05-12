@@ -1,12 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
+import 'package:ditonton_submission1/features/movies/presentation/bloc/popular_movies/popular_movies_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home/home.dart';
 import 'package:home/presentation/bloc/movie_list/movie_list_event.dart';
-import 'package:home/presentation/bloc/movie_list/movie_list_state.dart';
-
-
 
 class PopularMoviesPage extends StatefulWidget {
   const PopularMoviesPage({super.key});
@@ -21,7 +19,7 @@ class PopularMoviesPageState extends State<PopularMoviesPage> {
     super.initState();
     Future.microtask(() {
       if (!mounted) return;
-      context.read<MovieListBloc>().add( FetchMovieListPopularMovies());  // Ubah ke FetchMovieListPopularMovies
+      context.read<MovieListBloc>().add(FetchMovieListPopularMovies());
     });
   }
 
@@ -31,19 +29,21 @@ class PopularMoviesPageState extends State<PopularMoviesPage> {
       appBar: AppBar(title: const Text('Popular Movies')),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: BlocBuilder<MovieListBloc, MovieListState>(
+        child: BlocBuilder<PopularMoviesBloc, PopularMoviesState>(
           builder: (context, state) {
-            if (state.popularMoviesState == RequestState.loading) {
+            if (state is PopularMoviesLoading) {
               return const Center(child: CircularProgressIndicator());
-            } else if (state.popularMoviesState == RequestState.loaded) {
+            } else if (state is PopularMoviesHasData) {
+              final result = state.result;
+
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final movie = state.popularMovies[index];
+                  final movie = result[index];
                   return MediaCard(movie);
                 },
-                itemCount: state.popularMovies.length,
+                itemCount: result.length,
               );
-            } else if (state.popularMoviesState == RequestState.error) {
+            } else if (state is PopularMoviesError) {
               return Center(
                 key: const Key('error_message'),
                 child: Text(state.message),
@@ -69,11 +69,7 @@ class MediaCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 4),
       child: InkWell(
         onTap: () {
-          Navigator.pushNamed(
-            context,
-            movieDetailRoute,
-            arguments: movie.id,
-          );
+          Navigator.pushNamed(context, movieDetailRoute, arguments: movie.id);
         },
         child: Stack(
           alignment: Alignment.bottomLeft,
@@ -105,18 +101,15 @@ class MediaCard extends StatelessWidget {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(
-                left: 16,
-                bottom: 16,
-              ),
+              margin: const EdgeInsets.only(left: 16, bottom: 16),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: CachedNetworkImage(
                   imageUrl: '$baseImageUrl${movie.posterPath}',
                   width: 80,
-                  placeholder: (context, url) => const Center(
-                    child: CircularProgressIndicator(),
-                  ),
+                  placeholder:
+                      (context, url) =>
+                          const Center(child: CircularProgressIndicator()),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
