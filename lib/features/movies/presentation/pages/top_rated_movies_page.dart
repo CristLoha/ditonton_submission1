@@ -1,8 +1,7 @@
+import 'package:ditonton_submission1/features/tv/presentation/widgets/media_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/top_rated/top_rated_movies_bloc.dart';
-import '../widgets/movie_card.dart';
-
 class TopRatedMoviesPage extends StatefulWidget {
   const TopRatedMoviesPage({super.key});
 
@@ -36,7 +35,7 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final movie = result[index];
-                  return MovieCard(movie);
+                  return MediaCardList(media: movie, isMovie: true);
                 },
                 itemCount: result.length,
               );
@@ -44,10 +43,12 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
               return Center(
                 child: Text(key: Key('error_message'), state.message),
               );
-            } else {
+            } else if (state is TopRatedMoviesEmpty) {
               return const Center(
-                child: Text(key: Key('no_data_message'), 'No Data'),
+                child: Text(key: Key('empty_message'), 'No Data'),
               );
+            } else {
+              return const Center(child: Text('Something went wrong'));
             }
           },
         ),

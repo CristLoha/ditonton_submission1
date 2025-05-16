@@ -1,9 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:core/core.dart';
-import 'package:ditonton_submission1/features/movies/presentation/bloc/popular_movies/popular_movies_bloc.dart';
+import 'package:ditonton_submission1/features/movies/presentation/bloc/popular/popular_movies_bloc.dart';
+import 'package:ditonton_submission1/features/tv/presentation/widgets/media_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:home/home.dart';
 
 class PopularMoviesPage extends StatefulWidget {
   const PopularMoviesPage({super.key});
@@ -37,7 +35,7 @@ class PopularMoviesPageState extends State<PopularMoviesPage> {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final movie = result[index];
-                  return MediaCard(movie);
+                  return MediaCardList(media: movie, isMovie: true);
                 },
                 itemCount: result.length,
               );
@@ -46,73 +44,15 @@ class PopularMoviesPageState extends State<PopularMoviesPage> {
                 key: const Key('error_message'),
                 child: Text(state.message),
               );
+            } else if (state is PopularMoviesEmpty) {
+              return const Center(
+                key: Key('empty_message'),
+                child: Text('No Data'),
+              );
             } else {
-              return const Center(child: Text('Failed'));
+              return const Center(child: Text('Something went wrong'));
             }
           },
-        ),
-      ),
-    );
-  }
-}
-
-class MediaCard extends StatelessWidget {
-  final Movie movie;
-
-  const MediaCard(this.movie, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 4),
-      child: InkWell(
-        onTap: () {
-          Navigator.pushNamed(context, movieDetailRoute, arguments: movie.id);
-        },
-        child: Stack(
-          alignment: Alignment.bottomLeft,
-          children: [
-            Card(
-              child: Container(
-                margin: const EdgeInsets.only(
-                  left: 16 + 80 + 16,
-                  bottom: 8,
-                  right: 8,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      movie.title ?? '-',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: kHeading6,
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      movie.overview ?? '-',
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(left: 16, bottom: 16),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: CachedNetworkImage(
-                  imageUrl: '$baseImageUrl${movie.posterPath}',
-                  width: 80,
-                  placeholder:
-                      (context, url) =>
-                          const Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                ),
-              ),
-            ),
-          ],
         ),
       ),
     );

@@ -25,13 +25,14 @@ import 'package:ditonton_submission1/features/movies/domain/usecases/search_movi
 import 'package:ditonton_submission1/features/tv/domain/usecases/tv/search_tv.dart';
 import 'package:ditonton_submission1/features/movies/presentation/bloc/search/search_movie_bloc.dart';
 import 'package:ditonton_submission1/features/movies/presentation/bloc/detail/movie_detail_bloc.dart';
+import 'package:ditonton_submission1/features/tv/presentation/bloc/popular/popular_tv_bloc.dart';
 import 'package:ditonton_submission1/features/tv/presentation/bloc/search/search_tv_bloc.dart';
 import 'package:home/home.dart';
 import 'package:ditonton_submission1/features/tv/presentation/provider/tv/tv_detail_notifier.dart';
 import 'package:ditonton_submission1/features/tv/presentation/provider/tv/watchlist_tv_notifier.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
-import 'features/movies/presentation/bloc/popular_movies/popular_movies_bloc.dart';
+import 'features/movies/presentation/bloc/popular/popular_movies_bloc.dart';
 import 'features/tv/presentation/provider/tv/popular_tv_notifier.dart';
 import 'features/tv/presentation/provider/tv/top_rated_tv_notifier.dart';
 import 'package:ditonton_submission1/features/movies/presentation/bloc/top_rated/top_rated_movies_bloc.dart';
@@ -82,7 +83,7 @@ void init() {
   );
 
   locator.registerFactory(() => SearchTvBloc(locator()));
-  locator.registerFactory(() => PopularTvNotifier(locator()));
+  locator.registerFactory(() => PopularTvBloc(locator()));
   locator.registerFactory(() => TopRatedTvNotifier(getTopRatedTv: locator()));
 
   locator.registerFactory(() => WatchlistTvNotifier(getWatchlistTv: locator()));

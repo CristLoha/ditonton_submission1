@@ -1,7 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:core/error/failure.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ditonton_submission1/features/movies/presentation/bloc/popular_movies/popular_movies_bloc.dart';
+import 'package:ditonton_submission1/features/movies/presentation/bloc/popular/popular_movies_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import '../../dummy_data/dummy_objects.dart';
@@ -17,7 +17,7 @@ void main() {
   });
 
     test('initial state should be empty', () {
-    expect(popularMoviesBloc.state, PopularMoviesState());
+    expect(popularMoviesBloc.state, PopularMoviesEmpty());
   });
 
   group('get popular movies', () {
@@ -42,14 +42,14 @@ void main() {
       build: () {
         when(
           mockGetPopularMovies.execute(),
-        ).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+        ).thenAnswer((_) async => Left(ServerFailure('Error message')));
         return popularMoviesBloc;
       },
       act: (bloc) => bloc.add(FetchPopularMoviesData()),
       expect:
           () => [
             PopularMoviesLoading(),
-            const PopularMoviesError('Server Failure'),
+            const PopularMoviesError('Error message'),
           ],
       verify: (_) {
         verify(mockGetPopularMovies.execute());

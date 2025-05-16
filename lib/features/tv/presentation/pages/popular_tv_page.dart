@@ -1,8 +1,7 @@
-import 'package:core/core.dart';
-import 'package:ditonton_submission1/features/tv/presentation/provider/tv/popular_tv_notifier.dart';
+import 'package:ditonton_submission1/features/tv/presentation/bloc/popular/popular_tv_bloc.dart';
 import 'package:ditonton_submission1/features/tv/presentation/widgets/media_card_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PopularTvPage extends StatefulWidget {
   const PopularTvPage({super.key});
@@ -17,7 +16,7 @@ class _PopularTvPageState extends State<PopularTvPage> {
     super.initState();
     Future.microtask(() {
       if (!mounted) return;
-      Provider.of<PopularTvNotifier>(context, listen: false).fetchPopularTv();
+      context.read<PopularTvBloc>().add(FetchPopularTvData());
     });
   }
 
@@ -27,41 +26,38 @@ class _PopularTvPageState extends State<PopularTvPage> {
       appBar: AppBar(title: Text('Popular TV Shows')),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<PopularTvNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.loading) {
+        child: BlocBuilder<PopularTvBloc, PopularTvState>(
+          builder: (context, state) {
+            if (state is PopularTvLoading) {
               return Center(child: CircularProgressIndicator());
-            } else if (data.state == RequestState.error) {
+            } else if (state is PopularTvError) {
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(data.message),
+                    Text(state.message),
                     SizedBox(height: 16),
                     ElevatedButton(
-                      onPressed: () => data.fetchPopularTv(),
+                      onPressed: () {
+                        context.read<PopularTvBloc>().add(FetchPopularTvData());
+                      },
                       child: Text('Retry'),
                     ),
                   ],
                 ),
               );
-            } else if (data.state == RequestState.loaded) {
-              if (data.tv.isEmpty) {
-                return Center(child: Text('No TV shows found'));
-              }
+            } else if (state is PopularTvHasData) {
+              final data = state.result;
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final tv = data.tv[index];
-                  return InkWell(
-                    onTap: () {
-                      Navigator.of(
-                        context,
-                      ).pushNamed(tvDetailRoute, arguments: tv.id);
-                    },
-                    child: MediaCardList(media: tv, isMovie: false),
-                  );
+                  final tv = data[index];
+                  return MediaCardList(media: tv, isMovie: false);
                 },
-                itemCount: data.tv.length,
+                itemCount: data.length,
+              );
+            } else if (state is PopularTvEmpty) {
+              return Center(
+                child: Text(key: Key('empty_message'), 'No TV shows found'),
               );
             } else {
               return Container();

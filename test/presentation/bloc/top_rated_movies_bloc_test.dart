@@ -36,7 +36,7 @@ void main() {
   final tMovieList = [tMovie];
 
   test('initial state should be empty', () {
-    expect(topRatedMoviesBloc.state, const TopRatedMoviesState());
+    expect(topRatedMoviesBloc.state, TopRatedMoviesEmpty());
   });
 
   group('Get Top Rated Movies', () {

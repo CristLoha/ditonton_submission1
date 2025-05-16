@@ -88,12 +88,12 @@ void main() {
     expect(textFinder, findsOneWidget);
   });
 
-  testWidgets('Page should display text no data', (WidgetTester tester) async {
-    topRatedMoviesBloc.emit(TopRatedMoviesState());
+  testWidgets('Page should display text No Data', (WidgetTester tester) async {
+    topRatedMoviesBloc.emit(TopRatedMoviesEmpty());
     when(mockGetTopRatedMovies.execute()).thenAnswer((_) async => Right([]));
 
     await tester.pumpWidget(createTestableWidget(TopRatedMoviesPage()));
-    final textFinder = find.byKey(Key('no_data_message'));
+    final textFinder = find.byKey(Key('empty_message'));
     final centerFinder = find.byType(Center);
 
     await tester.pump();
