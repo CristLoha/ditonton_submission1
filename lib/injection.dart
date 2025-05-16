@@ -33,7 +33,6 @@ import 'package:ditonton_submission1/features/tv/presentation/provider/tv/watchl
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 import 'features/movies/presentation/bloc/popular/popular_movies_bloc.dart';
-import 'features/tv/presentation/provider/tv/popular_tv_notifier.dart';
 import 'features/tv/presentation/provider/tv/top_rated_tv_notifier.dart';
 import 'package:ditonton_submission1/features/movies/presentation/bloc/top_rated/top_rated_movies_bloc.dart';
 
