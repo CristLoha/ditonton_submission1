@@ -5,7 +5,7 @@ import 'package:ditonton_submission1/features/movies/presentation/bloc/top_rated
 import 'package:flutter_test/flutter_test.dart';
 import 'package:home/home.dart';
 import 'package:mockito/mockito.dart';
-import '../../helpers/test_helper.mocks.dart';
+import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late TopRatedMoviesBloc topRatedMoviesBloc;

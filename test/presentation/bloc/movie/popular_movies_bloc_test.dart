@@ -4,8 +4,8 @@ import 'package:dartz/dartz.dart';
 import 'package:ditonton_submission1/features/movies/presentation/bloc/popular/popular_movies_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import '../../dummy_data/dummy_objects.dart';
-import '../../helpers/test_helper.mocks.dart';
+import '../../../dummy_data/dummy_objects.dart';
+import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late PopularMoviesBloc popularMoviesBloc;

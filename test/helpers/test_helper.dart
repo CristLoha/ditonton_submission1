@@ -6,26 +6,24 @@ import 'package:ditonton_submission1/features/movies/data/datasources/movie_loca
 import 'package:ditonton_submission1/features/movies/data/datasources/movie_remote_data_source.dart';
 import 'package:ditonton_submission1/features/tv/data/datasources/tv_local_data_source.dart';
 import 'package:ditonton_submission1/features/tv/data/datasources/tv_remote_data_source.dart';
-import 'package:ditonton_submission1/features/tv/presentation/provider/tv/popular_tv_notifier.dart';
 import 'package:ditonton_submission1/features/movies/domain/usecases/get_movie_detail.dart';
 import 'package:ditonton_submission1/features/movies/domain/usecases/get_movie_recommendations.dart';
 import 'package:ditonton_submission1/features/movies/domain/usecases/get_watchlist_movies.dart';
 import 'package:ditonton_submission1/features/movies/domain/usecases/get_watchlist_status_movie.dart';
-import 'package:ditonton_submission1/features/tv/domain/usecases/tv/get_watchlist_tv.dart';
+import 'package:ditonton_submission1/features/tv/domain/usecases/get_watchlist_tv.dart';
 import 'package:ditonton_submission1/features/movies/domain/usecases/save_watchlist_movie.dart';
 import 'package:ditonton_submission1/features/movies/domain/usecases/remove_watchlist_movie.dart';
 import 'package:ditonton_submission1/features/movies/domain/usecases/search_movies.dart';
-import 'package:ditonton_submission1/features/tv/domain/usecases/tv/get_tv_detail.dart';
-import 'package:ditonton_submission1/features/tv/domain/usecases/tv/get_tv_recommendations.dart';
-import 'package:ditonton_submission1/features/tv/domain/usecases/tv/search_tv.dart';
-import 'package:ditonton_submission1/features/tv/domain/usecases/tv/get_watchlist_status_tv.dart';
-import 'package:ditonton_submission1/features/tv/domain/usecases/tv/save_watchlist_tv.dart';
-import 'package:ditonton_submission1/features/tv/domain/usecases/tv/remove_watchlist_tv.dart';
+import 'package:ditonton_submission1/features/tv/domain/usecases/get_tv_detail.dart';
+import 'package:ditonton_submission1/features/tv/domain/usecases/get_tv_recommendations.dart';
+import 'package:ditonton_submission1/features/tv/domain/usecases/search_tv.dart';
+import 'package:ditonton_submission1/features/tv/domain/usecases/get_watchlist_status_tv.dart';
+import 'package:ditonton_submission1/features/tv/domain/usecases/save_watchlist_tv.dart';
+import 'package:ditonton_submission1/features/tv/domain/usecases/remove_watchlist_tv.dart';
 import 'package:ditonton_submission1/features/tv/presentation/provider/tv/top_rated_tv_notifier.dart';
 import 'package:home/home.dart';
 import 'package:ditonton_submission1/features/tv/presentation/provider/tv/tv_detail_notifier.dart';
 import 'package:ditonton_submission1/features/tv/presentation/provider/tv/tv_search_notifier.dart';
-import 'package:ditonton_submission1/features/tv/presentation/provider/tv/watchlist_tv_notifier.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
 
@@ -83,7 +81,6 @@ final tTv = Tv(
 
 final testTvList = [tTv];
 
-// Mock classes
 @GenerateMocks(
   [
     GetTopRatedMovies,
@@ -100,11 +97,11 @@ final testTvList = [tTv];
     SaveWatchlistMovie,
     RemoveWatchlistMovie,
     GetWatchlistMovies,
-    GetWatchListTv,
     SearchMovies,
     SearchTv,
     GetTvDetail,
     GetTvRecommendations,
+     GetWatchListTv,
     GetWatchListStatusTv,
     SaveWatchlistTv,
     RemoveWatchlistTv,
@@ -112,10 +109,8 @@ final testTvList = [tTv];
     TvDatabaseHelper,
     TopRatedTvNotifier,
     TvDetailNotifier,
-    PopularTvNotifier,
     GetPopularTv,
     TvSearchNotifier,
-    WatchlistTvNotifier,
     DataConnectionChecker,
     http.Client,
   ],

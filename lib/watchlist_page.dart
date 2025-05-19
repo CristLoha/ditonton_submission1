@@ -2,7 +2,7 @@ import 'package:core/core.dart';
 import 'package:ditonton_submission1/features/movies/presentation/bloc/watchlist/watchlist_movie_bloc.dart';
 import 'package:ditonton_submission1/features/movies/presentation/bloc/watchlist/watchlist_movie_event.dart';
 import 'package:ditonton_submission1/features/movies/presentation/bloc/watchlist/watchlist_movie_state.dart';
-import 'package:ditonton_submission1/features/tv/presentation/provider/tv/watchlist_tv_notifier.dart';
+import 'package:ditonton_submission1/features/tv/presentation/bloc/watchlist/watchlist_tv_bloc.dart';
 import 'package:ditonton_submission1/features/tv/presentation/widgets/media_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,10 +26,7 @@ class WatchlistPageState extends State<WatchlistPage>
     Future.microtask(() {
       if (!mounted) return;
       context.read<WatchlistMovieBloc>().add(FetchWatchlistMoviesEvent());
-      Provider.of<WatchlistTvNotifier>(
-        context,
-        listen: false,
-      ).fetchWatchlistTv();
+      context.read<WatchlistTvBloc>().add(FetchWatchlistTvEvent());
     });
   }
 
@@ -44,10 +41,7 @@ class WatchlistPageState extends State<WatchlistPage>
     if (_tabController.index == 0) {
       context.read<WatchlistMovieBloc>().add(FetchWatchlistMoviesEvent());
     } else {
-      Provider.of<WatchlistTvNotifier>(
-        context,
-        listen: false,
-      ).fetchWatchlistTv();
+      context.read<WatchlistTvBloc>().add(FetchWatchlistTvEvent());
     }
   }
 
@@ -95,24 +89,26 @@ class WatchlistPageState extends State<WatchlistPage>
   }
 
   Widget _buildTvContent() {
-    return Consumer<WatchlistTvNotifier>(
-      builder: (context, data, child) {
-        if (data.watchlistState == RequestState.loading) {
+    return BlocBuilder<WatchlistTvBloc, WatchlistTvState>(
+      builder: (context, state) {
+        if (state is WatchlistTvLoading) {
           return Center(child: CircularProgressIndicator());
-        } else if (data.watchlistState == RequestState.loaded) {
-          if (data.watchlistTv.isEmpty) {
-            return Center(child: Text('No TV shows in watchlist'));
-          }
+        } else if (state is WatchlistTvHasData) {
+          final data = state.result;
           return ListView.builder(
             padding: EdgeInsets.only(top: 16),
             itemBuilder: (context, index) {
-              final tv = data.watchlistTv[index];
+              final tv = data[index];
               return MediaCardList(media: tv, isMovie: false);
             },
-            itemCount: data.watchlistTv.length,
+            itemCount: data.length,
           );
+        } else if (state is WatchlistTvEmpty) {
+          return Center(child: Text('No TV shows in watchlist'));
+        } else if (state is WatchlistTvError) {
+          return Center(key: Key('error_message'), child: Text(state.message));
         } else {
-          return Center(child: Text(data.message));
+          return Container();
         }
       },
     );

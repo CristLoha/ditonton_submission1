@@ -5,7 +5,7 @@ import 'package:ditonton_submission1/features/movies/presentation/bloc/detail/mo
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:home/home.dart';
-import '../../helpers/test_helper.mocks.dart';
+import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late MovieDetailBloc movieDetailBloc;

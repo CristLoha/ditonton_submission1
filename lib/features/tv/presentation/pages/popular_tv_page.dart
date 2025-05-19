@@ -30,22 +30,6 @@ class _PopularTvPageState extends State<PopularTvPage> {
           builder: (context, state) {
             if (state is PopularTvLoading) {
               return Center(child: CircularProgressIndicator());
-            } else if (state is PopularTvError) {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(state.message),
-                    SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: () {
-                        context.read<PopularTvBloc>().add(FetchPopularTvData());
-                      },
-                      child: Text('Retry'),
-                    ),
-                  ],
-                ),
-              );
             } else if (state is PopularTvHasData) {
               final data = state.result;
               return ListView.builder(
@@ -55,12 +39,13 @@ class _PopularTvPageState extends State<PopularTvPage> {
                 },
                 itemCount: data.length,
               );
-            } else if (state is PopularTvEmpty) {
+            } else if (state is PopularTvError) {
               return Center(
-                child: Text(key: Key('empty_message'), 'No TV shows found'),
+                key: const Key('error_message'),
+                child: Text(state.message),
               );
             } else {
-              return Container();
+              return const Center(child: Text('Something went wrong'));
             }
           },
         ),

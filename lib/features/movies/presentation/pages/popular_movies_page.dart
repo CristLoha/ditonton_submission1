@@ -44,11 +44,7 @@ class PopularMoviesPageState extends State<PopularMoviesPage> {
                 key: const Key('error_message'),
                 child: Text(state.message),
               );
-            } else if (state is PopularMoviesEmpty) {
-              return const Center(
-                key: Key('empty_message'),
-                child: Text('No Data'),
-              );
+            
             } else {
               return const Center(child: Text('Something went wrong'));
             }

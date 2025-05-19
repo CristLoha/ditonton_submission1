@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:ditonton_submission1/features/tv/domain/usecases/tv/search_tv.dart';
+import 'package:ditonton_submission1/features/tv/domain/usecases/search_tv.dart';
 import 'package:equatable/equatable.dart';
 import 'package:home/domain/entities/tv.dart';
 import 'package:rxdart/rxdart.dart';
