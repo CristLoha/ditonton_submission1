@@ -1,38 +1,38 @@
-import 'package:core/core.dart';
-import 'package:flutter/material.dart';
-import 'package:home/home.dart';
+// import 'package:core/core.dart';
+// import 'package:flutter/material.dart';
+// import 'package:home/home.dart';
 
 
-class TopRatedTvNotifier extends ChangeNotifier {
-  final GetTopRatedTv getTopRatedTv;
+// class TopRatedTvNotifier extends ChangeNotifier {
+//   final GetTopRatedTv getTopRatedTv;
 
-  TopRatedTvNotifier({required this.getTopRatedTv});
+//   TopRatedTvNotifier({required this.getTopRatedTv});
 
-  RequestState _state = RequestState.empty;
-  RequestState get state => _state;
+//   RequestState _state = RequestState.empty;
+//   RequestState get state => _state;
 
-  List<Tv> _tv = [];
-  List<Tv> get tv => _tv;
+//   List<Tv> _tv = [];
+//   List<Tv> get tv => _tv;
 
-  String _message = '';
-  String get message => _message;
+//   String _message = '';
+//   String get message => _message;
 
-  Future<void> fetchTopRatedTv() async {
-    _state = RequestState.loading;
-    notifyListeners();
+//   Future<void> fetchTopRatedTv() async {
+//     _state = RequestState.loading;
+//     notifyListeners();
 
-    final result = await getTopRatedTv.execute();
-    result.fold(
-      (failure) {
-        _message = failure.message;
-        _state = RequestState.error;
-        notifyListeners();
-      },
-      (tvData) {
-        _tv = tvData;
-        _state = RequestState.loaded;
-        notifyListeners();
-      },
-    );
-  }
-}
+//     final result = await getTopRatedTv.execute();
+//     result.fold(
+//       (failure) {
+//         _message = failure.message;
+//         _state = RequestState.error;
+//         notifyListeners();
+//       },
+//       (tvData) {
+//         _tv = tvData;
+//         _state = RequestState.loaded;
+//         notifyListeners();
+//       },
+//     );
+//   }
+// }

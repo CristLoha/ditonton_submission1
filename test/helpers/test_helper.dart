@@ -20,10 +20,8 @@ import 'package:ditonton_submission1/features/tv/domain/usecases/search_tv.dart'
 import 'package:ditonton_submission1/features/tv/domain/usecases/get_watchlist_status_tv.dart';
 import 'package:ditonton_submission1/features/tv/domain/usecases/save_watchlist_tv.dart';
 import 'package:ditonton_submission1/features/tv/domain/usecases/remove_watchlist_tv.dart';
-import 'package:ditonton_submission1/features/tv/presentation/provider/tv/top_rated_tv_notifier.dart';
 import 'package:home/home.dart';
 import 'package:ditonton_submission1/features/tv/presentation/provider/tv/tv_detail_notifier.dart';
-import 'package:ditonton_submission1/features/tv/presentation/provider/tv/tv_search_notifier.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
 
@@ -107,10 +105,8 @@ final testTvList = [tTv];
     RemoveWatchlistTv,
     MovieDatabaseHelper,
     TvDatabaseHelper,
-    TopRatedTvNotifier,
     TvDetailNotifier,
     GetPopularTv,
-    TvSearchNotifier,
     DataConnectionChecker,
     http.Client,
   ],

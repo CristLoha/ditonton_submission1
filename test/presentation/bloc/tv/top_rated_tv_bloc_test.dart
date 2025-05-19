@@ -1,22 +1,20 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
-import 'package:ditonton_submission1/features/tv/presentation/bloc/watchlist/watchlist_tv_bloc.dart';
+import 'package:ditonton_submission1/features/tv/presentation/bloc/top_rated/top_rated_tv_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:home/home.dart';
 import 'package:mockito/mockito.dart';
-
-import '../../helpers/test_helper.mocks.dart';
+import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late WatchlistTvBloc watchlistTvBloc;
-  late MockGetWatchListTv mockGetWatchlistTv;
+  late TopRatedTvBloc topRatedTvBloc;
+  late MockGetTopRatedTv mockGetTopRatedTv;
 
   setUp(() {
-    mockGetWatchlistTv = MockGetWatchListTv();
-    watchlistTvBloc = WatchlistTvBloc(mockGetWatchlistTv);
+    mockGetTopRatedTv = MockGetTopRatedTv();
+    topRatedTvBloc = TopRatedTvBloc(mockGetTopRatedTv);
   });
-
 
 final tTv = Tv(
   id: 100088,
@@ -37,43 +35,43 @@ final tTv = Tv(
 );
   final tTvList = <Tv>[tTv];
 
-
   test('initial state should be empty', () {
-    expect(watchlistTvBloc.state, WatchlistTvEmpty());
+    expect(topRatedTvBloc.state, TopRatedTvEmpty());
   });
-  group('Get Watchlist Movies', () {
-    blocTest<WatchlistTvBloc, WatchlistTvState>(
-      'Should emit [Loading, Loaded] when data is gotten successfully',
+
+  group('Get Top Rated Tv shows', () {
+    blocTest<TopRatedTvBloc, TopRatedTvState>(
+      'Should emit [loading, loaded] when data is gotten successfully',
       build: () {
         when(
-          mockGetWatchlistTv.execute(),
+          mockGetTopRatedTv.execute(),
         ).thenAnswer((_) async => Right(tTvList));
-        return watchlistTvBloc;
+        return topRatedTvBloc;
       },
-      act: (bloc) => bloc.add(FetchWatchlistTvEvent()),
+      act: (bloc) => bloc.add(FetchTopRatedTv()),
       expect:
-          () => [WatchlistTvLoading(), WatchlistTvHasData(tTvList)],
-      verify: (bloc) {
-        verify(mockGetWatchlistTv.execute());
+          () => [TopRatedTvLoading(), TopRatedTvHasData(tTvList)],
+      verify: (_) {
+        verify(mockGetTopRatedTv.execute());
       },
     );
 
-    blocTest<WatchlistTvBloc, WatchlistTvState>(
-      'Should emit [Loading, Error] when get data is unsuccessful',
+    blocTest<TopRatedTvBloc, TopRatedTvState>(
+      'Should emit [loading, error] when get top rated tv shows is unsuccessful',
       build: () {
         when(
-          mockGetWatchlistTv.execute(),
-        ).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
-        return watchlistTvBloc;
+          mockGetTopRatedTv.execute(),
+        ).thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
+        return topRatedTvBloc;
       },
-      act: (bloc) => bloc.add(FetchWatchlistTvEvent()),
+      act: (bloc) => bloc.add(FetchTopRatedTv()),
       expect:
           () => [
-            WatchlistTvLoading(),
-            WatchlistTvError('Server Failure'),
+            TopRatedTvLoading(),
+            const TopRatedTvError('Server Failure'),
           ],
-      verify: (bloc) {
-        verify(mockGetWatchlistTv.execute());
+      verify: (_) {
+        verify(mockGetTopRatedTv.execute());
       },
     );
   });

@@ -27,13 +27,13 @@ import 'package:ditonton_submission1/features/movies/presentation/bloc/search/se
 import 'package:ditonton_submission1/features/movies/presentation/bloc/detail/movie_detail_bloc.dart';
 import 'package:ditonton_submission1/features/tv/presentation/bloc/popular/popular_tv_bloc.dart';
 import 'package:ditonton_submission1/features/tv/presentation/bloc/search/search_tv_bloc.dart';
+import 'package:ditonton_submission1/features/tv/presentation/bloc/top_rated/top_rated_tv_bloc.dart';
 import 'package:ditonton_submission1/features/tv/presentation/bloc/watchlist/watchlist_tv_bloc.dart';
 import 'package:home/home.dart';
 import 'package:ditonton_submission1/features/tv/presentation/provider/tv/tv_detail_notifier.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 import 'features/movies/presentation/bloc/popular/popular_movies_bloc.dart';
-import 'features/tv/presentation/provider/tv/top_rated_tv_notifier.dart';
 import 'package:ditonton_submission1/features/movies/presentation/bloc/top_rated/top_rated_movies_bloc.dart';
 
 final locator = GetIt.instance;
@@ -83,7 +83,7 @@ void init() {
 
   locator.registerFactory(() => SearchTvBloc(locator()));
   locator.registerFactory(() => PopularTvBloc(locator()));
-  locator.registerFactory(() => TopRatedTvNotifier(getTopRatedTv: locator()));
+  locator.registerFactory(() => TopRatedTvBloc( locator()));
 
   locator.registerFactory(() => WatchlistTvBloc(locator()));
 

@@ -1,12 +1,10 @@
 import 'package:core/core.dart';
-import 'package:ditonton_submission1/features/tv/presentation/provider/tv/top_rated_tv_notifier.dart';
-
+import 'package:ditonton_submission1/features/tv/presentation/bloc/top_rated/top_rated_tv_bloc.dart';
 import 'package:ditonton_submission1/features/tv/presentation/widgets/media_card_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TopRatedTvPage extends StatefulWidget {
-
   const TopRatedTvPage({super.key});
 
   @override
@@ -19,10 +17,7 @@ class _TopRatedTvPageState extends State<TopRatedTvPage> {
     super.initState();
     Future.microtask(() {
       if (!mounted) return;
-      final notifier = Provider.of<TopRatedTvNotifier>(context, listen: false);
-      if (notifier.state == RequestState.empty) {
-        notifier.fetchTopRatedTv();
-      }
+      context.read<TopRatedTvBloc>().add(FetchTopRatedTv());
     });
   }
 
@@ -32,31 +27,15 @@ class _TopRatedTvPageState extends State<TopRatedTvPage> {
       appBar: AppBar(title: Text('Top Rated TV Shows')),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<TopRatedTvNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.loading) {
+        child: BlocBuilder<TopRatedTvBloc, TopRatedTvState>(
+          builder: (context, state) {
+            if (state is TopRatedTvLoading) {
               return Center(child: CircularProgressIndicator());
-            } else if (data.state == RequestState.error) {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(data.message),
-                    SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: () => data.fetchTopRatedTv(),
-                      child: Text('Retry'),
-                    ),
-                  ],
-                ),
-              );
-            } else if (data.state == RequestState.loaded) {
-              if (data.tv.isEmpty) {
-                return Center(child: Text('No TV shows found'));
-              }
+            } else if (state is TopRatedTvHasData) {
+              final result = state.result;
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final tv = data.tv[index];
+                  final tv = result[index];
                   return InkWell(
                     onTap: () {
                       Navigator.of(
@@ -66,10 +45,16 @@ class _TopRatedTvPageState extends State<TopRatedTvPage> {
                     child: MediaCardList(media: tv, isMovie: false),
                   );
                 },
-                itemCount: data.tv.length,
+                itemCount: result.length,
               );
+            } else if (state is TopRatedTvError) {
+              return Center(
+                child: Text(key: Key('error_message'), state.message),
+              );
+            } else if (state is TopRatedTvEmpty) {
+              return Center(child: Text(key: Key('empty_message'), 'No Data'));
             } else {
-              return Container();
+              return Center(child: Text('Something went wrong'));
             }
           },
         ),

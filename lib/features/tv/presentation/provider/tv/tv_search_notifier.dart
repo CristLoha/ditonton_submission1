@@ -1,38 +1,38 @@
-import 'package:core/core.dart';
-import 'package:home/home.dart';
-import 'package:ditonton_submission1/features/tv/domain/usecases/search_tv.dart';
-import 'package:flutter/foundation.dart';
+// import 'package:core/core.dart';
+// import 'package:home/home.dart';
+// import 'package:ditonton_submission1/features/tv/domain/usecases/search_tv.dart';
+// import 'package:flutter/foundation.dart';
 
-class TvSearchNotifier extends ChangeNotifier {
-  final SearchTv searchTv;
+// class TvSearchNotifier extends ChangeNotifier {
+//   final SearchTv searchTv;
 
-  TvSearchNotifier({required this.searchTv});
+//   TvSearchNotifier({required this.searchTv});
 
-  RequestState _state = RequestState.empty;
-  RequestState get state => _state;
+//   RequestState _state = RequestState.empty;
+//   RequestState get state => _state;
 
-  List<Tv> _searchResult = [];
-  List<Tv> get searchResult => _searchResult;
+//   List<Tv> _searchResult = [];
+//   List<Tv> get searchResult => _searchResult;
 
-  String _message = '';
-  String get message => _message;
+//   String _message = '';
+//   String get message => _message;
 
-  Future<void> fetchTvSearch(String query) async {
-    _state = RequestState.loading;
-    notifyListeners();
+//   Future<void> fetchTvSearch(String query) async {
+//     _state = RequestState.loading;
+//     notifyListeners();
 
-    final result = await searchTv.execute(query);
-    result.fold(
-      (failure) {
-        _message = failure.message;
-        _state = RequestState.error;
-        notifyListeners();
-      },
-      (data) {
-        _searchResult = data;
-        _state = RequestState.loaded;
-        notifyListeners();
-      },
-    );
-  }
-}
+//     final result = await searchTv.execute(query);
+//     result.fold(
+//       (failure) {
+//         _message = failure.message;
+//         _state = RequestState.error;
+//         notifyListeners();
+//       },
+//       (data) {
+//         _searchResult = data;
+//         _state = RequestState.loaded;
+//         notifyListeners();
+//       },
+//     );
+//   }
+// }
