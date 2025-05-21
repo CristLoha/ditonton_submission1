@@ -3,7 +3,6 @@ import 'package:ditonton_submission1/features/movies/domain/usecases/search_movi
 import 'package:equatable/equatable.dart';
 import 'package:home/domain/entities/movie.dart';
 import 'package:rxdart/rxdart.dart';
-
 part 'search_movie_event.dart';
 part 'search_movie_state.dart';
 
@@ -20,7 +19,7 @@ class SearchMovieBloc extends Bloc<SearchMovieEvent, SearchMovieState> {
           emit(SearchMovieError(failure.message));
         },
         (data) {
-          emit(SearchHasData(data));
+          emit(SearchMovieHasData(data));
         },
       );
     }, transformer: debounce(const Duration(milliseconds: 500)));

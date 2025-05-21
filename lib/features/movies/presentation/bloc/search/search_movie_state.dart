@@ -18,10 +18,10 @@ class SearchMovieError extends SearchMovieState {
   List<Object> get props => [message];
 }
 
-class SearchHasData extends SearchMovieState {
+class SearchMovieHasData extends SearchMovieState {
   final List<Movie> result;
 
-  const SearchHasData(this.result);
+  const SearchMovieHasData(this.result);
 
   @override
   List<Object> get props => [result];

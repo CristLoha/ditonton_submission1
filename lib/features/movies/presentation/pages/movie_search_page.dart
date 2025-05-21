@@ -31,9 +31,8 @@ class MovieSearchPage extends StatelessWidget {
               builder: (context, state) {
                 if (state is SearchMovieLoading) {
                   return const Center(child: CircularProgressIndicator());
-                } else if (state is SearchHasData) {
+                } else if (state is SearchMovieHasData) {
                   final result = state.result;
-
                   return Expanded(
                     child: ListView.builder(
                       padding: const EdgeInsets.all(8),
@@ -65,7 +64,7 @@ class MovieSearchPage extends StatelessWidget {
                     ),
                   );
                 } else {
-                  return Expanded(child: Container());
+                  return Container();
                 }
               },
             ),

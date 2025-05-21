@@ -50,7 +50,7 @@ void main() {
       },
       act: (bloc) => bloc.add(OnQueryChanged(tQuery)),
       wait: const Duration(milliseconds: 500),
-      expect: () => [SearchMovieLoading(), SearchHasData(testMovieList)],
+      expect: () => [SearchMovieLoading(), SearchMovieHasData(testMovieList)],
       verify: (bloc) {
         verify(mockSearchMovies.execute(tQuery));
       },

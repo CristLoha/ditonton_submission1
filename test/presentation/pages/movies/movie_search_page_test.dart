@@ -52,7 +52,7 @@ void main() {
 
   testWidgets('Page should display ListView when data is loaded',
       (WidgetTester tester) async {
-    searchBloc.emit(SearchHasData([tMovie]));
+    searchBloc.emit(SearchMovieHasData([tMovie]));
 
     await tester.pumpWidget(makeTestableWidget(MovieSearchPage()));
     await tester.enterText(find.byType(TextField), 'Spider-Man');

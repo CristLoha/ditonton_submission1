@@ -9,7 +9,7 @@ class TvSearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Search TV Shows')),
+      appBar: AppBar(title: const Text('Tv Search Shows')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -17,9 +17,7 @@ class TvSearchPage extends StatelessWidget {
           children: [
             TextField(
               onChanged: (query) {
-                if (query.isNotEmpty) {
-                  context.read<SearchTvBloc>().add(OnQueryChanged(query));
-                }
+                context.read<SearchTvBloc>().add(OnQueryTvChanged(query));
               },
               decoration: const InputDecoration(
                 hintText: 'Search title',
@@ -56,7 +54,7 @@ class TvSearchPage extends StatelessWidget {
                           ElevatedButton(
                             onPressed: () {
                               context.read<SearchTvBloc>().add(
-                                OnQueryChanged(''),
+                                OnQueryTvChanged(''),
                               );
                             },
                             child: const Text('Try Again'),

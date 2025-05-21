@@ -7,9 +7,9 @@ sealed class SearchTvEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class OnQueryChanged extends SearchTvEvent {
+class OnQueryTvChanged extends SearchTvEvent {
   final String query;
-  const OnQueryChanged(this.query);
+  const OnQueryTvChanged(this.query);
   @override
   List<Object> get props => [query];
 }
