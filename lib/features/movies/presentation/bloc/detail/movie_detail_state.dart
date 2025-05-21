@@ -1,47 +1,59 @@
-part of 'movie_detail_bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:home/domain/entities/movie.dart';
+import 'package:home/domain/entities/movie_detail.dart';
 
-class MovieDetailState extends Equatable {
-  final MovieDetail? movie;
-  final List<Movie> movieRecommendations;
-  final RequestState movieState;
-  final RequestState recommendationState;
+sealed class MovieDetailState extends Equatable {
+  const MovieDetailState();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class MovieDetailEmpty extends MovieDetailState {}
+
+class MovieDetailLoading extends MovieDetailState {}
+
+class MovieDetailError extends MovieDetailState {
   final String message;
-  final bool isAddedToWatchlist;
 
-  const MovieDetailState({
-    this.movie,
-    this.movieRecommendations = const [],
-    this.movieState = RequestState.empty,
-    this.recommendationState = RequestState.empty,
-    this.message = '',
-    this.isAddedToWatchlist = false,
+  const MovieDetailError(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
+class MovieDetailHasData extends MovieDetailState {
+  final MovieDetail movie;
+  final List<Movie> recommendations;
+  final bool isAddedToWatchlist;
+  final String watchlistMessage;
+
+  const MovieDetailHasData({
+    required this.movie,
+    required this.recommendations,
+    required this.isAddedToWatchlist,
+    this.watchlistMessage = '',
   });
 
-  MovieDetailState copyWith({
+  MovieDetailHasData copyWith({
     MovieDetail? movie,
-    List<Movie>? movieRecommendations,
-    RequestState? movieState,
-    RequestState? recommendationState,
-    String? message,
+    List<Movie>? recommendations,
     bool? isAddedToWatchlist,
+    String? watchlistMessage,
   }) {
-    return MovieDetailState(
+    return MovieDetailHasData(
       movie: movie ?? this.movie,
-      movieRecommendations: movieRecommendations ?? this.movieRecommendations,
-      movieState: movieState ?? this.movieState,
-      recommendationState: recommendationState ?? this.recommendationState,
-      message: message ?? this.message,
+      recommendations: recommendations ?? this.recommendations,
       isAddedToWatchlist: isAddedToWatchlist ?? this.isAddedToWatchlist,
+      watchlistMessage: watchlistMessage ?? '',
     );
   }
 
   @override
   List<Object?> get props => [
     movie,
-    movieRecommendations,
-    movieState,
-    recommendationState,
-    message,
+    recommendations,
     isAddedToWatchlist,
+    watchlistMessage,
   ];
 }

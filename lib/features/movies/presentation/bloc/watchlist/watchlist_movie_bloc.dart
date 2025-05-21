@@ -12,10 +12,15 @@ class WatchlistMovieBloc
       emit(WatchlistMovieLoading());
 
       final result = await getWatchlistMovies.execute();
-      result.fold(
-        (failure) => emit(WatchlistMovieError(failure.message)),
-        (data) => emit(WatchlistMovieHasData(data)),
-      );
+      result.fold((failure) => emit(WatchlistMovieError(failure.message)), (
+        data,
+      ) {
+        if (data.isEmpty) {
+          emit(WatchlistMovieEmpty());
+        } else {
+          emit(WatchlistMovieHasData(data));
+        }
+      });
     });
   }
 }

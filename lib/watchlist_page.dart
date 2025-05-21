@@ -6,7 +6,6 @@ import 'package:ditonton_submission1/features/tv/presentation/bloc/watchlist/wat
 import 'package:ditonton_submission1/features/tv/presentation/widgets/media_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
 class WatchlistPage extends StatefulWidget {
   const WatchlistPage({super.key});

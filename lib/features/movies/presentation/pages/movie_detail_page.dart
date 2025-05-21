@@ -1,4 +1,6 @@
 import 'package:core/core.dart';
+import 'package:ditonton_submission1/features/movies/presentation/bloc/detail/movie_detail_event.dart';
+import 'package:ditonton_submission1/features/movies/presentation/bloc/detail/movie_detail_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home/domain/entities/genre.dart';
 import 'package:home/domain/entities/movie.dart';
@@ -34,27 +36,27 @@ class MovieDetailPageState extends State<MovieDetailPage> {
     return Scaffold(
       body: BlocBuilder<MovieDetailBloc, MovieDetailState>(
         builder: (context, state) {
-          if (state.movieState == RequestState.loading) {
+          if (state is MovieDetailLoading) {
             return const Center(child: CircularProgressIndicator());
-          } else if (state.movieState == RequestState.loaded) {
-            final movie = state.movie!;
-
+          } else if (state is MovieDetailError) {
+            return Center(child: Text(state.message));
+          } else if (state is MovieDetailHasData) {
             return DetailContent(
-              movie,
-              state.movieRecommendations,
+              state.movie,
+              state.recommendations,
               state.isAddedToWatchlist,
               onWatchlistButtonPressed: (movie, isAddedWatchlist) {
                 if (isAddedWatchlist) {
                   context.read<MovieDetailBloc>().add(
-                    const RemoveFromWatchlist(),
+                    RemoveFromWatchlist(movie),
                   );
                 } else {
-                  context.read<MovieDetailBloc>().add(const AddWatchlist());
+                  context.read<MovieDetailBloc>().add(AddWatchlist(movie));
                 }
               },
             );
           } else {
-            return Center(child: Text(state.message));
+            return Container();
           }
         },
       ),
@@ -79,12 +81,15 @@ class DetailContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<MovieDetailBloc, MovieDetailState>(
-      listenWhen:
-          (previous, current) =>
-              previous.message != current.message && current.message.isNotEmpty,
+      listenWhen: (previous, current) {
+        if (current is MovieDetailHasData) {
+          return current.watchlistMessage.isNotEmpty;
+        }
+        return false;
+      },
       listener: (context, state) {
-        if (state.message.isNotEmpty) {
-          CustomSnackbar.show(context, state.message);
+        if (state is MovieDetailHasData && state.watchlistMessage.isNotEmpty) {
+          CustomSnackbar.show(context, state.watchlistMessage);
         }
       },
       child: Stack(
@@ -157,65 +162,59 @@ class DetailContent extends StatelessWidget {
                               Text(movie.overview),
                               const SizedBox(height: 16),
                               Text('Recommendations', style: kHeading6),
-                              BlocBuilder<MovieDetailBloc, MovieDetailState>(
-                                builder: (context, state) {
-                                  if (state.movieState ==
-                                      RequestState.loading) {
-                                    return const Center(
-                                      child: CircularProgressIndicator(),
-                                    );
-                                  } else if (state.movieState ==
-                                      RequestState.loaded) {
-                                    return SizedBox(
-                                      height: 150,
-                                      child: ListView.builder(
-                                        scrollDirection: Axis.horizontal,
-                                        itemBuilder: (context, index) {
-                                          final movie = recommendations[index];
-                                          return Padding(
-                                            padding: const EdgeInsets.all(4.0),
-                                            child: InkWell(
-                                              onTap: () {
-                                                Navigator.pushReplacementNamed(
-                                                  context,
-                                                  movieDetailRoute,
-                                                  arguments: movie.id,
-                                                );
-                                              },
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                      Radius.circular(8),
-                                                    ),
-                                                child: CachedNetworkImage(
-                                                  imageUrl:
-                                                      'https://image.tmdb.org/t/p/w500${movie.posterPath}',
-                                                  placeholder:
-                                                      (
-                                                        context,
-                                                        url,
-                                                      ) => const Center(
-                                                        child:
-                                                            CircularProgressIndicator(),
-                                                      ),
-                                                  errorWidget:
-                                                      (context, url, error) =>
-                                                          const Icon(
-                                                            Icons.error,
-                                                          ),
+                              if (recommendations.isNotEmpty)
+                                SizedBox(
+                                  height: 150,
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder: (context, index) {
+                                      final recommendation =
+                                          recommendations[index];
+                                      return Padding(
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: InkWell(
+                                          onTap: () {
+                                            Navigator.pushReplacementNamed(
+                                              context,
+                                              movieDetailRoute,
+                                              arguments: recommendation.id,
+                                            );
+                                          },
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                  Radius.circular(8),
                                                 ),
+                                            child: SizedBox(
+                                              width: 100,
+                                              child: CachedNetworkImage(
+                                                imageUrl:
+                                                    'https://image.tmdb.org/t/p/w500${recommendation.posterPath}',
+                                                placeholder:
+                                                    (
+                                                      context,
+                                                      url,
+                                                    ) => const Center(
+                                                      child:
+                                                          CircularProgressIndicator(),
+                                                    ),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        const Icon(Icons.error),
+                                                fit: BoxFit.cover,
                                               ),
                                             ),
-                                          );
-                                        },
-                                        itemCount: recommendations.length,
-                                      ),
-                                    );
-                                  } else {
-                                    return Container();
-                                  }
-                                },
-                              ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    itemCount: recommendations.length,
+                                  ),
+                                )
+                              else
+                                const Center(
+                                  child: Text('No recommendations available'),
+                                ),
                             ],
                           ),
                         ),

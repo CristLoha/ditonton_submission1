@@ -8,15 +8,17 @@ part 'watchlist_tv_state.dart';
 class WatchlistTvBloc extends Bloc<WatchlistTvEvent, WatchlistTvState> {
   final GetWatchListTv getWatchlistTv;
   WatchlistTvBloc(this.getWatchlistTv) : super(WatchlistTvEmpty()) {
-
-    on<WatchlistTvEvent>((event, emit) async{
+    on<FetchWatchlistTvEvent>((event, emit) async {
       emit(WatchlistTvLoading());
-     
-     final result = await getWatchlistTv.execute();
-      result.fold(
-        (failure) => emit(WatchlistTvError(failure.message)),
-        (data) => emit(WatchlistTvHasData(data)),
-      );
+
+      final result = await getWatchlistTv.execute();
+      result.fold((failure) => emit(WatchlistTvError(failure.message)), (data) {
+        if (data.isEmpty) {
+          emit(WatchlistTvEmpty());
+        } else {
+          emit(WatchlistTvHasData(data));
+        }
+      });
     });
   }
 }

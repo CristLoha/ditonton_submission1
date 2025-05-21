@@ -1,10 +1,11 @@
-part of 'movie_detail_bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:home/domain/entities/movie_detail.dart';
 
-abstract class MovieDetailEvent extends Equatable {
+sealed class MovieDetailEvent extends Equatable {
   const MovieDetailEvent();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 class FetchMovieDetail extends MovieDetailEvent {
@@ -13,21 +14,25 @@ class FetchMovieDetail extends MovieDetailEvent {
   const FetchMovieDetail(this.id);
 
   @override
-  List<Object> get props => [id];
+  List<Object?> get props => [id];
 }
 
 class AddWatchlist extends MovieDetailEvent {
-  const AddWatchlist();
+  final MovieDetail movie;
+
+  const AddWatchlist(this.movie);
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [movie];
 }
 
 class RemoveFromWatchlist extends MovieDetailEvent {
-  const RemoveFromWatchlist();
+  final MovieDetail movie;
+
+  const RemoveFromWatchlist(this.movie);
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [movie];
 }
 
 class LoadWatchlistStatus extends MovieDetailEvent {
@@ -36,7 +41,7 @@ class LoadWatchlistStatus extends MovieDetailEvent {
   const LoadWatchlistStatus(this.id);
 
   @override
-  List<Object> get props => [id];
+  List<Object?> get props => [id];
 }
 
 class FetchMovieRecommendations extends MovieDetailEvent {
@@ -45,5 +50,5 @@ class FetchMovieRecommendations extends MovieDetailEvent {
   const FetchMovieRecommendations(this.id);
 
   @override
-  List<Object> get props => [id];
+  List<Object?> get props => [id];
 }
