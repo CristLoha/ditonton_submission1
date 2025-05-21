@@ -1,11 +1,11 @@
-import 'package:core/core.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dartz/dartz.dart';
+import 'package:ditonton_submission1/features/movies/presentation/bloc/detail/movie_detail_state.dart';
 import 'package:ditonton_submission1/features/movies/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton_submission1/features/movies/presentation/bloc/detail/movie_detail_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:mockito/mockito.dart';
 import '../../../dummy_data/dummy_objects.dart';
 import '../../../helpers/test_helper.mocks.dart';
@@ -50,9 +50,7 @@ void main() {
   testWidgets('Should show loading indicator when state is loading', (
     tester,
   ) async {
-    movieDetailBloc.emit(
-      const MovieDetailState().copyWith(movieState: RequestState.loading),
-    );
+    movieDetailBloc.emit(MovieDetailLoading());
     await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
   });
@@ -61,9 +59,9 @@ void main() {
     tester,
   ) async {
     movieDetailBloc.emit(
-      MovieDetailState().copyWith(
-        movieState: RequestState.loaded,
+      MovieDetailHasData(
         movie: testMovieDetail,
+        recommendations: [testMovie],
         isAddedToWatchlist: false,
       ),
     );
@@ -78,12 +76,15 @@ void main() {
     tester,
   ) async {
     movieDetailBloc.emit(
-      MovieDetailState().copyWith(
-        movieState: RequestState.loaded,
+      MovieDetailHasData(
         movie: testMovieDetail,
+        recommendations: [testMovie],
         isAddedToWatchlist: true,
       ),
     );
+    when(
+      mockGetMovieDetail.execute(1),
+    ).thenAnswer((_) async => Right(testMovieDetail));
     await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
     expect(find.byIcon(Icons.check), findsOneWidget);
   });
@@ -92,10 +93,10 @@ void main() {
     tester,
   ) async {
     movieDetailBloc.emit(
-      MovieDetailState().copyWith(
-        movieState: RequestState.loaded,
+      MovieDetailHasData(
         movie: testMovieDetail,
-        movieRecommendations: [testMovie],
+        recommendations: [testMovie],
+        isAddedToWatchlist: false,
       ),
     );
     await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
@@ -110,9 +111,7 @@ void main() {
   testWidgets('Should show loading indicator when recommendation is loading', (
     tester,
   ) async {
-    movieDetailBloc.emit(
-      MovieDetailState().copyWith(movieState: RequestState.loading),
-    );
+    movieDetailBloc.emit(MovieDetailLoading());
     await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
     expect(find.byType(CircularProgressIndicator), findsOneWidget);
   });
@@ -120,12 +119,7 @@ void main() {
   testWidgets('Should show empty container on unknown recommendation state', (
     tester,
   ) async {
-    movieDetailBloc.emit(
-      MovieDetailState().copyWith(
-        movieState: RequestState.error,
-        message: 'Something went wrong',
-      ),
-    );
+    movieDetailBloc.emit(MovieDetailError('Something went wrong'));
     await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
     expect(find.text('Something went wrong'), findsOneWidget);
   });

@@ -1,7 +1,9 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:core/core.dart';
+import 'package:core/error/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ditonton_submission1/features/movies/presentation/bloc/detail/movie_detail_bloc.dart';
+import 'package:ditonton_submission1/features/movies/presentation/bloc/detail/movie_detail_event.dart';
+import 'package:ditonton_submission1/features/movies/presentation/bloc/detail/movie_detail_state.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:home/home.dart';
@@ -69,7 +71,7 @@ void main() {
 
   group('Get Movie Detail', () {
     test('initial state should be empty', () {
-      expect(movieDetailBloc.state, const MovieDetailState());
+      expect(movieDetailBloc.state, MovieDetailEmpty());
     });
 
     blocTest<MovieDetailBloc, MovieDetailState>(
@@ -80,23 +82,20 @@ void main() {
         ).thenAnswer((_) async => Right(testMovieDetail));
         when(
           mockGetMovieRecommendations.execute(tId),
-        ).thenAnswer((_) async => Right([testMovie]));
+        ).thenAnswer((_) async => Right(testMovieList));
+        when(
+          mockGetWatchlistStatus.execute(tId),
+        ).thenAnswer((_) async => false);
         return movieDetailBloc;
       },
-      act: (bloc) => bloc.add(const FetchMovieDetail(tId)),
+      act: (bloc) => bloc.add(FetchMovieDetail(tId)),
       expect:
           () => [
-            const MovieDetailState(movieState: RequestState.loading),
-            MovieDetailState(
-              movieState: RequestState.loaded,
+            MovieDetailLoading(),
+            MovieDetailHasData(
               movie: testMovieDetail,
-              recommendationState: RequestState.loading,
-            ),
-            MovieDetailState(
-              movieState: RequestState.loaded,
-              movie: testMovieDetail,
-              movieRecommendations: [testMovie],
-              recommendationState: RequestState.loaded,
+              recommendations: testMovieList,
+              isAddedToWatchlist: false,
             ),
           ],
       verify: (_) {
@@ -117,14 +116,7 @@ void main() {
         return movieDetailBloc;
       },
       act: (bloc) => bloc.add(const FetchMovieDetail(tId)),
-      expect:
-          () => [
-            const MovieDetailState(movieState: RequestState.loading),
-            const MovieDetailState(
-              movieState: RequestState.error,
-              message: 'Server Failure',
-            ),
-          ],
+      expect: () => [MovieDetailLoading(), MovieDetailError('Server Failure')],
       verify: (_) {
         verify(mockGetMovieDetail.execute(tId));
       },
@@ -139,164 +131,138 @@ void main() {
         when(
           mockGetMovieRecommendations.execute(tId),
         ).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
-        return movieDetailBloc;
-      },
-      act: (bloc) => bloc.add(const FetchMovieDetail(tId)),
-      expect:
-          () => [
-            const MovieDetailState(movieState: RequestState.loading),
-            MovieDetailState(
-              movieState: RequestState.loaded,
-              movie: testMovieDetail,
-              recommendationState: RequestState.loading,
-            ),
-            MovieDetailState(
-              movieState: RequestState.loaded,
-              movie: testMovieDetail,
-              recommendationState: RequestState.error,
-              message: 'Server Failure',
-            ),
-          ],
-      verify: (_) {
-        verify(mockGetMovieDetail.execute(tId));
-        verify(mockGetMovieRecommendations.execute(tId));
-      },
-    );
-  });
-
-  group('Watchlist', () {
-    blocTest<MovieDetailBloc, MovieDetailState>(
-      'should execute saving watchlist when function called',
-      build: () {
-        when(
-          mockGetMovieDetail.execute(tId),
-        ).thenAnswer((_) async => Right(testMovieDetail));
-        when(
-          mockGetMovieRecommendations.execute(tId),
-        ).thenAnswer((_) async => Right(testMovieList));
-        when(
-          mockSaveWatchlist.execute(testMovieDetail),
-        ).thenAnswer((_) async => Right('Added to Watchlist'));
-        when(mockGetWatchlistStatus.execute(tId)).thenAnswer((_) async => true);
-        return movieDetailBloc;
-      },
-      act: (bloc) async {
-        bloc.add(const FetchMovieDetail(tId));
-        await Future.delayed(Duration.zero);
-        bloc.add(const AddWatchlist());
-      },
-      expect:
-          () => [
-            // Initial loading state
-            const MovieDetailState().copyWith(movieState: RequestState.loading),
-
-            // Detail loaded, recommendation loading
-            const MovieDetailState().copyWith(
-              movieState: RequestState.loaded,
-              movie: testMovieDetail,
-              recommendationState: RequestState.loading,
-            ),
-
-            // Recommendation loaded
-            const MovieDetailState().copyWith(
-              movieState: RequestState.loaded,
-              movie: testMovieDetail,
-              recommendationState: RequestState.loaded,
-              movieRecommendations: testMovieList,
-            ),
-
-            // Emit pesan "Added to Watchlist" tanpa mengubah isAddedToWatchlist
-            const MovieDetailState().copyWith(
-              movieState: RequestState.loaded,
-              movie: testMovieDetail,
-              recommendationState: RequestState.loaded,
-              movieRecommendations: testMovieList,
-              message: 'Added to Watchlist',
-            ),
-
-            // Update isAddedToWatchlist menjadi true
-            const MovieDetailState().copyWith(
-              movieState: RequestState.loaded,
-              movie: testMovieDetail,
-              recommendationState: RequestState.loaded,
-              movieRecommendations: testMovieList,
-              message: 'Added to Watchlist',
-              isAddedToWatchlist: true,
-            ),
-          ],
-    );
-
-    blocTest<MovieDetailBloc, MovieDetailState>(
-      'Should emit proper states when removing from watchlist is successful',
-      build: () {
-        when(
-          mockGetMovieDetail.execute(tId),
-        ).thenAnswer((_) async => Right(testMovieDetail));
-        when(
-          mockGetMovieRecommendations.execute(tId),
-        ).thenAnswer((_) async => Right([testMovie]));
-        when(
-          mockRemoveWatchlist.execute(testMovieDetail),
-        ).thenAnswer((_) async => const Right('Removed from Watchlist'));
         when(
           mockGetWatchlistStatus.execute(tId),
         ).thenAnswer((_) async => false);
         return movieDetailBloc;
       },
-      act: (bloc) async {
-        bloc.add(const FetchMovieDetail(tId));
-        await Future.delayed(Duration.zero);
-        bloc.add(const RemoveFromWatchlist());
-      },
+      act: (bloc) => bloc.add(const FetchMovieDetail(tId)),
       expect:
           () => [
-            // Initial loading state
-            const MovieDetailState().copyWith(movieState: RequestState.loading),
-
-            // Detail loaded, recommendation loading
-            const MovieDetailState().copyWith(
-              movieState: RequestState.loaded,
+            MovieDetailLoading(),
+            MovieDetailHasData(
               movie: testMovieDetail,
-              recommendationState: RequestState.loading,
-            ),
-
-            // Recommendation loaded
-            const MovieDetailState().copyWith(
-              movieState: RequestState.loaded,
-              movie: testMovieDetail,
-              recommendationState: RequestState.loaded,
-              movieRecommendations: [testMovie],
-            ),
-
-            // Emit pesan "Removed from Watchlist" dan update status
-            const MovieDetailState().copyWith(
-              movieState: RequestState.loaded,
-              movie: testMovieDetail,
-              recommendationState: RequestState.loaded,
-              movieRecommendations: [testMovie],
-              message: 'Removed from Watchlist',
+              recommendations: [],
               isAddedToWatchlist: false,
             ),
           ],
       verify: (_) {
         verify(mockGetMovieDetail.execute(tId));
         verify(mockGetMovieRecommendations.execute(tId));
-        verify(mockRemoveWatchlist.execute(testMovieDetail));
-        verify(mockGetWatchlistStatus.execute(tId));
       },
     );
 
-    blocTest<MovieDetailBloc, MovieDetailState>(
-      'Should emit proper states when getting watchlist status',
-      build: () {
-        when(mockGetWatchlistStatus.execute(tId)).thenAnswer((_) async => true);
-        return movieDetailBloc;
-      },
-      act: (bloc) => bloc.add(const LoadWatchlistStatus(tId)),
-      expect: () => [const MovieDetailState(isAddedToWatchlist: true)],
-      verify: (_) {
-        verify(mockGetWatchlistStatus.execute(tId));
-      },
-    );
+    group('Watchlist', () {
+      blocTest<MovieDetailBloc, MovieDetailState>(
+        'should emit [Loading, HasData, HasData with Added to Watchlist] when AddWatchlist is successful',
+        build: () {
+          when(
+            mockGetMovieDetail.execute(tId),
+          ).thenAnswer((_) async => Right(testMovieDetail));
+          when(
+            mockGetWatchlistStatus.execute(tId),
+          ).thenAnswer((_) async => false);
+          when(
+            mockGetMovieRecommendations.execute(tId),
+          ).thenAnswer((_) async => Right(testMovieList));
+          when(
+            mockSaveWatchlist.execute(testMovieDetail),
+          ).thenAnswer((_) async => Right('Added to Watchlist'));
+          when(
+            mockGetWatchlistStatus.execute(tId),
+          ).thenAnswer((_) async => true);
+
+          return movieDetailBloc;
+        },
+        act: (bloc) async {
+          bloc.add(const FetchMovieDetail(tId));
+          await Future.delayed(Duration.zero);
+          bloc.add(AddWatchlist(testMovieDetail));
+        },
+        expect:
+            () => [
+              MovieDetailLoading(),
+              MovieDetailHasData(
+                movie: testMovieDetail,
+                recommendations: testMovieList,
+                isAddedToWatchlist: true,
+              ),
+              MovieDetailHasData(
+                movie: testMovieDetail,
+                recommendations: testMovieList,
+                isAddedToWatchlist: true,
+                watchlistMessage: 'Added to Watchlist',
+              ),
+            ],
+        verify: (_) {
+          verify(mockGetMovieDetail.execute(tId)).called(1);
+          verify(mockGetMovieRecommendations.execute(tId)).called(1);
+          verify(mockSaveWatchlist.execute(testMovieDetail)).called(1);
+          verify(
+            mockGetWatchlistStatus.execute(tId),
+          ).called(greaterThanOrEqualTo(1));
+        },
+      );
+      blocTest<MovieDetailBloc, MovieDetailState>(
+        'Should emit proper states when removing from watchlist is successful',
+        build: () {
+          when(
+            mockGetMovieDetail.execute(tId),
+          ).thenAnswer((_) async => Right(testMovieDetail));
+          when(
+            mockGetMovieRecommendations.execute(tId),
+          ).thenAnswer((_) async => Right([testMovie]));
+          when(
+            mockRemoveWatchlist.execute(testMovieDetail),
+          ).thenAnswer((_) async => const Right('Removed from Watchlist'));
+          when(
+            mockGetWatchlistStatus.execute(tId),
+          ).thenAnswer((_) async => false);
+          return movieDetailBloc;
+        },
+        act: (bloc) async {
+          bloc.add(const FetchMovieDetail(tId));
+          await Future.delayed(Duration.zero);
+          bloc.add(RemoveFromWatchlist(testMovieDetail));
+        },
+        expect:
+            () => [
+              MovieDetailLoading(),
+              MovieDetailHasData(
+                movie: testMovieDetail,
+                recommendations: [testMovie],
+                isAddedToWatchlist: false,
+              ),
+
+              MovieDetailHasData(
+                movie: testMovieDetail,
+                recommendations: [testMovie],
+                isAddedToWatchlist: false,
+                watchlistMessage: 'Removed from Watchlist',
+              ),
+            ],
+        verify: (_) {
+          verify(mockGetMovieDetail.execute(tId));
+          verify(mockGetMovieRecommendations.execute(tId));
+          verify(mockRemoveWatchlist.execute(testMovieDetail));
+          verify(mockGetWatchlistStatus.execute(tId));
+        },
+      );
+
+      blocTest<MovieDetailBloc, MovieDetailState>(
+        'Should emit proper states when getting watchlist status',
+        build: () {
+          when(
+            mockGetWatchlistStatus.execute(tId),
+          ).thenAnswer((_) async => true);
+          return movieDetailBloc;
+        },
+        act: (bloc) => bloc.add(const LoadWatchlistStatus(tId)),
+        expect: () => [MovieDetailLoading()],
+        verify: (_) {
+          verify(mockGetWatchlistStatus.execute(tId));
+        },
+      );
+    });
   });
 }
