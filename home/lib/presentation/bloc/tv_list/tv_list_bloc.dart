@@ -12,7 +12,7 @@ class TvListBloc extends Bloc<TvListEvent, TvListState> {
     required this.getOnTheAirTv,
     required this.getPopularTv,
     required this.getTopRatedTv,
-  }) : super(TvListHasData(onTheAirTv: [], popularTv: [], topRatedTv: [])) {
+  }) : super(TvListEmpty()) {
     on<FetchOnTheAirTv>(_onFetchOnTheAirTv);
     on<FetchPopularTv>(_onFetchPopularTv);
     on<FetchTopRatedTv>(_onFetchTopRatedTv);

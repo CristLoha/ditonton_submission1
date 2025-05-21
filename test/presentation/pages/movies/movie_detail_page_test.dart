@@ -103,7 +103,7 @@ void main() {
     expect(
       find.text('Recommendation'),
       findsNothing,
-    ); // label is "Recommendations"
+    ); 
     expect(find.text('Recommendations'), findsOneWidget);
     expect(find.byType(CachedNetworkImage), findsWidgets);
   });

@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home/domain/entities/movie.dart';
 import 'package:home/domain/entities/tv.dart';
-import 'package:home/presentation/bloc/home/home_bloc.dart';
-import 'package:home/presentation/bloc/home/home_event.dart';
+import 'package:home/presentation/bloc/home/home_cubit.dart';
 import 'package:home/presentation/bloc/home/home_state.dart';
 import 'package:home/presentation/bloc/movie_list/movie_list_bloc.dart';
 import 'package:home/presentation/bloc/movie_list/movie_list_event.dart';
@@ -25,150 +24,146 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+
     Future.microtask(() {
       if (!mounted) return;
-      context.read<MovieListBloc>()
-        ..add(FetchNowPlayingMovies())
-        ..add(FetchMovieListPopularMovies())
-        ..add(FetchTopRatedMovies());
-      context.read<TvListBloc>()
-        ..add(FetchOnTheAirTv())
-        ..add(FetchPopularTv())
-        ..add(FetchTopRatedTv());
+      final showMovies = context.read<HomeCubit>().state.showMovies;
+
+      if (showMovies) {
+        context.read<MovieListBloc>()
+          ..add(FetchNowPlayingMovies())
+          ..add(FetchMovieListPopularMovies())
+          ..add(FetchTopRatedMovies());
+      } else {
+        context.read<TvListBloc>()
+          ..add(FetchOnTheAirTv())
+          ..add(FetchPopularTv())
+          ..add(FetchTopRatedTv());
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => HomeBloc(),
-      child: BlocBuilder<HomeBloc, HomeState>(
-        builder: (context, state) {
-          return Scaffold(
-            drawer: Drawer(
-              child: Column(
-                children: [
-                  UserAccountsDrawerHeader(
-                    currentAccountPicture: CircleAvatar(
-                      backgroundImage: AssetImage('assets/circle-g.png'),
-                      backgroundColor: Colors.grey.shade900,
-                    ),
-                    accountName: Text('Ditonton'),
-                    accountEmail: Text('ditonton@dicoding.com'),
-                    decoration: BoxDecoration(color: Colors.grey.shade900),
+    return BlocBuilder<HomeCubit, HomeState>(
+      builder: (context, state) {
+        return Scaffold(
+          drawer: Drawer(
+            child: Column(
+              children: [
+                UserAccountsDrawerHeader(
+                  currentAccountPicture: CircleAvatar(
+                    backgroundImage: AssetImage('assets/circle-g.png'),
+                    backgroundColor: Colors.grey.shade900,
                   ),
-                  ListTile(
-                    leading: Icon(Icons.movie),
-                    title: Text('Movies'),
-                    selected: state.showMovies,
-                    onTap: () {
-                      context.read<HomeBloc>().add(const ToggleTab(true));
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.tv),
-                    title: Text('TV Shows'),
-                    key: Key('tv_shows_button'),
-                    selected: !state.showMovies,
-                    onTap: () {
-                      context.read<HomeBloc>().add(const ToggleTab(false));
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.save_alt),
-                    title: Text('Watchlist'),
-                    onTap: () {
-                      Navigator.pushNamed(context, wachlistRoute);
-                    },
-                  ),
-                  ListTile(
-                    onTap: () {
-                      Navigator.pushNamed(context, aboutRoute);
-                    },
-                    leading: Icon(Icons.info_outline),
-                    title: Text('About'),
-                  ),
-                ],
-              ),
-            ),
-            appBar: AppBar(
-              title: Text('Ditonton'),
-              actions: [
-                IconButton(
-                  onPressed: () {
-                    if (state.showMovies) {
-                      Navigator.pushNamed(context, movieSearchRoute);
-                    } else {
-                      Navigator.pushNamed(context, tvSearchRoute);
-                    }
+                  accountName: Text('Ditonton'),
+                  accountEmail: Text('ditonton@dicoding.com'),
+                  decoration: BoxDecoration(color: Colors.grey.shade900),
+                ),
+                ListTile(
+                  leading: Icon(Icons.movie),
+                  title: Text('Movies'),
+                  selected: state.showMovies,
+                  onTap: () {
+                    context.read<HomeCubit>().toggleTab(true);
+                    context.read<MovieListBloc>()
+                      ..add(FetchNowPlayingMovies())
+                      ..add(FetchMovieListPopularMovies())
+                      ..add(FetchTopRatedMovies());
+                    Navigator.pop(context);
                   },
-                  icon: Icon(Icons.search),
+                ),
+                ListTile(
+                  leading: Icon(Icons.tv),
+                  title: Text('TV Shows'),
+                  key: Key('tv_shows_button'),
+                  selected: !state.showMovies,
+                  onTap: () {
+                    context.read<HomeCubit>().toggleTab(false);
+                    context.read<TvListBloc>()
+                      ..add(FetchOnTheAirTv())
+                      ..add(FetchPopularTv())
+                      ..add(FetchTopRatedTv());
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.save_alt),
+                  title: Text('Watchlist'),
+                  onTap: () {
+                    Navigator.pushNamed(context, wachlistRoute);
+                  },
+                ),
+                ListTile(
+                  onTap: () {
+                    Navigator.pushNamed(context, aboutRoute);
+                  },
+                  leading: Icon(Icons.info_outline),
+                  title: Text('About'),
                 ),
               ],
             ),
-            body: state.showMovies ? _buildMovieContent() : _buildTvContent(),
-          );
-        },
-      ),
+          ),
+          appBar: AppBar(
+            title: Text('Ditonton'),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  if (state.showMovies) {
+                    Navigator.pushNamed(context, movieSearchRoute);
+                  } else {
+                    Navigator.pushNamed(context, tvSearchRoute);
+                  }
+                },
+                icon: Icon(Icons.search),
+              ),
+            ],
+          ),
+          body: state.showMovies ? _buildMovieContent() : _buildTvContent(),
+        );
+      },
     );
   }
 
   Widget _buildMovieContent() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Now Playing', style: kHeading6),
-            BlocBuilder<MovieListBloc, MovieListState>(
-              builder: (context, data) {
-                final state = data.nowPlayingState;
-                if (state == RequestState.loading) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (state == RequestState.loaded) {
-                  return MovieList(data.nowPlayingMovies);
-                } else {
-                  return Text('Failed');
-                }
-              },
-            ),
-            _buildSubHeading(
-              title: 'Popular',
-              onTap: () => Navigator.pushNamed(context, popularMoviesRoute),
-            ),
-            BlocBuilder<MovieListBloc, MovieListState>(
-              builder: (context, data) {
-                final state = data.popularMoviesState;
-                if (state == RequestState.loading) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (state == RequestState.loaded) {
-                  return MovieList(data.popularMovies);
-                } else {
-                  return Text('Failed');
-                }
-              },
-            ),
-            _buildSubHeading(
-              title: 'Top Rated',
-              onTap: () => Navigator.pushNamed(context, topRatedMoviesRoute),
-            ),
-            BlocBuilder<MovieListBloc, MovieListState>(
-              builder: (context, data) {
-                final state = data.topRatedMoviesState;
-                if (state == RequestState.loading) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (state == RequestState.loaded) {
-                  return MovieList(data.topRatedMovies);
-                } else {
-                  return Text('Failed');
-                }
-              },
-            ),
-          ],
-        ),
+      child: BlocBuilder<MovieListBloc, MovieListState>(
+        builder: (context, state) {
+          if (state is MovieListLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is MovieListHasData) {
+            return SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Now Playing', style: kHeading6),
+                  MovieList(state.nowPlayingMovies),
+
+                  _buildSubHeading(
+                    title: 'Popular',
+                    onTap:
+                        () => Navigator.pushNamed(context, popularMoviesRoute),
+                  ),
+                  MovieList(state.popularMovies),
+
+                  _buildSubHeading(
+                    title: 'Top Rated',
+                    onTap:
+                        () => Navigator.pushNamed(context, topRatedMoviesRoute),
+                  ),
+                  MovieList(state.topRatedMovies),
+                ],
+              ),
+            );
+          } else if (state is MovieListError) {
+            return Center(
+              child: Text(key: Key('error_message'), state.message),
+            );
+          } else {
+            return const SizedBox();
+          }
+        },
       ),
     );
   }
@@ -181,7 +176,6 @@ class _HomePageState extends State<HomePage> {
           if (state is TvListLoading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is TvListHasData) {
-   
             return SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

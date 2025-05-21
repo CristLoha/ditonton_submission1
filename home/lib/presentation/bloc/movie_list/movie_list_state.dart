@@ -1,54 +1,49 @@
 import 'package:equatable/equatable.dart';
-import 'package:core/core.dart';
-import 'package:home/home.dart';
+import 'package:home/domain/entities/movie.dart';
 
-class MovieListState extends Equatable {
-  final List<Movie> nowPlayingMovies;
-  final RequestState nowPlayingState;
-  final List<Movie> popularMovies;
-  final RequestState popularMoviesState;
-  final List<Movie> topRatedMovies;
-  final RequestState topRatedMoviesState;
+sealed class MovieListState extends Equatable {
+  const MovieListState();
+
+  @override
+  List<Object?> get props => [];
+}
+
+class MovieListEmpty extends MovieListState {}
+
+class MovieListLoading extends MovieListState {}
+
+class MovieListError extends MovieListState {
   final String message;
 
-  const MovieListState({
-    this.nowPlayingMovies = const [],
-    this.nowPlayingState = RequestState.empty,
-    this.popularMovies = const [],
-    this.popularMoviesState = RequestState.empty,
-    this.topRatedMovies = const [],
-    this.topRatedMoviesState = RequestState.empty,
-    this.message = '',
+  const MovieListError(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
+class MovieListHasData extends MovieListState {
+  final List<Movie> nowPlayingMovies;
+  final List<Movie> popularMovies;
+  final List<Movie> topRatedMovies;
+
+  const MovieListHasData({
+    required this.nowPlayingMovies,
+    required this.popularMovies,
+    required this.topRatedMovies,
   });
 
-  MovieListState copyWith({
+  MovieListHasData copyWith({
     List<Movie>? nowPlayingMovies,
-    RequestState? nowPlayingState,
     List<Movie>? popularMovies,
-    RequestState? popularMoviesState,
     List<Movie>? topRatedMovies,
-    RequestState? topRatedMoviesState,
-    String? message,
   }) {
-    return MovieListState(
+    return MovieListHasData(
       nowPlayingMovies: nowPlayingMovies ?? this.nowPlayingMovies,
-      nowPlayingState: nowPlayingState ?? this.nowPlayingState,
       popularMovies: popularMovies ?? this.popularMovies,
-      popularMoviesState: popularMoviesState ?? this.popularMoviesState,
       topRatedMovies: topRatedMovies ?? this.topRatedMovies,
-      topRatedMoviesState: topRatedMoviesState ?? this.topRatedMoviesState,
-      message: message ?? this.message,
     );
   }
 
   @override
-  List<Object?> get props => [
-    nowPlayingMovies,
-    nowPlayingState,
-    popularMovies,
-    popularMoviesState,
-    topRatedMovies,
-    topRatedMoviesState,
-    message,
-  ];
+  List<Object?> get props => [nowPlayingMovies, popularMovies, topRatedMovies];
 }

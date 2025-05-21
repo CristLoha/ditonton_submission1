@@ -31,6 +31,7 @@ import 'package:ditonton_submission1/features/tv/presentation/bloc/top_rated/top
 import 'package:ditonton_submission1/features/tv/presentation/bloc/watchlist/watchlist_tv_bloc.dart';
 import 'package:home/home.dart';
 import 'package:ditonton_submission1/features/tv/presentation/provider/tv/tv_detail_notifier.dart';
+import 'package:home/presentation/bloc/home/home_cubit.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 import 'features/movies/presentation/bloc/popular/popular_movies_bloc.dart';
@@ -81,9 +82,11 @@ void init() {
     ),
   );
 
+  locator.registerFactory(() => HomeCubit());
+
   locator.registerFactory(() => SearchTvBloc(locator()));
   locator.registerFactory(() => PopularTvBloc(locator()));
-  locator.registerFactory(() => TopRatedTvBloc( locator()));
+  locator.registerFactory(() => TopRatedTvBloc(locator()));
 
   locator.registerFactory(() => WatchlistTvBloc(locator()));
 

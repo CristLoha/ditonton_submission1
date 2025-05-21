@@ -23,7 +23,7 @@ import 'package:ditonton_submission1/watchlist_page.dart';
 import 'package:ditonton_submission1/features/tv/presentation/provider/tv/tv_detail_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:home/presentation/bloc/home/home_bloc.dart';
+import 'package:home/presentation/bloc/home/home_cubit.dart';
 import 'package:provider/provider.dart';
 import 'features/movies/presentation/bloc/popular/popular_movies_bloc.dart';
 
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => di.locator<MovieDetailBloc>()),
         BlocProvider(create: (_) => di.locator<TopRatedMoviesBloc>()),
         BlocProvider(create: (_) => di.locator<SearchMovieBloc>()),
-        BlocProvider(create: (_) => di.locator<HomeBloc>()),
+        BlocProvider(create: (_) => di.locator<HomeCubit>()),
         BlocProvider(create: (_) => di.locator<PopularMoviesBloc>()),
         BlocProvider(create: (_) => di.locator<WatchlistMovieBloc>()),
         // TV
