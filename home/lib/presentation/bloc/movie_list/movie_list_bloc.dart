@@ -17,7 +17,7 @@ class MovieListBloc extends Bloc<MovieListEvent, MovieListState> {
     required this.getTopRatedMovies,
   }) : super(const MovieListState()) {
     on<FetchNowPlayingMovies>(_onFetchNowPlayingMovies);
-    on<FetchMovieListPopularMovies>(_onFetchPopularMovies);  // Update this line
+    on<FetchMovieListPopularMovies>(_onFetchPopularMovies);  
     on<FetchTopRatedMovies>(_onFetchTopRatedMovies);
   }
 

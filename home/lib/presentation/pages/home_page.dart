@@ -176,57 +176,39 @@ class _HomePageState extends State<HomePage> {
   Widget _buildTvContent() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('On The Air', style: kHeading6),
-            BlocBuilder<TvListBloc, TvListState>(
-              builder: (context, data) {
-                final state = data.onTheAirTvState;
-                if (state == RequestState.loading) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (state == RequestState.loaded) {
-                  return TvList(data.onTheAirTv);
-                } else {
-                  return Text('Failed');
-                }
-              },
-            ),
-            _buildSubHeading(
-              title: 'Popular',
-              onTap: () => Navigator.pushNamed(context, popularTvRoute),
-            ),
-            BlocBuilder<TvListBloc, TvListState>(
-              builder: (context, data) {
-                final state = data.popularTvState;
-                if (state == RequestState.loading) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (state == RequestState.loaded) {
-                  return TvList(data.popularTv);
-                } else {
-                  return Text('Failed');
-                }
-              },
-            ),
-            _buildSubHeading(
-              title: 'Top Rated',
-              onTap: () => Navigator.pushNamed(context, topRatedTvRoute),
-            ),
-            BlocBuilder<TvListBloc, TvListState>(
-              builder: (context, data) {
-                final state = data.topRatedTvState;
-                if (state == RequestState.loading) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (state == RequestState.loaded) {
-                  return TvList(data.topRatedTv);
-                } else {
-                  return Text('Failed');
-                }
-              },
-            ),
-          ],
-        ),
+      child: BlocBuilder<TvListBloc, TvListState>(
+        builder: (context, state) {
+          if (state is TvListLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is TvListHasData) {
+   
+            return SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('On The Air', style: kHeading6),
+                  TvList(state.onTheAirTv),
+
+                  _buildSubHeading(
+                    title: 'Popular',
+                    onTap: () => Navigator.pushNamed(context, popularTvRoute),
+                  ),
+                  TvList(state.popularTv),
+
+                  _buildSubHeading(
+                    title: 'Top Rated',
+                    onTap: () => Navigator.pushNamed(context, topRatedTvRoute),
+                  ),
+                  TvList(state.topRatedTv),
+                ],
+              ),
+            );
+          } else if (state is TvListError) {
+            return Center(child: Text(state.message));
+          } else {
+            return const SizedBox();
+          }
+        },
       ),
     );
   }

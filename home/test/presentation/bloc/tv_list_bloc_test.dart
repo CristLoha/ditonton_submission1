@@ -10,12 +10,7 @@ import 'package:mockito/mockito.dart';
 import '../../dummy_data/dummy_objects.dart';
 import 'tv_list_bloc_test.mocks.dart';
 
-
-@GenerateMocks([
-  GetOnTheAirTv,
-  GetPopularTv,
-  GetTopRatedTv,
-])
+@GenerateMocks([GetOnTheAirTv, GetPopularTv, GetTopRatedTv])
 void main() {
   late TvListBloc bloc;
   late MockGetOnTheAirTv mockGetOnTheAirTv;
@@ -34,45 +29,66 @@ void main() {
   });
 
   group('On The Air TV', () {
-    test('initial state harus kosong', () {
-      expect(bloc.state, const TvListState());
+    test('initial state should be empty', () {
+      expect(bloc.state, TvListEmpty());
     });
 
     blocTest<TvListBloc, TvListState>(
-      'harus emit [loading, loaded] ketika data berhasil diambil',
+      'should emit [loading, loaded] when on the air data is successfully fetched',
+
       build: () {
-        when(mockGetOnTheAirTv.execute())
-            .thenAnswer((_) async => Right(testTvList));
+        when(
+          mockGetOnTheAirTv.execute(),
+        ).thenAnswer((_) async => Right(testTvList));
         return bloc;
       },
       act: (bloc) => bloc.add(FetchOnTheAirTv()),
-      expect: () => [
-        const TvListState(onTheAirTvState: RequestState.loading),
-        TvListState(
-          onTheAirTvState: RequestState.loaded,
-          onTheAirTv: testTvList,
-        ),
-      ],
+      expect: () => [TvListLoading(), TvListHasData(onTheAirTv: testTvList)],
       verify: (_) {
         verify(mockGetOnTheAirTv.execute());
       },
     );
 
     blocTest<TvListBloc, TvListState>(
-      'harus emit [loading, error] ketika gagal mengambil data',
+      'should emit [loading, error] when on the air data is unsuccessfully fetched',
       build: () {
-        when(mockGetOnTheAirTv.execute())
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+        when(
+          mockGetOnTheAirTv.execute(),
+        ).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
         return bloc;
       },
       act: (bloc) => bloc.add(FetchOnTheAirTv()),
-      expect: () => [
-        const TvListState(onTheAirTvState: RequestState.loading),
-        const TvListState(
-          onTheAirTvState: RequestState.error,
-          message: 'Server Failure',
-        ),
-      ],
+      expect: () => [TvListLoading(), const TvListError('Server Failure')],
+      verify: (_) {
+        verify(mockGetOnTheAirTv.execute());
+      },
+    );
+
+    blocTest<TvListBloc, TvListState>(
+      'should emit [loading, empty] when on the air data is empty',
+      build: () {
+        when(
+          mockGetOnTheAirTv.execute(),
+        ).thenAnswer((_) async => const Right([]));
+        return bloc;
+      },
+      act: (bloc) => bloc.add(FetchOnTheAirTv()),
+      expect: () => [TvListLoading(), const TvListHasData(onTheAirTv: [])],
+      verify: (_) {
+        verify(mockGetOnTheAirTv.execute());
+      },
+    );
+
+    blocTest<TvListBloc, TvListState>(
+      'should emit [loading, error] when on the air data is unsuccessfully fetched',
+      build: () {
+        when(mockGetOnTheAirTv.execute()).thenAnswer(
+          (_) async => Left(ConnectionFailure('Connection Failure')),
+        );
+        return bloc;
+      },
+      act: (bloc) => bloc.add(FetchOnTheAirTv()),
+      expect: () => [TvListLoading(), const TvListError('Connection Failure')],
       verify: (_) {
         verify(mockGetOnTheAirTv.execute());
       },
@@ -81,40 +97,60 @@ void main() {
 
   group('Popular TV', () {
     blocTest<TvListBloc, TvListState>(
-      'harus emit [loading, loaded] ketika data popular berhasil diambil',
+      'should emit [loading, loaded] when popular data is successfully fetched',
       build: () {
-        when(mockGetPopularTv.execute())
-            .thenAnswer((_) async => Right(testTvList));
+        when(
+          mockGetPopularTv.execute(),
+        ).thenAnswer((_) async => Right(testTvList));
         return bloc;
       },
       act: (bloc) => bloc.add(FetchPopularTv()),
-      expect: () => [
-        const TvListState(popularTvState: RequestState.loading),
-        TvListState(
-          popularTvState: RequestState.loaded,
-          popularTv: testTvList,
-        ),
-      ],
+      expect: () => [TvListLoading(), TvListHasData(popularTv: testTvList)],
       verify: (_) {
         verify(mockGetPopularTv.execute());
       },
     );
 
     blocTest<TvListBloc, TvListState>(
-      'harus emit [loading, error] ketika gagal mengambil data popular',
+      'should emit [loading, error] when popular data is unsuccessfully fetched',
+
       build: () {
-        when(mockGetPopularTv.execute())
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+        when(
+          mockGetPopularTv.execute(),
+        ).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
         return bloc;
       },
       act: (bloc) => bloc.add(FetchPopularTv()),
-      expect: () => [
-        const TvListState(popularTvState: RequestState.loading),
-        const TvListState(
-          popularTvState: RequestState.error,
-          message: 'Server Failure',
-        ),
-      ],
+      expect: () => [TvListLoading(), const TvListError('Server Failure')],
+      verify: (_) {
+        verify(mockGetPopularTv.execute());
+      },
+    );
+
+    blocTest<TvListBloc, TvListState>(
+      'should emit [loading, empty] when popular data is empty',
+      build: () {
+        when(
+          mockGetPopularTv.execute(),
+        ).thenAnswer((_) async => const Right([]));
+        return bloc;
+      },
+      act: (bloc) => bloc.add(FetchPopularTv()),
+      expect: () => [TvListLoading(), const TvListHasData(popularTv: [])],
+      verify: (_) {
+        verify(mockGetPopularTv.execute());
+      },
+    );
+    blocTest<TvListBloc, TvListState>(
+      'should emit [loading, error] when popular data is unsuccessfully fetched',
+      build: () {
+        when(mockGetPopularTv.execute()).thenAnswer(
+          (_) async => Left(ConnectionFailure('Connection Failure')),
+        );
+        return bloc;
+      },
+      act: (bloc) => bloc.add(FetchPopularTv()),
+      expect: () => [TvListLoading(), const TvListError('Connection Failure')],
       verify: (_) {
         verify(mockGetPopularTv.execute());
       },
@@ -123,40 +159,61 @@ void main() {
 
   group('Top Rated TV', () {
     blocTest<TvListBloc, TvListState>(
-      'harus emit [loading, loaded] ketika data top rated berhasil diambil',
+      'should emit [loading, loaded] when top rated data is successfully fetched',
+
       build: () {
-        when(mockGetTopRatedTv.execute())
-            .thenAnswer((_) async => Right(testTvList));
+        when(
+          mockGetTopRatedTv.execute(),
+        ).thenAnswer((_) async => Right(testTvList));
         return bloc;
       },
       act: (bloc) => bloc.add(FetchTopRatedTv()),
-      expect: () => [
-        const TvListState(topRatedTvState: RequestState.loading),
-        TvListState(
-          topRatedTvState: RequestState.loaded,
-          topRatedTv: testTvList,
-        ),
-      ],
+      expect: () => [TvListLoading(), TvListHasData(topRatedTv: testTvList)],
       verify: (_) {
         verify(mockGetTopRatedTv.execute());
       },
     );
 
     blocTest<TvListBloc, TvListState>(
-      'harus emit [loading, error] ketika gagal mengambil data top rated',
+      'should emit [loading, error] when top rated data is unsuccessfully fetched',
+
       build: () {
-        when(mockGetTopRatedTv.execute())
-            .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+        when(
+          mockGetTopRatedTv.execute(),
+        ).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
         return bloc;
       },
       act: (bloc) => bloc.add(FetchTopRatedTv()),
-      expect: () => [
-        const TvListState(topRatedTvState: RequestState.loading),
-        const TvListState(
-          topRatedTvState: RequestState.error,
-          message: 'Server Failure',
-        ),
-      ],
+      expect: () => [TvListLoading(), const TvListError('Server Failure')],
+      verify: (_) {
+        verify(mockGetTopRatedTv.execute());
+      },
+    );
+
+    blocTest<TvListBloc, TvListState>(
+      'should emit [loading, empty] when top rated data is empty',
+      build: () {
+        when(
+          mockGetTopRatedTv.execute(),
+        ).thenAnswer((_) async => const Right([]));
+        return bloc;
+      },
+      act: (bloc) => bloc.add(FetchTopRatedTv()),
+      expect: () => [TvListLoading(), const TvListHasData(topRatedTv: [])],
+      verify: (_) {
+        verify(mockGetTopRatedTv.execute());
+      },
+    );
+    blocTest<TvListBloc, TvListState>(
+      'should emit [loading, error] when top rated data is unsuccessfully fetched',
+      build: () {
+        when(mockGetTopRatedTv.execute()).thenAnswer(
+          (_) async => Left(ConnectionFailure('Connection Failure')),
+        );
+        return bloc;
+      },
+      act: (bloc) => bloc.add(FetchTopRatedTv()),
+      expect: () => [TvListLoading(), const TvListError('Connection Failure')],
       verify: (_) {
         verify(mockGetTopRatedTv.execute());
       },

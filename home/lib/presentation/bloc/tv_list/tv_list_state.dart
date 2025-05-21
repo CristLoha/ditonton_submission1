@@ -1,54 +1,48 @@
 import 'package:equatable/equatable.dart';
-import 'package:core/core.dart';
 import 'package:home/home.dart';
 
-class TvListState extends Equatable {
-  final List<Tv> onTheAirTv;
-  final RequestState onTheAirTvState;
-  final List<Tv> popularTv;
-  final RequestState popularTvState;
-  final List<Tv> topRatedTv;
-  final RequestState topRatedTvState;
+sealed class TvListState extends Equatable {
+  const TvListState();
+  @override
+  List<Object?> get props => [];
+}
+
+class TvListEmpty extends TvListState {}
+
+class TvListLoading extends TvListState {}
+
+class TvListError extends TvListState {
   final String message;
 
-  const TvListState({
+  const TvListError(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
+class TvListHasData extends TvListState {
+  final List<Tv> onTheAirTv;
+  final List<Tv> popularTv;
+  final List<Tv> topRatedTv;
+
+  const TvListHasData({
     this.onTheAirTv = const [],
-    this.onTheAirTvState = RequestState.empty,
     this.popularTv = const [],
-    this.popularTvState = RequestState.empty,
     this.topRatedTv = const [],
-    this.topRatedTvState = RequestState.empty,
-    this.message = '',
   });
 
-  TvListState copyWith({
+  TvListHasData copyWith({
     List<Tv>? onTheAirTv,
-    RequestState? onTheAirTvState,
     List<Tv>? popularTv,
-    RequestState? popularTvState,
     List<Tv>? topRatedTv,
-    RequestState? topRatedTvState,
-    String? message,
   }) {
-    return TvListState(
+    return TvListHasData(
       onTheAirTv: onTheAirTv ?? this.onTheAirTv,
-      onTheAirTvState: onTheAirTvState ?? this.onTheAirTvState,
       popularTv: popularTv ?? this.popularTv,
-      popularTvState: popularTvState ?? this.popularTvState,
       topRatedTv: topRatedTv ?? this.topRatedTv,
-      topRatedTvState: topRatedTvState ?? this.topRatedTvState,
-      message: message ?? this.message,
     );
   }
 
   @override
-  List<Object?> get props => [
-    onTheAirTv,
-    onTheAirTvState,
-    popularTv,
-    popularTvState,
-    topRatedTv,
-    topRatedTvState,
-    message,
-  ];
+  List<Object?> get props => [onTheAirTv, popularTv, topRatedTv];
 }

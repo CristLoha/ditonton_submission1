@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:core/core.dart';
 import 'package:home/home.dart';
 import 'tv_list_event.dart';
 import 'tv_list_state.dart';
@@ -13,68 +12,77 @@ class TvListBloc extends Bloc<TvListEvent, TvListState> {
     required this.getOnTheAirTv,
     required this.getPopularTv,
     required this.getTopRatedTv,
-  }) : super(const TvListState()) {
+  }) : super(TvListHasData(onTheAirTv: [], popularTv: [], topRatedTv: [])) {
     on<FetchOnTheAirTv>(_onFetchOnTheAirTv);
     on<FetchPopularTv>(_onFetchPopularTv);
     on<FetchTopRatedTv>(_onFetchTopRatedTv);
   }
 
   Future<void> _onFetchOnTheAirTv(
-      FetchOnTheAirTv event, Emitter<TvListState> emit) async {
-    emit(state.copyWith(onTheAirTvState: RequestState.loading));
+    FetchOnTheAirTv event,
+    Emitter<TvListState> emit,
+  ) async {
+    emit(TvListLoading());
     final result = await getOnTheAirTv.execute();
     result.fold(
       (failure) {
-        emit(state.copyWith(
-          onTheAirTvState: RequestState.error,
-          message: failure.message,
-        ));
+        emit(TvListError(failure.message));
       },
       (tvData) {
-        emit(state.copyWith(
-          onTheAirTvState: RequestState.loaded,
-          onTheAirTv: tvData,
-        ));
+        final currentState = state;
+        if (currentState is TvListHasData) {
+          emit(currentState.copyWith(onTheAirTv: tvData));
+        } else {
+          emit(
+            TvListHasData(onTheAirTv: tvData, popularTv: [], topRatedTv: []),
+          );
+        }
       },
     );
   }
 
   Future<void> _onFetchPopularTv(
-      FetchPopularTv event, Emitter<TvListState> emit) async {
-    emit(state.copyWith(popularTvState: RequestState.loading));
+    FetchPopularTv event,
+    Emitter<TvListState> emit,
+  ) async {
+    emit(TvListLoading());
     final result = await getPopularTv.execute();
     result.fold(
       (failure) {
-        emit(state.copyWith(
-          popularTvState: RequestState.error,
-          message: failure.message,
-        ));
+        emit(TvListError(failure.message));
       },
       (tvData) {
-        emit(state.copyWith(
-          popularTvState: RequestState.loaded,
-          popularTv: tvData,
-        ));
+        final currentState = state;
+        if (currentState is TvListHasData) {
+          emit(currentState.copyWith(popularTv: tvData));
+        } else {
+          emit(
+            TvListHasData(onTheAirTv: [], popularTv: tvData, topRatedTv: []),
+          );
+        }
       },
     );
   }
 
   Future<void> _onFetchTopRatedTv(
-      FetchTopRatedTv event, Emitter<TvListState> emit) async {
-    emit(state.copyWith(topRatedTvState: RequestState.loading));
+    FetchTopRatedTv event,
+    Emitter<TvListState> emit,
+  ) async {
+    emit(TvListLoading());
     final result = await getTopRatedTv.execute();
     result.fold(
       (failure) {
-        emit(state.copyWith(
-          topRatedTvState: RequestState.error,
-          message: failure.message,
-        ));
+        emit(TvListError(failure.message));
       },
       (tvData) {
-        emit(state.copyWith(
-          topRatedTvState: RequestState.loaded,
-          topRatedTv: tvData,
-        ));
+        final currentState = state;
+        if (currentState is TvListHasData) {
+          emit(currentState.copyWith(topRatedTv: tvData));
+        } else {
+          emit(
+            TvListHasData(onTheAirTv: [], popularTv: [], topRatedTv: tvData),
+          );
+        }
       },
     );
   }
