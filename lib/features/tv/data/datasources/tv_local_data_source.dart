@@ -16,11 +16,14 @@ class TvLocalDataSourceImpl implements TvLocalDataSource {
 
   TvLocalDataSourceImpl({required this.databaseHelper});
 
+  static const watchlistAddSuccessMessage = 'Added to Watchlist';
+  static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
+
   @override
   Future<String> insertWatchlist(TvTable tv) async {
     try {
       await databaseHelper.insertWatchlist(tv);
-      return 'Added to Watchlist';
+      return watchlistAddSuccessMessage;
     } catch (e) {
       throw DatabaseException(e.toString());
     }
@@ -30,7 +33,7 @@ class TvLocalDataSourceImpl implements TvLocalDataSource {
   Future<String> removeWatchlist(TvTable tv) async {
     try {
       await databaseHelper.removeWatchlist(tv);
-      return 'Removed from Watchlist';
+      return watchlistRemoveSuccessMessage;
     } catch (e) {
       throw DatabaseException(e.toString());
     }

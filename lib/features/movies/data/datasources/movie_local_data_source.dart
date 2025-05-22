@@ -17,11 +17,14 @@ class MovieLocalDataSourceImpl implements MovieLocalDataSource {
 
   MovieLocalDataSourceImpl({required this.databaseHelper});
 
+  static const watchlistAddSuccessMessage = 'Added to Watchlist';
+  static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
+
   @override
   Future<String> insertWatchlist(MovieTable movie) async {
     try {
       await databaseHelper.insertWatchlist(movie);
-      return 'Added to Watchlist';
+      return watchlistAddSuccessMessage;
     } catch (e) {
       throw DatabaseException(e.toString());
     }
@@ -31,7 +34,7 @@ class MovieLocalDataSourceImpl implements MovieLocalDataSource {
   Future<String> removeWatchlist(MovieTable movie) async {
     try {
       await databaseHelper.removeWatchlist(movie);
-      return 'Removed from Watchlist';
+      return watchlistRemoveSuccessMessage;
     } catch (e) {
       throw DatabaseException(e.toString());
     }

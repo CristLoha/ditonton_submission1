@@ -1,3 +1,4 @@
+import 'package:ditonton_submission1/features/movies/data/datasources/movie_local_data_source.dart';
 import 'package:ditonton_submission1/features/movies/presentation/bloc/detail/movie_detail_event.dart';
 import 'package:ditonton_submission1/features/movies/presentation/bloc/detail/movie_detail_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -105,7 +106,8 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
         emit(
           currentState.copyWith(
             isAddedToWatchlist: isAdded,
-            watchlistMessage: 'Added to Watchlist',
+            watchlistMessage:
+                MovieLocalDataSourceImpl.watchlistAddSuccessMessage,
           ),
         );
       },
@@ -127,7 +129,8 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
         emit(
           currentState.copyWith(
             isAddedToWatchlist: isAdded,
-            watchlistMessage: 'Removed from Watchlist',
+            watchlistMessage:
+                MovieLocalDataSourceImpl.watchlistRemoveSuccessMessage,
           ),
         );
       },
