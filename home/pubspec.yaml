@@ -2,8 +2,6 @@ name: home
 description: "A new Flutter package project."
 version: 0.0.1
 
-
-
 environment:
   sdk: ^3.7.2
   flutter: ">=1.17.0"
@@ -11,6 +9,10 @@ environment:
 dependencies:
   core:
     path: ../core
+
+  about:
+    path: ../about
+
   dartz: ^0.10.1
   mockito: ^5.4.6
   build_runner: ^2.4.15

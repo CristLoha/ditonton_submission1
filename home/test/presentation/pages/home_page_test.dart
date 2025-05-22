@@ -172,6 +172,7 @@ void main() {
       expect(find.byType(MovieList), findsNWidgets(3));
     });
   });
+
   testWidgets('Page should display tv list when tv shows tab is selected', (
     WidgetTester tester,
   ) async {
