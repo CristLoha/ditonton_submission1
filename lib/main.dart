@@ -17,11 +17,10 @@ import 'package:ditonton_submission1/features/tv/presentation/pages/popular_tv_p
 import 'package:ditonton_submission1/features/movies/presentation/pages/top_rated_movies_page.dart';
 import 'package:ditonton_submission1/features/tv/presentation/pages/top_rated_tv_page.dart';
 import 'package:ditonton_submission1/features/tv/presentation/pages/tv_detail_page.dart';
+import 'package:ditonton_submission1/watchlist_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home/home.dart';
 import 'package:ditonton_submission1/features/tv/presentation/pages/tv_search_page.dart';
-import 'package:ditonton_submission1/watchlist_page.dart';
-import 'package:ditonton_submission1/features/tv/presentation/provider/tv/tv_detail_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:home/presentation/bloc/home/home_cubit.dart';

@@ -21,7 +21,6 @@ import 'package:ditonton_submission1/features/tv/domain/usecases/get_watchlist_s
 import 'package:ditonton_submission1/features/tv/domain/usecases/save_watchlist_tv.dart';
 import 'package:ditonton_submission1/features/tv/domain/usecases/remove_watchlist_tv.dart';
 import 'package:home/home.dart';
-import 'package:ditonton_submission1/features/tv/presentation/provider/tv/tv_detail_notifier.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
 
