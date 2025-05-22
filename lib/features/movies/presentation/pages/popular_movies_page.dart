@@ -45,7 +45,15 @@ class PopularMoviesPageState extends State<PopularMoviesPage> {
                 child: Text(state.message),
               );
             
-            } else {
+            }  else if (state is PopularMoviesEmpty) {
+            return Center(
+              // Tambahkan key di sini
+              key: Key('empty_message'),
+              child: Text('No Popular Movies Available'),
+            );
+          }
+            
+             else {
               return const Center(child: Text('Something went wrong'));
             }
           },

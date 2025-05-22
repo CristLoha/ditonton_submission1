@@ -3,9 +3,6 @@ import 'package:home/domain/entities/movie_detail.dart';
 
 sealed class MovieDetailEvent extends Equatable {
   const MovieDetailEvent();
-
-  @override
-  List<Object?> get props => [];
 }
 
 class FetchMovieDetail extends MovieDetailEvent {

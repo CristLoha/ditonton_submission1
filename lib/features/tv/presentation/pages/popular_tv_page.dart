@@ -44,6 +44,11 @@ class _PopularTvPageState extends State<PopularTvPage> {
                 key: const Key('error_message'),
                 child: Text(state.message),
               );
+            } else if (state is PopularTvEmpty) {
+              return Center(
+                key: Key('empty_message'),
+                child: Text('No TV shows found'),
+              );
             } else {
               return const Center(child: Text('Something went wrong'));
             }

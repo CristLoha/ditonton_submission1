@@ -91,7 +91,7 @@ void main() {
   });
 
 
-  testWidgets('Page should display text No Data', (
+  testWidgets('Page should display text No Popular Movies Available', (
     WidgetTester tester,
   ) async {
     popularMoviesBloc.emit(PopularMoviesEmpty());
@@ -103,6 +103,6 @@ void main() {
 
     expect(centerFinder, findsOneWidget);
     expect(textFinder, findsOneWidget);
-    expect(find.text('No Data'), findsOneWidget);
+    expect(find.text('No Popular Movies Available'), findsOneWidget);
   });
 }
