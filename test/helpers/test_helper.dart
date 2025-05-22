@@ -105,7 +105,6 @@ final testTvList = [tTv];
     RemoveWatchlistTv,
     MovieDatabaseHelper,
     TvDatabaseHelper,
-    TvDetailNotifier,
     GetPopularTv,
     DataConnectionChecker,
     http.Client,

@@ -2,6 +2,7 @@ import 'package:about/about.dart';
 import 'package:core/core.dart';
 import 'package:ditonton_submission1/features/movies/presentation/bloc/top_rated/top_rated_movies_bloc.dart';
 import 'package:ditonton_submission1/features/movies/presentation/bloc/watchlist/watchlist_movie_bloc.dart';
+import 'package:ditonton_submission1/features/tv/presentation/bloc/detail/tv_detail_bloc.dart';
 import 'package:ditonton_submission1/features/tv/presentation/bloc/popular/popular_tv_bloc.dart';
 import 'package:ditonton_submission1/features/tv/presentation/bloc/search/search_tv_bloc.dart';
 import 'package:ditonton_submission1/features/tv/presentation/bloc/top_rated/top_rated_tv_bloc.dart';
@@ -53,7 +54,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => di.locator<PopularTvBloc>()),
         BlocProvider(create: (_) => di.locator<WatchlistTvBloc>()),
         BlocProvider(create: (_) => di.locator<TopRatedTvBloc>()),
-        ChangeNotifierProvider(create: (_) => di.locator<TvDetailNotifier>()),
+        BlocProvider(create: (_) => di.locator<TvDetailBloc>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

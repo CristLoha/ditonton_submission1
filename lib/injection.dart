@@ -25,12 +25,12 @@ import 'package:ditonton_submission1/features/movies/domain/usecases/search_movi
 import 'package:ditonton_submission1/features/tv/domain/usecases/search_tv.dart';
 import 'package:ditonton_submission1/features/movies/presentation/bloc/search/search_movie_bloc.dart';
 import 'package:ditonton_submission1/features/movies/presentation/bloc/detail/movie_detail_bloc.dart';
+import 'package:ditonton_submission1/features/tv/presentation/bloc/detail/tv_detail_bloc.dart';
 import 'package:ditonton_submission1/features/tv/presentation/bloc/popular/popular_tv_bloc.dart';
 import 'package:ditonton_submission1/features/tv/presentation/bloc/search/search_tv_bloc.dart';
 import 'package:ditonton_submission1/features/tv/presentation/bloc/top_rated/top_rated_tv_bloc.dart';
 import 'package:ditonton_submission1/features/tv/presentation/bloc/watchlist/watchlist_tv_bloc.dart';
 import 'package:home/home.dart';
-import 'package:ditonton_submission1/features/tv/presentation/provider/tv/tv_detail_notifier.dart';
 import 'package:home/presentation/bloc/home/home_cubit.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
@@ -73,12 +73,12 @@ void init() {
   );
 
   locator.registerFactory(
-    () => TvDetailNotifier(
+    () => TvDetailBloc(
       getTvDetail: locator(),
-      getTvRecommendations: locator(),
       getWatchListStatus: locator(),
       saveWatchlist: locator(),
       removeWatchlist: locator(),
+      getTvRecommendations: locator(),
     ),
   );
 
