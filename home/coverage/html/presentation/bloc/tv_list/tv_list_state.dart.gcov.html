@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-05-23 10:24:29</td>
+            <td class="headerValue">2025-05-23 16:50:22</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -64,9 +64,9 @@
 <span id="L2"><span class="lineNum">       2</span>              : import 'package:home/home.dart';</span>
 <span id="L3"><span class="lineNum">       3</span>              : </span>
 <span id="L4"><span class="lineNum">       4</span>              : sealed class TvListState extends Equatable {</span>
-<span id="L5"><span class="lineNum">       5</span> <span class="tlaGNC">           5 :   const TvListState();</span></span>
-<span id="L6"><span class="lineNum">       6</span> <span class="tlaGNC">           3 :   @override</span></span>
-<span id="L7"><span class="lineNum">       7</span> <span class="tlaGNC">           3 :   List&lt;Object?&gt; get props =&gt; [];</span></span>
+<span id="L5"><span class="lineNum">       5</span> <span class="tlaGNC">           3 :   const TvListState();</span></span>
+<span id="L6"><span class="lineNum">       6</span> <span class="tlaGNC">           2 :   @override</span></span>
+<span id="L7"><span class="lineNum">       7</span> <span class="tlaGNC">           2 :   List&lt;Object?&gt; get props =&gt; [];</span></span>
 <span id="L8"><span class="lineNum">       8</span>              : }</span>
 <span id="L9"><span class="lineNum">       9</span>              : </span>
 <span id="L10"><span class="lineNum">      10</span>              : class TvListEmpty extends TvListState {}</span>
@@ -76,10 +76,10 @@
 <span id="L14"><span class="lineNum">      14</span>              : class TvListError extends TvListState {</span>
 <span id="L15"><span class="lineNum">      15</span>              :   final String message;</span>
 <span id="L16"><span class="lineNum">      16</span>              : </span>
-<span id="L17"><span class="lineNum">      17</span> <span class="tlaGNC">           4 :   const TvListError(this.message);</span></span>
+<span id="L17"><span class="lineNum">      17</span> <span class="tlaGNC">           2 :   const TvListError(this.message);</span></span>
 <span id="L18"><span class="lineNum">      18</span>              : </span>
-<span id="L19"><span class="lineNum">      19</span> <span class="tlaGNC">           2 :   @override</span></span>
-<span id="L20"><span class="lineNum">      20</span> <span class="tlaGNC">           4 :   List&lt;Object?&gt; get props =&gt; [message];</span></span>
+<span id="L19"><span class="lineNum">      19</span> <span class="tlaGNC">           1 :   @override</span></span>
+<span id="L20"><span class="lineNum">      20</span> <span class="tlaGNC">           2 :   List&lt;Object?&gt; get props =&gt; [message];</span></span>
 <span id="L21"><span class="lineNum">      21</span>              : }</span>
 <span id="L22"><span class="lineNum">      22</span>              : </span>
 <span id="L23"><span class="lineNum">      23</span>              : class TvListHasData extends TvListState {</span>
@@ -87,7 +87,7 @@
 <span id="L25"><span class="lineNum">      25</span>              :   final List&lt;Tv&gt; popularTv;</span>
 <span id="L26"><span class="lineNum">      26</span>              :   final List&lt;Tv&gt; topRatedTv;</span>
 <span id="L27"><span class="lineNum">      27</span>              : </span>
-<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC">           5 :   const TvListHasData({</span></span>
+<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC">           3 :   const TvListHasData({</span></span>
 <span id="L29"><span class="lineNum">      29</span>              :     this.onTheAirTv = const [],</span>
 <span id="L30"><span class="lineNum">      30</span>              :     this.popularTv = const [],</span>
 <span id="L31"><span class="lineNum">      31</span>              :     this.topRatedTv = const [],</span>
@@ -105,8 +105,8 @@
 <span id="L43"><span class="lineNum">      43</span>              :     );</span>
 <span id="L44"><span class="lineNum">      44</span>              :   }</span>
 <span id="L45"><span class="lineNum">      45</span>              : </span>
-<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">           3 :   @override</span></span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">          12 :   List&lt;Object?&gt; get props =&gt; [onTheAirTv, popularTv, topRatedTv];</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">           2 :   @override</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">           8 :   List&lt;Object?&gt; get props =&gt; [onTheAirTv, popularTv, topRatedTv];</span></span>
 <span id="L48"><span class="lineNum">      48</span>              : }</span>
         </pre>
               </td>
