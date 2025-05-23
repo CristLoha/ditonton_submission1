@@ -93,6 +93,25 @@ void main() {
           expect(result, equals(Left(ServerFailure(''))));
         },
       );
+      test(
+        'should return connection failure when device gets socket exception',
+        () async {
+          // arrange
+          when(mockRemoteDataSource.getNowPlayingMovies()).thenThrow(
+            const SocketException('Failed to connect to the network'),
+          );
+
+          // act
+          final result = await repository.getNowPlayingMovies();
+
+          // assert
+          verify(mockRemoteDataSource.getNowPlayingMovies());
+          expect(
+            result,
+            equals(Left(ConnectionFailure('Failed to connect to the network'))),
+          );
+        },
+      );
     });
 
     group('when device is offline', () {

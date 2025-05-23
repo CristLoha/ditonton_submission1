@@ -31,13 +31,13 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryMed">89.5&nbsp;%</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
             <td class="headerCovTableEntry">19</td>
-            <td class="headerCovTableEntry">17</td>
+            <td class="headerCovTableEntry">19</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-05-22 17:30:02</td>
+            <td class="headerValue">2025-05-23 10:00:42</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -63,7 +63,7 @@
 <span id="L1"><span class="lineNum">       1</span>              : part of 'tv_detail_bloc.dart';</span>
 <span id="L2"><span class="lineNum">       2</span>              : </span>
 <span id="L3"><span class="lineNum">       3</span>              : sealed class TvDetailState extends Equatable {</span>
-<span id="L4"><span class="lineNum">       4</span> <span class="tlaGNC">           2 :   const TvDetailState();</span></span>
+<span id="L4"><span class="lineNum">       4</span> <span class="tlaGNC">           3 :   const TvDetailState();</span></span>
 <span id="L5"><span class="lineNum">       5</span>              : </span>
 <span id="L6"><span class="lineNum">       6</span> <span class="tlaGNC">           2 :   @override</span></span>
 <span id="L7"><span class="lineNum">       7</span> <span class="tlaGNC">           2 :   List&lt;Object&gt; get props =&gt; [];</span></span>
@@ -88,33 +88,33 @@
 <span id="L26"><span class="lineNum">      26</span>              :   final bool isAddedToWatchlist;</span>
 <span id="L27"><span class="lineNum">      27</span>              :   final String watchlistMessage;</span>
 <span id="L28"><span class="lineNum">      28</span>              : </span>
-<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">           2 :   const TvDetailHasData({</span></span>
+<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">           3 :   const TvDetailHasData({</span></span>
 <span id="L30"><span class="lineNum">      30</span>              :     required this.tv,</span>
 <span id="L31"><span class="lineNum">      31</span>              :     required this.recommendations,</span>
 <span id="L32"><span class="lineNum">      32</span>              :     required this.isAddedToWatchlist,</span>
 <span id="L33"><span class="lineNum">      33</span>              :     this.watchlistMessage = '',</span>
 <span id="L34"><span class="lineNum">      34</span>              :   });</span>
 <span id="L35"><span class="lineNum">      35</span>              : </span>
-<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">           1 :   TvDetailHasData copyWith({</span></span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">           2 :   TvDetailHasData copyWith({</span></span>
 <span id="L37"><span class="lineNum">      37</span>              :     TvDetail? tv,</span>
 <span id="L38"><span class="lineNum">      38</span>              :     List&lt;Tv&gt;? recommendations,</span>
 <span id="L39"><span class="lineNum">      39</span>              :     bool? isAddedToWatchlist,</span>
 <span id="L40"><span class="lineNum">      40</span>              :     String? watchlistMessage,</span>
 <span id="L41"><span class="lineNum">      41</span>              :   }) {</span>
-<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">           1 :     return TvDetailHasData(</span></span>
-<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">           1 :       tv: tv ?? this.tv,</span></span>
-<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">           1 :       recommendations: recommendations ?? this.recommendations,</span></span>
-<span id="L45"><span class="lineNum">      45</span> <span class="tlaUNC">           0 :       isAddedToWatchlist: isAddedToWatchlist ?? this.isAddedToWatchlist,</span></span>
-<span id="L46"><span class="lineNum">      46</span> <span class="tlaUNC">           0 :       watchlistMessage: watchlistMessage ?? this.watchlistMessage,</span></span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">           2 :     return TvDetailHasData(</span></span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">           2 :       tv: tv ?? this.tv,</span></span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">           2 :       recommendations: recommendations ?? this.recommendations,</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">           1 :       isAddedToWatchlist: isAddedToWatchlist ?? this.isAddedToWatchlist,</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">           2 :       watchlistMessage: watchlistMessage ?? this.watchlistMessage,</span></span>
 <span id="L47"><span class="lineNum">      47</span>              :     );</span>
 <span id="L48"><span class="lineNum">      48</span>              :   }</span>
 <span id="L49"><span class="lineNum">      49</span>              : </span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">           1 :   @override</span></span>
-<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">           1 :   List&lt;Object&gt; get props =&gt; [</span></span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">           1 :     tv,</span></span>
-<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">           1 :     recommendations,</span></span>
-<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">           1 :     isAddedToWatchlist,</span></span>
-<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">           1 :     watchlistMessage,</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">           2 :   @override</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">           2 :   List&lt;Object&gt; get props =&gt; [</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">           2 :     tv,</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">           2 :     recommendations,</span></span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">           2 :     isAddedToWatchlist,</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">           2 :     watchlistMessage,</span></span>
 <span id="L56"><span class="lineNum">      56</span>              :   ];</span>
 <span id="L57"><span class="lineNum">      57</span>              : }</span>
         </pre>

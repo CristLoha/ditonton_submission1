@@ -4,8 +4,8 @@ import 'package:dartz/dartz.dart';
 import 'package:ditonton_submission1/features/tv/presentation/bloc/popular/popular_tv_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import '../../../helpers/test_helper.dart';
-import '../../../helpers/test_helper.mocks.dart';
+import '../../../../helpers/test_helper.dart';
+import '../../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late PopularTvBloc popularTvBloc;

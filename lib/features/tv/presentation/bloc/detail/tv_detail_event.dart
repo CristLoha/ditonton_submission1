@@ -2,9 +2,6 @@ part of 'tv_detail_bloc.dart';
 
 sealed class TvDetailEvent extends Equatable {
   const TvDetailEvent();
-
-  @override
-  List<Object> get props => [];
 }
 
 class FetchTvDetail extends TvDetailEvent {
@@ -15,6 +12,7 @@ class FetchTvDetail extends TvDetailEvent {
   @override
   List<Object> get props => [id];
 }
+
 class AddWatchlist extends TvDetailEvent {
   final TvDetail tv;
 
@@ -23,6 +21,7 @@ class AddWatchlist extends TvDetailEvent {
   @override
   List<Object> get props => [tv];
 }
+
 class RemoveFromWatchlist extends TvDetailEvent {
   final TvDetail tv;
 
@@ -31,6 +30,7 @@ class RemoveFromWatchlist extends TvDetailEvent {
   @override
   List<Object> get props => [tv];
 }
+
 class LoadWatchlistStatus extends TvDetailEvent {
   final int id;
 
@@ -39,6 +39,7 @@ class LoadWatchlistStatus extends TvDetailEvent {
   @override
   List<Object> get props => [id];
 }
+
 class FetchTvRecommendations extends TvDetailEvent {
   final int id;
 

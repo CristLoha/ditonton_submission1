@@ -88,6 +88,26 @@ void main() {
           expect(result, equals(Left(ServerFailure(''))));
         },
       );
+
+      test(
+        'should return connection failure when device gets socket exception',
+        () async {
+          // arrange
+          when(mockRemoteDataSource.getOnTheAirTv()).thenThrow(
+            const SocketException('Failed to connect to the network'),
+          );
+
+          // act
+          final result = await repository.getOnTheAirTv();
+
+          // assert
+          verify(mockRemoteDataSource.getOnTheAirTv());
+          expect(
+            result,
+            equals(Left(ConnectionFailure('Failed to connect to the network'))),
+          );
+        },
+      );
     });
 
     group('when device is offline', () {

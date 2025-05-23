@@ -14,7 +14,6 @@ class MovieDatabaseHelper {
   factory MovieDatabaseHelper() =>
       _databaseHelper ?? MovieDatabaseHelper._instance();
 
-  // For testing purposes
   @visibleForTesting
   static void setDatabaseForTesting(Database? database) {
     _database = database;

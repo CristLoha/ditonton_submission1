@@ -5,22 +5,39 @@ void main() {
   group('WatchlistMovieEvent', () {
     group('FetchWatchlistMoviesEvent', () {
       test('supports value equality', () {
-        expect(
-          FetchWatchlistMoviesEvent(),
-          equals(FetchWatchlistMoviesEvent()),
-        );
+        // Arrange
+        final firstEvent = FetchWatchlistMoviesEvent();
+        final secondEvent = FetchWatchlistMoviesEvent();
+
+        // Act
+        final comparisonResult = firstEvent == secondEvent;
+
+        // Assert
+        expect(comparisonResult, true);
       });
 
       test('props should be empty', () {
+        // Arrange
         final event = FetchWatchlistMoviesEvent();
-        expect(event.props, []);
+
+        // Act
+        final props = event.props;
+
+        // Assert
+        expect(props, []);
       });
     });
 
     group('Base WatchlistMovieEvent', () {
       test('base props should be empty', () {
+        // Arrange
         final event = FetchWatchlistMoviesEvent() as WatchlistMovieEvent;
-        expect(event.props, []);
+
+        // Act
+        final props = event.props;
+
+        // Assert
+        expect(props, []);
       });
     });
   });

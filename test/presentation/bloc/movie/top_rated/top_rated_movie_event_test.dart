@@ -5,16 +5,26 @@ void main() {
   group('TopRatedMoviesEvent', () {
     group('FetchTopRatedMovies', () {
       test('supports value equality', () {
-        expect(
-          FetchTopRatedMovies(),
-          equals(FetchTopRatedMovies()),
-        );
+        // Arrange
+        final firstEvent = FetchTopRatedMovies();
+        final secondEvent = FetchTopRatedMovies();
+
+        // Act
+        final comparisonResult = firstEvent == secondEvent;
+
+        // Assert
+        expect(comparisonResult, true);
       });
 
       test('props should be empty', () {
-
+        // Arrange
         final event = FetchTopRatedMovies();
-        expect(event.props, []);
+
+        // Act
+        final props = event.props;
+
+        // Assert
+        expect(props, []);
       });
     });
   });

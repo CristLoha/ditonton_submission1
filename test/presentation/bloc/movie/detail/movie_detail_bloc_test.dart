@@ -199,6 +199,7 @@ void main() {
         verify(mockGetMovieRecommendations.execute(tId));
       },
     );
+  });
     group('Watchlist', () {
       blocTest<MovieDetailBloc, MovieDetailState>(
         'should emit [Loading, HasData, HasData with Added to Watchlist] when AddWatchlist is successful',
@@ -380,5 +381,5 @@ void main() {
       act: (bloc) => bloc.add(const LoadWatchlistStatus(tId)),
       expect: () => [MovieDetailLoading()],
     );
-  });
+  
 }

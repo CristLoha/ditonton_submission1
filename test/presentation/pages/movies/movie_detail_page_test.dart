@@ -100,10 +100,7 @@ void main() {
       ),
     );
     await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
-    expect(
-      find.text('Recommendation'),
-      findsNothing,
-    ); 
+    expect(find.text('Recommendation'), findsNothing);
     expect(find.text('Recommendations'), findsOneWidget);
     expect(find.byType(CachedNetworkImage), findsWidgets);
   });
@@ -122,5 +119,34 @@ void main() {
     movieDetailBloc.emit(MovieDetailError('Something went wrong'));
     await tester.pumpWidget(makeTestableWidget(MovieDetailPage(id: 1)));
     expect(find.text('Something went wrong'), findsOneWidget);
+  });
+
+  testWidgets('Should show empty container on initial state', (tester) async {
+    movieDetailBloc.emit(MovieDetailEmpty());
+
+    await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
+
+    expect(find.byType(Container), findsOneWidget);
+    expect(find.byType(CircularProgressIndicator), findsNothing);
+    expect(find.byType(DetailContent), findsNothing);
+  });
+
+  testWidgets('Should call initState and load initial data', (tester) async {
+    // Setup initial responses
+    when(
+      mockGetMovieDetail.execute(1),
+    ).thenAnswer((_) async => Right(testMovieDetail));
+    when(
+      mockGetMovieRecommendations.execute(1),
+    ).thenAnswer((_) async => Right([testMovie]));
+    when(mockGetWatchListStatus.execute(1)).thenAnswer((_) async => false);
+
+    // Pump widget to trigger initState
+    await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
+    await tester.pumpAndSettle();
+
+    // Verify initial events were dispatched
+    verify(mockGetMovieDetail.execute(1)).called(1);
+    verify(mockGetWatchListStatus.execute(1)).called(1);
   });
 }

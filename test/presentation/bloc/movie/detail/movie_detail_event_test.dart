@@ -1,97 +1,156 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ditonton_submission1/features/movies/presentation/bloc/detail/movie_detail_event.dart';
-
 import '../../../../dummy_data/dummy_objects.dart';
 
 void main() {
   group('MovieDetailEvent', () {
     group('FetchMovieDetail', () {
       test('supports value equality', () {
-        expect(
-          const FetchMovieDetail(1),
-          equals(const FetchMovieDetail(1)),
-        );
+        // Arrange
+        const firstEvent = FetchMovieDetail(1);
+        const secondEvent = FetchMovieDetail(1);
+        const differentEvent = FetchMovieDetail(2);
+
+        // Act
+        final equalityResult = firstEvent == secondEvent;
+        final inequalityResult = firstEvent == differentEvent;
+
+        // Assert
+        expect(equalityResult, true);
+        expect(inequalityResult, false);
       });
 
       test('props contains id', () {
-        expect(
-          const FetchMovieDetail(1).props,
-          [1],
-        );
+        // Arrange
+        const movieId = 1;
+        const event = FetchMovieDetail(movieId);
+
+        // Act
+        final props = event.props;
+
+        // Assert
+        expect(props, [movieId]);
       });
     });
 
     group('AddWatchlist', () {
       test('supports value equality', () {
-        expect(
-          AddWatchlist(testMovieDetail),
-          equals(AddWatchlist(testMovieDetail)),
-        );
+        // Arrange
+        final firstEvent = AddWatchlist(testMovieDetail);
+        final secondEvent = AddWatchlist(testMovieDetail);
+
+        // Act
+        final equalityResult = firstEvent == secondEvent;
+
+        // Assert
+        expect(equalityResult, true);
       });
 
       test('props contains movie', () {
-        expect(
-          AddWatchlist(testMovieDetail).props,
-          [testMovieDetail],
-        );
+        // Arrange
+        final event = AddWatchlist(testMovieDetail);
+
+        // Act
+        final props = event.props;
+
+        // Assert
+        expect(props, [testMovieDetail]);
       });
     });
 
     group('RemoveFromWatchlist', () {
       test('supports value equality', () {
-        expect(
-          RemoveFromWatchlist(testMovieDetail),
-          equals(RemoveFromWatchlist(testMovieDetail)),
-        );
+        // Arrange
+        final firstEvent = RemoveFromWatchlist(testMovieDetail);
+        final secondEvent = RemoveFromWatchlist(testMovieDetail);
+
+        // Act
+        final equalityResult = firstEvent == secondEvent;
+
+        // Assert
+        expect(equalityResult, true);
       });
 
       test('props contains movie', () {
-        expect(
-          RemoveFromWatchlist(testMovieDetail).props,
-          [testMovieDetail],
-        );
+        // Arrange
+        final event = RemoveFromWatchlist(testMovieDetail);
+
+        // Act
+        final props = event.props;
+
+        // Assert
+        expect(props, [testMovieDetail]);
       });
     });
 
     group('LoadWatchlistStatus', () {
       test('supports value equality', () {
-        expect(
-          const LoadWatchlistStatus(1),
-          equals(const LoadWatchlistStatus(1)),
-        );
+        // Arrange
+        const firstEvent = LoadWatchlistStatus(1);
+        const secondEvent = LoadWatchlistStatus(1);
+        const differentEvent = LoadWatchlistStatus(2);
+
+        // Act
+        final equalityResult = firstEvent == secondEvent;
+        final inequalityResult = firstEvent == differentEvent;
+
+        // Assert
+        expect(equalityResult, true);
+        expect(inequalityResult, false);
       });
 
       test('props contains id', () {
-        expect(
-          const LoadWatchlistStatus(1).props,
-          [1],
-        );
+        // Arrange
+        const movieId = 1;
+        const event = LoadWatchlistStatus(movieId);
+
+        // Act
+        final props = event.props;
+
+        // Assert
+        expect(props, [movieId]);
       });
     });
 
     group('FetchMovieRecommendations', () {
       test('supports value equality', () {
-        expect(
-          const FetchMovieRecommendations(1),
-          equals(const FetchMovieRecommendations(1)),
-        );
+        // Arrange
+        const firstEvent = FetchMovieRecommendations(1);
+        const secondEvent = FetchMovieRecommendations(1);
+        const differentEvent = FetchMovieRecommendations(2);
+
+        // Act
+        final equalityResult = firstEvent == secondEvent;
+        final inequalityResult = firstEvent == differentEvent;
+
+        // Assert
+        expect(equalityResult, true);
+        expect(inequalityResult, false);
       });
 
       test('props contains id', () {
-        expect(
-          const FetchMovieRecommendations(1).props,
-          [1],
-        );
+        // Arrange
+        const movieId = 1;
+        const event = FetchMovieRecommendations(movieId);
+
+        // Act
+        final props = event.props;
+
+        // Assert
+        expect(props, [movieId]);
       });
     });
 
     group('Base MovieDetailEvent', () {
-      test('base event props should be empty', () {
-     
-        final movieEvent = FetchMovieDetail(1);
-      
-        final baseProps = (movieEvent as MovieDetailEvent).props;
-        expect(baseProps, [1]); 
+      test('base event props should contain correct values', () {
+        // Arrange
+        final event = FetchMovieDetail(1);
+
+        // Act
+        final baseProps = (event as MovieDetailEvent).props;
+
+        // Assert
+        expect(baseProps, [1]);
       });
     });
   });

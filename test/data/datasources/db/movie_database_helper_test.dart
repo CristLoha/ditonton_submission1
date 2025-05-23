@@ -1,6 +1,7 @@
 import 'package:ditonton_submission1/features/movies/data/datasources/db/movie_database_helper.dart';
 import 'package:home/data/models/movie_table.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:path/path.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 void main() {
@@ -8,14 +9,12 @@ void main() {
   late Database database;
 
   setUpAll(() {
-    // Initialize FFI
     sqfliteFfiInit();
-    // Change the default factory
+
     databaseFactory = databaseFactoryFfi;
   });
 
   setUp(() async {
-    // Create a new in-memory database for each test
     database = await databaseFactoryFfi.openDatabase(
       inMemoryDatabasePath,
       options: OpenDatabaseOptions(
@@ -42,9 +41,8 @@ void main() {
       ),
     );
 
-    // Create a new instance for each test
     databaseHelper = MovieDatabaseHelper();
-    // Set the test database
+
     MovieDatabaseHelper.setDatabaseForTesting(database);
   });
 
@@ -55,17 +53,14 @@ void main() {
 
   group('MovieDatabaseHelper', () {
     test('should be a singleton', () {
-      // arrange
       final instance1 = MovieDatabaseHelper();
       final instance2 = MovieDatabaseHelper();
 
-      // assert
       expect(instance1, instance2);
     });
 
     group('insertWatchlist', () {
       test('should insert movie to watchlist table', () async {
-        // arrange
         final movie = MovieTable(
           id: 1,
           title: 'test',
@@ -73,10 +68,8 @@ void main() {
           posterPath: 'test',
         );
 
-        // act
         final result = await databaseHelper.insertWatchlist(movie);
 
-        // assert
         expect(result, 1);
         final movies = await database.query('watchlist');
         expect(movies.length, 1);
@@ -87,7 +80,6 @@ void main() {
       });
 
       test('should throw error when inserting duplicate movie', () async {
-        // arrange
         final movie = MovieTable(
           id: 1,
           title: 'test',
@@ -96,14 +88,12 @@ void main() {
         );
         await databaseHelper.insertWatchlist(movie);
 
-        // act & assert
         expect(() => databaseHelper.insertWatchlist(movie), throwsException);
       });
     });
 
     group('removeWatchlist', () {
       test('should remove movie from watchlist table', () async {
-        // arrange
         final movie = MovieTable(
           id: 1,
           title: 'test',
@@ -112,17 +102,14 @@ void main() {
         );
         await database.insert('watchlist', movie.toJson());
 
-        // act
         final result = await databaseHelper.removeWatchlist(movie);
 
-        // assert
         expect(result, 1);
         final movies = await database.query('watchlist');
         expect(movies, isEmpty);
       });
 
       test('should return 0 when removing non-existent movie', () async {
-        // arrange
         final movie = MovieTable(
           id: 1,
           title: 'test',
@@ -130,17 +117,14 @@ void main() {
           posterPath: 'test',
         );
 
-        // act
         final result = await databaseHelper.removeWatchlist(movie);
 
-        // assert
         expect(result, 0);
       });
     });
 
     group('getMovieById', () {
       test('should return movie when movie exists in watchlist', () async {
-        // arrange
         final movie = MovieTable(
           id: 1,
           title: 'test',
@@ -149,10 +133,8 @@ void main() {
         );
         await database.insert('watchlist', movie.toJson());
 
-        // act
         final result = await databaseHelper.getMovieById(movie.id);
 
-        // assert
         expect(result, isNotNull);
         expect(result!['id'], movie.id);
         expect(result['title'], movie.title);
@@ -163,9 +145,8 @@ void main() {
       test(
         'should return null when movie does not exist in watchlist',
         () async {
-          // act
           final result = await databaseHelper.getMovieById(1);
-          // assert
+
           expect(result, null);
         },
       );
@@ -173,7 +154,6 @@ void main() {
 
     group('getWatchlistMovies', () {
       test('should return list of movies from watchlist', () async {
-        // arrange
         final movie = MovieTable(
           id: 1,
           title: 'test',
@@ -182,10 +162,8 @@ void main() {
         );
         await database.insert('watchlist', movie.toJson());
 
-        // act
         final result = await databaseHelper.getWatchlistMovies();
 
-        // assert
         expect(result.length, 1);
         expect(result.first['id'], movie.id);
         expect(result.first['title'], movie.title);
@@ -194,17 +172,14 @@ void main() {
       });
 
       test('should return empty list when watchlist is empty', () async {
-        // act
         final result = await databaseHelper.getWatchlistMovies();
 
-        // assert
         expect(result, isEmpty);
       });
     });
 
     group('cache operations', () {
       test('should insert and retrieve movies from cache', () async {
-        // arrange
         final movies = [
           MovieTable(
             id: 1,
@@ -214,11 +189,9 @@ void main() {
           ),
         ];
 
-        // act
         await databaseHelper.insertCacheTransaction(movies, 'now playing');
         final result = await databaseHelper.getCacheMovies('now playing');
 
-        // assert
         expect(result.length, 1);
         expect(result.first['id'], movies.first.id);
         expect(result.first['title'], movies.first.title);
@@ -228,7 +201,6 @@ void main() {
       });
 
       test('should clear cache by category', () async {
-        // arrange
         final movies = [
           MovieTable(
             id: 1,
@@ -239,17 +211,14 @@ void main() {
         ];
         await databaseHelper.insertCacheTransaction(movies, 'now playing');
 
-        // act
         final result = await databaseHelper.clearCache('now playing');
 
-        // assert
         expect(result, 1);
         final cachedMovies = await database.query('cache');
         expect(cachedMovies, isEmpty);
       });
 
       test('should handle multiple movies in cache transaction', () async {
-        // arrange
         final movies = [
           MovieTable(
             id: 1,
@@ -265,31 +234,82 @@ void main() {
           ),
         ];
 
-        // act
         await databaseHelper.insertCacheTransaction(movies, 'now playing');
         final result = await databaseHelper.getCacheMovies('now playing');
 
-        // assert
         expect(result.length, 2);
         expect(result[0]['id'], movies[0].id);
         expect(result[1]['id'], movies[1].id);
       });
 
       test('should return empty list for non-existent category', () async {
-        // act
         final result = await databaseHelper.getCacheMovies('non-existent');
 
-        // assert
         expect(result, isEmpty);
       });
 
       test('should return 0 when clearing non-existent category', () async {
-        // act
         final result = await databaseHelper.clearCache('non-existent');
 
-        // assert
         expect(result, 0);
       });
     });
+
+    group('Database Path and Initialization', () {
+      test('should create database with correct path', () async {
+        MovieDatabaseHelper.setDatabaseForTesting(null);
+
+        final databaseHelper = MovieDatabaseHelper();
+        final databasesPath = await getDatabasesPath();
+        final expectedPath = join(databasesPath, 'ditonton1.db');
+
+        final db = await databaseHelper.database;
+        final path = db!.path;
+
+        expect(path, expectedPath);
+      });
+
+      test('should create tables on database creation', () async {
+        MovieDatabaseHelper.setDatabaseForTesting(null);
+
+        final databaseHelper = MovieDatabaseHelper();
+        final db = await databaseHelper.database;
+
+        final watchlistResult = await db!.query(
+          'sqlite_master',
+          where: 'type = ? AND name = ?',
+          whereArgs: ['table', 'watchlist'],
+        );
+
+        expect(watchlistResult.length, 1);
+        expect(
+          watchlistResult.first['sql'].toString().toLowerCase(),
+          contains('create table watchlist'),
+        );
+
+        final cacheResult = await db.query(
+          'sqlite_master',
+          where: 'type = ? AND name = ?',
+          whereArgs: ['table', 'cache'],
+        );
+
+        expect(cacheResult.length, 1);
+        expect(
+          cacheResult.first['sql'].toString().toLowerCase(),
+          contains('create table cache'),
+        );
+      });
+
+      test('should reuse existing database instance', () async {
+        MovieDatabaseHelper.setDatabaseForTesting(null);
+
+        final helper = MovieDatabaseHelper();
+        final db1 = await helper.database;
+        final db2 = await helper.database;
+
+        expect(identical(db1, db2), true);
+      });
+    });
+
   });
 }

@@ -70,7 +70,6 @@ class TvDetailBloc extends Bloc<TvDetailEvent, TvDetailState> {
     );
   }
 
-
   Future<void> _onAddWatchlist(
     AddWatchlist event,
     Emitter<TvDetailState> emit,
@@ -79,19 +78,17 @@ class TvDetailBloc extends Bloc<TvDetailEvent, TvDetailState> {
     final currentState = state as TvDetailHasData;
 
     final result = await saveWatchlist.execute(currentState.tv);
-    await result.fold(
-      (failure) async => emit(TvDetailError(failure.message)),
-      (_) async {
-        final isAdded = await getWatchListStatus.execute(currentState.tv.id);
-        emit(
-          currentState.copyWith(
-            isAddedToWatchlist: isAdded,
-            watchlistMessage:
-                TvLocalDataSourceImpl.watchlistAddSuccessMessage,
-          ),
-        );
-      },
-    );
+    await result.fold((failure) async => emit(TvDetailError(failure.message)), (
+      _,
+    ) async {
+      final isAdded = await getWatchListStatus.execute(currentState.tv.id);
+      emit(
+        currentState.copyWith(
+          isAddedToWatchlist: isAdded,
+          watchlistMessage: TvLocalDataSourceImpl.watchlistAddSuccessMessage,
+        ),
+      );
+    });
   }
 
   Future<void> _onRemoveFromWatchlist(
@@ -102,21 +99,20 @@ class TvDetailBloc extends Bloc<TvDetailEvent, TvDetailState> {
     final currentState = state as TvDetailHasData;
 
     final result = await removeWatchlist.execute(currentState.tv);
-    await result.fold(
-      (failure) async => emit(TvDetailError(failure.message)),
-      (_) async {
-        final isAdded = await getWatchListStatus.execute(currentState.tv.id);
-        emit(
-          currentState.copyWith(
-            isAddedToWatchlist: isAdded,
-            watchlistMessage:
-                TvLocalDataSourceImpl.watchlistRemoveSuccessMessage,
-          ),
-        );
-      },
-    );
+    await result.fold((failure) async => emit(TvDetailError(failure.message)), (
+      _,
+    ) async {
+      final isAdded = await getWatchListStatus.execute(currentState.tv.id);
+      emit(
+        currentState.copyWith(
+          isAddedToWatchlist: isAdded,
+          watchlistMessage: TvLocalDataSourceImpl.watchlistRemoveSuccessMessage,
+        ),
+      );
+    });
   }
- Future<void> _onLoadWatchlistStatus(
+
+  Future<void> _onLoadWatchlistStatus(
     LoadWatchlistStatus event,
     Emitter<TvDetailState> emit,
   ) async {
@@ -134,30 +130,24 @@ class TvDetailBloc extends Bloc<TvDetailEvent, TvDetailState> {
     FetchTvRecommendations event,
     Emitter<TvDetailState> emit,
   ) async {
-    emit(TvDetailLoading());
     if (state is! TvDetailHasData) return;
     final currentState = state as TvDetailHasData;
 
     final result = await getTvRecommendations.execute(event.id);
     result.fold(
       (failure) {
-        emit(
-          TvDetailHasData(
-            tv: currentState.tv,
-            recommendations: [],
-            isAddedToWatchlist: currentState.isAddedToWatchlist,
-          ),
-        );
+        emit(TvDetailError(failure.message));
       },
-      (recommendations) {
+      (moviesData) {
         emit(
           TvDetailHasData(
             tv: currentState.tv,
-            recommendations: recommendations,
+            recommendations: moviesData,
             isAddedToWatchlist: currentState.isAddedToWatchlist,
           ),
         );
       },
     );
   }
+
 }

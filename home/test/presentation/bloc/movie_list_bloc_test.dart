@@ -1,181 +1,242 @@
-// import 'package:bloc_test/bloc_test.dart';
-// import 'package:dartz/dartz.dart';
-// import 'package:flutter_test/flutter_test.dart';
-// import 'package:core/core.dart';
-// import 'package:home/domain/usecases/get_now_playing_movies.dart';
-// import 'package:home/domain/usecases/get_popular_movies.dart';
-// import 'package:home/domain/usecases/get_top_rated_movies.dart';
-// import 'package:home/presentation/bloc/movie_list/movie_list_bloc.dart';
-// import 'package:home/presentation/bloc/movie_list/movie_list_event.dart';
-// import 'package:home/presentation/bloc/movie_list/movie_list_state.dart';
-// import 'package:mockito/annotations.dart';
-// import 'package:mockito/mockito.dart';
-// import '../../dummy_data/dummy_objects.dart';
-// import 'movie_list_bloc_test.mocks.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:home/home.dart';
+import 'package:core/core.dart';
+import 'package:home/presentation/bloc/tv_list/tv_list_event.dart';
+import 'package:home/presentation/bloc/tv_list/tv_list_state.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
+import 'tv_list_bloc_test.mocks.dart';
 
-// @GenerateMocks([GetPopularMovies, GetTopRatedMovies, GetNowPlayingMovies])
-// void main() {
-//   late MovieListBloc bloc;
-//   late MockGetNowPlayingMovies mockGetNowPlayingMovies;
-//   late MockGetPopularMovies mockGetPopularMovies;
-//   late MockGetTopRatedMovies mockGetTopRatedMovies;
+@GenerateMocks([GetOnTheAirTv, GetPopularTv, GetTopRatedTv])
+void main() {
+  late TvListBloc bloc;
+  late MockGetOnTheAirTv mockGetOnTheAirTv;
+  late MockGetPopularTv mockGetPopularTv;
+  late MockGetTopRatedTv mockGetTopRatedTv;
 
-//   setUp(() {
-//     mockGetNowPlayingMovies = MockGetNowPlayingMovies();
-//     mockGetPopularMovies = MockGetPopularMovies();
-//     mockGetTopRatedMovies = MockGetTopRatedMovies();
-//     bloc = MovieListBloc(
-//       getNowPlayingMovies: mockGetNowPlayingMovies,
-//       getPopularMovies: mockGetPopularMovies,
-//       getTopRatedMovies: mockGetTopRatedMovies,
-//     );
-//   });
+  setUp(() {
+    mockGetOnTheAirTv = MockGetOnTheAirTv();
+    mockGetPopularTv = MockGetPopularTv();
+    mockGetTopRatedTv = MockGetTopRatedTv();
+    bloc = TvListBloc(
+      getOnTheAirTv: mockGetOnTheAirTv,
+      getPopularTv: mockGetPopularTv,
+      getTopRatedTv: mockGetTopRatedTv,
+    );
+  });
 
-//   group('Now Playing Movies', () {
-//     test('initial state should be empty', () {
-//       expect(bloc.state, const MovieListState());
-//     });
 
-//     blocTest<MovieListBloc, MovieListState>(
-//       'should emit [loading, loaded] when data is gotten successfully',
-//       build: () {
-//         when(
-//           mockGetNowPlayingMovies.execute(),
-//         ).thenAnswer((_) async => Right(testMovieList));
-//         return bloc;
-//       },
-//       act: (bloc) => bloc.add(FetchNowPlayingMovies()),
-//       expect:
-//           () => [
-//             const MovieListState(nowPlayingState: RequestState.loading),
-//             MovieListState(
-//               nowPlayingState: RequestState.loaded,
-//               nowPlayingMovies: testMovieList,
-//             ),
-//           ],
-//       verify: (_) {
-//         verify(mockGetNowPlayingMovies.execute());
-//       },
-//     );
+  final tTv = Tv(
+    adult: false,
+    backdropPath: '/7dowXHcFccjmxf0YZYxDFkfVq65.jpg',
+    genreIds: [18],
+    id: 100088,
+    originalName: 'The Last of Us',
+    overview:
+        'Twenty years after modern civilization has been destroyed, Joel, a hardened survivor, is hired to smuggle Ellie, a 14-year-old girl, out of an oppressive quarantine zone. What starts as a small job soon becomes a brutal, heartbreaking journey, as they both must traverse the United States and depend on each other for survival.',
+    popularity: 433.6105,
+    posterPath: '/dmo6TYuuJgaYinXBPjrgG9mB5od.jpg',
+    firstAirDate: DateTime.parse('2023-01-15'),
+    name: 'The Last of Us',
+    voteAverage: 8.579,
+    voteCount: 5750,
+    originCountry: ['US'],
+    originalLanguage: 'en',
+  );
 
-//     blocTest<MovieListBloc, MovieListState>(
-//       'should emit [loading, error] when get data is unsuccessful',
-//       build: () {
-//         when(
-//           mockGetNowPlayingMovies.execute(),
-//         ).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
-//         return bloc;
-//       },
-//       act: (bloc) => bloc.add(FetchNowPlayingMovies()),
-//       expect:
-//           () => [
-//             const MovieListState(nowPlayingState: RequestState.loading),
-//             const MovieListState(
-//               nowPlayingState: RequestState.error,
-//               message: 'Server Failure',
-//             ),
-//           ],
-//       verify: (_) {
-//         verify(mockGetNowPlayingMovies.execute());
-//       },
-//     );
-//   });
+  final testTvList = [tTv];
 
-//   group('Popular Movies', () {
-//     blocTest<MovieListBloc, MovieListState>(
-//       'should emit [loading, loaded] when data is gotten successfully',
-//       build: () {
-//         when(
-//           mockGetPopularMovies.execute(),
-//         ).thenAnswer((_) async => Right(testMovieList));
-//         return bloc;
-//       },
-//       act:
-//           (bloc) => bloc.add(
-//             FetchMovieListPopularMovies(),
-//           ), // Ubah ke FetchMovieListPopularMovies
-//       expect:
-//           () => [
-//             const MovieListState(popularMoviesState: RequestState.loading),
-//             MovieListState(
-//               popularMoviesState: RequestState.loaded,
-//               popularMovies: testMovieList,
-//             ),
-//           ],
-//       verify: (_) {
-//         verify(mockGetPopularMovies.execute());
-//       },
-//     );
+  group('On The Air TV', () {
+    test('initial state should be empty', () {
+      expect(bloc.state, TvListEmpty());
+    });
 
-//     blocTest<MovieListBloc, MovieListState>(
-//       'should emit [loading, error] when get data is unsuccessful',
-//       build: () {
-//         when(
-//           mockGetPopularMovies.execute(),
-//         ).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
-//         return bloc;
-//       },
-//       act:
-//           (bloc) => bloc.add(
-//             FetchMovieListPopularMovies(),
-//           ), // Ubah ke FetchMovieListPopularMovies
-//       expect:
-//           () => [
-//             const MovieListState(popularMoviesState: RequestState.loading),
-//             const MovieListState(
-//               popularMoviesState: RequestState.error,
-//               message: 'Server Failure',
-//             ),
-//           ],
-//       verify: (_) {
-//         verify(mockGetPopularMovies.execute());
-//       },
-//     );
-//   });
+    blocTest<TvListBloc, TvListState>(
+      'should emit [loading, loaded] when on the air data is successfully fetched',
 
-//   group('Top Rated Movies', () {
-//     blocTest<MovieListBloc, MovieListState>(
-//       'should emit [loading, loaded] when data is gotten successfully',
-//       build: () {
-//         when(
-//           mockGetTopRatedMovies.execute(),
-//         ).thenAnswer((_) async => Right(testMovieList));
-//         return bloc;
-//       },
-//       act: (bloc) => bloc.add(FetchTopRatedMovies()),
-//       expect:
-//           () => [
-//             const MovieListState(topRatedMoviesState: RequestState.loading),
-//             MovieListState(
-//               topRatedMoviesState: RequestState.loaded,
-//               topRatedMovies: testMovieList,
-//             ),
-//           ],
-//       verify: (_) {
-//         verify(mockGetTopRatedMovies.execute());
-//       },
-//     );
+      build: () {
+        when(
+          mockGetOnTheAirTv.execute(),
+        ).thenAnswer((_) async => Right(testTvList));
+        return bloc;
+      },
+      act: (bloc) => bloc.add(FetchOnTheAirTv()),
+      expect: () => [TvListLoading(), TvListHasData(onTheAirTv: testTvList)],
+      verify: (_) {
+        verify(mockGetOnTheAirTv.execute());
+      },
+    );
 
-//     blocTest<MovieListBloc, MovieListState>(
-//       'should emit [loading, error] when get data is unsuccessful',
-//       build: () {
-//         when(
-//           mockGetTopRatedMovies.execute(),
-//         ).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
-//         return bloc;
-//       },
-//       act: (bloc) => bloc.add(FetchTopRatedMovies()),
-//       expect:
-//           () => [
-//             const MovieListState(topRatedMoviesState: RequestState.loading),
-//             const MovieListState(
-//               topRatedMoviesState: RequestState.error,
-//               message: 'Server Failure',
-//             ),
-//           ],
-//       verify: (_) {
-//         verify(mockGetTopRatedMovies.execute());
-//       },
-//     );
-//   });
-// }
+    blocTest<TvListBloc, TvListState>(
+      'should emit [loading, error] when on the air data is unsuccessfully fetched',
+      build: () {
+        when(
+          mockGetOnTheAirTv.execute(),
+        ).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+        return bloc;
+      },
+      act: (bloc) => bloc.add(FetchOnTheAirTv()),
+      expect: () => [TvListLoading(), const TvListError('Server Failure')],
+      verify: (_) {
+        verify(mockGetOnTheAirTv.execute());
+      },
+    );
+
+    blocTest<TvListBloc, TvListState>(
+      'should emit [loading, empty] when on the air data is empty',
+      build: () {
+        when(
+          mockGetOnTheAirTv.execute(),
+        ).thenAnswer((_) async => const Right([]));
+        return bloc;
+      },
+      act: (bloc) => bloc.add(FetchOnTheAirTv()),
+      expect: () => [TvListLoading(), const TvListHasData(onTheAirTv: [])],
+      verify: (_) {
+        verify(mockGetOnTheAirTv.execute());
+      },
+    );
+
+    blocTest<TvListBloc, TvListState>(
+      'should emit [loading, error] when on the air data is unsuccessfully fetched',
+      build: () {
+        when(mockGetOnTheAirTv.execute()).thenAnswer(
+          (_) async => Left(ConnectionFailure('Connection Failure')),
+        );
+        return bloc;
+      },
+      act: (bloc) => bloc.add(FetchOnTheAirTv()),
+      expect: () => [TvListLoading(), const TvListError('Connection Failure')],
+      verify: (_) {
+        verify(mockGetOnTheAirTv.execute());
+      },
+    );
+  });
+
+  group('Popular TV', () {
+    blocTest<TvListBloc, TvListState>(
+      'should emit [loading, loaded] when popular data is successfully fetched',
+      build: () {
+        when(
+          mockGetPopularTv.execute(),
+        ).thenAnswer((_) async => Right(testTvList));
+        return bloc;
+      },
+      act: (bloc) => bloc.add(FetchPopularTv()),
+      expect: () => [TvListLoading(), TvListHasData(popularTv: testTvList)],
+      verify: (_) {
+        verify(mockGetPopularTv.execute());
+      },
+    );
+
+    blocTest<TvListBloc, TvListState>(
+      'should emit [loading, error] when popular data is unsuccessfully fetched',
+
+      build: () {
+        when(
+          mockGetPopularTv.execute(),
+        ).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+        return bloc;
+      },
+      act: (bloc) => bloc.add(FetchPopularTv()),
+      expect: () => [TvListLoading(), const TvListError('Server Failure')],
+      verify: (_) {
+        verify(mockGetPopularTv.execute());
+      },
+    );
+
+    blocTest<TvListBloc, TvListState>(
+      'should emit [loading, empty] when popular data is empty',
+      build: () {
+        when(
+          mockGetPopularTv.execute(),
+        ).thenAnswer((_) async => const Right([]));
+        return bloc;
+      },
+      act: (bloc) => bloc.add(FetchPopularTv()),
+      expect: () => [TvListLoading(), const TvListHasData(popularTv: [])],
+      verify: (_) {
+        verify(mockGetPopularTv.execute());
+      },
+    );
+    blocTest<TvListBloc, TvListState>(
+      'should emit [loading, error] when popular data is unsuccessfully fetched',
+      build: () {
+        when(mockGetPopularTv.execute()).thenAnswer(
+          (_) async => Left(ConnectionFailure('Connection Failure')),
+        );
+        return bloc;
+      },
+      act: (bloc) => bloc.add(FetchPopularTv()),
+      expect: () => [TvListLoading(), const TvListError('Connection Failure')],
+      verify: (_) {
+        verify(mockGetPopularTv.execute());
+      },
+    );
+  });
+
+  group('Top Rated TV', () {
+    blocTest<TvListBloc, TvListState>(
+      'should emit [loading, loaded] when top rated data is successfully fetched',
+
+      build: () {
+        when(
+          mockGetTopRatedTv.execute(),
+        ).thenAnswer((_) async => Right(testTvList));
+        return bloc;
+      },
+      act: (bloc) => bloc.add(FetchTopRatedTv()),
+      expect: () => [TvListLoading(), TvListHasData(topRatedTv: testTvList)],
+      verify: (_) {
+        verify(mockGetTopRatedTv.execute());
+      },
+    );
+
+    blocTest<TvListBloc, TvListState>(
+      'should emit [loading, error] when top rated data is unsuccessfully fetched',
+
+      build: () {
+        when(
+          mockGetTopRatedTv.execute(),
+        ).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+        return bloc;
+      },
+      act: (bloc) => bloc.add(FetchTopRatedTv()),
+      expect: () => [TvListLoading(), const TvListError('Server Failure')],
+      verify: (_) {
+        verify(mockGetTopRatedTv.execute());
+      },
+    );
+
+    blocTest<TvListBloc, TvListState>(
+      'should emit [loading, empty] when top rated data is empty',
+      build: () {
+        when(
+          mockGetTopRatedTv.execute(),
+        ).thenAnswer((_) async => const Right([]));
+        return bloc;
+      },
+      act: (bloc) => bloc.add(FetchTopRatedTv()),
+      expect: () => [TvListLoading(), const TvListHasData(topRatedTv: [])],
+      verify: (_) {
+        verify(mockGetTopRatedTv.execute());
+      },
+    );
+    blocTest<TvListBloc, TvListState>(
+      'should emit [loading, error] when top rated data is unsuccessfully fetched',
+      build: () {
+        when(mockGetTopRatedTv.execute()).thenAnswer(
+          (_) async => Left(ConnectionFailure('Connection Failure')),
+        );
+        return bloc;
+      },
+      act: (bloc) => bloc.add(FetchTopRatedTv()),
+      expect: () => [TvListLoading(), const TvListError('Connection Failure')],
+      verify: (_) {
+        verify(mockGetTopRatedTv.execute());
+      },
+    );
+  });
+}

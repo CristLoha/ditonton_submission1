@@ -3,14 +3,29 @@ import 'package:ditonton_submission1/features/movies/presentation/bloc/popular/p
 
 void main() {
   group('PopularMoviesEvent', () {
-    test('FetchPopularMoviesData props should be empty', () {
-      final event = FetchPopularMoviesData();
+    group('FetchPopularMoviesData', () {
+      test('props should be empty', () {
+        // Arrange
+        final event = FetchPopularMoviesData();
 
-      expect(event.props, []);
-    });
+        // Act
+        final props = event.props;
 
-    test('supports value equality', () {
-      expect(FetchPopularMoviesData(), equals(FetchPopularMoviesData()));
+        // Assert
+        expect(props, []);
+      });
+
+      test('supports value equality', () {
+        // Arrange
+        final eventPertama = FetchPopularMoviesData();
+        final eventKedua = FetchPopularMoviesData();
+
+        // Act
+        final hasilPerbandingan = eventPertama == eventKedua;
+
+        // Assert
+        expect(hasilPerbandingan, true);
+      });
     });
   });
 }

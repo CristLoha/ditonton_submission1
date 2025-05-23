@@ -1,10 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:core/error/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ditonton_submission1/features/tv/presentation/bloc/search/search_tv_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:home/domain/entities/tv.dart';
 import 'package:mockito/mockito.dart';
-import '../../../helpers/test_helper.mocks.dart';
+import '../../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late SearchTvBloc searchBloc;
@@ -56,5 +57,37 @@ void main() {
         verify(mockSearchTv.execute(tQuery));
       },
     );
+
+    blocTest<SearchTvBloc, SearchTvState>(
+      'Should emit [Loading, Error] when search fails',
+      build: () {
+        when(
+          mockSearchTv.execute('the last of us'),
+        ).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+        return searchBloc;
+      },
+      act: (bloc) => bloc.add(OnQueryTvChanged('the last of us')),
+      wait: const Duration(milliseconds: 500),
+      expect: () => [SearchTvLoading(), SearchTvError('Server Failure')],
+      verify: (bloc) {
+        verify(mockSearchTv.execute('the last of us'));
+      },
+    );
+  });
+  group('SearchTvEvent', () {
+    test('supports value comparison', () {
+      expect(OnQueryTvChanged(tQuery), OnQueryTvChanged(tQuery));
+    });
+  });
+  group('SearchTvState', () {
+    test('supports value comparison', () {
+      expect(SearchTvEmpty(), SearchTvEmpty());
+      expect(SearchTvLoading(), SearchTvLoading());
+      expect(SearchTvHasData(testTvList), SearchTvHasData(testTvList));
+      expect(SearchTvError('Error message'), SearchTvError('Error message'));
+    });
+  });
+  tearDown(() {
+    searchBloc.close();
   });
 }

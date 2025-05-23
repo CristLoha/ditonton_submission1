@@ -5,7 +5,7 @@ import 'package:ditonton_submission1/features/tv/presentation/bloc/detail/tv_det
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:home/home.dart';
-import '../../../helpers/test_helper.mocks.dart';
+import '../../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late TvDetailBloc tvDetailBloc;
@@ -69,8 +69,8 @@ void main() {
     firstAirDate: DateTime.parse('2023-01-15'),
   );
 
-final testTvList = [testTv];
-  const tId =  45789;
+  final testTvList = [testTv];
+  const tId = 45789;
 
   group('Get Tv Show Detail', () {
     test('initial state should be empty', () {
@@ -151,6 +151,54 @@ final testTvList = [testTv];
           ],
       verify: (_) {
         verify(mockGetTvDetail.execute(tId));
+        verify(mockGetTvRecommendations.execute(tId));
+      },
+    );
+
+    blocTest<TvDetailBloc, TvDetailState>(
+      'Should emit proper states when fetching tv shows recommendations',
+      build: () {
+        when(
+          mockGetTvRecommendations.execute(tId),
+        ).thenAnswer((_) async => Right(testTvList));
+        return tvDetailBloc;
+      },
+      seed:
+          () => TvDetailHasData(
+            tv: testTvDetail,
+            recommendations: [],
+            isAddedToWatchlist: false,
+          ),
+      act: (bloc) => bloc.add(const FetchTvRecommendations(tId)),
+      expect:
+          () => [
+            TvDetailHasData(
+              tv: testTvDetail,
+              recommendations: testTvList,
+              isAddedToWatchlist: false,
+            ),
+          ],
+      verify: (_) {
+        verify(mockGetTvRecommendations.execute(tId));
+      },
+    );
+    blocTest<TvDetailBloc, TvDetailState>(
+      'Should emit error when fetching tv shows recommendations fails',
+      build: () {
+        when(
+          mockGetTvRecommendations.execute(tId),
+        ).thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
+        return tvDetailBloc;
+      },
+      seed:
+          () => TvDetailHasData(
+            tv: testTvDetail,
+            recommendations: [],
+            isAddedToWatchlist: false,
+          ),
+      act: (bloc) => bloc.add(const FetchTvRecommendations(tId)),
+      expect: () => [TvDetailError('Server Failure')],
+      verify: (_) {
         verify(mockGetTvRecommendations.execute(tId));
       },
     );
@@ -267,5 +315,59 @@ final testTvList = [testTv];
         },
       );
     });
+
+    blocTest<TvDetailBloc, TvDetailState>(
+      'Should emit error when adding to watchlist fails',
+      build: () {
+        when(mockSaveWatchlist.execute(testTvDetail)).thenAnswer(
+          (_) async => const Left(DatabaseFailure('Database Failure')),
+        );
+        return tvDetailBloc;
+      },
+      seed:
+          () => TvDetailHasData(
+            tv: testTvDetail,
+            recommendations: testTvList,
+            isAddedToWatchlist: false,
+          ),
+      act: (bloc) => bloc.add(AddWatchlist(testTvDetail)),
+      expect: () => [TvDetailError('Database Failure')],
+    );
+
+    blocTest<TvDetailBloc, TvDetailState>(
+      'Should update watchlist status when tv detail is loaded',
+      build: () {
+        when(mockGetWatchlistStatus.execute(tId)).thenAnswer((_) async => true);
+        return tvDetailBloc;
+      },
+      seed:
+          () => TvDetailHasData(
+            tv: testTvDetail,
+            recommendations: testTvList,
+            isAddedToWatchlist: false,
+          ),
+      act: (bloc) => bloc.add(const LoadWatchlistStatus(tId)),
+      expect:
+          () => [
+            TvDetailHasData(
+              tv: testTvDetail,
+              recommendations: testTvList,
+              isAddedToWatchlist: true,
+            ),
+          ],
+    );
+
+    blocTest<TvDetailBloc, TvDetailState>(
+      'Should emit proper states when getting watchlist status',
+      build: () {
+        when(mockGetWatchlistStatus.execute(tId)).thenAnswer((_) async => true);
+        return tvDetailBloc;
+      },
+      act: (bloc) => bloc.add(const LoadWatchlistStatus(tId)),
+      expect: () => [TvDetailLoading()],
+      verify: (_) {
+        verify(mockGetWatchlistStatus.execute(tId));
+      },
+    );
   });
 }

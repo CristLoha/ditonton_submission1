@@ -1,18 +1,35 @@
 import 'package:core/error/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:home/home.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:home/domain/entities/movie.dart';
+import 'package:home/domain/entities/tv.dart';
+import 'package:home/domain/usecases/get_now_playing_movies.dart';
+import 'package:home/domain/usecases/get_on_the_air_tv.dart';
+import 'package:home/domain/usecases/get_popular_movies.dart';
+import 'package:home/domain/usecases/get_popular_tv.dart';
+import 'package:home/domain/usecases/get_top_rated_movies.dart';
+import 'package:home/domain/usecases/get_top_rated_tv.dart';
 import 'package:home/presentation/bloc/home/home_cubit.dart';
+import 'package:home/presentation/bloc/movie_list/movie_list_bloc.dart';
 import 'package:home/presentation/bloc/movie_list/movie_list_state.dart';
+import 'package:home/presentation/bloc/tv_list/tv_list_bloc.dart';
 import 'package:home/presentation/bloc/tv_list/tv_list_state.dart';
+import 'package:home/presentation/pages/home_page.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import '../../dummy_data/dummy_objects.dart';
-import '../bloc/movie_list_bloc_test.mocks.dart';
-import '../bloc/tv_list_bloc_test.mocks.dart';
 import 'package:network_image_mock/network_image_mock.dart';
+import 'home_page_test.mocks.dart';
 
+@GenerateMocks([
+  GetNowPlayingMovies,
+  GetPopularMovies,
+  GetTopRatedMovies,
+  GetOnTheAirTv,
+  GetPopularTv,
+  GetTopRatedTv,
+])
 void main() {
   late MovieListBloc movieListBloc;
   late TvListBloc tvListBloc;
@@ -129,7 +146,23 @@ void main() {
     voteAverage: 7.2,
     voteCount: 13507,
   );
-
+  final tTv = Tv(
+    adult: false,
+    backdropPath: '/7dowXHcFccjmxf0YZYxDFkfVq65.jpg',
+    genreIds: [18],
+    id: 100088,
+    originalName: 'The Last of Us',
+    overview:
+        'Twenty years after modern civilization has been destroyed, Joel, a hardened survivor, is hired to smuggle Ellie, a 14-year-old girl, out of an oppressive quarantine zone. What starts as a small job soon becomes a brutal, heartbreaking journey, as they both must traverse the United States and depend on each other for survival.',
+    popularity: 433.6105,
+    posterPath: '/dmo6TYuuJgaYinXBPjrgG9mB5od.jpg',
+    firstAirDate: DateTime.parse('2023-01-15'),
+    name: 'The Last of Us',
+    voteAverage: 8.579,
+    voteCount: 5750,
+    originCountry: ['US'],
+    originalLanguage: 'en',
+  );
   testWidgets('Page should display drawer when drawer button is tapped', (
     WidgetTester tester,
   ) async {
