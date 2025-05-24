@@ -1,8 +1,8 @@
 # Ditonton App
 
-[![Codemagic build status](https://api.codemagic.io/apps/68315418f9aae8967c531743/default-workflow/status_badge.svg)](https://codemagic.io/apps/68315418f9aae8967c531743/default-workflow/latest_build)
+[![Codemagic build status](https://api.codemagic.io/apps/68313ff5180b265069adc82e/68313ff5180b265069adc82d/status_badge.svg)](https://codemagic.io/app/68313ff5180b265069adc82e/68313ff5180b265069adc82d/latest_build)
 
-// ...rest of README content...
+
 A Flutter application for browsing movies and TV shows, implementing clean architecture principles and BLoC state management.
 
 ## Features
