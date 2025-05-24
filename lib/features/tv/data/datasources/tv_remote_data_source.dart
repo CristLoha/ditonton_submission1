@@ -17,7 +17,8 @@ abstract class TvRemoteDataSource {
 class TvRemoteDataSourceImpl implements TvRemoteDataSource {
   final http.Client client;
 
-  TvRemoteDataSourceImpl({required this.client});
+  TvRemoteDataSourceImpl({http.Client? client})
+    : client = client ?? SSLPinning.client;
 
   @override
   Future<List<TvModel>> getOnTheAirTv() async {

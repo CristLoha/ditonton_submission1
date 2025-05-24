@@ -11,3 +11,4 @@ export 'styles/text_styles.dart';
 export 'utils/routes.dart';
 export 'widgets/app_drawer.dart';
 export 'widgets/custom_snackbar.dart';
+export 'utils/ssl_pinning.dart';

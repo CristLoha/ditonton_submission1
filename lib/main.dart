@@ -27,7 +27,9 @@ import 'package:home/presentation/bloc/home/home_cubit.dart';
 import 'package:provider/provider.dart';
 import 'features/movies/presentation/bloc/popular/popular_movies_bloc.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SSLPinning.init();
   di.init();
   runApp(MyApp());
 }
