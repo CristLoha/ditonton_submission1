@@ -19,6 +19,7 @@ import 'package:ditonton_submission1/features/movies/presentation/pages/top_rate
 import 'package:ditonton_submission1/features/tv/presentation/pages/top_rated_tv_page.dart';
 import 'package:ditonton_submission1/features/tv/presentation/pages/tv_detail_page.dart';
 import 'package:ditonton_submission1/watchlist_page.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home/home.dart';
@@ -34,12 +35,15 @@ void main() async {
   await SSLPinning.init();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   di.init();
+  final analytics = FirebaseAnalytics.instance;
 
-  runApp(MyApp());
+  await analytics.setAnalyticsCollectionEnabled(true);
+  runApp(MyApp(analytics: analytics));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final FirebaseAnalytics analytics;
+  const MyApp({super.key, required this.analytics});
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +67,8 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
+        title: 'Ditonton Submission Final',
+
         theme: ThemeData.dark().copyWith(
           colorScheme: kColorScheme,
           primaryColor: kRichBlack,
@@ -72,7 +77,10 @@ class MyApp extends StatelessWidget {
           drawerTheme: kDrawerTheme,
         ),
         home: HomePage(),
-        navigatorObservers: [routeObserver],
+        navigatorObservers: [
+          FirebaseAnalyticsObserver(analytics: analytics),
+          routeObserver,
+        ],
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
             case '/home':
