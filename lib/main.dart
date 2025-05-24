@@ -7,6 +7,7 @@ import 'package:ditonton_submission1/features/tv/presentation/bloc/popular/popul
 import 'package:ditonton_submission1/features/tv/presentation/bloc/search/search_tv_bloc.dart';
 import 'package:ditonton_submission1/features/tv/presentation/bloc/top_rated/top_rated_tv_bloc.dart';
 import 'package:ditonton_submission1/features/tv/presentation/bloc/watchlist/watchlist_tv_bloc.dart';
+import 'package:ditonton_submission1/firebase_options.dart';
 import 'package:ditonton_submission1/injection.dart' as di;
 import 'package:ditonton_submission1/features/movies/presentation/bloc/search/search_movie_bloc.dart';
 import 'package:ditonton_submission1/features/movies/presentation/bloc/detail/movie_detail_bloc.dart';
@@ -18,6 +19,7 @@ import 'package:ditonton_submission1/features/movies/presentation/pages/top_rate
 import 'package:ditonton_submission1/features/tv/presentation/pages/top_rated_tv_page.dart';
 import 'package:ditonton_submission1/features/tv/presentation/pages/tv_detail_page.dart';
 import 'package:ditonton_submission1/watchlist_page.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:home/home.dart';
 import 'package:ditonton_submission1/features/tv/presentation/pages/tv_search_page.dart';
@@ -30,7 +32,9 @@ import 'features/movies/presentation/bloc/popular/popular_movies_bloc.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SSLPinning.init();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   di.init();
+
   runApp(MyApp());
 }
 
