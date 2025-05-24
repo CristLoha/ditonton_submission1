@@ -43,7 +43,7 @@ A Flutter application for browsing movies and TV shows, implementing clean archi
 
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/ditonton_submission1.git
+git clone https://github.com/CristLoha/ditonton_submission1.git
 ```
 
 2. Install dependencies
