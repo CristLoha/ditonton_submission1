@@ -1,7 +1,8 @@
 # Ditonton App
 
-[![Codemagic build status](https://api.codemagic.io/apps/6831409e3ecb651875a16b63/6831409e3ecb651875a16b63/status_badge.svg)](https://codemagic.io/apps/6831409e3ecb651875a16b63/6831409e3ecb651875a16b63/latest_build)
+[![Codemagic build status](https://api.codemagic.io/apps/6831409e3ecb651875a16b63/default-workflow/status_badge.svg)](https://codemagic.io/apps/6831409e3ecb651875a16b63/default-workflow/latest_build)
 
+// ...rest of README content...
 A Flutter application for browsing movies and TV shows, implementing clean architecture principles and BLoC state management.
 
 ## Features
@@ -43,7 +44,7 @@ A Flutter application for browsing movies and TV shows, implementing clean archi
 
 1. Clone the repository
 ```bash
-git clone https://github.com/CristLoha/ditonton_submission1.git
+git clone https://github.com/yourusername/ditonton_submission1.git
 ```
 
 2. Install dependencies
