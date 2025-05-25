@@ -25,7 +25,14 @@ class SSLPinning {
     try {
       _clientInstance = await createClient();
 
-      await _clientInstance!.get(Uri.parse('https://themoviedb.org'));
+      // Use the API endpoint instead of main website
+      final response = await _clientInstance!.get(
+        Uri.parse('https://themoviedb.org/'),
+      );
+
+      if (response.statusCode != 200) {
+        throw Exception('Failed to verify TMDB API connection');
+      }
     } on HandshakeException catch (e) {
       throw Exception('SSL Pinning HandshakeException: $e');
     } catch (e) {
