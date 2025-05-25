@@ -32,12 +32,11 @@ import 'features/movies/presentation/bloc/popular/popular_movies_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SSLPinning.init();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   di.init();
   final analytics = FirebaseAnalytics.instance;
   await analytics.setAnalyticsCollectionEnabled(true);
-
+  await SSLPinning.init();
   runApp(MyApp(analytics: analytics));
 }
 
