@@ -36,8 +36,8 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   di.init();
   final analytics = FirebaseAnalytics.instance;
-
   await analytics.setAnalyticsCollectionEnabled(true);
+
   runApp(MyApp(analytics: analytics));
 }
 
