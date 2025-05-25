@@ -27,7 +27,6 @@ void main() {
     );
   });
 
-
   final tTv = Tv(
     adult: false,
     backdropPath: '/7dowXHcFccjmxf0YZYxDFkfVq65.jpg',

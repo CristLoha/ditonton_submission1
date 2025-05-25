@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-abstract class TvListEvent extends Equatable {
+sealed class TvListEvent extends Equatable {
   const TvListEvent();
 
   @override

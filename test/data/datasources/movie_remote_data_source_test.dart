@@ -253,4 +253,15 @@ void main() {
       },
     );
   });
+  group('MovieRemoteDataSourceImpl initialization', () {
+    test('should use provided client when client is passed', () {
+      final dataSource = MovieRemoteDataSourceImpl(client: mockHttpClient);
+      expect(dataSource.client, mockHttpClient);
+    });
+
+    test('should use SSLPinning client when no client is provided', () {
+      final dataSource = MovieRemoteDataSourceImpl();
+      expect(dataSource.client, isA<http.Client>());
+    });
+  });
 }

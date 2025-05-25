@@ -10,8 +10,6 @@ import 'package:mockito/mockito.dart';
 import 'movie_list_bloc_test.mocks.dart';
 
 @GenerateMocks([GetNowPlayingMovies, GetPopularMovies, GetTopRatedMovies])
-
-
 void main() {
   late MovieListBloc bloc;
   late MockGetNowPlayingMovies mockGetNowPlayingMovies;
@@ -219,4 +217,6 @@ void main() {
       },
     );
   });
+
+
 }
