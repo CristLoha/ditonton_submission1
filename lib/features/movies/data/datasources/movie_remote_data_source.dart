@@ -3,7 +3,7 @@ import 'package:core/core.dart';
 import 'package:ditonton_submission1/features/movies/data/models/movie_detail_model.dart';
 import 'package:home/data/models/movie_model.dart';
 import 'package:ditonton_submission1/features/movies/data/models/movie_response.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart';
 
 abstract class MovieRemoteDataSource {
   Future<List<MovieModel>> getNowPlayingMovies();
@@ -15,10 +15,9 @@ abstract class MovieRemoteDataSource {
 }
 
 class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
-  final http.Client client;
+  final IOClient client;
 
-  MovieRemoteDataSourceImpl({http.Client? client})
-    : client = client ?? SSLPinning.client;
+  MovieRemoteDataSourceImpl({required this.client});
 
   @override
   Future<List<MovieModel>> getNowPlayingMovies() async {

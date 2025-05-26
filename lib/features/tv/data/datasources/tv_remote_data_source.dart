@@ -3,7 +3,7 @@ import 'package:core/core.dart';
 import 'package:ditonton_submission1/features/tv/data/models/tv_detail_model.dart';
 import 'package:home/data/models/tv_model.dart';
 import 'package:ditonton_submission1/features/tv/data/models/tv_response.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart';
 
 abstract class TvRemoteDataSource {
   Future<List<TvModel>> getOnTheAirTv();
@@ -15,10 +15,9 @@ abstract class TvRemoteDataSource {
 }
 
 class TvRemoteDataSourceImpl implements TvRemoteDataSource {
-  final http.Client client;
+  final IOClient client;
 
-  TvRemoteDataSourceImpl({http.Client? client})
-    : client = client ?? SSLPinning.client;
+  TvRemoteDataSourceImpl({required this.client});
 
   @override
   Future<List<TvModel>> getOnTheAirTv() async {

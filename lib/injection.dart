@@ -32,14 +32,16 @@ import 'package:ditonton_submission1/features/tv/presentation/bloc/top_rated/top
 import 'package:ditonton_submission1/features/tv/presentation/bloc/watchlist/watchlist_tv_bloc.dart';
 import 'package:home/home.dart';
 import 'package:home/presentation/bloc/home/home_cubit.dart';
-import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
+import 'package:http/io_client.dart';
 import 'features/movies/presentation/bloc/popular/popular_movies_bloc.dart';
 import 'package:ditonton_submission1/features/movies/presentation/bloc/top_rated/top_rated_movies_bloc.dart';
 
 final locator = GetIt.instance;
 
-void init() {
+Future<void> init() async {
+  final ioClient = await SslPinning.ioClient;
+
   // bloc movie
   locator.registerFactory(() => SearchMovieBloc(locator()));
   locator.registerFactory(
@@ -158,7 +160,7 @@ void init() {
   locator.registerLazySingleton<TvDatabaseHelper>(() => TvDatabaseHelper());
 
   // external
-  locator.registerLazySingleton(() => http.Client());
+  locator.registerLazySingleton<IOClient>(() => ioClient);
   locator.registerLazySingleton(() => DataConnectionChecker());
 
   // network info
