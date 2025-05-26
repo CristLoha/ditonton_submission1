@@ -14,10 +14,10 @@ void main() {
   const baseUrl = 'https://api.themoviedb.org/3';
 
   late TvRemoteDataSourceImpl dataSource;
-  late MockClient mockHttpClient;
+  late MockIOClient mockHttpClient;
 
   setUp(() {
-    mockHttpClient = MockClient();
+    mockHttpClient = MockIOClient();
     dataSource = TvRemoteDataSourceImpl(client: mockHttpClient);
   });
 
@@ -267,7 +267,7 @@ void main() {
     });
 
     test('should use SSLPinning client when no client is provided', () {
-      final dataSource = TvRemoteDataSourceImpl();
+      final dataSource = TvRemoteDataSourceImpl(client: mockHttpClient);
       expect(dataSource.client, isA<http.Client>());
     });
   });

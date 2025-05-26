@@ -4,8 +4,8 @@ import 'package:ditonton_submission1/features/movies/data/datasources/movie_remo
 import 'package:ditonton_submission1/features/movies/data/models/movie_detail_model.dart';
 import 'package:ditonton_submission1/features/movies/data/models/movie_response.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
+import 'package:http/http.dart' as http;
 import '../../json_reader.dart';
 import '../../helpers/test_helper.mocks.dart';
 
@@ -14,10 +14,10 @@ void main() {
   const baseUrl = 'https://api.themoviedb.org/3';
 
   late MovieRemoteDataSourceImpl dataSource;
-  late MockClient mockHttpClient;
+  late MockIOClient mockHttpClient;
 
   setUp(() {
-    mockHttpClient = MockClient();
+    mockHttpClient = MockIOClient();
     dataSource = MovieRemoteDataSourceImpl(client: mockHttpClient);
   });
 
@@ -260,7 +260,7 @@ void main() {
     });
 
     test('should use SSLPinning client when no client is provided', () {
-      final dataSource = MovieRemoteDataSourceImpl();
+      final dataSource = MovieRemoteDataSourceImpl(client: mockHttpClient);
       expect(dataSource.client, isA<http.Client>());
     });
   });
