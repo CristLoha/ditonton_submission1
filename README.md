@@ -5,6 +5,8 @@
 
 A Flutter application for browsing movies and TV shows, implementing clean architecture principles and BLoC state management.
 
+📺 Demo Video: [Watch on YouTube](https://youtu.be/Z2xsAe0ye6g)
+
 ## Features
 
 - Now playing movies
